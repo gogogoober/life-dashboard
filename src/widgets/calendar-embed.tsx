@@ -7,7 +7,7 @@ interface CalendarEmbedProps extends WidgetProps {
 export function CalendarEmbed({ calendarSrc }: CalendarEmbedProps) {
   const src =
     calendarSrc ||
-    "https://calendar.google.com/calendar/embed?showTitle=0&showNav=1&showPrint=0&showCalendars=0&mode=WEEK&bgcolor=%23161920&color=%23e8a735&ctz=America%2FNew_York";
+    "https://calendar.google.com/calendar/embed?src=juicebox.salinas%40gmail.com&ctz=America%2FNew_York";
 
   return (
     <div className="flex flex-col h-full">
