@@ -42,30 +42,36 @@ export function TemplateRenderer({ config, data }: TemplateRendererProps) {
 export const defaultTemplate: TemplateConfig = {
   name: "Default",
   columns: "repeat(12, 1fr)",
-  rows: "1fr 1fr",
+  rows: "repeat(6, 1fr)",
   slots: [
-    {
-      widgetId: "active-threads",
-      gridColumn: "1 / 9",
-      gridRow: "1 / 2",
-      size: "large",
-    },
     {
       widgetId: "temporal-bubble-map",
       gridColumn: "1 / 9",
-      gridRow: "2 / 3",
+      gridRow: "1 / 4",
       size: "large",
+    },
+    {
+      widgetId: "active-threads",
+      gridColumn: "1 / 9",
+      gridRow: "4 / 7",
+      size: "large",
+    },
+    {
+      widgetId: "context-resume",
+      gridColumn: "9 / 13",
+      gridRow: "1 / 3",
+      size: "default",
     },
     {
       widgetId: "calendar-embed",
       gridColumn: "9 / 13",
-      gridRow: "1 / 2",
+      gridRow: "3 / 5",
       size: "default",
     },
     {
       widgetId: "city-map",
       gridColumn: "9 / 13",
-      gridRow: "2 / 3",
+      gridRow: "5 / 7",
       size: "default",
     },
   ],
