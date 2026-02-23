@@ -9,8 +9,6 @@
  */
 
 import https from "https";
-import fs from "fs";
-import path from "path";
 
 // ─── Config ────────────────────────────────────────────────────────────────
 
@@ -30,13 +28,13 @@ const CLAUDE_MODEL = "claude-sonnet-4-6";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
-function httpsRequest(method, hostname, path, headers, body) {
+function httpsRequest(method, hostname, urlPath, headers, body) {
   return new Promise((resolve, reject) => {
     const data = body ? JSON.stringify(body) : null;
     const req = https.request(
       {
         hostname,
-        path,
+        path: urlPath,
         method,
         headers: {
           "Content-Type": "application/json",
@@ -65,6 +63,8 @@ function httpsRequest(method, hostname, path, headers, body) {
 // ─── Craft MCP ──────────────────────────────────────────────────────────────
 
 async function fetchCraftDocument(documentId) {
+  console.log(`Fetching Craft document: ${documentId}`);
+
   const response = await httpsRequest(
     "POST",
     "mcp.craft.do",
@@ -80,7 +80,13 @@ async function fetchCraftDocument(documentId) {
       },
     }
   );
-  return response?.body?.result?.content?.[0]?.text ?? "";
+
+  console.log("Craft response status:", response.status);
+  console.log("Craft response body:", JSON.stringify(response.body, null, 2).slice(0, 500));
+
+  const text = response?.body?.result?.content?.[0]?.text ?? "";
+  console.log("Extracted text length:", text.length);
+  return text;
 }
 
 // ─── Claude Call ────────────────────────────────────────────────────────────
@@ -92,10 +98,9 @@ async function generateDashboardJson(workingMemory) {
 
 Your job is to transform the working memory TOML into a structured JSON object that a React dashboard can consume.
 
-## Output schema
-
 Return ONLY valid JSON. No explanation. No markdown fences.
 
+Schema:
 {
   "generated_at": "<ISO timestamp>",
   "items": [
@@ -110,8 +115,8 @@ Return ONLY valid JSON. No explanation. No markdown fences.
       "sub_threads": ["string"],
       "open_actions": ["string"],
       "deadline": "YYYY-MM-DD or null",
-      "pinned": true | false,
-      "days_until_deadline": number | null
+      "pinned": true,
+      "days_until_deadline": 0
     }
   ],
   "habit_tracking": {
@@ -119,15 +124,15 @@ Return ONLY valid JSON. No explanation. No markdown fences.
     "habits": [
       {
         "id": "string",
-        "completions": ["mon", "tue", ...],
+        "completions": ["mon"],
         "status": "done | partial | missed | pending"
       }
     ]
   },
   "meta": {
-    "hot_count": number,
-    "warm_count": number,
-    "archived_count": number
+    "hot_count": 0,
+    "warm_count": 0,
+    "archived_count": 0
   }
 }
 
@@ -154,12 +159,14 @@ Today's date: ${today}`;
     }
   );
 
+  console.log("Claude response status:", response.status);
+
   const raw = response?.body?.content?.[0]?.text ?? "";
+  console.log("Claude raw output preview:", raw.slice(0, 300));
 
   try {
     return JSON.parse(raw);
   } catch {
-    // Strip any accidental markdown fences
     const clean = raw.replace(/```json\n?|```\n?/g, "").trim();
     return JSON.parse(clean);
   }
@@ -172,7 +179,6 @@ async function pushDashboardJson(dashboardJson) {
     JSON.stringify(dashboardJson, null, 2)
   ).toString("base64");
 
-  // Get current file SHA (needed to update existing file)
   const existing = await httpsRequest(
     "GET",
     "api.github.com",
@@ -224,9 +230,8 @@ async function main() {
   if (!GITHUB_TOKEN) throw new Error("Missing GITHUB_TOKEN");
 
   console.log("Fetching working memory from Craft...");
-  const workingMemory = await fetchCraftDocument(
-    CRAFT_DOCUMENT_IDS.workingMemory
-  );
+  const workingMemory = await fetchCraftDocument(CRAFT_DOCUMENT_IDS.workingMemory);
+  console.log("Working memory length:", workingMemory.length);
 
   console.log("Generating dashboard JSON via Claude...");
   const dashboardJson = await generateDashboardJson(workingMemory);
