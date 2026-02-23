@@ -3,7 +3,7 @@
 /**
  * Dashboard Generator
  *
- * Runs frequently (e.g. every hour). Reads working memory from Craft,
+ * Runs frequently (e.g. every hour). Reads working memory from Craft via REST API,
  * sends it to Claude to generate dashboard JSON, then commits
  * dashboard.json to the GitHub repo so the site re-renders.
  */
@@ -19,6 +19,9 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_REPO = "gogogoober/life-dashboard";
 const GITHUB_BRANCH = "main";
 const DASHBOARD_JSON_PATH = "public/dashboard.json";
+
+const CRAFT_API_BASE = "connect.craft.do";
+const CRAFT_API_PATH = "/api/v1";
 
 const CRAFT_DOCUMENT_IDS = {
   workingMemory: "FC9D77DC-45EB-4EBA-B7F5-3F6F7BEB9DD0",
@@ -60,32 +63,58 @@ function httpsRequest(method, hostname, urlPath, headers, body) {
   });
 }
 
-// ─── Craft MCP ──────────────────────────────────────────────────────────────
+// ─── Craft REST API ──────────────────────────────────────────────────────────
 
 async function fetchCraftDocument(documentId) {
   console.log(`Fetching Craft document: ${documentId}`);
 
   const response = await httpsRequest(
-    "POST",
-    "mcp.craft.do",
-    "/links/8pMZhXonzqg/mcp",
-    { Authorization: `Bearer ${CRAFT_MCP_TOKEN}` },
+    "GET",
+    CRAFT_API_BASE,
+    `${CRAFT_API_PATH}/blocks?id=${documentId}`,
     {
-      jsonrpc: "2.0",
-      id: 1,
-      method: "tools/call",
-      params: {
-        name: "blocks_get",
-        arguments: { id: documentId, format: "markdown" },
-      },
+      Authorization: `Bearer ${CRAFT_MCP_TOKEN}`,
+      Accept: "text/markdown",
     }
   );
 
   console.log("Craft response status:", response.status);
-  console.log("Craft response body:", JSON.stringify(response.body, null, 2).slice(0, 500));
 
-  const text = response?.body?.result?.content?.[0]?.text ?? "";
+  if (response.status !== 200) {
+    console.error("Craft error body:", JSON.stringify(response.body, null, 2).slice(0, 500));
+    return "";
+  }
+
+  // When Accept: text/markdown, body comes back as a plain string (not JSON)
+  const text = typeof response.body === "string" ? response.body : JSON.stringify(response.body);
   console.log("Extracted text length:", text.length);
+  console.log("Text preview:", text.slice(0, 200));
+  return text;
+}
+
+async function fetchTodayDailyNote() {
+  const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  console.log(`Fetching daily note for: ${today}`);
+
+  const response = await httpsRequest(
+    "GET",
+    CRAFT_API_BASE,
+    `${CRAFT_API_PATH}/blocks?date=${today}`,
+    {
+      Authorization: `Bearer ${CRAFT_MCP_TOKEN}`,
+      Accept: "text/markdown",
+    }
+  );
+
+  console.log("Daily note response status:", response.status);
+
+  if (response.status !== 200) {
+    console.log("No daily note found for today, continuing with empty note.");
+    return "";
+  }
+
+  const text = typeof response.body === "string" ? response.body : JSON.stringify(response.body);
+  console.log("Daily note length:", text.length);
   return text;
 }
 
