@@ -7,7 +7,7 @@
  * sends them to Claude, and writes the updated working memory back to Craft.
  */
 
-const https = require("https");
+import https from "https";
 
 // ─── Config ────────────────────────────────────────────────────────────────
 

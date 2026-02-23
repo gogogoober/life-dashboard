@@ -8,9 +8,9 @@
  * dashboard.json to the GitHub repo so the site re-renders.
  */
 
-const https = require("https");
-const fs = require("fs");
-const path = require("path");
+import https from "https";
+import fs from "fs";
+import path from "path";
 
 // ─── Config ────────────────────────────────────────────────────────────────
 
