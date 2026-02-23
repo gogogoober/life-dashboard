@@ -43,6 +43,31 @@ export interface MapPin {
   days: string;
 }
 
+// ─── Active Threads ────────────────────────────────────────
+
+export type ThreadTier = "main" | "side";
+export type ThreadDomain = "work" | "personal";
+export type EffortBucket = "15 min" | "1 hr" | "half day" | "full day";
+
+export interface ThreadTask {
+  label: string;
+  effort: EffortBucket;
+  bigRock: boolean;
+}
+
+export interface ThreadJournalEntry {
+  text: string;
+  date: string;
+}
+
+export interface ActiveThread {
+  name: string;
+  tier: ThreadTier;
+  domain: ThreadDomain;
+  tasks: ThreadTask[];
+  journal: ThreadJournalEntry[];
+}
+
 // ─── Placeholder ───────────────────────────────────────────────────
 
 export interface PlaceholderItem {

@@ -1,5 +1,5 @@
 import { TemplateRenderer, defaultTemplate } from "./templates";
-import { EVENTS, CONTEXT_STUB, TOKYO_PINS } from "./data/stub";
+import { EVENTS, CONTEXT_STUB, TOKYO_PINS, ACTIVE_THREADS_STUB } from "./data/stub";
 
 // Map widget IDs to their data. Each key matches a widgetId in the template config.
 // When you add a new widget, add its data here under its registry key.
@@ -13,6 +13,9 @@ const widgetData: Record<string, Record<string, unknown>> = {
   "city-map": {
     city: "Tokyo",
     pins: TOKYO_PINS,
+  },
+  "active-threads": {
+    items: ACTIVE_THREADS_STUB,
   },
 };
 

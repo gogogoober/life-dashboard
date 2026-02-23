@@ -45,7 +45,7 @@ export const defaultTemplate: TemplateConfig = {
   rows: "1fr 1fr",
   slots: [
     {
-      widgetId: "calendar-embed",
+      widgetId: "active-threads",
       gridColumn: "1 / 9",
       gridRow: "1 / 2",
       size: "large",
@@ -57,7 +57,7 @@ export const defaultTemplate: TemplateConfig = {
       size: "large",
     },
     {
-      widgetId: "context-resume",
+      widgetId: "calendar-embed",
       gridColumn: "9 / 13",
       gridRow: "1 / 2",
       size: "default",

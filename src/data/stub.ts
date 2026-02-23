@@ -1,4 +1,4 @@
-import type { DashboardEvent, ContextItem, MapPin, PinType } from "../types";
+import type { DashboardEvent, ContextItem, MapPin, PinType, ActiveThread } from "../types";
 
 export const EVENTS: DashboardEvent[] = [
   {
@@ -105,3 +105,82 @@ export const PIN_COLORS: Record<PinType, string> = {
   food: "#f87171",
   transit: "#93c5fd",
 };
+
+export const ACTIVE_THREADS_STUB: ActiveThread[] = [
+  {
+    name: "Japan Trip",
+    tier: "main",
+    domain: "personal",
+    tasks: [
+      { label: "Buy travel adapter", effort: "15 min", bigRock: false },
+      { label: "Book JR Rail Pass", effort: "1 hr", bigRock: true },
+      { label: "Decide on Kyoto hotel — ryokan vs modern", effort: "1 hr", bigRock: false },
+      { label: "Plan day-by-day itinerary", effort: "half day", bigRock: false },
+    ],
+    journal: [
+      { text: "Booked flights and Tokyo hotel. Kyoto hotel still open.", date: "Feb 21" },
+      { text: "Started building itinerary. Tsukiji and Akihabara on day 1.", date: "Feb 18" },
+      { text: "Decided on late March dates. Isabella confirmed.", date: "Feb 14" },
+    ],
+  },
+  {
+    name: "API Rate Limiting PR",
+    tier: "main",
+    domain: "work",
+    tasks: [
+      { label: "Fix burst limit edge case — failing test", effort: "1 hr", bigRock: false },
+      { label: "Ping Sarah for re-review after fix", effort: "15 min", bigRock: false },
+    ],
+    journal: [
+      { text: "Token bucket mostly working. One edge case with burst limits failing.", date: "Feb 20" },
+      { text: "Sarah left initial review comments. Addressed 4 of 5.", date: "Feb 19" },
+    ],
+  },
+  {
+    name: "Q1 Planning Doc",
+    tier: "main",
+    domain: "work",
+    tasks: [
+      { label: "Follow up with Miguel for headcount numbers", effort: "15 min", bigRock: false },
+      { label: "Write capacity section once numbers arrive", effort: "half day", bigRock: false },
+    ],
+    journal: [
+      { text: "Draft is 80% done. Capacity section is the last gap.", date: "Feb 19" },
+    ],
+  },
+  {
+    name: "Fountain Pen Research",
+    tier: "side",
+    domain: "personal",
+    tasks: [
+      { label: "Order replacement nib for Pilot 823", effort: "15 min", bigRock: false },
+    ],
+    journal: [
+      { text: "Narrowed to Pilot 823 or Sailor Pro Gear. Leaning Pilot for the vac filler.", date: "Feb 20" },
+    ],
+  },
+  {
+    name: "Follow Up with Jake",
+    tier: "side",
+    domain: "personal",
+    tasks: [
+      { label: "Text Jake about the job opportunity he mentioned", effort: "15 min", bigRock: false },
+    ],
+    journal: [
+      { text: "Jake brought up a role at his company during dinner. Said he'd send details.", date: "Feb 17" },
+    ],
+  },
+  {
+    name: "Cerebro Dashboard",
+    tier: "main",
+    domain: "personal",
+    tasks: [
+      { label: "Build Active Threads widget", effort: "half day", bigRock: false },
+      { label: "Set up working memory update cron job", effort: "full day", bigRock: false },
+    ],
+    journal: [
+      { text: "Consolidated Context Resume and Up Next into quest-log-style panel.", date: "Feb 23" },
+      { text: "Bubble map and city map working. Widget registry and template system solid.", date: "Feb 21" },
+    ],
+  },
+];
