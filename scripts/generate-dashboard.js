@@ -20,8 +20,8 @@ const GITHUB_REPO = "gogogoober/life-dashboard";
 const GITHUB_BRANCH = "main";
 const DASHBOARD_JSON_PATH = "public/dashboard.json";
 
-const CRAFT_API_BASE = "connect.craft.do";
-const CRAFT_API_PATH = "/api/v1";
+const CRAFT_API_BASE = "mcp.craft.do";
+const CRAFT_API_PATH = "/links/8pMZhXonzqg/api/v1";
 
 const CRAFT_DOCUMENT_IDS = {
   workingMemory: "FC9D77DC-45EB-4EBA-B7F5-3F6F7BEB9DD0",
