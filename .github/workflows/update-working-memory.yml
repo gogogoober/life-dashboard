@@ -22,5 +22,4 @@ jobs:
       - name: Run Working Memory Updater
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          CRAFT_MCP_TOKEN: ${{ secrets.CRAFT_MCP_TOKEN }}
         run: node scripts/update-working-memory.js

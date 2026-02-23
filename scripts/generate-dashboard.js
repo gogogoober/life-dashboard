@@ -3,8 +3,8 @@
 /**
  * Dashboard Generator
  *
- * Runs frequently (e.g. every hour). Reads working memory from Craft via REST API,
- * sends it to Claude to generate dashboard JSON, then commits
+ * Runs frequently (e.g. every hour). Uses Claude with Craft MCP integration
+ * to read working memory and generate dashboard JSON, then commits
  * dashboard.json to the GitHub repo so the site re-renders.
  */
 
@@ -13,21 +13,16 @@ import https from "https";
 // ─── Config ────────────────────────────────────────────────────────────────
 
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-const CRAFT_MCP_TOKEN = process.env.CRAFT_MCP_TOKEN;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 const GITHUB_REPO = "gogogoober/life-dashboard";
 const GITHUB_BRANCH = "main";
 const DASHBOARD_JSON_PATH = "public/dashboard.json";
 
-const CRAFT_API_BASE = "mcp.craft.do";
-const CRAFT_API_PATH = "/links/8pMZhXonzqg/api/v1";
+const CRAFT_MCP_URL = "https://mcp.craft.do/links/8pMZhXonzqg/mcp";
+const WORKING_MEMORY_DOC_ID = "FC9D77DC-45EB-4EBA-B7F5-3F6F7BEB9DD0";
 
-const CRAFT_DOCUMENT_IDS = {
-  workingMemory: "FC9D77DC-45EB-4EBA-B7F5-3F6F7BEB9DD0",
-};
-
-const CLAUDE_MODEL = "claude-sonnet-4-6";
+const CLAUDE_MODEL = "claude-sonnet-4-5-20250929";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -63,71 +58,18 @@ function httpsRequest(method, hostname, urlPath, headers, body) {
   });
 }
 
-// ─── Craft REST API ──────────────────────────────────────────────────────────
+// ─── Claude + Craft MCP ─────────────────────────────────────────────────────
 
-async function fetchCraftDocument(documentId) {
-  console.log(`Fetching Craft document: ${documentId}`);
-
-  const response = await httpsRequest(
-    "GET",
-    CRAFT_API_BASE,
-    `${CRAFT_API_PATH}/blocks?id=${documentId}`,
-    {
-      Authorization: `Bearer ${CRAFT_MCP_TOKEN}`,
-      Accept: "text/markdown",
-    }
-  );
-
-  console.log("Craft response status:", response.status);
-
-  if (response.status !== 200) {
-    console.error("Craft error body:", JSON.stringify(response.body, null, 2).slice(0, 500));
-    return "";
-  }
-
-  // When Accept: text/markdown, body comes back as a plain string (not JSON)
-  const text = typeof response.body === "string" ? response.body : JSON.stringify(response.body);
-  console.log("Extracted text length:", text.length);
-  console.log("Text preview:", text.slice(0, 200));
-  return text;
-}
-
-async function fetchTodayDailyNote() {
-  const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
-  console.log(`Fetching daily note for: ${today}`);
-
-  const response = await httpsRequest(
-    "GET",
-    CRAFT_API_BASE,
-    `${CRAFT_API_PATH}/blocks?date=${today}`,
-    {
-      Authorization: `Bearer ${CRAFT_MCP_TOKEN}`,
-      Accept: "text/markdown",
-    }
-  );
-
-  console.log("Daily note response status:", response.status);
-
-  if (response.status !== 200) {
-    console.log("No daily note found for today, continuing with empty note.");
-    return "";
-  }
-
-  const text = typeof response.body === "string" ? response.body : JSON.stringify(response.body);
-  console.log("Daily note length:", text.length);
-  return text;
-}
-
-// ─── Claude Call ────────────────────────────────────────────────────────────
-
-async function generateDashboardJson(workingMemory) {
+async function generateDashboardJson() {
   const today = new Date().toISOString().split("T")[0];
 
   const systemPrompt = `You are the Dashboard Generator for a personal productivity system called Cerebro.
 
-Your job is to transform the working memory TOML into a structured JSON object that a React dashboard can consume.
+You have access to Craft via MCP tools. Your job:
+1. Read the working memory document (ID: ${WORKING_MEMORY_DOC_ID}) using blocks_get with format "markdown"
+2. Transform the TOML content into structured dashboard JSON
 
-Return ONLY valid JSON. No explanation. No markdown fences.
+Return ONLY valid JSON. No explanation. No markdown fences. No other text.
 
 Schema:
 {
@@ -167,6 +109,8 @@ Schema:
 
 Today's date: ${today}`;
 
+  console.log("Calling Claude with Craft MCP integration...");
+
   const response = await httpsRequest(
     "POST",
     "api.anthropic.com",
@@ -182,7 +126,14 @@ Today's date: ${today}`;
       messages: [
         {
           role: "user",
-          content: `Convert this working memory to dashboard JSON:\n\n${workingMemory}`,
+          content: "Read the working memory from Craft and generate the dashboard JSON.",
+        },
+      ],
+      mcp_servers: [
+        {
+          type: "url",
+          url: CRAFT_MCP_URL,
+          name: "craft",
         },
       ],
     }
@@ -190,8 +141,22 @@ Today's date: ${today}`;
 
   console.log("Claude response status:", response.status);
 
-  const raw = response?.body?.content?.[0]?.text ?? "";
+  if (response.status !== 200) {
+    console.error("Claude API error:", JSON.stringify(response.body, null, 2).slice(0, 1000));
+    throw new Error(`Claude API returned status ${response.status}`);
+  }
+
+  // Extract text blocks (skip mcp_tool_use / mcp_tool_result)
+  const textBlocks = (response.body?.content ?? [])
+    .filter((block) => block.type === "text")
+    .map((block) => block.text);
+
+  const raw = textBlocks.join("\n").trim();
   console.log("Claude raw output preview:", raw.slice(0, 300));
+
+  if (!raw) {
+    throw new Error("Claude returned no text content. Check MCP connectivity.");
+  }
 
   try {
     return JSON.parse(raw);
@@ -255,15 +220,10 @@ async function main() {
   console.log("=== Dashboard Generator starting ===");
 
   if (!ANTHROPIC_API_KEY) throw new Error("Missing ANTHROPIC_API_KEY");
-  if (!CRAFT_MCP_TOKEN) throw new Error("Missing CRAFT_MCP_TOKEN");
   if (!GITHUB_TOKEN) throw new Error("Missing GITHUB_TOKEN");
 
-  console.log("Fetching working memory from Craft...");
-  const workingMemory = await fetchCraftDocument(CRAFT_DOCUMENT_IDS.workingMemory);
-  console.log("Working memory length:", workingMemory.length);
-
-  console.log("Generating dashboard JSON via Claude...");
-  const dashboardJson = await generateDashboardJson(workingMemory);
+  console.log("Generating dashboard JSON via Claude + Craft MCP...");
+  const dashboardJson = await generateDashboardJson();
 
   console.log("Pushing dashboard.json to GitHub...");
   await pushDashboardJson(dashboardJson);

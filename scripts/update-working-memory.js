@@ -3,8 +3,9 @@
 /**
  * Working Memory Updater
  *
- * Runs once daily. Reads today's Craft daily note + current working memory + config,
- * sends them to Claude, and writes the updated working memory back to Craft.
+ * Runs once daily. Uses Claude with Craft MCP integration to read today's
+ * daily note + current working memory + config, process them, and write
+ * the updated working memory back to Craft.
  */
 
 import https from "https";
@@ -12,36 +13,29 @@ import https from "https";
 // ─── Config ────────────────────────────────────────────────────────────────
 
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-const CRAFT_MCP_TOKEN = process.env.CRAFT_MCP_TOKEN;
+
+const CRAFT_MCP_URL = "https://mcp.craft.do/links/8pMZhXonzqg/mcp";
 
 const CRAFT_DOCUMENT_IDS = {
   workingMemory: "FC9D77DC-45EB-4EBA-B7F5-3F6F7BEB9DD0",
   config: "15AD13D1-F413-41F9-B2CD-1F9B51E1EB1C",
 };
 
-const CLAUDE_MODEL = "claude-sonnet-4-6";
+const CLAUDE_MODEL = "claude-sonnet-4-5-20250929";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
-function getTodayDateString() {
-  const now = new Date();
-  const yyyy = now.getFullYear();
-  const mm = String(now.getMonth() + 1).padStart(2, "0");
-  const dd = String(now.getDate()).padStart(2, "0");
-  return `${yyyy}.${mm}.${dd}`;
-}
-
-function httpsPost(hostname, path, headers, body) {
+function httpsRequest(method, hostname, urlPath, headers, body) {
   return new Promise((resolve, reject) => {
-    const data = JSON.stringify(body);
+    const data = body ? JSON.stringify(body) : null;
     const req = https.request(
       {
         hostname,
-        path,
-        method: "POST",
+        path: urlPath,
+        method,
         headers: {
           "Content-Type": "application/json",
-          "Content-Length": Buffer.byteLength(data),
+          ...(data ? { "Content-Length": Buffer.byteLength(data) } : {}),
           ...headers,
         },
       },
@@ -50,128 +44,39 @@ function httpsPost(hostname, path, headers, body) {
         res.on("data", (chunk) => (raw += chunk));
         res.on("end", () => {
           try {
-            resolve(JSON.parse(raw));
+            resolve({ status: res.statusCode, body: JSON.parse(raw) });
           } catch {
-            reject(new Error(`Failed to parse response: ${raw}`));
+            resolve({ status: res.statusCode, body: raw });
           }
         });
       }
     );
     req.on("error", reject);
-    req.write(data);
+    if (data) req.write(data);
     req.end();
   });
 }
 
-// ─── Craft MCP Calls ────────────────────────────────────────────────────────
+// ─── Claude + Craft MCP ─────────────────────────────────────────────────────
 
-async function fetchCraftDocument(documentId) {
-  const response = await httpsPost(
-    "mcp.craft.do",
-    "/links/8pMZhXonzqg/mcp",
-    { Authorization: `Bearer ${CRAFT_MCP_TOKEN}` },
-    {
-      jsonrpc: "2.0",
-      id: 1,
-      method: "tools/call",
-      params: {
-        name: "blocks_get",
-        arguments: { id: documentId, format: "markdown" },
-      },
-    }
-  );
-  return response?.result?.content?.[0]?.text ?? "";
-}
-
-async function fetchTodayDailyNote() {
-  const today = getTodayDateString();
-  console.log(`Fetching daily note for: ${today}`);
-
-  // Search for today's note by title
-  const response = await httpsPost(
-    "mcp.craft.do",
-    "/links/8pMZhXonzqg/mcp",
-    { Authorization: `Bearer ${CRAFT_MCP_TOKEN}` },
-    {
-      jsonrpc: "2.0",
-      id: 2,
-      method: "tools/call",
-      params: {
-        name: "documents_search",
-        arguments: { include: today },
-      },
-    }
-  );
-
-  const docs = response?.result?.content?.[0]?.text;
-  if (!docs) return `No daily note found for ${today}.`;
-
-  // Parse out the first matching document ID and fetch its content
-  const parsed = JSON.parse(docs);
-  const match = parsed?.documents?.find((d) => d.title === today);
-  if (!match) return `No daily note found for ${today}.`;
-
-  return fetchCraftDocument(match.id);
-}
-
-async function writeCraftDocument(documentId, tomlContent) {
-  // First clear the existing code block content, then write new content
-  // Strategy: fetch block IDs, find the code block, update it
-  const fetchResponse = await httpsPost(
-    "mcp.craft.do",
-    "/links/8pMZhXonzqg/mcp",
-    { Authorization: `Bearer ${CRAFT_MCP_TOKEN}` },
-    {
-      jsonrpc: "2.0",
-      id: 3,
-      method: "tools/call",
-      params: {
-        name: "blocks_get",
-        arguments: { id: documentId, format: "json", maxDepth: 1 },
-      },
-    }
-  );
-
-  const blocks = JSON.parse(
-    fetchResponse?.result?.content?.[0]?.text ?? "[]"
-  );
-  const codeBlock = blocks?.find?.((b) => b.type === "code");
-
-  if (!codeBlock) {
-    console.error("Could not find code block in working memory document.");
-    return;
-  }
-
-  await httpsPost(
-    "mcp.craft.do",
-    "/links/8pMZhXonzqg/mcp",
-    { Authorization: `Bearer ${CRAFT_MCP_TOKEN}` },
-    {
-      jsonrpc: "2.0",
-      id: 4,
-      method: "tools/call",
-      params: {
-        name: "blocks_update",
-        arguments: {
-          blocks: [{ id: codeBlock.id, rawCode: tomlContent }],
-        },
-      },
-    }
-  );
-
-  console.log("Working memory updated in Craft.");
-}
-
-// ─── Claude Call ────────────────────────────────────────────────────────────
-
-async function runClaudeUpdate(dailyNote, workingMemory, config) {
-  const today = getTodayDateString();
+async function runWorkingMemoryUpdate() {
+  const now = new Date();
+  const today = now.toISOString().split("T")[0]; // YYYY-MM-DD
 
   const systemPrompt = `You are the Working Memory Updater for a personal productivity system called Cerebro.
 
-Your job is to read the user's daily notes, current working memory, and config, then produce an updated working memory document in TOML format.
+You have access to Craft via MCP tools. Follow these steps in order:
 
-## Rules
+## Step 1: Read source documents
+Use MCP tools to fetch these three things:
+1. Today's daily note — use blocks_get with date="${today}" and format="markdown"
+2. Working memory — use blocks_get with id="${CRAFT_DOCUMENT_IDS.workingMemory}" and format="markdown"
+3. Config — use blocks_get with id="${CRAFT_DOCUMENT_IDS.config}" and format="markdown"
+
+If today's daily note is empty, that's fine — proceed with just working memory and config.
+
+## Step 2: Process and generate updated TOML
+Apply these rules:
 
 **Heat levels:**
 - hot: actively occupying mental space, mentioned with depth/branching
@@ -194,27 +99,20 @@ Your job is to read the user's daily notes, current working memory, and config, 
 **What counts as "eating the brain":**
 Depth and branching — the user returns to a topic from multiple angles, not just mentions it once.
 
-## Output format
+## Step 3: Write back to Craft
+First, use blocks_get with id="${CRAFT_DOCUMENT_IDS.workingMemory}" and format="json" and maxDepth=1 to find the code block.
+Then use blocks_update to update that code block's rawCode with the new TOML.
+Update the last_updated field to "${today}".
 
-Return ONLY valid TOML inside a code block. No explanation. No commentary. Match the exact schema of the current working memory.
+## Step 4: Confirm
+After writing, respond with a brief summary of changes made (items added/removed/heat changed).
 
 Today's date: ${today}`;
 
-  const userMessage = `Here are the three source documents. Please update the working memory.
+  console.log("Calling Claude with Craft MCP integration...");
 
----
-## TODAY'S DAILY NOTE (${today})
-${dailyNote}
-
----
-## CURRENT WORKING MEMORY
-${workingMemory}
-
----
-## CONFIG
-${config}`;
-
-  const response = await httpsPost(
+  const response = await httpsRequest(
+    "POST",
     "api.anthropic.com",
     "/v1/messages",
     {
@@ -223,21 +121,53 @@ ${config}`;
     },
     {
       model: CLAUDE_MODEL,
-      max_tokens: 4096,
+      max_tokens: 8192,
       system: systemPrompt,
-      messages: [{ role: "user", content: userMessage }],
+      messages: [
+        {
+          role: "user",
+          content:
+            "Read today's daily note, current working memory, and config from Craft. " +
+            "Process the updates, then write the updated working memory back to Craft.",
+        },
+      ],
+      mcp_servers: [
+        {
+          type: "url",
+          url: CRAFT_MCP_URL,
+          name: "craft",
+        },
+      ],
     }
   );
 
-  const raw = response?.content?.[0]?.text ?? "";
+  console.log("Claude response status:", response.status);
 
-  // Extract TOML from code block
-  const match = raw.match(/```(?:toml)?\n([\s\S]*?)```/);
-  if (!match) {
-    throw new Error(`Claude did not return a TOML code block. Raw: ${raw}`);
+  if (response.status !== 200) {
+    console.error("Claude API error:", JSON.stringify(response.body, null, 2).slice(0, 1000));
+    throw new Error(`Claude API returned status ${response.status}`);
   }
 
-  return match[1].trim();
+  // Log Claude's summary of what it did
+  const textBlocks = (response.body?.content ?? [])
+    .filter((block) => block.type === "text")
+    .map((block) => block.text);
+
+  const summary = textBlocks.join("\n").trim();
+  if (summary) {
+    console.log("\nClaude's update summary:\n" + summary);
+  }
+
+  // Verify MCP tool calls were made
+  const toolCalls = (response.body?.content ?? []).filter(
+    (block) => block.type === "mcp_tool_use"
+  );
+  console.log(`\nMCP tool calls made: ${toolCalls.length}`);
+  toolCalls.forEach((tc) => console.log(`  - ${tc.name}`));
+
+  if (toolCalls.length === 0) {
+    throw new Error("Claude made no MCP tool calls. Check MCP connectivity.");
+  }
 }
 
 // ─── Main ────────────────────────────────────────────────────────────────────
@@ -246,22 +176,10 @@ async function main() {
   console.log("=== Working Memory Updater starting ===");
 
   if (!ANTHROPIC_API_KEY) throw new Error("Missing ANTHROPIC_API_KEY");
-  if (!CRAFT_MCP_TOKEN) throw new Error("Missing CRAFT_MCP_TOKEN");
 
-  console.log("Fetching source documents from Craft...");
-  const [dailyNote, workingMemory, config] = await Promise.all([
-    fetchTodayDailyNote(),
-    fetchCraftDocument(CRAFT_DOCUMENT_IDS.workingMemory),
-    fetchCraftDocument(CRAFT_DOCUMENT_IDS.config),
-  ]);
+  await runWorkingMemoryUpdate();
 
-  console.log("Sending to Claude for processing...");
-  const updatedToml = await runClaudeUpdate(dailyNote, workingMemory, config);
-
-  console.log("Writing updated working memory back to Craft...");
-  await writeCraftDocument(CRAFT_DOCUMENT_IDS.workingMemory, updatedToml);
-
-  console.log("=== Done ===");
+  console.log("\n=== Done ===");
 }
 
 main().catch((err) => {
