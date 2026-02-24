@@ -162,13 +162,45 @@ You have two data sources:
 1. **Craft (via MCP tools)** — Read the working memory document (ID: ${WORKING_MEMORY_DOC_ID}) using blocks_get with format "markdown". This contains items actively occupying mental space, with heat levels, sub-threads, and open actions.
 2. **Google Calendar events** — Provided in the user message below. These are one-off (non-recurring) events for the next 2 months, plus any recurring birthdays.
 
-## Your job
+## CRITICAL: Intelligent Merge Rules
 
-1. Read working memory from Craft via MCP
-2. Combine it with the calendar events to produce a unified dashboard JSON
-3. For calendar events: assign a weight (1-10) based on how significant the event seems — multi-day trips and events with many attendees are heavier; simple dinners and 1:1s are lighter
-4. Cross-reference: if a calendar event relates to a working memory item (e.g. a "Japan" calendar event matches the japan-trip item), note the connection in the event's "related_item_id" field
-5. Calculate days_until for both items and events relative to today
+You MUST intelligently merge these two data sources. Never show the same thing twice.
+
+### Step 1: Match calendar events to working memory items
+Look for semantic matches — shared keywords, overlapping dates, contextual clues. Examples:
+- A calendar event called "JAPAN!" and a working memory item called "Japan Trip 2026" are the SAME thing
+- A calendar event called "Chicago" and a working memory item about a Chicago trip are the SAME thing
+- Use fuzzy matching: "JAPAN!", "Japan Trip", "Flight to Osaka" all relate to the same trip
+
+### Step 2: For matched trips/events — merge, don't duplicate
+When a calendar event matches a working memory item:
+- The item goes in "items" ONCE with all the working memory context (summary, sub_threads, open_actions, heat, etc.)
+- **Use the calendar dates as the source of truth** for the item's start/end dates. Override the working memory deadline with the actual calendar start date.
+- Do NOT also put the trip block (e.g. "JAPAN!" or "Chicago") in calendar_events — it's already represented in items.
+
+### Step 3: Flights, hotels, and logistics stay as separate calendar_events
+Even though flights and hotel stays are part of a trip, keep them as individual entries in "calendar_events" with their specific times and locations. These are actionable/time-specific:
+- "Flight to Taipei (BR 55)" → separate calendar_event, linked to parent trip via related_item_id
+- "Stay at Travelodge Kyoto" → separate calendar_event, linked via related_item_id
+- "Flight to Honolulu (ZG 2)" → separate calendar_event, linked via related_item_id
+
+### Step 4: Standalone calendar events
+Calendar events with NO working memory match go into "calendar_events" as standalone entries:
+- Birthdays, appointments, social events, etc.
+- Set related_item_id to null
+
+### Step 5: Standalone working memory items
+Working memory items with NO calendar match (e.g. a coding project) go into "items" as-is with their original dates.
+
+### Summary of what goes where:
+- "items": Working memory items (enriched with calendar dates when matched). ONE entry per concept.
+- "calendar_events": Flights, hotels, logistics (linked to parent item), birthdays, appointments, and anything from the calendar that isn't already represented in items.
+
+## Weighting & Dates
+
+- For calendar_events: assign weight 1-10 based on significance. Multi-day trips=8-10, flights=6-7, birthdays=5, appointments=3, hotel stays=4.
+- Calculate days_until and days_until_deadline relative to today.
+- For items with a matched calendar event, set the deadline to the calendar's start date (the departure date for trips).
 
 Return ONLY valid JSON. No explanation. No markdown fences. No other text.
 
@@ -187,18 +219,22 @@ Return ONLY valid JSON. No explanation. No markdown fences. No other text.
       "summary": "string",
       "sub_threads": ["string"],
       "open_actions": ["string"],
+      "start_date": "YYYY-MM-DD or null",
+      "end_date": "YYYY-MM-DD or null",
       "deadline": "YYYY-MM-DD or null",
       "pinned": true,
-      "days_until_deadline": number | null
+      "days_until_deadline": number | null,
+      "calendar_source": true | false
     }
   ],
   "calendar_events": [
     {
       "id": "string",
       "title": "string",
+      "type": "flight | hotel | appointment | birthday | social | logistics | other",
       "start": "ISO datetime or YYYY-MM-DD",
       "end": "ISO datetime or YYYY-MM-DD",
-      "all_day": true,
+      "all_day": true | false,
       "location": "string or null",
       "description": "string or null",
       "attendees": ["string"],
