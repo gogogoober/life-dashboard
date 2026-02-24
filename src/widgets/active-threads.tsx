@@ -53,7 +53,13 @@ function ThreadCard({ thread, isLarge }: ThreadCardProps) {
         </span>
         <span
           className="text-sm font-medium leading-tight"
-          style={{ color: nameColor }}
+          style={{
+            color: nameColor,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            minWidth: 0,
+          }}
         >
           {thread.name}
         </span>
@@ -61,7 +67,7 @@ function ThreadCard({ thread, isLarge }: ThreadCardProps) {
 
       {/* Task list */}
       <div className="flex flex-col gap-1.5">
-        {thread.tasks.map((task, i) => {
+        {thread.tasks.slice(0, 4).map((task, i) => {
           const effort = EFFORT[task.effort];
           return (
             <div key={i} className="flex items-start gap-1.5">
@@ -89,6 +95,11 @@ function ThreadCard({ thread, isLarge }: ThreadCardProps) {
             </div>
           );
         })}
+        {thread.tasks.length > 4 && (
+          <span style={{ color: "#444", fontSize: 10, paddingLeft: "2.75rem" }}>
+            +{thread.tasks.length - 4} more
+          </span>
+        )}
       </div>
 
       {/* Journal entry (large only) */}

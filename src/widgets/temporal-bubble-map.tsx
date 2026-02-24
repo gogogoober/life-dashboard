@@ -57,6 +57,7 @@ function buildChartOption(events: DashboardEvent[]) {
       }),
       _daysAway: Math.round(days),
       _childCount: todoActions.length,
+      _size: size,
     });
 
     if (todoActions.length > 0) {
@@ -136,6 +137,29 @@ function buildChartOption(events: DashboardEvent[]) {
     { label: "2 Months", days: 60 },
   ];
 
+  function getWeekendLines() {
+    const lines = [];
+    const base = new Date();
+    for (let d = 0; d <= 14; d++) {
+      const date = new Date(base);
+      date.setDate(base.getDate() + d);
+      const dow = date.getDay(); // 0=Sun, 6=Sat
+      if (dow === 0 || dow === 6) {
+        lines.push({
+          xAxis: logX(d === 0 ? 0 : d),
+          label: { show: false },
+          lineStyle: {
+            color: "#232840",
+            type: "solid",
+            width: 1,
+            opacity: 1,
+          },
+        });
+      }
+    }
+    return lines;
+  }
+
   return {
     backgroundColor: "transparent",
     animationDuration: 1200,
@@ -159,10 +183,10 @@ function buildChartOption(events: DashboardEvent[]) {
         return `<span style="color:#ccc">${d.name}</span>`;
       },
     },
-    grid: { left: 40, right: 40, top: 30, bottom: 45 },
+    grid: { left: 8, right: 40, top: 30, bottom: 45 },
     xAxis: {
       type: "value",
-      min: -2,
+      min: -1,
       max: 105,
       axisLine: { show: false },
       axisTick: { show: false },
@@ -180,16 +204,34 @@ function buildChartOption(events: DashboardEvent[]) {
           silent: true,
           symbol: "none",
           animation: false,
-          data: markers.map((m) => ({
-            xAxis: logX(m.days),
-            label: {
-              formatter: m.label,
-              position: "start",
-              color: "#2a2f3a",
-              fontSize: 10,
+          data: [
+            {
+              xAxis: logX(0),
+              label: {
+                formatter: "TODAY",
+                position: "start",
+                color: "#f97316",
+                fontSize: 9,
+              },
+              lineStyle: {
+                color: "#f97316",
+                type: "solid",
+                width: 1.5,
+                opacity: 0.65,
+              },
             },
-            lineStyle: { color: "#1c2030", type: [4, 4], width: 1 },
-          })),
+            ...getWeekendLines(),
+            ...markers.map((m) => ({
+              xAxis: logX(m.days),
+              label: {
+                formatter: m.label,
+                position: "start",
+                color: "#2a2f3a",
+                fontSize: 10,
+              },
+              lineStyle: { color: "#1c2030", type: [4, 4], width: 1 },
+            })),
+          ],
         },
       },
       {
@@ -218,21 +260,24 @@ function buildChartOption(events: DashboardEvent[]) {
       { id: "children", type: "scatter", data: childData, z: 2 },
       { id: "parents", type: "scatter", data: parentData, z: 3 },
       {
-        id: "today",
+        id: "dayLabels",
         type: "scatter",
         silent: true,
-        data: [
-          {
-            value: [logX(0.5), -4],
-            symbolSize: 0,
-            label: {
-              show: true,
-              formatter: "▲ TODAY",
-              color: "#444",
-              fontSize: 9,
-            },
+        z: 4,
+        data: parentData.map((d) => ({
+          value: d.value,
+          symbolSize: 0,
+          label: {
+            show: true,
+            formatter: String(d._daysAway),
+            position: "inside",
+            fontSize: Math.min(18, Math.max(7, Math.round(d._size * 0.3))),
+            fontWeight: "bold",
+            color: "rgba(255,255,255,0.8)",
+            textBorderColor: "rgba(0,0,0,0.25)",
+            textBorderWidth: 1,
           },
-        ],
+        })),
       },
     ],
   };

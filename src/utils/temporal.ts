@@ -34,5 +34,6 @@ export function daysFromNow(date: Date): number {
 }
 
 export function logX(days: number): number {
-  return (Math.log(days + 1) / Math.log(MAX_DAYS + 1)) * 100;
+  const t = Math.log(days + 1) / Math.log(MAX_DAYS + 1);
+  return Math.pow(t, 1.3) * 100;
 }

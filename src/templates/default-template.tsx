@@ -42,18 +42,18 @@ export function TemplateRenderer({ config, data }: TemplateRendererProps) {
 export const defaultTemplate: TemplateConfig = {
   name: "Default",
   columns: "repeat(12, 1fr)",
-  rows: "repeat(6, 1fr)",
+  rows: "repeat(5, 1fr)",
   slots: [
     {
       widgetId: "temporal-bubble-map",
       gridColumn: "1 / 9",
-      gridRow: "1 / 4",
+      gridRow: "1 / 3",
       size: "large",
     },
     {
       widgetId: "active-threads",
       gridColumn: "1 / 9",
-      gridRow: "4 / 7",
+      gridRow: "3 / 6",
       size: "large",
     },
     {
@@ -71,7 +71,7 @@ export const defaultTemplate: TemplateConfig = {
     {
       widgetId: "city-map",
       gridColumn: "9 / 13",
-      gridRow: "5 / 7",
+      gridRow: "5 / 6",
       size: "default",
     },
   ],

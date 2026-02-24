@@ -31,7 +31,15 @@ const WORKING_MEMORY_DOC_ID = "FC9D77DC-45EB-4EBA-B7F5-3F6F7BEB9DD0";
 
 const CLAUDE_MODEL = "claude-sonnet-4-5-20250929";
 
+// Delay before calling Claude API (seconds). Prevents rate-limit collisions
+// when this workflow is triggered right after Update Working Memory completes.
+const STARTUP_DELAY_SECONDS = 120;
+
 // ─── Helpers ────────────────────────────────────────────────────────────────
+
+function sleep(seconds) {
+  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+}
 
 function httpsRequest(method, hostname, urlPath, headers, body) {
   return new Promise((resolve, reject) => {
@@ -104,7 +112,7 @@ async function fetchCalendarEvents(accessToken) {
   const params = new URLSearchParams({
     timeMin: now.toISOString(),
     timeMax: twoMonthsOut.toISOString(),
-    singleEvents: "true",       // expand recurring into individual instances
+    singleEvents: "true",
     orderBy: "startTime",
     maxResults: "250",
   });
@@ -125,7 +133,6 @@ async function fetchCalendarEvents(accessToken) {
 
   const allEvents = response.body.items || [];
 
-  // Filter OUT recurring event instances — keep one-off events + birthdays
   const isBirthday = (e) =>
     (e.summary || "").toLowerCase().includes("birthday");
   const filtered = allEvents.filter((e) => !e.recurringEventId || isBirthday(e));
@@ -134,16 +141,15 @@ async function fetchCalendarEvents(accessToken) {
     `Calendar: ${allEvents.length} total events, ${filtered.length} kept (${allEvents.length - filtered.length} recurring filtered out, birthdays preserved)`
   );
 
-  // Simplify to what Claude needs
   return filtered.map((e) => ({
     id: e.id,
     title: e.summary || "(no title)",
     description: e.description || null,
     location: e.location || null,
-    start: e.start?.dateTime || e.start?.date || null, // dateTime for timed, date for all-day
+    start: e.start?.dateTime || e.start?.date || null,
     end: e.end?.dateTime || e.end?.date || null,
     all_day: !!e.start?.date,
-    status: e.status,                                   // confirmed, tentative, cancelled
+    status: e.status,
     attendees: (e.attendees || [])
       .filter((a) => !a.self)
       .map((a) => a.displayName || a.email),
@@ -156,112 +162,34 @@ async function fetchCalendarEvents(accessToken) {
 async function generateDashboardJson(calendarEvents) {
   const today = new Date().toISOString().split("T")[0];
 
-  const systemPrompt = `You are the Dashboard Generator for a personal productivity system called Cerebro.
+  const systemPrompt = `You are the Dashboard Generator for a personal productivity system.
 
-You have two data sources:
-1. **Craft (via MCP tools)** — Read the working memory document (ID: ${WORKING_MEMORY_DOC_ID}) using blocks_get with format "markdown". This contains items actively occupying mental space, with heat levels, sub-threads, and open actions.
-2. **Google Calendar events** — Provided in the user message below. These are one-off (non-recurring) events for the next 2 months, plus any recurring birthdays.
+## Data Sources
+1. **Craft MCP** — Read working memory (ID: ${WORKING_MEMORY_DOC_ID}) via blocks_get format="markdown". Contains items with heat levels, sub-threads, open actions.
+2. **Google Calendar** — Provided below. Non-recurring events + birthdays for the next 2 months.
 
-## CRITICAL: Intelligent Merge Rules
+## Merge Rules
+- Fuzzy-match calendar events to working memory items (e.g. "JAPAN!" matches "Japan Trip 2026").
+- Matched items: appear ONCE in "items" with working memory context. Use calendar dates as source of truth for start/end. Do NOT duplicate in calendar_events.
+- Flights, hotels, logistics: keep as separate calendar_events with related_item_id linking to the parent item. E.g. "Flight to Osaka (BR 55)" and "Stay at Travelodge Kyoto" are separate calendar_events linked to the Japan trip item.
+- Unmatched calendar events: standalone in calendar_events (related_item_id=null).
+- Unmatched working memory items: in "items" as-is.
 
-You MUST intelligently merge these two data sources. Never show the same thing twice.
+## Weights & Dates
+calendar_events weight (1-10): multi-day trips=8-10, flights=6-7, birthdays=5, hotel stays=4, appointments=3.
+Calculate days_until and days_until_deadline relative to today's date.
 
-### Step 1: Match calendar events to working memory items
-Look for semantic matches — shared keywords, overlapping dates, contextual clues. Examples:
-- A calendar event called "JAPAN!" and a working memory item called "Japan Trip 2026" are the SAME thing
-- A calendar event called "Chicago" and a working memory item about a Chicago trip are the SAME thing
-- Use fuzzy matching: "JAPAN!", "Japan Trip", "Flight to Osaka" all relate to the same trip
+## Output
+Return ONLY valid JSON matching this schema. No markdown fences, no explanation.
 
-### Step 2: For matched trips/events — merge, don't duplicate
-When a calendar event matches a working memory item:
-- The item goes in "items" ONCE with all the working memory context (summary, sub_threads, open_actions, heat, etc.)
-- **Use the calendar dates as the source of truth** for the item's start/end dates. Override the working memory deadline with the actual calendar start date.
-- Do NOT also put the trip block (e.g. "JAPAN!" or "Chicago") in calendar_events — it's already represented in items.
-
-### Step 3: Flights, hotels, and logistics stay as separate calendar_events
-Even though flights and hotel stays are part of a trip, keep them as individual entries in "calendar_events" with their specific times and locations. These are actionable/time-specific:
-- "Flight to Taipei (BR 55)" → separate calendar_event, linked to parent trip via related_item_id
-- "Stay at Travelodge Kyoto" → separate calendar_event, linked via related_item_id
-- "Flight to Honolulu (ZG 2)" → separate calendar_event, linked via related_item_id
-
-### Step 4: Standalone calendar events
-Calendar events with NO working memory match go into "calendar_events" as standalone entries:
-- Birthdays, appointments, social events, etc.
-- Set related_item_id to null
-
-### Step 5: Standalone working memory items
-Working memory items with NO calendar match (e.g. a coding project) go into "items" as-is with their original dates.
-
-### Summary of what goes where:
-- "items": Working memory items (enriched with calendar dates when matched). ONE entry per concept.
-- "calendar_events": Flights, hotels, logistics (linked to parent item), birthdays, appointments, and anything from the calendar that isn't already represented in items.
-
-## Weighting & Dates
-
-- For calendar_events: assign weight 1-10 based on significance. Multi-day trips=8-10, flights=6-7, birthdays=5, appointments=3, hotel stays=4.
-- Calculate days_until and days_until_deadline relative to today.
-- For items with a matched calendar event, set the deadline to the calendar's start date (the departure date for trips).
-
-Return ONLY valid JSON. No explanation. No markdown fences. No other text.
-
-## Schema
-
-{
-  "generated_at": "<ISO timestamp>",
-  "items": [
-    {
-      "id": "string",
-      "title": "string",
-      "category": "active-research | project | action-item | trip-event | people",
-      "tag": "personal | work | both",
-      "heat": "hot | warm | archived",
-      "heat_reason": "string",
-      "summary": "string",
-      "sub_threads": ["string"],
-      "open_actions": ["string"],
-      "start_date": "YYYY-MM-DD or null",
-      "end_date": "YYYY-MM-DD or null",
-      "deadline": "YYYY-MM-DD or null",
-      "pinned": true,
-      "days_until_deadline": number | null,
-      "calendar_source": true | false
-    }
-  ],
-  "calendar_events": [
-    {
-      "id": "string",
-      "title": "string",
-      "type": "flight | hotel | appointment | birthday | social | logistics | other",
-      "start": "ISO datetime or YYYY-MM-DD",
-      "end": "ISO datetime or YYYY-MM-DD",
-      "all_day": true | false,
-      "location": "string or null",
-      "description": "string or null",
-      "attendees": ["string"],
-      "weight": 1-10,
-      "days_until": number,
-      "related_item_id": "string or null"
-    }
-  ],
-  "habit_tracking": {
-    "week_start": "YYYY-MM-DD",
-    "habits": [
-      {
-        "id": "string",
-        "completions": ["mon"],
-        "status": "done | partial | missed | pending"
-      }
-    ]
-  },
-  "meta": {
-    "hot_count": 0,
-    "warm_count": 0,
-    "archived_count": 0,
-    "upcoming_events_count": 0
-  }
+{ "generated_at": "ISO timestamp",
+  "items": [{ "id": "string", "title": "string", "category": "active-research|project|action-item|trip-event|people", "tag": "personal|work|both", "heat": "hot|warm|archived", "heat_reason": "string", "summary": "string", "sub_threads": ["string"], "open_actions": ["string"], "start_date": "YYYY-MM-DD|null", "end_date": "YYYY-MM-DD|null", "deadline": "YYYY-MM-DD|null", "pinned": true, "days_until_deadline": "number|null", "calendar_source": "boolean" }],
+  "calendar_events": [{ "id": "string", "title": "string", "type": "flight|hotel|appointment|birthday|social|logistics|other", "start": "ISO datetime or YYYY-MM-DD", "end": "ISO datetime or YYYY-MM-DD", "all_day": "boolean", "location": "string|null", "description": "string|null", "attendees": ["string"], "weight": "1-10", "days_until": "number", "related_item_id": "string|null" }],
+  "habit_tracking": { "week_start": "YYYY-MM-DD", "habits": [{ "id": "string", "completions": ["mon"], "status": "done|partial|missed|pending" }] },
+  "meta": { "hot_count": 0, "warm_count": 0, "archived_count": 0, "upcoming_events_count": 0 }
 }
 
-Today's date: ${today}`;
+Today: ${today}`;
 
   console.log("Calling Claude with Craft MCP connector + calendar context...");
 
@@ -282,12 +210,8 @@ Today's date: ${today}`;
         {
           role: "user",
           content: calendarEvents.length > 0
-            ? `Read the working memory from Craft, then combine it with these calendar events to generate the dashboard JSON.
-
-## Google Calendar Events (next 2 months, non-recurring + birthdays)
-
-${JSON.stringify(calendarEvents, null, 2)}`
-            : `Read the working memory from Craft and generate the dashboard JSON. No calendar events are available this run — leave the calendar_events array empty.`,
+            ? `Read working memory from Craft, then merge with these calendar events to generate dashboard JSON.\n\n${JSON.stringify(calendarEvents, null, 2)}`
+            : `Read working memory from Craft and generate dashboard JSON. No calendar events available — leave calendar_events empty.`,
         },
       ],
       mcp_servers: [
@@ -316,7 +240,6 @@ ${JSON.stringify(calendarEvents, null, 2)}`
     throw new Error(`Claude API returned status ${response.status}`);
   }
 
-  // Extract text blocks (skip mcp_tool_use / mcp_tool_result)
   const textBlocks = (response.body?.content ?? [])
     .filter((block) => block.type === "text")
     .map((block) => block.text);
@@ -391,6 +314,11 @@ async function main() {
 
   if (!ANTHROPIC_API_KEY) throw new Error("Missing ANTHROPIC_API_KEY");
   if (!GITHUB_TOKEN) throw new Error("Missing GITHUB_TOKEN");
+
+  // Wait for rate limit window to clear after working memory updater
+  console.log(`Waiting ${STARTUP_DELAY_SECONDS}s for rate limit cooldown...`);
+  await sleep(STARTUP_DELAY_SECONDS);
+  console.log("Cooldown complete, proceeding.");
 
   let calendarEvents = [];
   if (GOOGLE_CLIENT_ID && GOOGLE_CLIENT_SECRET && GOOGLE_REFRESH_TOKEN) {
