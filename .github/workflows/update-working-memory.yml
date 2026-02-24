@@ -4,12 +4,11 @@ on:
   schedule:
     # Runs every day at 11 PM ET (03:00 UTC)
     - cron: "0 3 * * *"
-  workflow_dispatch: # Allow manual trigger
+  workflow_dispatch:
 
 jobs:
   update-working-memory:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
