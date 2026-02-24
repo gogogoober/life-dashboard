@@ -1,4 +1,7 @@
-import type { DashboardEvent, ContextItem, MapPin, PinType, ActiveThread } from "../types";
+import type {
+  DashboardEvent, ContextItem, MapPin, PinType, ActiveThread,
+  UpNextThread, UpNextHabit, UpNextPriority, UpNextData,
+} from "../types";
 
 export const EVENTS: DashboardEvent[] = [
   {
@@ -104,6 +107,63 @@ export const PIN_COLORS: Record<PinType, string> = {
   activity: "#6ee7b7",
   food: "#f87171",
   transit: "#93c5fd",
+};
+
+export const UP_NEXT_STUB: UpNextData = {
+  generated_at: "2026-02-23T14:00:00.000Z",
+  context: {
+    day_of_week: "monday",
+    time_of_day: "afternoon",
+    is_weekend: false,
+    after_6pm: false,
+  },
+  active_threads: [
+    {
+      task: "Fix burst limit edge case — failing test",
+      epic: "Rate Limit PR",
+      category: "work",
+      left_off: "Token bucket mostly working, one edge case failing",
+      left_off_date: "Feb 20",
+      urgency: "active",
+    },
+    {
+      task: "Book JR Rail Pass — prices go up in March",
+      epic: "Japan Trip",
+      category: "personal",
+      left_off: "Booked flights and Tokyo hotel, Kyoto still open",
+      left_off_date: "Feb 21",
+      urgency: "active",
+    },
+    {
+      task: "Follow up with Miguel for headcount numbers",
+      epic: "Q1 Planning",
+      category: "work",
+      left_off: "Draft 80% done, blocked on capacity section",
+      left_off_date: "Feb 19",
+      urgency: "waiting",
+    },
+  ],
+  pickup_notes: [
+    "Rate limit PR has one failing edge case",
+    "Kyoto hotel still needs booking",
+  ],
+  habits: [
+    { id: "workout", state: "ok" },
+    { id: "laundry", state: "late" },
+    { id: "cleaning", state: "ok" },
+  ],
+  smart_priorities: [
+    {
+      label: "Japan Trip",
+      reason: "JR Pass prices increase next week",
+      urgency: "high",
+    },
+    {
+      label: "Q1 Planning",
+      reason: "Miguel hasn't replied in 3 days",
+      urgency: "medium",
+    },
+  ],
 };
 
 export const ACTIVE_THREADS_STUB: ActiveThread[] = [

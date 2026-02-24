@@ -57,7 +57,7 @@ export const defaultTemplate: TemplateConfig = {
       size: "large",
     },
     {
-      widgetId: "context-resume",
+      widgetId: "up-next",
       gridColumn: "9 / 13",
       gridRow: "1 / 3",
       size: "default",

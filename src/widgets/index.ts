@@ -7,6 +7,7 @@ import { ContextResume } from "./context-resume";
 import { CityMap } from "./city-map";
 import { PlaceholderModule } from "./placeholder";
 import { ActiveThreads } from "./active-threads";
+import { UpNext } from "./up-next";
 
 export { ModuleCard } from "./module-card";
 export { TemporalBubbleMap } from "./temporal-bubble-map";
@@ -15,6 +16,7 @@ export { ContextResume } from "./context-resume";
 export { CityMap } from "./city-map";
 export { PlaceholderModule } from "./placeholder";
 export { ActiveThreads } from "./active-threads";
+export { UpNext } from "./up-next";
 
 // Registry: maps string keys to widget components.
 // To add a new widget, create the component file, then add an entry here.
@@ -25,4 +27,5 @@ export const widgetRegistry: Record<string, ComponentType<any>> = {
   "city-map": CityMap,
   placeholder: PlaceholderModule,
   "active-threads": ActiveThreads,
+  "up-next": UpNext,
 };

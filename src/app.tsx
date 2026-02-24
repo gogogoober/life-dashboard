@@ -1,5 +1,5 @@
 import { TemplateRenderer, defaultTemplate } from "./templates";
-import { EVENTS, CONTEXT_STUB, TOKYO_PINS, ACTIVE_THREADS_STUB } from "./data/stub";
+import { EVENTS, CONTEXT_STUB, TOKYO_PINS, ACTIVE_THREADS_STUB, UP_NEXT_STUB } from "./data/stub";
 import { useDashboard, toEvents, toContextItems, toActiveThreads } from "./data/dashboard";
 
 export default function App() {
@@ -22,6 +22,9 @@ export default function App() {
     },
     "active-threads": {
       items: data ? toActiveThreads(data) : ACTIVE_THREADS_STUB,
+    },
+    "up-next": {
+      data: UP_NEXT_STUB,
     },
   };
 
