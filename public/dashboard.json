@@ -16,8 +16,8 @@
       "open_actions": [
         "Find Jell-O shot recipe"
       ],
-      "start_date": "2026-02-28",
-      "end_date": "2026-02-28",
+      "start_date": null,
+      "end_date": null,
       "deadline": "2026-02-28",
       "pinned": false,
       "days_until_deadline": 4,
@@ -29,7 +29,7 @@
       "category": "trip-event",
       "tag": "personal",
       "heat": "hot",
-      "heat_reason": "deadline (17 days), multiple unresolved actions",
+      "heat_reason": "deadline (18 days), multiple unresolved actions",
       "summary": "Mariano turns 30 on March 19th. Plan is a 1-2 night backpacking trip somewhere warm (weekend of Mar 14-15), then Chicago for the birthday celebration. Flights to Chicago already booked (return leg from Japan routed through Chicago). Need to find a warm backpacking destination and sort gear.",
       "sub_threads": [
         "backpacking destination search",
@@ -56,7 +56,7 @@
       "category": "trip-event",
       "tag": "personal",
       "heat": "hot",
-      "heat_reason": "pinned:hot, deadline approaching",
+      "heat_reason": "pinned:hot, deadline approaching (27 days)",
       "summary": "Two-week trip with Dana, March 23 – April 7. Route: Osaka → Nara → Kyoto → Takayama → Tokyo. All flights and hotels booked. Now in activity planning phase. Also celebrating Dana's 30th during the trip.",
       "sub_threads": [
         "pen shopping",
@@ -147,7 +147,7 @@
       "start_date": null,
       "end_date": null,
       "deadline": null,
-      "pinned": false,
+      "pinned": true,
       "days_until_deadline": null,
       "calendar_source": false
     },
@@ -179,6 +179,20 @@
     }
   ],
   "calendar_events": [
+    {
+      "id": "3g2nuc1lkf69p4ticcr6d0tmjh_20260228",
+      "title": "Dana's Birthday",
+      "type": "birthday",
+      "start": "2026-02-28",
+      "end": "2026-03-01",
+      "all_day": true,
+      "location": null,
+      "description": null,
+      "attendees": [],
+      "weight": 5,
+      "days_until": 4,
+      "related_item_id": "danas-30th"
+    },
     {
       "id": "_68o32e9o6kqj6e9j70pjee1g74r3cd0",
       "title": "Online Consultation & Diagnosis (Regine Blaise PMHNP)",
@@ -264,7 +278,6 @@
       "related_item_id": "japan-trip-2026"
     },
     {
-      "_60s42h1i8p0k4ba360p34b9k8cs4cb9p8oqjgba3752k4chm70q42ca560_20260407": "Dad's Birthday",
       "id": "_60s42h1i8p0k4ba360p34b9k8cs4cb9p8oqjgba3752k4chm70q42ca560_20260407",
       "title": "Dad's Birthday",
       "type": "birthday",
@@ -325,7 +338,17 @@
     "week_start": "2026-02-23",
     "habits": [
       {
-        "id": "",
+        "id": "workout",
+        "completions": [],
+        "status": "pending"
+      },
+      {
+        "id": "laundry",
+        "completions": [],
+        "status": "pending"
+      },
+      {
+        "id": "cleaning",
         "completions": [],
         "status": "pending"
       }
@@ -335,6 +358,6 @@
     "hot_count": 5,
     "warm_count": 2,
     "archived_count": 0,
-    "upcoming_events_count": 10
+    "upcoming_events_count": 11
   }
 }
