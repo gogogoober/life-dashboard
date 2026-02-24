@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-02-24T04:37:26.726Z",
+  "context": {
+    "day_of_week": "tuesday",
+    "time_of_day": "morning",
+    "is_weekend": false,
+    "after_6pm": false
+  },
+  "active_threads": [
+    {
+      "task": "Find Jell-O shot recipe",
+      "epic": "Dana's 30th Birthday",
+      "category": "personal",
+      "left_off": "Gift bought, laser tag with Shar organized",
+      "left_off_date": "Feb 23",
+      "urgency": "active"
+    },
+    {
+      "task": "Get components correctly registered under entities",
+      "epic": "Go Game Engine / ECS",
+      "category": "personal",
+      "left_off": "Snake prototype working, migrating to ECS pattern",
+      "left_off_date": "Feb 23",
+      "urgency": "active"
+    },
+    {
+      "task": "Build Today's Focus widget",
+      "epic": "Life Dashboard",
+      "category": "personal",
+      "left_off": "Four widgets built, working memory now updated",
+      "left_off_date": "Feb 23",
+      "urgency": "active"
+    }
+  ],
+  "pickup_notes": [
+    "Dana's party Saturday needs Jell-O shot recipe",
+    "ECS engine components need entity registration next"
+  ],
+  "habits": [
+    {
+      "id": "workout",
+      "state": "ok"
+    },
+    {
+      "id": "laundry",
+      "state": "ok"
+    },
+    {
+      "id": "cleaning",
+      "state": "ok"
+    }
+  ],
+  "smart_priorities": [
+    {
+      "label": "Dana's 30th Birthday",
+      "reason": "Saturday deadline, Jell-O shots not ready",
+      "urgency": "high"
+    },
+    {
+      "label": "Mariano's 30th / Chicago",
+      "reason": "Backpacking destination needed, 17 days out",
+      "urgency": "medium"
+    }
+  ]
+}
