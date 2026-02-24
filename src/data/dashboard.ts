@@ -17,6 +17,7 @@ import type {
   ActiveThread,
   ThreadTier,
   ThreadDomain,
+  UpNextData,
 } from "../types";
 
 // ─── Fetch + hook ─────────────────────────────────────────────────────────────
@@ -63,6 +64,26 @@ export function useDashboard() {
   }, []);
 
   return { data, loading, error };
+}
+
+export async function fetchUpNext(): Promise<UpNextData> {
+  const url = import.meta.env.BASE_URL + "up_next.json";
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Failed to fetch up_next.json (${res.status})`);
+  return res.json();
+}
+
+export function useUpNext() {
+  const [data, setData] = useState<UpNextData | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchUpNext()
+      .then(setData)
+      .catch((e: Error) => setError(e.message));
+  }, []);
+
+  return { data, error };
 }
 
 // ─── Item selectors ───────────────────────────────────────────────────────────

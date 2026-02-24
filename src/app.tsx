@@ -1,12 +1,16 @@
 import { TemplateRenderer, defaultTemplate } from "./templates";
 import { EVENTS, CONTEXT_STUB, TOKYO_PINS, ACTIVE_THREADS_STUB, UP_NEXT_STUB } from "./data/stub";
-import { useDashboard, toEvents, toContextItems, toActiveThreads } from "./data/dashboard";
+import { useDashboard, useUpNext, toEvents, toContextItems, toActiveThreads } from "./data/dashboard";
 
 export default function App() {
   const { data, error } = useDashboard();
+  const { data: upNextData, error: upNextError } = useUpNext();
 
   if (error) {
     console.warn("[dashboard] Failed to load dashboard.json, using stubs:", error);
+  }
+  if (upNextError) {
+    console.warn("[up-next] Failed to load up_next.json, using stub:", upNextError);
   }
 
   const widgetData: Record<string, Record<string, unknown>> = {
@@ -24,7 +28,7 @@ export default function App() {
       items: data ? toActiveThreads(data) : ACTIVE_THREADS_STUB,
     },
     "up-next": {
-      data: UP_NEXT_STUB,
+      data: upNextData ?? UP_NEXT_STUB,
     },
   };
 
