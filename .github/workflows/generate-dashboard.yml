@@ -4,6 +4,11 @@ on:
   schedule:
     # Runs every hour
     - cron: "0 * * * *"
+  workflow_run:
+    # Also runs immediately after Update Working Memory completes
+    workflows: ["Update Working Memory"]
+    types: [completed]
+    branches: [main]
   workflow_dispatch: # Allow manual trigger
 
 permissions:
@@ -17,6 +22,8 @@ concurrency:
 
 jobs:
   generate-and-deploy:
+    # When triggered by workflow_run, skip if the upstream job failed
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages
