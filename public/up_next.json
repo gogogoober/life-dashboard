@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-24T04:47:04.449Z",
+  "generated_at": "2026-02-24T04:57:23.944Z",
   "context": {
     "day_of_week": "tuesday",
     "time_of_day": "morning",
@@ -11,15 +11,15 @@
       "task": "Find Jell-O shot recipe",
       "epic": "Dana's 30th Birthday",
       "category": "personal",
-      "left_off": "Gift bought, laser tag with Shar coordinated",
+      "left_off": "Gift bought, coordinating with Shar on laser tag event",
       "left_off_date": "Feb 23",
       "urgency": "active"
     },
     {
-      "task": "Find warm backpacking destination and book flights",
+      "task": "Find warm backpacking destination for Mar 14-15",
       "epic": "Mariano's 30th / Chicago",
       "category": "personal",
-      "left_off": "Flights to Chicago booked from Japan leg",
+      "left_off": "Flights to Chicago booked, multiple logistics pending",
       "left_off_date": "Feb 23",
       "urgency": "active"
     },
@@ -27,38 +27,38 @@
       "task": "Plan activities in Kyoto",
       "epic": "Japan Trip 2026",
       "category": "personal",
-      "left_off": "All flights and hotels booked, activity planning phase",
+      "left_off": "All flights and hotels booked, in activity planning phase",
       "left_off_date": "Feb 23",
       "urgency": "active"
     }
   ],
   "pickup_notes": [
-    "Dana's party Saturday — need Jell-O shot recipe",
-    "Mariano's backpacking trip — find warm destination soon"
+    "Dana's 30th laser tag Saturday—need yellow Jell-O recipe",
+    "Mariano's Chicago trip needs warm backpacking destination"
   ],
   "habits": [
     {
-      "id": "workout",
-      "state": "ok"
+      "label": "Workout",
+      "status": "ok"
     },
     {
-      "id": "laundry",
-      "state": "ok"
+      "label": "Laundry",
+      "status": "ok"
     },
     {
-      "id": "cleaning",
-      "state": "ok"
+      "label": "Cleaning",
+      "status": "ok"
     }
   ],
   "smart_priorities": [
     {
       "label": "Dana's 30th Birthday",
-      "reason": "Saturday deadline, need Jell-O recipe now",
+      "reason": "4 days away, Jell-O recipe still needed",
       "urgency": "high"
     },
     {
       "label": "Mariano's 30th / Chicago",
-      "reason": "17 days to trip, flights not booked",
+      "reason": "17 days out, flights and destination unbooked",
       "urgency": "high"
     }
   ]
