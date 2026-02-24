@@ -1,0 +1,30 @@
+name: Generate Up Next
+
+on:
+  workflow_run:
+    workflows: ["Generate Dashboard"]
+    types:
+      - completed
+
+  workflow_dispatch:
+
+jobs:
+  generate-up-next:
+    runs-on: ubuntu-latest
+
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate Up Next JSON
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        run: node scripts/generate-up-next.js
