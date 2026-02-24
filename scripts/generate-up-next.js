@@ -3,13 +3,8 @@
 /**
  * Up Next Generator
  *
- * Runs frequently (e.g. every hour, after dashboard generator).
- * Uses Claude with Craft MCP connector to read working memory + config,
- * then generates up_next.json — a compact daily briefing with:
- *   - Active threads (max 3, context-aware)
- *   - Pickup notes (where you left off)
- *   - Habit status (ok / late / severe)
- *   - Smart priorities (max 2 alerts)
+ * Runs after Dashboard Generator. Uses Claude with Craft MCP connector
+ * to read working memory + config, then generates up_next.json.
  * Commits up_next.json to GitHub so the site re-renders.
  */
 
@@ -32,7 +27,7 @@ const CONFIG_DOC_ID = "15AD13D1-F413-41F9-B2CD-1F9B51E1EB1C";
 const CLAUDE_MODEL = "claude-sonnet-4-5-20250929";
 
 // Delay before calling Claude API (seconds). Prevents rate-limit collisions
-// when this workflow is triggered right after Dashboard Generator completes.
+// when this job runs right after Dashboard Generator completes.
 const STARTUP_DELAY_SECONDS = 120;
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -91,25 +86,33 @@ async function generateUpNextJson() {
   const timeOfDay =
     hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening";
 
-  const systemPrompt = `You are the Up Next agent for Hugo's personal life dashboard.
-Your job is to produce a single up_next.json file.
+  // ── System prompt: who you are and what tools to use ──────────────
+  const systemPrompt = `You are the Up Next agent for Hugo's personal life dashboard called Cerebro.
 Be decisive. Do not hedge. Hugo trusts you to make the call.
 
-You have access to Craft via MCP tools. Read these documents first:
-1. Working memory — use blocks_get with id="${WORKING_MEMORY_DOC_ID}" and format="markdown"
-2. Config — use blocks_get with id="${CONFIG_DOC_ID}" and format="markdown"
+You MUST use MCP tools to read Hugo's actual data before generating output.
+Do NOT invent or assume any data. Every field must come from what you read.`;
 
-## CURRENT DATETIME
-- ISO: ${now.toISOString()}
-- Date: ${today}
-- Day: ${dayOfWeek}
-- Time of day: ${timeOfDay}
-- Is weekend: ${isWeekend}
-- After 6pm: ${after6pm}
+  // ── User message: step-by-step instructions ───────────────────────
+  const userMessage = `## STEP 1: READ DATA FROM CRAFT
 
-## CONTEXT RULES
+Use MCP tools now. Make both calls before doing anything else:
 
-Use these to decide what to surface:
+Call 1: blocks_get with id="${WORKING_MEMORY_DOC_ID}" and format="markdown"
+Call 2: blocks_get with id="${CONFIG_DOC_ID}" and format="markdown"
+
+Read the responses carefully. All output must be derived from this data.
+
+## STEP 2: APPLY CONTEXT RULES
+
+Current datetime: ${now.toISOString()}
+Today: ${today}
+Day: ${dayOfWeek}
+Time of day: ${timeOfDay}
+Is weekend: ${isWeekend}
+After 6pm: ${after6pm}
+
+Use these rules to decide what to surface:
 
 WEEKDAY BEFORE 18:00
 → Prioritize work items. Personal only if deadline is within 7 days.
@@ -121,85 +124,59 @@ WEEKEND
 → Personal-first. Suppress work items UNLESS:
   - persist_weekend = true on a left_off entry
   - A work deadline is within 3 days
-  - Daily note contains signal like "working this weekend" or "urgent"
 
-## ACTIVE THREADS
+## STEP 3: BUILD EACH SECTION
 
-Select max 3 items from working_memory items where heat = "hot" or "warm".
-Apply context rules above.
+### active_threads (max 3)
+Select from working_memory items where heat = "hot" or "warm".
+For each, provide:
+- task: the specific next action to take (imperative verb, not the project name)
+- epic: the working memory item title
+- category: "work" or "personal" based on the item's tag
+- left_off: what was last done on this thread, from left_off entries or sub_threads
+- left_off_date: when that happened, e.g. "Feb 21"
+- urgency: "active" if actionable now, "waiting" if blocked, "nudge" if needs follow-up
 
-Each thread must have:
-- task: the most actionable next step (not the project title)
-- epic: the item title (shown as a pill)
-- category: work | personal
-- left_off: pull from left_off section if thread_id matches, else derive from open_actions
-- left_off_date: from left_off entry or today if derived
-- urgency: active | waiting | nudge
-
-## PICKUP NOTES
-
+### pickup_notes (max 2)
+Short bullets (under 10 words each) summarizing where Hugo left off.
 Pull from left_off entries in working memory.
-Summarize into max 2 plain-language bullets.
-If no declared left_off entries exist, derive from the top active thread's open_actions.
-Keep each bullet under 10 words.
+If none exist, derive from the top thread's open_actions.
 
-## HABITS
+### habits
+For each habit in the config's habits section, check habit_tracking in working memory.
+Compare completions this week against target_days and the current day of week.
+- "ok": completed or not yet due this week
+- "late": past an expected day without completion
+- "severe": 2+ days past expected without completion
 
-For each habit in habit_tracking:
-- Compare completions against target_days for the current week
-- Compute days elapsed since week_start
-- Assign state:
-  ok      → completed or not yet due
-  late    → past expected day, not done
-  severe  → 2+ days past expected day, not done
+### smart_priorities (max 2)
+Items needing attention NOW. Different from active_threads — these are alerts.
+Look for: approaching deadlines, stalled items (no activity in days), pending replies.
+- label: the item name
+- reason: max 8 words explaining why it's urgent
+- urgency: "high" or "medium"
 
-## SMART PRIORITIES
+## STEP 4: OUTPUT
 
-Select max 2 items that need attention RIGHT NOW.
-These are separate from active threads — think of them as alerts.
-Criteria: approaching deadline, stalled item, pending communication.
-Each needs:
-- label: item title
-- reason: one phrase, max 8 words, why it matters right now
-- urgency: high | medium
-
-## OUTPUT FORMAT
-
-After reading working memory and config, respond with ONLY valid JSON.
-No explanation. No markdown. No code fences. No text before or after.
+After reading the data and applying rules, respond with ONLY the JSON object below.
+No explanation before or after. No markdown fences. No commentary.
+Fill every field with real data from what you read in Step 1.
 
 {
-  "generated_at": "<ISO timestamp>",
+  "generated_at": "${now.toISOString()}",
   "context": {
     "day_of_week": "${dayOfWeek}",
     "time_of_day": "${timeOfDay}",
     "is_weekend": ${isWeekend},
     "after_6pm": ${after6pm}
   },
-  "active_threads": [
-    {
-      "task": "string — most actionable next step",
-      "epic": "string — item title",
-      "category": "work|personal",
-      "left_off": "string — where you left off",
-      "left_off_date": "string — e.g. Feb 21",
-      "urgency": "active|waiting|nudge"
-    }
-  ],
-  "pickup_notes": ["string max 10 words", "string max 10 words"],
-  "habits": [
-    { "id": "workout", "state": "ok|late|severe" },
-    { "id": "laundry", "state": "ok|late|severe" },
-    { "id": "cleaning", "state": "ok|late|severe" }
-  ],
-  "smart_priorities": [
-    {
-      "label": "string — item title",
-      "reason": "string — max 8 words",
-      "urgency": "high|medium"
-    }
-  ]
-}`;
+  "active_threads": [],
+  "pickup_notes": [],
+  "habits": [],
+  "smart_priorities": []
+}
+
+Remember: the arrays above are empty placeholders. You must fill them with real data from Craft.`;
 
   console.log("Calling Claude with Craft MCP connector...");
 
@@ -219,8 +196,7 @@ No explanation. No markdown. No code fences. No text before or after.
       messages: [
         {
           role: "user",
-          content:
-            "Read working memory and config from Craft, then generate the up_next.json output.",
+          content: userMessage,
         },
       ],
       mcp_servers: [
@@ -249,17 +225,30 @@ No explanation. No markdown. No code fences. No text before or after.
     throw new Error(`Claude API returned status ${response.status}`);
   }
 
+  // Log MCP tool calls for debugging
+  const toolCalls = (response.body?.content ?? []).filter(
+    (block) => block.type === "mcp_tool_use"
+  );
+  console.log(`MCP tool calls made: ${toolCalls.length}`);
+  toolCalls.forEach((tc) => console.log(`  - ${tc.name}(${JSON.stringify(tc.input).slice(0, 100)})`));
+
+  if (toolCalls.length === 0) {
+    console.warn("WARNING: Claude made no MCP tool calls. Output may be hallucinated.");
+  }
+
+  // Extract text blocks (the final JSON output)
   const textBlocks = (response.body?.content ?? [])
     .filter((block) => block.type === "text")
     .map((block) => block.text);
 
   const raw = textBlocks.join("\n").trim();
-  console.log("Claude raw output preview:", raw.slice(0, 300));
+  console.log("Claude raw output preview:", raw.slice(0, 500));
 
   if (!raw) {
     throw new Error("Claude returned no text content. Check MCP connectivity.");
   }
 
+  // Parse JSON — try direct first, then extract from mixed output
   try {
     return JSON.parse(raw);
   } catch {

@@ -59,7 +59,7 @@ function HabitRow({ habits }: { habits: UpNextHabit[] }) {
         const state = HABIT_STATE[habit.state];
         return (
           <div key={habit.id} className="flex items-center gap-1">
-            <span style={{ fontSize: 13, lineHeight: 1 }}>{emoji}</span>
+            <span style={{ fontSize: 31, lineHeight: 1 }}>{emoji}</span>
             <span
               style={{ fontSize: 10, fontWeight: 600, color: state.color, lineHeight: 1 }}
             >
@@ -77,8 +77,8 @@ function PickupNotes({ notes }: { notes: string[] }) {
     <div className="flex flex-col gap-1">
       {notes.slice(0, 2).map((note, i) => (
         <div key={i} className="flex items-start gap-1.5">
-          <span style={{ color: "#444", fontSize: 11, lineHeight: 1.5, flexShrink: 0 }}>↩</span>
-          <span style={{ color: "#666", fontSize: 11, lineHeight: 1.5 }}>{note}</span>
+          <span style={{ color: "#ffffff", fontSize: 10, lineHeight: 1.5, flexShrink: 0 }}>▸</span>
+          <span style={{ color: "#ffffff", fontSize: 14, lineHeight: 1.4 }}>{note}</span>
         </div>
       ))}
     </div>
@@ -158,36 +158,39 @@ export function UpNext({ data, size }: UpNextProps) {
 
   return (
     <ModuleCard title="Up Next" icon="⚡">
-      <div className="flex flex-col gap-0">
-        {/* Habits */}
-        <HabitRow habits={data.habits} />
-
-        {/* Pickup notes */}
-        {notes.length > 0 && (
-          <div style={{ marginTop: 8 }}>
+      <div className="flex flex-col justify-between h-full">
+        {/* Top content — stays grouped at the top */}
+        <div className="flex flex-col gap-0">
+          {/* Pickup notes */}
+          {notes.length > 0 && (
             <PickupNotes notes={notes} />
-          </div>
-        )}
+          )}
 
-        {/* Threads */}
-        {DIVIDER}
-        <div className="flex flex-col gap-3">
-          {threads.map((thread, i) => (
-            <ThreadRow key={i} thread={thread} />
-          ))}
+          {/* Threads */}
+          {DIVIDER}
+          <div className="flex flex-col gap-3">
+            {threads.map((thread, i) => (
+              <ThreadRow key={i} thread={thread} />
+            ))}
+          </div>
+
+          {/* Smart priorities — large only */}
+          {isLarge && priorities.length > 0 && (
+            <>
+              {DIVIDER}
+              <div className="flex flex-col gap-3">
+                {priorities.map((p, i) => (
+                  <PriorityRow key={i} priority={p} />
+                ))}
+              </div>
+            </>
+          )}
         </div>
 
-        {/* Smart priorities — large only */}
-        {isLarge && priorities.length > 0 && (
-          <>
-            {DIVIDER}
-            <div className="flex flex-col gap-3">
-              {priorities.map((p, i) => (
-                <PriorityRow key={i} priority={p} />
-              ))}
-            </div>
-          </>
-        )}
+        {/* Habits — bottom right */}
+        <div className="flex justify-end">
+          <HabitRow habits={data.habits} />
+        </div>
       </div>
     </ModuleCard>
   );
