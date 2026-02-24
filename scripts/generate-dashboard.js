@@ -3,9 +3,10 @@
 /**
  * Dashboard Generator
  *
- * Runs frequently (e.g. every hour). Uses Claude with Craft MCP connector
- * to read working memory and generate dashboard JSON, then commits
- * dashboard.json to the GitHub repo so the site re-renders.
+ * Runs frequently (e.g. every hour). Fetches Google Calendar events,
+ * uses Claude with Craft MCP connector to read working memory,
+ * then generates dashboard JSON combining both sources.
+ * Commits dashboard.json to GitHub so the site re-renders.
  */
 
 import https from "https";
@@ -14,6 +15,11 @@ import https from "https";
 
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const GOOGLE_REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN;
+const GOOGLE_CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || "primary";
 
 const GITHUB_REPO = "gogogoober/life-dashboard";
 const GITHUB_BRANCH = "main";
@@ -29,7 +35,11 @@ const CLAUDE_MODEL = "claude-sonnet-4-5-20250929";
 
 function httpsRequest(method, hostname, urlPath, headers, body) {
   return new Promise((resolve, reject) => {
-    const data = body ? JSON.stringify(body) : null;
+    const data = body
+      ? typeof body === "string"
+        ? body
+        : JSON.stringify(body)
+      : null;
     const req = https.request(
       {
         hostname,
@@ -59,20 +69,111 @@ function httpsRequest(method, hostname, urlPath, headers, body) {
   });
 }
 
+// ─── Google Calendar ────────────────────────────────────────────────────────
+
+async function getGoogleAccessToken() {
+  const tokenBody = [
+    `client_id=${encodeURIComponent(GOOGLE_CLIENT_ID)}`,
+    `client_secret=${encodeURIComponent(GOOGLE_CLIENT_SECRET)}`,
+    `refresh_token=${encodeURIComponent(GOOGLE_REFRESH_TOKEN)}`,
+    `grant_type=refresh_token`,
+  ].join("&");
+
+  const response = await httpsRequest(
+    "POST",
+    "oauth2.googleapis.com",
+    "/token",
+    { "Content-Type": "application/x-www-form-urlencoded" },
+    tokenBody
+  );
+
+  if (response.status !== 200) {
+    throw new Error(
+      `Google OAuth failed (${response.status}): ${JSON.stringify(response.body)}`
+    );
+  }
+
+  return response.body.access_token;
+}
+
+async function fetchCalendarEvents(accessToken) {
+  const now = new Date();
+  const twoMonthsOut = new Date(now);
+  twoMonthsOut.setMonth(twoMonthsOut.getMonth() + 2);
+
+  const params = new URLSearchParams({
+    timeMin: now.toISOString(),
+    timeMax: twoMonthsOut.toISOString(),
+    singleEvents: "true",       // expand recurring into individual instances
+    orderBy: "startTime",
+    maxResults: "250",
+  });
+
+  const calId = encodeURIComponent(GOOGLE_CALENDAR_ID);
+  const response = await httpsRequest(
+    "GET",
+    "www.googleapis.com",
+    `/calendar/v3/calendars/${calId}/events?${params.toString()}`,
+    { Authorization: `Bearer ${accessToken}` }
+  );
+
+  if (response.status !== 200) {
+    throw new Error(
+      `Google Calendar API failed (${response.status}): ${JSON.stringify(response.body)}`
+    );
+  }
+
+  const allEvents = response.body.items || [];
+
+  // Filter OUT recurring event instances — keep one-off events + birthdays
+  const isBirthday = (e) =>
+    (e.summary || "").toLowerCase().includes("birthday");
+  const filtered = allEvents.filter((e) => !e.recurringEventId || isBirthday(e));
+
+  console.log(
+    `Calendar: ${allEvents.length} total events, ${filtered.length} kept (${allEvents.length - filtered.length} recurring filtered out, birthdays preserved)`
+  );
+
+  // Simplify to what Claude needs
+  return filtered.map((e) => ({
+    id: e.id,
+    title: e.summary || "(no title)",
+    description: e.description || null,
+    location: e.location || null,
+    start: e.start?.dateTime || e.start?.date || null, // dateTime for timed, date for all-day
+    end: e.end?.dateTime || e.end?.date || null,
+    all_day: !!e.start?.date,
+    status: e.status,                                   // confirmed, tentative, cancelled
+    attendees: (e.attendees || [])
+      .filter((a) => !a.self)
+      .map((a) => a.displayName || a.email),
+    creator: e.creator?.displayName || e.creator?.email || null,
+  }));
+}
+
 // ─── Claude + Craft MCP ─────────────────────────────────────────────────────
 
-async function generateDashboardJson() {
+async function generateDashboardJson(calendarEvents) {
   const today = new Date().toISOString().split("T")[0];
 
   const systemPrompt = `You are the Dashboard Generator for a personal productivity system called Cerebro.
 
-You have access to Craft via MCP tools. Your job:
-1. Read the working memory document (ID: ${WORKING_MEMORY_DOC_ID}) using blocks_get with format "markdown"
-2. Transform the TOML content into structured dashboard JSON
+You have two data sources:
+1. **Craft (via MCP tools)** — Read the working memory document (ID: ${WORKING_MEMORY_DOC_ID}) using blocks_get with format "markdown". This contains items actively occupying mental space, with heat levels, sub-threads, and open actions.
+2. **Google Calendar events** — Provided in the user message below. These are one-off (non-recurring) events for the next 2 months, plus any recurring birthdays.
+
+## Your job
+
+1. Read working memory from Craft via MCP
+2. Combine it with the calendar events to produce a unified dashboard JSON
+3. For calendar events: assign a weight (1-10) based on how significant the event seems — multi-day trips and events with many attendees are heavier; simple dinners and 1:1s are lighter
+4. Cross-reference: if a calendar event relates to a working memory item (e.g. a "Japan" calendar event matches the japan-trip item), note the connection in the event's "related_item_id" field
+5. Calculate days_until for both items and events relative to today
 
 Return ONLY valid JSON. No explanation. No markdown fences. No other text.
 
-Schema:
+## Schema
+
 {
   "generated_at": "<ISO timestamp>",
   "items": [
@@ -88,7 +189,22 @@ Schema:
       "open_actions": ["string"],
       "deadline": "YYYY-MM-DD or null",
       "pinned": true,
-      "days_until_deadline": 0
+      "days_until_deadline": number | null
+    }
+  ],
+  "calendar_events": [
+    {
+      "id": "string",
+      "title": "string",
+      "start": "ISO datetime or YYYY-MM-DD",
+      "end": "ISO datetime or YYYY-MM-DD",
+      "all_day": true,
+      "location": "string or null",
+      "description": "string or null",
+      "attendees": ["string"],
+      "weight": 1-10,
+      "days_until": number,
+      "related_item_id": "string or null"
     }
   ],
   "habit_tracking": {
@@ -104,13 +220,14 @@ Schema:
   "meta": {
     "hot_count": 0,
     "warm_count": 0,
-    "archived_count": 0
+    "archived_count": 0,
+    "upcoming_events_count": 0
   }
 }
 
 Today's date: ${today}`;
 
-  console.log("Calling Claude with Craft MCP connector...");
+  console.log("Calling Claude with Craft MCP connector + calendar context...");
 
   const response = await httpsRequest(
     "POST",
@@ -123,12 +240,16 @@ Today's date: ${today}`;
     },
     {
       model: CLAUDE_MODEL,
-      max_tokens: 4096,
+      max_tokens: 8192,
       system: systemPrompt,
       messages: [
         {
           role: "user",
-          content: "Read the working memory from Craft and generate the dashboard JSON.",
+          content: `Read the working memory from Craft, then combine it with these calendar events to generate the dashboard JSON.
+
+## Google Calendar Events (next 2 months, non-recurring + birthdays)
+
+${JSON.stringify(calendarEvents, null, 2)}`,
         },
       ],
       mcp_servers: [
@@ -150,7 +271,10 @@ Today's date: ${today}`;
   console.log("Claude response status:", response.status);
 
   if (response.status !== 200) {
-    console.error("Claude API error:", JSON.stringify(response.body, null, 2).slice(0, 1000));
+    console.error(
+      "Claude API error:",
+      JSON.stringify(response.body, null, 2).slice(0, 1000)
+    );
     throw new Error(`Claude API returned status ${response.status}`);
   }
 
@@ -229,9 +353,17 @@ async function main() {
 
   if (!ANTHROPIC_API_KEY) throw new Error("Missing ANTHROPIC_API_KEY");
   if (!GITHUB_TOKEN) throw new Error("Missing GITHUB_TOKEN");
+  if (!GOOGLE_CLIENT_ID) throw new Error("Missing GOOGLE_CLIENT_ID");
+  if (!GOOGLE_CLIENT_SECRET) throw new Error("Missing GOOGLE_CLIENT_SECRET");
+  if (!GOOGLE_REFRESH_TOKEN) throw new Error("Missing GOOGLE_REFRESH_TOKEN");
 
-  console.log("Generating dashboard JSON via Claude + Craft MCP...");
-  const dashboardJson = await generateDashboardJson();
+  console.log("Fetching Google Calendar events...");
+  const accessToken = await getGoogleAccessToken();
+  const calendarEvents = await fetchCalendarEvents(accessToken);
+  console.log(`Got ${calendarEvents.length} one-off events for next 2 months`);
+
+  console.log("Generating dashboard JSON via Claude + Craft MCP + Calendar...");
+  const dashboardJson = await generateDashboardJson(calendarEvents);
 
   console.log("Pushing dashboard.json to GitHub...");
   await pushDashboardJson(dashboardJson);
