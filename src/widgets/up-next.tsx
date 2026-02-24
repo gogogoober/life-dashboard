@@ -56,7 +56,7 @@ function HabitRow({ habits }: { habits: UpNextHabit[] }) {
     <div className="flex items-center gap-4">
       {habits.map((habit) => {
         const emoji = HABIT_EMOJI[habit.id] ?? habit.id;
-        const state = HABIT_STATE[habit.state];
+        const state = HABIT_STATE[habit.state] ?? HABIT_STATE.ok;
         return (
           <div key={habit.id} className="flex items-center gap-1">
             <span style={{ fontSize: 31, lineHeight: 1 }}>{emoji}</span>
