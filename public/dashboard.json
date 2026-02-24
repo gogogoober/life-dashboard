@@ -1,0 +1,121 @@
+{
+  "generated_at": "2026-02-24T00:00:00Z",
+  "items": [
+    {
+      "id": "japan-trip-2026",
+      "title": "Japan Trip 2026",
+      "category": "trip-event",
+      "tag": "personal",
+      "heat": "hot",
+      "heat_reason": "pinned:hot, deadline proximity",
+      "summary": "Trip to Japan coming up. Hotels mostly booked. Fountain pen shopping is a key item — looking at stores in Tokyo for Pilot, Sailor, and Platinum. Also planning to pick up pens for siblings.",
+      "sub_threads": [
+        "hotel bookings",
+        "fountain pen stores Tokyo",
+        "itinerary planning",
+        "gift shopping"
+      ],
+      "open_actions": [
+        "Confirm final hotel stay",
+        "Research Itoya and Maruzen pen floors",
+        "Check baggage allowance for liquids/fragile items"
+      ],
+      "deadline": "2026-04-01",
+      "pinned": true,
+      "days_until_deadline": 36
+    },
+    {
+      "id": "fountain-pen-research",
+      "title": "Fountain Pen Research",
+      "category": "active-research",
+      "tag": "personal",
+      "heat": "hot",
+      "heat_reason": "branching depth, frequency",
+      "summary": "Deep dive into fountain pens — comparing Japanese brands (Pilot, Sailor, Platinum). Considering buying in Japan to get better selection and pricing. Also looking at high-quality writing paper.",
+      "sub_threads": [
+        "Japanese brands comparison",
+        "Tokyo pen stores",
+        "paper quality",
+        "pens for siblings"
+      ],
+      "open_actions": [
+        "Decide on brand before trip",
+        "Find recommended stores in Tokyo"
+      ],
+      "deadline": null,
+      "pinned": false,
+      "days_until_deadline": null
+    },
+    {
+      "id": "cerebro-project",
+      "title": "Cerebro",
+      "category": "project",
+      "tag": "work",
+      "heat": "warm",
+      "heat_reason": "pinned:warm",
+      "summary": "Developer insight platform — gives engineers visibility into what's happening across the org. Side project, needs focused time outside work hours. Has been deprioritized but keeps coming back.",
+      "sub_threads": [
+        "architecture design",
+        "org data sources",
+        "dashboard UI"
+      ],
+      "open_actions": [
+        "Define v1 scope",
+        "Set aside dedicated weekly time slot"
+      ],
+      "deadline": null,
+      "pinned": true,
+      "days_until_deadline": null
+    },
+    {
+      "id": "go-game-engine",
+      "title": "Go Game Engine / ECS",
+      "category": "project",
+      "tag": "personal",
+      "heat": "warm",
+      "heat_reason": "frequency, depth",
+      "summary": "Golang project building an Entity Component System on top of a Go game engine. Current sticking point is how to register components to entities cleanly.",
+      "sub_threads": [
+        "ECS architecture",
+        "component registration",
+        "Go engine selection"
+      ],
+      "open_actions": [
+        "Resolve component registration pattern"
+      ],
+      "deadline": null,
+      "pinned": false,
+      "days_until_deadline": null
+    }
+  ],
+  "habit_tracking": {
+    "week_start": "2026-02-17",
+    "habits": [
+      {
+        "id": "workout",
+        "completions": [
+          "mon",
+          "wed"
+        ],
+        "status": "partial"
+      },
+      {
+        "id": "laundry",
+        "completions": [],
+        "status": "pending"
+      },
+      {
+        "id": "cleaning",
+        "completions": [
+          "sun"
+        ],
+        "status": "partial"
+      }
+    ]
+  },
+  "meta": {
+    "hot_count": 2,
+    "warm_count": 2,
+    "archived_count": 0
+  }
+}
