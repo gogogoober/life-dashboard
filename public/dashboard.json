@@ -2,23 +2,72 @@
   "generated_at": "2026-02-24T00:00:00Z",
   "items": [
     {
+      "id": "danas-30th",
+      "title": "Dana's 30th Birthday",
+      "category": "trip-event",
+      "tag": "personal",
+      "heat": "hot",
+      "heat_reason": "deadline (4 days away)",
+      "summary": "Dana turns 30 this Saturday. Laser tag with a bigger group, organized with her best friend Shar. Drinks, food, yellow Jell-O shots. Gift already bought.",
+      "sub_threads": [
+        "Jell-O shot recipe",
+        "group coordination with Shar"
+      ],
+      "open_actions": [
+        "Find Jell-O shot recipe"
+      ],
+      "start_date": "2026-02-28",
+      "end_date": "2026-02-28",
+      "deadline": "2026-02-28",
+      "pinned": false,
+      "days_until_deadline": 4,
+      "calendar_source": true
+    },
+    {
+      "id": "marianos-30th-chicago",
+      "title": "Mariano's 30th / Chicago",
+      "category": "trip-event",
+      "tag": "personal",
+      "heat": "hot",
+      "heat_reason": "deadline (17 days), multiple unresolved actions",
+      "summary": "Mariano turns 30 on March 19th. Plan is a 1-2 night backpacking trip somewhere warm (weekend of Mar 14-15), then Chicago for the birthday celebration. Flights to Chicago already booked (return leg from Japan routed through Chicago). Need to find a warm backpacking destination and sort gear.",
+      "sub_threads": [
+        "backpacking destination search",
+        "REI gear rental",
+        "Chicago birthday plans"
+      ],
+      "open_actions": [
+        "Find warm backpacking destination",
+        "Book flights to backpacking location",
+        "Book flight from backpacking to Chicago",
+        "Figure out REI gear rentals",
+        "Buy Mariano a gift (maybe)"
+      ],
+      "start_date": "2026-03-13",
+      "end_date": "2026-03-23",
+      "deadline": "2026-03-13",
+      "pinned": false,
+      "days_until_deadline": 17,
+      "calendar_source": true
+    },
+    {
       "id": "japan-trip-2026",
       "title": "Japan Trip 2026",
       "category": "trip-event",
       "tag": "personal",
       "heat": "hot",
-      "heat_reason": "pinned:hot",
-      "summary": "Trip to Japan coming up. Hotels mostly booked. Fountain pen shopping is a key item — looking at stores in Tokyo for Pilot, Sailor, and Platinum. Also planning to pick up pens for siblings.",
+      "heat_reason": "pinned:hot, deadline approaching",
+      "summary": "Two-week trip with Dana, March 23 – April 7. Route: Osaka → Nara → Kyoto → Takayama → Tokyo. All flights and hotels booked. Now in activity planning phase. Also celebrating Dana's 30th during the trip.",
       "sub_threads": [
-        "hotel bookings",
-        "fountain pen stores Tokyo",
-        "itinerary planning",
-        "gift shopping"
+        "pen shopping",
+        "celebrating Dana's 30th in Japan",
+        "doing something outdoorsy",
+        "city activity planning"
       ],
       "open_actions": [
-        "Confirm final hotel stay",
-        "Research Itoya and Maruzen pen floors",
-        "Check baggage allowance for liquids/fragile items"
+        "Plan activities in Kyoto",
+        "Plan activities in Takayama",
+        "Plan activities in Tokyo"
       ],
       "start_date": "2026-03-23",
       "end_date": "2026-04-08",
@@ -28,46 +77,24 @@
       "calendar_source": true
     },
     {
-      "id": "cerebro-project",
-      "title": "Cerebro",
+      "id": "life-dashboard",
+      "title": "Life Dashboard",
       "category": "project",
-      "tag": "work",
-      "heat": "warm",
-      "heat_reason": "pinned:warm",
-      "summary": "Developer insight platform — gives engineers visibility into what's happening across the org. Side project, needs focused time outside work hours. Has been deprioritized but keeps coming back.",
-      "sub_threads": [
-        "architecture design",
-        "org data sources",
-        "dashboard UI"
-      ],
-      "open_actions": [
-        "Define v1 scope",
-        "Set aside dedicated weekly time slot"
-      ],
-      "start_date": null,
-      "end_date": null,
-      "deadline": null,
-      "pinned": true,
-      "days_until_deadline": null,
-      "calendar_source": false
-    },
-    {
-      "id": "fountain-pen-research",
-      "title": "Fountain Pen Research",
-      "category": "active-research",
       "tag": "personal",
-      "heat": "warm",
-      "heat_reason": "time decay (5 days since last mention)",
-      "summary": "Deep dive into fountain pens — comparing Japanese brands (Pilot, Sailor, Platinum). Considering buying in Japan to get better selection and pricing. Also looking at high-quality writing paper.",
+      "heat": "hot",
+      "heat_reason": "active development, daily engagement",
+      "summary": "Personal life dashboard built in React + Vite + Tailwind + TypeScript. Deployed to GitHub Pages, semi-functional. Four widgets built: calendar embed, temporal bubble map (ECharts), context resume, city map mini. Currently updating working memory to feed real data into it.",
       "sub_threads": [
-        "Japanese brands comparison",
-        "Tokyo pen stores",
-        "paper quality",
-        "pens for siblings"
+        "working memory accuracy",
+        "UI refinement",
+        "Today's Focus widget",
+        "additional widget ideas"
       ],
       "open_actions": [
-        "Decide on brand before trip",
-        "Find recommended stores in Tokyo"
+        "Finish updating working memory",
+        "Build Today's Focus widget",
+        "Create additional widgets",
+        "Continue UI refinement"
       ],
       "start_date": null,
       "end_date": null,
@@ -81,16 +108,67 @@
       "title": "Go Game Engine / ECS",
       "category": "project",
       "tag": "personal",
-      "heat": "warm",
+      "heat": "hot",
       "heat_reason": "frequency, depth",
-      "summary": "Golang project building an Entity Component System on top of a Go game engine. Current sticking point is how to register components to entities cleanly.",
+      "summary": "Building an ECS game engine on top of Ebitengine in Go. Intentionally avoiding LLMs — this is a Go learning exercise. Snake prototype already works, now migrating to ECS pattern.",
       "sub_threads": [
+        "Go programming language",
         "ECS architecture",
         "component registration",
-        "Go engine selection"
+        "entity-component querying",
+        "system-entity editing"
       ],
       "open_actions": [
-        "Resolve component registration pattern"
+        "Get components correctly registered under entities",
+        "Correctly call entities with the right components",
+        "Create a system that edits entities based on their components"
+      ],
+      "start_date": null,
+      "end_date": null,
+      "deadline": null,
+      "pinned": false,
+      "days_until_deadline": null,
+      "calendar_source": false
+    },
+    {
+      "id": "cerebro-project",
+      "title": "Cerebro",
+      "category": "project",
+      "tag": "work",
+      "heat": "warm",
+      "heat_reason": "pinned:warm, parked until local setup done",
+      "summary": "Developer portal — a one-stop shop connecting communication and platform info for engineers. Currently parked until it's running locally.",
+      "sub_threads": [
+        "local setup"
+      ],
+      "open_actions": [
+        "Get it running locally"
+      ],
+      "start_date": null,
+      "end_date": null,
+      "deadline": null,
+      "pinned": false,
+      "days_until_deadline": null,
+      "calendar_source": false
+    },
+    {
+      "id": "fountain-pen-research",
+      "title": "Fountain Pen Research",
+      "category": "active-research",
+      "tag": "personal",
+      "heat": "warm",
+      "heat_reason": "linked to Japan trip deadline",
+      "summary": "Researching fountain pens for the Japan trip. Leaning toward Sailor Pro Gear Slim for the limited editions tied to being in Tokyo. Also looking for ~$100 pens for siblings and dot grid disc journal paper for fountain pens.",
+      "sub_threads": [
+        "Sailor vs Pilot comparison",
+        "limited edition hunting",
+        "sibling gift pens (~$100)",
+        "dot grid disc journal paper"
+      ],
+      "open_actions": [
+        "Decide on pen before trip",
+        "Research sibling price-point options",
+        "Find good dot grid fountain pen paper"
       ],
       "start_date": null,
       "end_date": null,
@@ -101,20 +179,6 @@
     }
   ],
   "calendar_events": [
-    {
-      "id": "3g2nuc1lkf69p4ticcr6d0tmjh_20260228",
-      "title": "Dana's Birthday",
-      "type": "birthday",
-      "start": "2026-02-28",
-      "end": "2026-03-01",
-      "all_day": true,
-      "location": null,
-      "description": null,
-      "attendees": [],
-      "weight": 5,
-      "days_until": 4,
-      "related_item_id": null
-    },
     {
       "id": "_68o32e9o6kqj6e9j70pjee1g74r3cd0",
       "title": "Online Consultation & Diagnosis (Regine Blaise PMHNP)",
@@ -130,20 +194,6 @@
       "related_item_id": null
     },
     {
-      "id": "21va9tgnesm6vvmbudevj6v344",
-      "title": "Chicago",
-      "type": "other",
-      "start": "2026-03-13",
-      "end": "2026-03-23",
-      "all_day": true,
-      "location": null,
-      "description": null,
-      "attendees": [],
-      "weight": 8,
-      "days_until": 17,
-      "related_item_id": null
-    },
-    {
       "id": "c9gmapb36op3gbb36tijcb9k64qmcbb2ckp3eb9h6cpm4php74omcp1j68_20260319",
       "title": "Mariano birthday",
       "type": "birthday",
@@ -155,7 +205,7 @@
       "attendees": [],
       "weight": 5,
       "days_until": 23,
-      "related_item_id": null
+      "related_item_id": "marianos-30th-chicago"
     },
     {
       "id": "494jl6gb7u75ro4fqjidqjikt6",
@@ -167,7 +217,7 @@
       "location": null,
       "description": null,
       "attendees": [],
-      "weight": 6,
+      "weight": 4,
       "days_until": 27,
       "related_item_id": null
     },
@@ -214,6 +264,7 @@
       "related_item_id": "japan-trip-2026"
     },
     {
+      "_60s42h1i8p0k4ba360p34b9k8cs4cb9p8oqjgba3752k4chm70q42ca560_20260407": "Dad's Birthday",
       "id": "_60s42h1i8p0k4ba360p34b9k8cs4cb9p8oqjgba3752k4chm70q42ca560_20260407",
       "title": "Dad's Birthday",
       "type": "birthday",
@@ -271,34 +322,19 @@
     }
   ],
   "habit_tracking": {
-    "week_start": "2026-02-17",
+    "week_start": "2026-02-23",
     "habits": [
       {
-        "id": "workout",
-        "completions": [
-          "mon",
-          "wed"
-        ],
-        "status": "partial"
-      },
-      {
-        "id": "laundry",
+        "id": "",
         "completions": [],
         "status": "pending"
-      },
-      {
-        "id": "cleaning",
-        "completions": [
-          "sun"
-        ],
-        "status": "partial"
       }
     ]
   },
   "meta": {
-    "hot_count": 1,
-    "warm_count": 3,
+    "hot_count": 5,
+    "warm_count": 2,
     "archived_count": 0,
-    "upcoming_events_count": 13
+    "upcoming_events_count": 10
   }
 }
