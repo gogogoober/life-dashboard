@@ -180,7 +180,7 @@ calendar_events weight (1-10): multi-day trips=8-10, flights=6-7, birthdays=5, h
 Calculate days_until and days_until_deadline relative to today's date.
 
 ## Output
-Return ONLY valid JSON matching this schema. No markdown fences, no explanation.
+Return ONLY valid JSON matching this schema. No preamble, no explanation, no markdown fences, no text before or after the JSON object.
 
 { "generated_at": "ISO timestamp",
   "items": [{ "id": "string", "title": "string", "category": "active-research|project|action-item|trip-event|people", "tag": "personal|work|both", "heat": "hot|warm|archived", "heat_reason": "string", "summary": "string", "sub_threads": ["string"], "open_actions": ["string"], "start_date": "YYYY-MM-DD|null", "end_date": "YYYY-MM-DD|null", "deadline": "YYYY-MM-DD|null", "pinned": true, "days_until_deadline": "number|null", "calendar_source": "boolean" }],
@@ -254,8 +254,12 @@ Today: ${today}`;
   try {
     return JSON.parse(raw);
   } catch {
-    const clean = raw.replace(/```json\n?|```\n?/g, "").trim();
-    return JSON.parse(clean);
+    // Claude sometimes adds preamble text or markdown fences — extract the JSON object
+    const jsonMatch = raw.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      return JSON.parse(jsonMatch[0]);
+    }
+    throw new Error("Could not extract valid JSON from Claude's response.");
   }
 }
 
