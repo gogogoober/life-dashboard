@@ -3,7 +3,7 @@
 /**
  * Dashboard Generator
  *
- * Runs frequently (e.g. every hour). Uses Claude with Craft MCP integration
+ * Runs frequently (e.g. every hour). Uses Claude with Craft MCP connector
  * to read working memory and generate dashboard JSON, then commits
  * dashboard.json to the GitHub repo so the site re-renders.
  */
@@ -20,6 +20,7 @@ const GITHUB_BRANCH = "main";
 const DASHBOARD_JSON_PATH = "public/dashboard.json";
 
 const CRAFT_MCP_URL = "https://mcp.craft.do/links/8pMZhXonzqg/mcp";
+const CRAFT_MCP_NAME = "craft";
 const WORKING_MEMORY_DOC_ID = "FC9D77DC-45EB-4EBA-B7F5-3F6F7BEB9DD0";
 
 const CLAUDE_MODEL = "claude-sonnet-4-5-20250929";
@@ -109,7 +110,7 @@ Schema:
 
 Today's date: ${today}`;
 
-  console.log("Calling Claude with Craft MCP integration...");
+  console.log("Calling Claude with Craft MCP connector...");
 
   const response = await httpsRequest(
     "POST",
@@ -118,6 +119,7 @@ Today's date: ${today}`;
     {
       "x-api-key": ANTHROPIC_API_KEY,
       "anthropic-version": "2023-06-01",
+      "anthropic-beta": "mcp-client-2025-11-20",
     },
     {
       model: CLAUDE_MODEL,
@@ -133,7 +135,13 @@ Today's date: ${today}`;
         {
           type: "url",
           url: CRAFT_MCP_URL,
-          name: "craft",
+          name: CRAFT_MCP_NAME,
+        },
+      ],
+      tools: [
+        {
+          type: "mcp_toolset",
+          mcp_server_name: CRAFT_MCP_NAME,
         },
       ],
     }

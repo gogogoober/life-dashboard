@@ -3,7 +3,7 @@
 /**
  * Working Memory Updater
  *
- * Runs once daily. Uses Claude with Craft MCP integration to read today's
+ * Runs once daily. Uses Claude with Craft MCP connector to read today's
  * daily note + current working memory + config, process them, and write
  * the updated working memory back to Craft.
  */
@@ -15,6 +15,7 @@ import https from "https";
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
 const CRAFT_MCP_URL = "https://mcp.craft.do/links/8pMZhXonzqg/mcp";
+const CRAFT_MCP_NAME = "craft";
 
 const CRAFT_DOCUMENT_IDS = {
   workingMemory: "FC9D77DC-45EB-4EBA-B7F5-3F6F7BEB9DD0",
@@ -109,7 +110,7 @@ After writing, respond with a brief summary of changes made (items added/removed
 
 Today's date: ${today}`;
 
-  console.log("Calling Claude with Craft MCP integration...");
+  console.log("Calling Claude with Craft MCP connector...");
 
   const response = await httpsRequest(
     "POST",
@@ -118,6 +119,7 @@ Today's date: ${today}`;
     {
       "x-api-key": ANTHROPIC_API_KEY,
       "anthropic-version": "2023-06-01",
+      "anthropic-beta": "mcp-client-2025-11-20",
     },
     {
       model: CLAUDE_MODEL,
@@ -135,7 +137,13 @@ Today's date: ${today}`;
         {
           type: "url",
           url: CRAFT_MCP_URL,
-          name: "craft",
+          name: CRAFT_MCP_NAME,
+        },
+      ],
+      tools: [
+        {
+          type: "mcp_toolset",
+          mcp_server_name: CRAFT_MCP_NAME,
         },
       ],
     }
