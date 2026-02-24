@@ -281,11 +281,13 @@ Today's date: ${today}`;
       messages: [
         {
           role: "user",
-          content: `Read the working memory from Craft, then combine it with these calendar events to generate the dashboard JSON.
+          content: calendarEvents.length > 0
+            ? `Read the working memory from Craft, then combine it with these calendar events to generate the dashboard JSON.
 
 ## Google Calendar Events (next 2 months, non-recurring + birthdays)
 
-${JSON.stringify(calendarEvents, null, 2)}`,
+${JSON.stringify(calendarEvents, null, 2)}`
+            : `Read the working memory from Craft and generate the dashboard JSON. No calendar events are available this run — leave the calendar_events array empty.`,
         },
       ],
       mcp_servers: [
@@ -389,16 +391,22 @@ async function main() {
 
   if (!ANTHROPIC_API_KEY) throw new Error("Missing ANTHROPIC_API_KEY");
   if (!GITHUB_TOKEN) throw new Error("Missing GITHUB_TOKEN");
-  if (!GOOGLE_CLIENT_ID) throw new Error("Missing GOOGLE_CLIENT_ID");
-  if (!GOOGLE_CLIENT_SECRET) throw new Error("Missing GOOGLE_CLIENT_SECRET");
-  if (!GOOGLE_REFRESH_TOKEN) throw new Error("Missing GOOGLE_REFRESH_TOKEN");
 
-  console.log("Fetching Google Calendar events...");
-  const accessToken = await getGoogleAccessToken();
-  const calendarEvents = await fetchCalendarEvents(accessToken);
-  console.log(`Got ${calendarEvents.length} one-off events for next 2 months`);
+  let calendarEvents = [];
+  if (GOOGLE_CLIENT_ID && GOOGLE_CLIENT_SECRET && GOOGLE_REFRESH_TOKEN) {
+    console.log("Fetching Google Calendar events...");
+    try {
+      const accessToken = await getGoogleAccessToken();
+      calendarEvents = await fetchCalendarEvents(accessToken);
+      console.log(`Got ${calendarEvents.length} events for next 2 months`);
+    } catch (err) {
+      console.warn("Google Calendar fetch failed, continuing without:", err.message);
+    }
+  } else {
+    console.log("Google Calendar credentials not configured, skipping. Add GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_REFRESH_TOKEN to enable.");
+  }
 
-  console.log("Generating dashboard JSON via Claude + Craft MCP + Calendar...");
+  console.log(`Generating dashboard JSON via Claude + Craft MCP${calendarEvents.length > 0 ? " + Calendar" : ""}...`);
   const dashboardJson = await generateDashboardJson(calendarEvents);
 
   console.log("Pushing dashboard.json to GitHub...");
