@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-24T04:37:26.726Z",
+  "generated_at": "2026-02-24T04:47:04.449Z",
   "context": {
     "day_of_week": "tuesday",
     "time_of_day": "morning",
@@ -11,30 +11,30 @@
       "task": "Find Jell-O shot recipe",
       "epic": "Dana's 30th Birthday",
       "category": "personal",
-      "left_off": "Gift bought, laser tag with Shar organized",
+      "left_off": "Gift bought, laser tag with Shar coordinated",
       "left_off_date": "Feb 23",
       "urgency": "active"
     },
     {
-      "task": "Get components correctly registered under entities",
-      "epic": "Go Game Engine / ECS",
+      "task": "Find warm backpacking destination and book flights",
+      "epic": "Mariano's 30th / Chicago",
       "category": "personal",
-      "left_off": "Snake prototype working, migrating to ECS pattern",
+      "left_off": "Flights to Chicago booked from Japan leg",
       "left_off_date": "Feb 23",
       "urgency": "active"
     },
     {
-      "task": "Build Today's Focus widget",
-      "epic": "Life Dashboard",
+      "task": "Plan activities in Kyoto",
+      "epic": "Japan Trip 2026",
       "category": "personal",
-      "left_off": "Four widgets built, working memory now updated",
+      "left_off": "All flights and hotels booked, activity planning phase",
       "left_off_date": "Feb 23",
       "urgency": "active"
     }
   ],
   "pickup_notes": [
-    "Dana's party Saturday needs Jell-O shot recipe",
-    "ECS engine components need entity registration next"
+    "Dana's party Saturday — need Jell-O shot recipe",
+    "Mariano's backpacking trip — find warm destination soon"
   ],
   "habits": [
     {
@@ -53,13 +53,13 @@
   "smart_priorities": [
     {
       "label": "Dana's 30th Birthday",
-      "reason": "Saturday deadline, Jell-O shots not ready",
+      "reason": "Saturday deadline, need Jell-O recipe now",
       "urgency": "high"
     },
     {
       "label": "Mariano's 30th / Chicago",
-      "reason": "Backpacking destination needed, 17 days out",
-      "urgency": "medium"
+      "reason": "17 days to trip, flights not booked",
+      "urgency": "high"
     }
   ]
 }
