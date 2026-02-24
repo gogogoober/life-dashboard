@@ -7,7 +7,7 @@
       "category": "trip-event",
       "tag": "personal",
       "heat": "hot",
-      "heat_reason": "pinned:hot, deadline proximity",
+      "heat_reason": "pinned:hot",
       "summary": "Trip to Japan coming up. Hotels mostly booked. Fountain pen shopping is a key item — looking at stores in Tokyo for Pilot, Sailor, and Platinum. Also planning to pick up pens for siblings.",
       "sub_threads": [
         "hotel bookings",
@@ -20,31 +20,12 @@
         "Research Itoya and Maruzen pen floors",
         "Check baggage allowance for liquids/fragile items"
       ],
-      "deadline": "2026-04-01",
+      "start_date": "2026-03-23",
+      "end_date": "2026-04-08",
+      "deadline": "2026-03-23",
       "pinned": true,
-      "days_until_deadline": 36
-    },
-    {
-      "id": "fountain-pen-research",
-      "title": "Fountain Pen Research",
-      "category": "active-research",
-      "tag": "personal",
-      "heat": "hot",
-      "heat_reason": "branching depth, frequency",
-      "summary": "Deep dive into fountain pens — comparing Japanese brands (Pilot, Sailor, Platinum). Considering buying in Japan to get better selection and pricing. Also looking at high-quality writing paper.",
-      "sub_threads": [
-        "Japanese brands comparison",
-        "Tokyo pen stores",
-        "paper quality",
-        "pens for siblings"
-      ],
-      "open_actions": [
-        "Decide on brand before trip",
-        "Find recommended stores in Tokyo"
-      ],
-      "deadline": null,
-      "pinned": false,
-      "days_until_deadline": null
+      "days_until_deadline": 27,
+      "calendar_source": true
     },
     {
       "id": "cerebro-project",
@@ -63,9 +44,37 @@
         "Define v1 scope",
         "Set aside dedicated weekly time slot"
       ],
+      "start_date": null,
+      "end_date": null,
       "deadline": null,
       "pinned": true,
-      "days_until_deadline": null
+      "days_until_deadline": null,
+      "calendar_source": false
+    },
+    {
+      "id": "fountain-pen-research",
+      "title": "Fountain Pen Research",
+      "category": "active-research",
+      "tag": "personal",
+      "heat": "warm",
+      "heat_reason": "time decay (5 days since last mention)",
+      "summary": "Deep dive into fountain pens — comparing Japanese brands (Pilot, Sailor, Platinum). Considering buying in Japan to get better selection and pricing. Also looking at high-quality writing paper.",
+      "sub_threads": [
+        "Japanese brands comparison",
+        "Tokyo pen stores",
+        "paper quality",
+        "pens for siblings"
+      ],
+      "open_actions": [
+        "Decide on brand before trip",
+        "Find recommended stores in Tokyo"
+      ],
+      "start_date": null,
+      "end_date": null,
+      "deadline": null,
+      "pinned": false,
+      "days_until_deadline": null,
+      "calendar_source": false
     },
     {
       "id": "go-game-engine",
@@ -83,9 +92,182 @@
       "open_actions": [
         "Resolve component registration pattern"
       ],
+      "start_date": null,
+      "end_date": null,
       "deadline": null,
       "pinned": false,
-      "days_until_deadline": null
+      "days_until_deadline": null,
+      "calendar_source": false
+    }
+  ],
+  "calendar_events": [
+    {
+      "id": "_68o32e9o6kqj6e9j70pjee1g74r3cd0",
+      "title": "Online Consultation & Diagnosis (Regine Blaise PMHNP)",
+      "type": "appointment",
+      "start": "2026-03-06T12:15:00-05:00",
+      "end": "2026-03-06T12:40:00-05:00",
+      "all_day": false,
+      "location": "https://portal.getmindfulhealth.com/appointments/fcgaza027jeo",
+      "description": "Client Time zone: America/New_York \n\nChange Appointment: https://portal.getmindfulhealth.com\n\n\n\nThanks for scheduling an appointment with ✌️Mindful. Set aside 25 minutes for the appointment.\n\nPlease check your email for a booking confirmation and next steps to complete the medical intake form. This is required to confirm your appointment.",
+      "attendees": [],
+      "weight": 6,
+      "days_until": 10,
+      "related_item_id": null
+    },
+    {
+      "id": "21va9tgnesm6vvmbudevj6v344",
+      "title": "Chicago",
+      "type": "other",
+      "start": "2026-03-13",
+      "end": "2026-03-23",
+      "all_day": true,
+      "location": null,
+      "description": null,
+      "attendees": [],
+      "weight": 8,
+      "days_until": 17,
+      "related_item_id": null
+    },
+    {
+      "id": "c9gmapb36op3gbb36tijcb9k64qmcbb2ckp3eb9h6cpm4php74omcp1j68_20260319",
+      "title": "Mariano birthday",
+      "type": "birthday",
+      "start": "2026-03-19",
+      "end": "2026-03-20",
+      "all_day": true,
+      "location": null,
+      "description": null,
+      "attendees": [],
+      "weight": 5,
+      "days_until": 23,
+      "related_item_id": null
+    },
+    {
+      "id": "7q20fg9mga6aja0df1qof4uif7",
+      "title": "Need Airbnb",
+      "type": "logistics",
+      "start": "2026-03-20",
+      "end": "2026-03-23",
+      "all_day": true,
+      "location": null,
+      "description": null,
+      "attendees": [],
+      "weight": 6,
+      "days_until": 24,
+      "related_item_id": null
+    },
+    {
+      "id": "494jl6gb7u75ro4fqjidqjikt6",
+      "title": "Dana Spring Break",
+      "type": "social",
+      "start": "2026-03-23",
+      "end": "2026-03-28",
+      "all_day": true,
+      "location": null,
+      "description": null,
+      "attendees": [],
+      "weight": 7,
+      "days_until": 27,
+      "related_item_id": null
+    },
+    {
+      "id": "6d4rdeq1hv4rd02oglbj0d829c",
+      "title": "Flight to TAIPEI (BR 55)",
+      "type": "flight",
+      "start": "2026-03-23T01:30:00-04:00",
+      "end": "2026-03-23T17:25:00-04:00",
+      "all_day": false,
+      "location": "CHICAGO ORD",
+      "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DNf1UtGtGvtWV54khhjALSFqDUkuDs_5fo",
+      "attendees": [],
+      "weight": 7,
+      "days_until": 27,
+      "related_item_id": "japan-trip-2026"
+    },
+    {
+      "id": "bndaug0o06k24tfepk1ighb2m0",
+      "title": "Flight to OSAKA (BR 130)",
+      "type": "flight",
+      "start": "2026-03-24T01:30:00-04:00",
+      "end": "2026-03-24T03:55:00-04:00",
+      "all_day": false,
+      "location": "TAIPEI TPE",
+      "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DNf1UtGtGvtWV54khhjALSFqDUkuDs_5fo",
+      "attendees": [],
+      "weight": 7,
+      "days_until": 28,
+      "related_item_id": "japan-trip-2026"
+    },
+    {
+      "id": "vt3ur6me2j9d3kstr37q1hh89c",
+      "title": "Stay at Travelodge Kyoto Shijo Kawaramachi",
+      "type": "hotel",
+      "start": "2026-03-25",
+      "end": "2026-03-29",
+      "all_day": true,
+      "location": "Kyoto, Kyoto, 240 Yamazakicho, 2 Kawaramachi-dori Sanjosagaru, Nakakyo-ku, \nJapan",
+      "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DMj2WhsRAQIQvwSFvONlcjKuxteZ95sDnk",
+      "attendees": [],
+      "weight": 4,
+      "days_until": 29,
+      "related_item_id": "japan-trip-2026"
+    },
+    {
+      "id": "_60s42h1i8p0k4ba360p34b9k8cs4cb9p8oqjgba3752k4chm70q42ca560_20260407",
+      "title": "Dad's Birthday",
+      "type": "birthday",
+      "start": "2026-04-07",
+      "end": "2026-04-08",
+      "all_day": true,
+      "location": null,
+      "description": null,
+      "attendees": [],
+      "weight": 5,
+      "days_until": 42,
+      "related_item_id": null
+    },
+    {
+      "id": "lbbtvqoodaj63htsvbpnsto1vg",
+      "title": "Flight to Honolulu (ZG 2)",
+      "type": "flight",
+      "start": "2026-04-07T06:10:00-04:00",
+      "end": "2026-04-07T13:25:00-04:00",
+      "all_day": false,
+      "location": "Tokyo NRT",
+      "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DMBpVtxvsiTp7w48uplTmripc0XlF2O_Jw",
+      "attendees": [],
+      "weight": 7,
+      "days_until": 42,
+      "related_item_id": "japan-trip-2026"
+    },
+    {
+      "id": "fo4hj1bntt16o65vilvmgtsmf4",
+      "title": "Flight to New York (DL 650)",
+      "type": "flight",
+      "start": "2026-04-07T23:24:00-04:00",
+      "end": "2026-04-08T09:00:00-04:00",
+      "all_day": false,
+      "location": "Honolulu HNL",
+      "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DN2YgD6ie69-LUcHMGNhRbvrD7KCojA_0g",
+      "attendees": [],
+      "weight": 7,
+      "days_until": 42,
+      "related_item_id": "japan-trip-2026"
+    },
+    {
+      "id": "1r463ark52knto3itt9cr2kr45_20260423",
+      "title": "Mariels Birthday",
+      "type": "birthday",
+      "start": "2026-04-23",
+      "end": "2026-04-24",
+      "all_day": true,
+      "location": null,
+      "description": null,
+      "attendees": [],
+      "weight": 5,
+      "days_until": 58,
+      "related_item_id": null
     }
   ],
   "habit_tracking": {
@@ -114,8 +296,9 @@
     ]
   },
   "meta": {
-    "hot_count": 2,
-    "warm_count": 2,
-    "archived_count": 0
+    "hot_count": 1,
+    "warm_count": 3,
+    "archived_count": 0,
+    "upcoming_events_count": 12
   }
 }
