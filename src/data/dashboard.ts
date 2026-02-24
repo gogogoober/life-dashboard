@@ -225,7 +225,7 @@ export function toEvents(data: DashboardData): DashboardEvent[] {
 
     events.push({
       name: item.title,
-      date: new Date(dateStr),
+      date: new Date(dateStr.length === 10 ? dateStr + "T00:00:00" : dateStr),
       weight,
       actions,
     });
@@ -235,7 +235,7 @@ export function toEvents(data: DashboardData): DashboardEvent[] {
   for (const event of getStandaloneEvents(data)) {
     events.push({
       name: event.title,
-      date: new Date(event.start),
+      date: new Date(event.start.length === 10 ? event.start + "T00:00:00" : event.start),
       weight: event.weight,
       actions: [],
     });

@@ -30,7 +30,11 @@ export function temporalGlow(days: number): string {
 }
 
 export function daysFromNow(date: Date): number {
-  return Math.max(0.5, (date.getTime() - TODAY.getTime()) / (1000 * 60 * 60 * 24));
+  const todayMidnight = new Date();
+  todayMidnight.setHours(0, 0, 0, 0);
+  const eventMidnight = new Date(date);
+  eventMidnight.setHours(0, 0, 0, 0);
+  return Math.max(0.5, (eventMidnight.getTime() - todayMidnight.getTime()) / (1000 * 60 * 60 * 24));
 }
 
 export function logX(days: number): number {
