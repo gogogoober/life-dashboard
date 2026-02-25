@@ -26,10 +26,6 @@ const CONFIG_DOC_ID = "15AD13D1-F413-41F9-B2CD-1F9B51E1EB1C";
 
 const CLAUDE_MODEL = "claude-sonnet-4-5-20250929";
 
-// Delay before calling Claude API (seconds). Prevents rate-limit collisions
-// when this job runs right after Dashboard Generator completes.
-const STARTUP_DELAY_SECONDS = 120;
-
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 function sleep(seconds) {
@@ -316,9 +312,7 @@ async function main() {
   if (!ANTHROPIC_API_KEY) throw new Error("Missing ANTHROPIC_API_KEY");
   if (!GITHUB_TOKEN) throw new Error("Missing GITHUB_TOKEN");
 
-  console.log(`Waiting ${STARTUP_DELAY_SECONDS}s for rate limit cooldown...`);
-  await sleep(STARTUP_DELAY_SECONDS);
-  console.log("Cooldown complete, proceeding.");
+
 
   console.log("Generating up_next.json via Claude + Craft MCP...");
   const upNextJson = await generateUpNextJson();

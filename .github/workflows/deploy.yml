@@ -8,6 +8,12 @@ on:
     paths-ignore:
       - "public/dashboard.json"
       - "public/up_next.json"
+  workflow_run:
+    # Runs after all Generate Data jobs complete
+    workflows: ["Generate Data"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -20,9 +26,12 @@ concurrency:
 
 jobs:
   build:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main  # Always build from latest main, including freshly pushed JSON files
 
       - uses: actions/setup-node@v4
         with:
