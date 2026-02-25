@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-24T00:00:00Z",
+  "generated_at": "2026-02-25T00:00:00Z",
   "items": [
     {
       "id": "danas-30th",
@@ -7,7 +7,7 @@
       "category": "trip-event",
       "tag": "personal",
       "heat": "hot",
-      "heat_reason": "deadline (4 days away)",
+      "heat_reason": "deadline (3 days away)",
       "summary": "Dana turns 30 this Saturday. Laser tag with a bigger group, organized with her best friend Shar. Drinks, food, yellow Jell-O shots. Gift already bought.",
       "sub_threads": [
         "Jell-O shot recipe",
@@ -16,11 +16,11 @@
       "open_actions": [
         "Find Jell-O shot recipe"
       ],
-      "start_date": null,
-      "end_date": null,
+      "start_date": "2026-02-28",
+      "end_date": "2026-02-28",
       "deadline": "2026-02-28",
       "pinned": false,
-      "days_until_deadline": 4,
+      "days_until_deadline": 3,
       "calendar_source": true
     },
     {
@@ -29,7 +29,7 @@
       "category": "trip-event",
       "tag": "personal",
       "heat": "hot",
-      "heat_reason": "deadline (17 days away), multiple unresolved actions",
+      "heat_reason": "recently mentioned, multiple unresolved actions",
       "summary": "Mariano turns 30 on March 19th. Plan is a 1-2 night backpacking trip somewhere warm (weekend of Mar 14-15), then Chicago for the birthday celebration. Flights to Chicago already booked (return leg from Japan routed through Chicago). Need to find a warm backpacking destination and sort gear.",
       "sub_threads": [
         "backpacking destination search",
@@ -44,10 +44,10 @@
         "Buy Mariano a gift (maybe)"
       ],
       "start_date": "2026-03-13",
-      "end_date": "2026-03-23",
+      "end_date": "2026-03-22",
       "deadline": "2026-03-13",
       "pinned": false,
-      "days_until_deadline": 17,
+      "days_until_deadline": 16,
       "calendar_source": true
     },
     {
@@ -56,7 +56,7 @@
       "category": "trip-event",
       "tag": "personal",
       "heat": "hot",
-      "heat_reason": "pinned:hot, deadline approaching (27 days)",
+      "heat_reason": "pinned:hot, deadline approaching (26 days)",
       "summary": "Two-week trip with Dana, March 23 – April 7. Route: Osaka → Nara → Kyoto → Takayama → Tokyo. All flights and hotels booked. Now in activity planning phase. Also celebrating Dana's 30th during the trip.",
       "sub_threads": [
         "pen shopping",
@@ -73,7 +73,7 @@
       "end_date": "2026-04-08",
       "deadline": "2026-03-23",
       "pinned": true,
-      "days_until_deadline": 27,
+      "days_until_deadline": 26,
       "calendar_source": true
     },
     {
@@ -180,18 +180,18 @@
   ],
   "calendar_events": [
     {
-      "id": "3g2nuc1lkf69p4ticcr6d0tmjh_20260228",
-      "title": "Dana's Birthday",
-      "type": "birthday",
-      "start": "2026-02-28",
-      "end": "2026-03-01",
-      "all_day": true,
-      "location": null,
-      "description": null,
+      "id": "hnidfrcpndgv4om68be96k2ils",
+      "title": "Reservation at Holywater",
+      "type": "social",
+      "start": "2026-02-25T19:15:00-05:00",
+      "end": "2026-02-25T20:15:00-05:00",
+      "all_day": false,
+      "location": "Holywater, 112 Reade St, New York, NY 10013",
+      "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DNMPt_fPgrptWDR-bI8vk32MLzujaoty1I\n",
       "attendees": [],
-      "weight": 5,
-      "days_until": 4,
-      "related_item_id": "danas-30th"
+      "weight": 3,
+      "days_until": 0,
+      "related_item_id": null
     },
     {
       "id": "_68o32e9o6kqj6e9j70pjee1g74r3cd0",
@@ -204,7 +204,7 @@
       "description": "Client Time zone: America/New_York \n\nChange Appointment: https://portal.getmindfulhealth.com\n\n\n\nThanks for scheduling an appointment with ✌️Mindful. Set aside 25 minutes for the appointment.\n\nPlease check your email for a booking confirmation and next steps to complete the medical intake form. This is required to confirm your appointment.\n",
       "attendees": [],
       "weight": 3,
-      "days_until": 10,
+      "days_until": 9,
       "related_item_id": null
     },
     {
@@ -218,7 +218,7 @@
       "description": null,
       "attendees": [],
       "weight": 5,
-      "days_until": 23,
+      "days_until": 22,
       "related_item_id": "marianos-30th-chicago"
     },
     {
@@ -231,8 +231,8 @@
       "location": null,
       "description": null,
       "attendees": [],
-      "weight": 6,
-      "days_until": 27,
+      "weight": 5,
+      "days_until": 26,
       "related_item_id": null
     },
     {
@@ -246,7 +246,7 @@
       "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DNf1UtGtGvtWV54khhjALSFqDUkuDs_5fo\n",
       "attendees": [],
       "weight": 7,
-      "days_until": 27,
+      "days_until": 26,
       "related_item_id": "japan-trip-2026"
     },
     {
@@ -260,7 +260,7 @@
       "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DNf1UtGtGvtWV54khhjALSFqDUkuDs_5fo\n",
       "attendees": [],
       "weight": 7,
-      "days_until": 28,
+      "days_until": 27,
       "related_item_id": "japan-trip-2026"
     },
     {
@@ -274,7 +274,7 @@
       "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DMj2WhsRAQIQvwSFvONlcjKuxteZ95sDnk\n",
       "attendees": [],
       "weight": 4,
-      "days_until": 29,
+      "days_until": 28,
       "related_item_id": "japan-trip-2026"
     },
     {
@@ -288,7 +288,7 @@
       "description": null,
       "attendees": [],
       "weight": 5,
-      "days_until": 42,
+      "days_until": 41,
       "related_item_id": null
     },
     {
@@ -302,7 +302,7 @@
       "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DMBpVtxvsiTp7w48uplTmripc0XlF2O_Jw\n",
       "attendees": [],
       "weight": 7,
-      "days_until": 42,
+      "days_until": 41,
       "related_item_id": "japan-trip-2026"
     },
     {
@@ -316,7 +316,7 @@
       "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DN2YgD6ie69-LUcHMGNhRbvrD7KCojA_0g\n",
       "attendees": [],
       "weight": 7,
-      "days_until": 42,
+      "days_until": 41,
       "related_item_id": "japan-trip-2026"
     },
     {
@@ -330,7 +330,7 @@
       "description": null,
       "attendees": [],
       "weight": 5,
-      "days_until": 58,
+      "days_until": 57,
       "related_item_id": null
     }
   ],
@@ -358,6 +358,6 @@
     "hot_count": 5,
     "warm_count": 2,
     "archived_count": 0,
-    "upcoming_events_count": 12
+    "upcoming_events_count": 11
   }
 }
