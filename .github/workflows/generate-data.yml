@@ -8,6 +8,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write  # Required to push generated JSON files to the repo
+
 jobs:
   # ── Generate scripts run in parallel. Add future generate jobs with the ──────
   # ── same needs/if pattern and they will fan out automatically. ───────────────
@@ -15,6 +18,7 @@ jobs:
   generate-dashboard:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Sleep 60s (rate-limit buffer after memory update)
         run: sleep 60
@@ -40,6 +44,7 @@ jobs:
   generate-up-next:
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Sleep 60s (rate-limit buffer after memory update)
         run: sleep 60

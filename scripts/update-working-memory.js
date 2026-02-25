@@ -26,6 +26,8 @@ const CLAUDE_MODEL = "claude-sonnet-4-5-20250929";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
+const REQUEST_TIMEOUT_MS = 14 * 60 * 1000; // 14 min — just under the 15-min job timeout
+
 function httpsRequest(method, hostname, urlPath, headers, body) {
   return new Promise((resolve, reject) => {
     const data = body ? JSON.stringify(body) : null;
@@ -52,6 +54,9 @@ function httpsRequest(method, hostname, urlPath, headers, body) {
         });
       }
     );
+    req.setTimeout(REQUEST_TIMEOUT_MS, () => {
+      req.destroy(new Error(`Request timed out after ${REQUEST_TIMEOUT_MS / 1000}s`));
+    });
     req.on("error", reject);
     if (data) req.write(data);
     req.end();
@@ -110,46 +115,58 @@ After writing, respond with a brief summary of changes made (items added/removed
 
 Today's date: ${today}`;
 
-  console.log("Calling Claude with Craft MCP connector...");
+  console.log(`[${new Date().toISOString()}] Calling Claude with Craft MCP connector...`);
+  console.log("(Claude will make ~4 MCP round-trips to Craft — this can take several minutes)");
 
-  const response = await httpsRequest(
-    "POST",
-    "api.anthropic.com",
-    "/v1/messages",
-    {
-      "x-api-key": ANTHROPIC_API_KEY,
-      "anthropic-version": "2023-06-01",
-      "anthropic-beta": "mcp-client-2025-11-20",
-    },
-    {
-      model: CLAUDE_MODEL,
-      max_tokens: 8192,
-      system: systemPrompt,
-      messages: [
-        {
-          role: "user",
-          content:
-            "Read today's daily note, current working memory, and config from Craft. " +
-            "Process the updates, then write the updated working memory back to Craft.",
-        },
-      ],
-      mcp_servers: [
-        {
-          type: "url",
-          url: CRAFT_MCP_URL,
-          name: CRAFT_MCP_NAME,
-        },
-      ],
-      tools: [
-        {
-          type: "mcp_toolset",
-          mcp_server_name: CRAFT_MCP_NAME,
-        },
-      ],
-    }
-  );
+  const callStart = Date.now();
+  const heartbeat = setInterval(() => {
+    const elapsed = Math.round((Date.now() - callStart) / 1000);
+    console.log(`[${new Date().toISOString()}] Still waiting for Claude response... (${elapsed}s elapsed)`);
+  }, 30_000);
 
-  console.log("Claude response status:", response.status);
+  let response;
+  try {
+    response = await httpsRequest(
+      "POST",
+      "api.anthropic.com",
+      "/v1/messages",
+      {
+        "x-api-key": ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01",
+        "anthropic-beta": "mcp-client-2025-11-20",
+      },
+      {
+        model: CLAUDE_MODEL,
+        max_tokens: 8192,
+        system: systemPrompt,
+        messages: [
+          {
+            role: "user",
+            content:
+              "Read today's daily note, current working memory, and config from Craft. " +
+              "Process the updates, then write the updated working memory back to Craft.",
+          },
+        ],
+        mcp_servers: [
+          {
+            type: "url",
+            url: CRAFT_MCP_URL,
+            name: CRAFT_MCP_NAME,
+          },
+        ],
+        tools: [
+          {
+            type: "mcp_toolset",
+            mcp_server_name: CRAFT_MCP_NAME,
+          },
+        ],
+      }
+    );
+  } finally {
+    clearInterval(heartbeat);
+  }
+
+  console.log(`[${new Date().toISOString()}] Claude response status:`, response.status);
 
   if (response.status !== 200) {
     console.error("Claude API error:", JSON.stringify(response.body, null, 2).slice(0, 1000));

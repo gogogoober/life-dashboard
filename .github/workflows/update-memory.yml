@@ -10,6 +10,7 @@ jobs:
   # ── Update scripts run sequentially. Add future update jobs with needs: ──────
   update-working-memory:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4

@@ -31,10 +31,6 @@ const WORKING_MEMORY_DOC_ID = "FC9D77DC-45EB-4EBA-B7F5-3F6F7BEB9DD0";
 
 const CLAUDE_MODEL = "claude-sonnet-4-5-20250929";
 
-// Delay before calling Claude API (seconds). Prevents rate-limit collisions
-// when this workflow is triggered right after Update Working Memory completes.
-const STARTUP_DELAY_SECONDS = 120;
-
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 function sleep(seconds) {
@@ -318,11 +314,6 @@ async function main() {
 
   if (!ANTHROPIC_API_KEY) throw new Error("Missing ANTHROPIC_API_KEY");
   if (!GITHUB_TOKEN) throw new Error("Missing GITHUB_TOKEN");
-
-  // Wait for rate limit window to clear after working memory updater
-  console.log(`Waiting ${STARTUP_DELAY_SECONDS}s for rate limit cooldown...`);
-  await sleep(STARTUP_DELAY_SECONDS);
-  console.log("Cooldown complete, proceeding.");
 
   let calendarEvents = [];
   if (GOOGLE_CLIENT_ID && GOOGLE_CLIENT_SECRET && GOOGLE_REFRESH_TOKEN) {
