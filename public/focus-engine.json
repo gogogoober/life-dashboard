@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-02-26T02:39:53.395Z",
+  "generated_at": "2026-02-26T02:58:21.125Z",
   "energy_band": "ramp_up",
   "slots": [
     {
       "slot": 1,
       "category": "work",
       "thread_name": "Cerebro",
-      "hook": "The developer portal is waiting. It's pinned warm for a reason — once you get it running locally, you can start connecting communication and platform info for the team. Getting past this setup hurdle unlocks the real work.",
-      "next_step": "Open the Cerebro repo and locate the README or setup documentation",
+      "hook": "The developer portal is waiting for you, but right now it's blocked on one thing: getting it running locally. Once you crack that setup barrier, you can start connecting the dots between communication and platform info for the whole team.",
+      "next_step": "Open the Cerebro project repo and locate the README or setup docs",
       "effort": "medium",
-      "countdown": "no deadline set"
+      "countdown": "no deadline"
     },
     {
       "slot": 2,
       "category": "personal",
       "thread_name": "Dana's 30th Birthday",
-      "hook": "Saturday is Dana's 30th — laser tag, drinks, and yellow Jell-O shots with the crew. You've got the gift sorted, but you still need that Jell-O shot recipe to make it happen. Two days out, this is the moment to lock it down.",
-      "next_step": "Search for a yellow Jell-O shot recipe online",
+      "hook": "Dana's 30th is 2 days away. The laser tag party with Shar's crew is set, gift's wrapped, but you still need to nail down that yellow Jell-O shot recipe everyone's expecting.",
+      "next_step": "Search for yellow Jell-O shot recipes and pick one",
       "effort": "low",
       "countdown": "2 days away"
     },
@@ -24,8 +24,8 @@
       "slot": 3,
       "category": "personal",
       "thread_name": "Mariano's 30th / Chicago",
-      "hook": "Mariano turns 30 in 15 days and you're planning a warm backpacking weekend before Chicago. Flights to Chicago are booked, but the backpacking destination is still wide open. Finding that spot unlocks everything else — gear, flights, the whole adventure.",
-      "next_step": "Open a search for warm backpacking destinations accessible mid-March",
+      "hook": "Mariano turns 30 in 15 days, and you've got a backpacking-then-Chicago plan brewing. The Chicago leg is booked, but the warm backpacking weekend (Mar 14-15) needs a destination, flights, and gear sorted before it slips away.",
+      "next_step": "Open a search for warm backpacking destinations within reach of Chicago for mid-March",
       "effort": "medium",
       "countdown": "15 days away"
     }
