@@ -1,0 +1,11 @@
+// Single place to change the font across the entire system
+$font-family-primary: 'JetBrains Mono', monospace;
+
+// Import from Google Fonts (loaded via link tag in index.html, not here)
+// This file just defines the mixin
+
+@mixin font-primary {
+  font-family: $font-family-primary;
+}
+
+// Future: add $font-family-secondary if we add a body font

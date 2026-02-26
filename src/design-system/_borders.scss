@@ -1,0 +1,44 @@
+// ── Border Colors
+:root {
+  --border-emphasis: rgba(46, 204, 113, 0.4);
+  --border-primary: rgba(40, 70, 40, 0.25);
+  --border-secondary: rgba(40, 70, 40, 0.12);
+  --border-alert: rgba(232, 93, 53, 0.35);
+  --border-warning: rgba(232, 167, 53, 0.3);
+}
+
+// ── Border Radius
+:root {
+  --radius-emphasis: 24px;   // Capsule pills
+  --radius-primary: 16px;    // Standard rounded
+  --radius-secondary: 8px;   // Moderate
+  --radius-tertiary: 4px;    // Barely rounded
+}
+
+// Also as pill-specific aliases
+:root {
+  --pill-radius-emphasis: 24px;
+  --pill-radius-primary: 16px;
+  --pill-radius-secondary: 8px;
+  --pill-radius-tertiary: 4px;
+}
+
+// ── Border Width
+:root {
+  --border-width-emphasis: 2px;
+  --border-width-primary: 1px;
+  --border-width-secondary: 0.5px;
+}
+
+// ── Convenience mixins
+@mixin border-surface {
+  border: var(--border-width-primary) solid var(--border-primary);
+}
+
+@mixin border-alert {
+  border: var(--border-width-primary) solid var(--border-alert);
+}
+
+@mixin border-warning {
+  border: var(--border-width-primary) solid var(--border-warning);
+}

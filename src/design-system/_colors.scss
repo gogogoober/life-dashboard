@@ -1,0 +1,84 @@
+@use 'sass:math';
+@use 'sass:color';
+
+// ── Background tokens
+:root {
+  --bg-base: #0a0e0a;
+  --bg-surface: 10, 18, 10;           // RGB values, pair with opacity tokens
+  --bg-surface-secondary: 14, 22, 14;
+  --bg-surface-alert: 232, 93, 53;
+  --bg-surface-warning: 232, 167, 53;
+}
+
+// ── Text tokens
+:root {
+  --text-emphasis: #d4f5d4;
+  --text-primary: #c8d8c8;
+  --text-secondary: #5a7a5a;
+  --text-tertiary: #3a5a3a;
+  --text-alert: #e85d35;
+  --text-warning: #e8a735;
+}
+
+// ── Status tokens
+:root {
+  --status-alert: #e85d35;
+  --status-warning: #e8a735;
+  --status-primary: #2ecc71;
+  --status-secondary: #1a8a4a;
+}
+
+// ── Category tokens
+:root {
+  // Travel — Cyan
+  --category-travel-emphasis: #00e5ff;
+  --category-travel-primary: #0097a7;
+  --category-travel-secondary: #004d5a;
+
+  // Personal — Purple / Lavender
+  --category-personal-emphasis: #ce93d8;
+  --category-personal-primary: #8e4a9e;
+  --category-personal-secondary: #4a2558;
+
+  // Project — Silver Gray / Steel
+  --category-project-emphasis: #cfd8dc;
+  --category-project-primary: #78909c;
+  --category-project-secondary: #37474f;
+
+  // Admin — Slate
+  --category-admin-emphasis: #90a4ae;
+  --category-admin-primary: #546e7a;
+  --category-admin-secondary: #263238;
+}
+
+// ── Sass variables (for use in other .scss files)
+$status-alert: #e85d35;
+$status-warning: #e8a735;
+$status-primary: #2ecc71;
+$status-secondary: #1a8a4a;
+
+$text-emphasis: #d4f5d4;
+$text-primary: #c8d8c8;
+$text-secondary: #5a7a5a;
+$text-tertiary: #3a5a3a;
+
+// ── Hue scale function
+// Input: 0 (most alert/urgent) to 100 (most calm/dormant)
+// Output: HSL color string
+//
+// Hue:        15° (burnt orange) → 150° (deep green)
+// Saturation: 80% → 60%
+// Lightness:  55% → 15%
+
+@function hue-color($value) {
+  $h: 15 + ($value / 100) * (150 - 15);
+  $s: 80 - ($value / 100) * (80 - 60);
+  $l: 55 - ($value / 100) * (55 - 15);
+  @return hsl($h, #{$s}#{"%"}, #{$l}#{"%"});
+}
+
+// Logarithmic variant — more resolution in urgent range
+@function hue-color-log($value) {
+  $log-value: math.div(math.log($value + 1), math.log(101)) * 100;
+  @return hue-color($log-value);
+}

@@ -1,0 +1,69 @@
+// ── Opacity: Surface
+:root {
+  --opacity-surface-emphasis: 0.65;
+  --opacity-surface-primary: 0.45;
+  --opacity-surface-secondary: 0.30;
+  --opacity-surface-tertiary: 0.15;
+}
+
+// ── Opacity: Overlay
+:root {
+  --opacity-overlay-emphasis: 0.60;
+  --opacity-overlay-primary: 0.45;
+  --opacity-overlay-secondary: 0.25;
+  --opacity-overlay-tertiary: 0.12;
+}
+
+// ── Opacity: Pill
+:root {
+  --opacity-pill-emphasis: 0.55;
+  --opacity-pill-primary: 0.40;
+  --opacity-pill-secondary: 0.25;
+  --opacity-pill-tertiary: 0.12;
+}
+
+// ── Blur
+:root {
+  --blur-surface: 16px;
+  --blur-overlay: 24px;
+}
+
+// ── Shadows: Surface
+:root {
+  --shadow-surface-emphasis: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-surface-primary: 0 2px 12px rgba(0, 0, 0, 0.25);
+  --shadow-surface-secondary: 0 1px 6px rgba(0, 0, 0, 0.15);
+}
+
+// ── Shadows: Overlay
+:root {
+  --shadow-overlay-emphasis: 0 6px 30px rgba(0, 0, 0, 0.5);
+  --shadow-overlay-primary: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-overlay-secondary: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+// ── Shadows: Pill
+:root {
+  --shadow-pill-emphasis: 0 0 16px rgba(0, 0, 0, 0.15);
+  --shadow-pill-primary: 0 0 10px rgba(0, 0, 0, 0.1);
+  --shadow-pill-secondary: none;
+}
+
+// ── Glows (status-colored, used on orbital nodes and status dots)
+:root {
+  --glow-alert: 0 0 20px rgba(232, 93, 53, 0.35);
+  --glow-warning: 0 0 16px rgba(232, 167, 53, 0.2);
+  --glow-primary: 0 0 12px rgba(46, 204, 113, 0.15);
+  --glow-secondary: 0 0 8px rgba(26, 138, 74, 0.08);
+}
+
+// ── Sass convenience mixins
+@mixin blur-surface {
+  backdrop-filter: blur(var(--blur-surface));
+  -webkit-backdrop-filter: blur(var(--blur-surface));
+}
+
+@mixin blur-overlay {
+  backdrop-filter: blur(var(--blur-overlay));
+  -webkit-backdrop-filter: blur(var(--blur-overlay));
+}

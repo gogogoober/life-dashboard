@@ -1,0 +1,70 @@
+@use 'fonts' as *;
+
+// ── Heading scale
+@mixin heading-lg {
+  @include font-primary;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+@mixin heading-md {
+  @include font-primary;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+@mixin heading-sm {
+  @include font-primary;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+// ── Body scale
+@mixin body-primary {
+  @include font-primary;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+@mixin body-secondary {
+  @include font-primary;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+// ── Label scale
+@mixin label-emphasis {
+  @include font-primary;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: capitalize;  // Title Case handled per-word in code
+}
+
+@mixin label-primary {
+  @include font-primary;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+@mixin label-secondary {
+  @include font-primary;
+  font-size: 9px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+// ── Data (orbital node numbers)
+@mixin data($size: 14px) {
+  @include font-primary;
+  font-size: $size;
+  font-weight: 700;
+  text-align: center;
+}

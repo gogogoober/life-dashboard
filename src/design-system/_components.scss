@@ -1,0 +1,78 @@
+@use 'elevation' as *;
+@use 'borders' as *;
+@use 'typography' as *;
+
+// ═══════════════════════════════════════════
+// SURFACE — Panels (Focus, future Dynamic Island)
+// ═══════════════════════════════════════════
+
+@mixin surface($variant: 'primary') {
+  @include border-surface;
+  @include blur-surface;
+
+  @if $variant == 'emphasis' {
+    background: rgba(var(--bg-surface), var(--opacity-surface-emphasis));
+    box-shadow: var(--shadow-surface-emphasis);
+  } @else if $variant == 'primary' {
+    background: rgba(var(--bg-surface), var(--opacity-surface-primary));
+    box-shadow: var(--shadow-surface-primary);
+  } @else if $variant == 'secondary' {
+    background: rgba(var(--bg-surface), var(--opacity-surface-secondary));
+    box-shadow: var(--shadow-surface-secondary);
+  } @else if $variant == 'tertiary' {
+    background: rgba(var(--bg-surface), var(--opacity-surface-tertiary));
+    box-shadow: none;
+  }
+}
+
+// ═══════════════════════════════════════════
+// RIBBON — Timeline, flush-mounted at top
+// ═══════════════════════════════════════════
+
+@mixin ribbon {
+  @include blur-surface;
+  background: rgba(var(--bg-surface), var(--opacity-surface-primary));
+  border: var(--border-width-primary) solid var(--border-primary);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  box-shadow: var(--shadow-surface-secondary);
+}
+
+// ═══════════════════════════════════════════
+// PILL — Notifications & inline bars
+// ═══════════════════════════════════════════
+// Usage: @include pill('overlay') or @include pill('inline')
+
+@mixin pill($position: 'overlay', $status: 'primary') {
+  @if $position == 'overlay' {
+    @include blur-overlay;
+    background: rgba(var(--bg-surface), var(--opacity-pill-primary));
+    border-radius: var(--pill-radius-emphasis);
+    box-shadow: var(--shadow-pill-primary);
+
+    @if $status == 'alert' {
+      border: var(--border-width-primary) solid var(--border-alert);
+      box-shadow: var(--shadow-pill-emphasis);
+    } @else if $status == 'warning' {
+      border: var(--border-width-primary) solid var(--border-warning);
+    } @else {
+      border: var(--border-width-primary) solid var(--border-primary);
+    }
+  } @else if $position == 'inline' {
+    background: rgba(var(--bg-surface), var(--opacity-pill-secondary));
+    border-radius: var(--pill-radius-secondary);
+    box-shadow: var(--shadow-pill-secondary);
+    border: var(--border-width-primary) solid var(--border-secondary);
+  }
+}
+
+// ═══════════════════════════════════════════
+// PANEL — Focus panel, expandable sections
+// ═══════════════════════════════════════════
+
+@mixin panel {
+  @include surface('secondary');
+  border-radius: 12px;
+  padding: 20px 16px;
+  overflow: auto;
+}
