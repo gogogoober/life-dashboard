@@ -9,7 +9,7 @@ import {
   hue,
   daysToHueValue,
 } from "../design-system";
-import { Section, Heading, Label } from "../components";
+
 
 // ═══════════════════════════════════════════
 // Types
@@ -410,25 +410,12 @@ export function TemporalBubbleMap({ events }: TemporalBubbleMapProps) {
   }, [events]);
 
   return (
-    <Section use="base" className="h-full flex flex-col overflow-hidden">
-      <div className="flex items-baseline justify-between mb-2">
-        <Heading size="sm">What&apos;s Ahead</Heading>
-        <Label variant="secondary">logarithmic time scale</Label>
-      </div>
-      <div
-        ref={containerRef}
-        className="flex-1 min-h-0 relative rounded-xl overflow-hidden"
-        style={{
-          background: canvasColors.bg.base,
-          border: `1px solid ${canvasColors.border.secondary}`,
-        }}
-      >
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 w-full h-full"
-          style={{ display: "block" }}
-        />
-      </div>
-    </Section>
+    <div ref={containerRef} className="relative w-full h-full overflow-hidden">
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full"
+        style={{ display: "block" }}
+      />
+    </div>
   );
 }

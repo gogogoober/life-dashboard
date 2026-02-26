@@ -8,7 +8,6 @@
 
 @mixin surface($variant: 'primary') {
   @include border-surface;
-  @include blur-surface;
 
   @if $variant == 'emphasis' {
     background: rgba(var(--bg-surface), var(--opacity-surface-emphasis));

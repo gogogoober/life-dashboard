@@ -1,5 +1,5 @@
 import { TemplateRenderer, defaultTemplate } from "./templates";
-import { EVENTS, CONTEXT_STUB, TOKYO_PINS, ACTIVE_THREADS_STUB, UP_NEXT_STUB } from "./data/stub";
+import { EVENTS, CONTEXT_STUB, TOKYO_PINS, ACTIVE_THREADS_STUB, UP_NEXT_STUB, CALENDAR_EVENTS_STUB } from "./data/stub";
 import { useDashboard, useUpNext, useOrbital, useFocusEngine, toOrbitalEvents, toContextItems, toActiveThreads } from "./data/dashboard";
 
 export default function App() {
@@ -25,10 +25,10 @@ export default function App() {
     "temporal-bubble-map": {
       events: orbitalData ? toOrbitalEvents(orbitalData) : EVENTS,
     },
+    "timeline-ribbon": { events: CALENDAR_EVENTS_STUB },
     "focus-engine": focusData
       ? { slots: focusData.slots, activeSlot: focusData.active_slot }
       : {},
-    "action-items": {},
   };
 
   const generatedAt = data
@@ -42,7 +42,7 @@ export default function App() {
 
   return (
     <div
-      className="relative w-screen h-screen p-5 overflow-hidden"
+      className="relative w-screen h-screen overflow-hidden"
       style={{ background: "var(--bg-base)" }}
     >
       <TemplateRenderer config={defaultTemplate} data={widgetData} />

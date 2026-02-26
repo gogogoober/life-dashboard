@@ -164,12 +164,25 @@ export interface PlaceholderItem {
 
 // ─── Template System ───────────────────────────────────────────────
 
+export type SlotLayer = 'background' | 'foreground' | 'floating';
+
+export interface SlotPlacement {
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+  width?: string;
+  height?: string;
+}
+
 export interface SlotConfig {
   widgetId: string;
-  gridColumn: string;
-  gridRow: string;
+  gridColumn?: string;
+  gridRow?: string;
   size: SlotSize;
   props?: Record<string, unknown>;
+  layer?: SlotLayer;
+  placement?: SlotPlacement;
 }
 
 export interface TemplateConfig {

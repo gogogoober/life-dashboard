@@ -1,2 +1,8 @@
 @import "tailwindcss";
 @import "./design-system/index.scss";
+
+:root {
+  --dashboard-inset: 1.25rem;
+  --focus-panel-width: clamp(16rem, 22vw, 22rem);
+  --ribbon-height: 4.5rem;
+}
