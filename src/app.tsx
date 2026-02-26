@@ -1,10 +1,15 @@
 import { TemplateRenderer, defaultTemplate } from "./templates";
 import { EVENTS, CONTEXT_STUB, TOKYO_PINS, ACTIVE_THREADS_STUB, UP_NEXT_STUB } from "./data/stub";
-import { useDashboard, useUpNext, toEvents, toContextItems, toActiveThreads } from "./data/dashboard";
+import { useDashboard, useUpNext, useOrbital, toOrbitalEvents, toContextItems, toActiveThreads } from "./data/dashboard";
 
 export default function App() {
   const { data, error } = useDashboard();
   const { data: upNextData, error: upNextError } = useUpNext();
+  const { data: orbitalData, error: orbitalError } = useOrbital();
+
+  if (orbitalError) {
+    console.warn("[orbital] Failed to load orbital.json, using stubs:", orbitalError);
+  }
 
   if (error) {
     console.warn("[dashboard] Failed to load dashboard.json, using stubs:", error);
@@ -15,7 +20,7 @@ export default function App() {
 
   const widgetData: Record<string, Record<string, unknown>> = {
     "temporal-bubble-map": {
-      events: data ? toEvents(data) : EVENTS,
+      events: orbitalData ? toOrbitalEvents(orbitalData) : EVENTS,
     },
     "context-resume": {
       items: data ? toContextItems(data) : CONTEXT_STUB,

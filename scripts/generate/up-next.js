@@ -176,40 +176,50 @@ Remember: the arrays above are empty placeholders. You must fill them with real 
 
   console.log("Calling Claude with Craft MCP connector...");
 
-  const response = await httpsRequest(
-    "POST",
-    "api.anthropic.com",
-    "/v1/messages",
-    {
-      "x-api-key": ANTHROPIC_API_KEY,
-      "anthropic-version": "2023-06-01",
-      "anthropic-beta": "mcp-client-2025-11-20",
-    },
-    {
-      model: CLAUDE_MODEL,
-      max_tokens: 4096,
-      system: systemPrompt,
-      messages: [
-        {
-          role: "user",
-          content: userMessage,
-        },
-      ],
-      mcp_servers: [
-        {
-          type: "url",
-          url: CRAFT_MCP_URL,
-          name: CRAFT_MCP_NAME,
-        },
-      ],
-      tools: [
-        {
-          type: "mcp_toolset",
-          mcp_server_name: CRAFT_MCP_NAME,
-        },
-      ],
+  let response;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    response = await httpsRequest(
+      "POST",
+      "api.anthropic.com",
+      "/v1/messages",
+      {
+        "x-api-key": ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01",
+        "anthropic-beta": "mcp-client-2025-11-20",
+      },
+      {
+        model: CLAUDE_MODEL,
+        max_tokens: 4096,
+        system: systemPrompt,
+        messages: [
+          {
+            role: "user",
+            content: userMessage,
+          },
+        ],
+        mcp_servers: [
+          {
+            type: "url",
+            url: CRAFT_MCP_URL,
+            name: CRAFT_MCP_NAME,
+          },
+        ],
+        tools: [
+          {
+            type: "mcp_toolset",
+            mcp_server_name: CRAFT_MCP_NAME,
+          },
+        ],
+      }
+    );
+    if (response.status === 429) {
+      if (attempt === 3) break;
+      console.log(`Rate limited (429). Waiting 60s before retry ${attempt + 1}/3...`);
+      await sleep(60);
+      continue;
     }
-  );
+    break;
+  }
 
   console.log("Claude response status:", response.status);
 

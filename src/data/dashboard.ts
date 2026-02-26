@@ -66,6 +66,50 @@ export function useDashboard() {
   return { data, loading, error };
 }
 
+// ─── Orbital data ─────────────────────────────────────────────────────────────
+
+interface OrbitalEvent {
+  name: string;
+  date: string; // YYYY-MM-DD
+  weight: number;
+  actions: Array<{ name: string; status: "todo" | "done" }>;
+}
+
+interface OrbitalData {
+  generated_at: string;
+  events: OrbitalEvent[];
+}
+
+export async function fetchOrbital(): Promise<OrbitalData> {
+  const url = import.meta.env.BASE_URL + "orbital.json";
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Failed to fetch orbital.json (${res.status})`);
+  return res.json();
+}
+
+export function useOrbital() {
+  const [data, setData] = useState<OrbitalData | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchOrbital()
+      .then(setData)
+      .catch((e: Error) => setError(e.message));
+  }, []);
+
+  return { data, error };
+}
+
+/** OrbitalData → DashboardEvent[] for the TemporalBubbleMap widget */
+export function toOrbitalEvents(data: OrbitalData): DashboardEvent[] {
+  return data.events.map((e) => ({
+    name: e.name,
+    date: new Date(e.date.length === 10 ? e.date + "T00:00:00" : e.date),
+    weight: e.weight,
+    actions: e.actions,
+  }));
+}
+
 export async function fetchUpNext(): Promise<UpNextData> {
   const url = import.meta.env.BASE_URL + "up_next.json";
   const res = await fetch(url);
