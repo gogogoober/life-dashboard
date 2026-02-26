@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-02-26T04:18:25.257Z",
+  "generated_at": "2026-02-26T05:07:38.317Z",
   "type": "knockout",
   "height": "tall",
   "content": {
-    "threads": null,
     "knockout": {
-      "prompt": "Saturday's coming fast — Dana's 30th is 2 days away. Quick wins before the big day.",
+      "prompt": "Dana's 30th is in 2 days. Quick wins to lock in the details.",
       "tasks": [
-        "Find and save the yellow Jell-O shot recipe for Dana's laser tag event",
-        "Confirm final headcount with Shar and lock in the laser tag reservation",
-        "Pack a small bag with the gift and any supplies you're bringing to the event"
+        "Find and save the Jell-O shot recipe for Saturday's laser tag party",
+        "Confirm final headcount with Shar for food/drink quantities",
+        "Pack a small bag for the weekend (Dana's party Saturday)"
       ],
       "points_each": 5,
       "bonus": 15
     },
+    "threads": null,
     "nudge": null,
     "quote": null
   }
