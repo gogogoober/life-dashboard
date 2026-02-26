@@ -3,8 +3,8 @@
 /**
  * Focus Engine Generator
  *
- * Reads working memory from Craft via MCP, then uses Claude to select
- * 3 quest cards — the most important threads to surface right now.
+ * Fetches Google Calendar events and reads working memory from Craft via MCP.
+ * Uses Claude to select the 3 most important threads to surface as quest cards.
  * Pushes focus-engine.json to GitHub so the dashboard can render them.
  */
 
@@ -15,9 +15,14 @@ import https from "https";
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const GOOGLE_REFRESH_TOKEN = process.env.GOOGLE_REFRESH_TOKEN;
+const GOOGLE_CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || "primary";
+
 const GITHUB_REPO = "gogogoober/life-dashboard";
 const GITHUB_BRANCH = "main";
-const OUTPUT_JSON_PATH = "public/focus-engine.json";
+const FOCUS_ENGINE_JSON_PATH = "public/focus-engine.json";
 
 const CRAFT_MCP_URL = "https://mcp.craft.do/links/8pMZhXonzqg/mcp";
 const CRAFT_MCP_NAME = "craft";
@@ -26,6 +31,10 @@ const WORKING_MEMORY_DOC_ID = "FC9D77DC-45EB-4EBA-B7F5-3F6F7BEB9DD0";
 const CLAUDE_MODEL = "claude-sonnet-4-5-20250929";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
+
+function sleep(seconds) {
+  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+}
 
 function httpsRequest(method, hostname, urlPath, headers, body) {
   return new Promise((resolve, reject) => {
@@ -63,113 +72,205 @@ function httpsRequest(method, hostname, urlPath, headers, body) {
   });
 }
 
-// ─── Helpers (continued) ────────────────────────────────────────────────────
-
-function sleep(seconds) {
-  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
-}
-
-// ─── Energy Band ─────────────────────────────────────────────────────────────
+// ─── Time Context ────────────────────────────────────────────────────────────
 
 function getEnergyBand(hour) {
   if (hour < 10) return "ramp_up";
   if (hour < 13) return "prime_work";
   if (hour < 14) return "lunch_dip";
-  if (hour < 17) return "high_energy";
+  if (hour < 16) return "high_energy";
+  if (hour < 17) return "transition";
   if (hour < 18) return "chores";
   if (hour < 19) return "planning";
   return "wind_down";
 }
 
+// ─── Google Calendar ────────────────────────────────────────────────────────
+
+async function getGoogleAccessToken() {
+  const tokenBody = [
+    `client_id=${encodeURIComponent(GOOGLE_CLIENT_ID)}`,
+    `client_secret=${encodeURIComponent(GOOGLE_CLIENT_SECRET)}`,
+    `refresh_token=${encodeURIComponent(GOOGLE_REFRESH_TOKEN)}`,
+    `grant_type=refresh_token`,
+  ].join("&");
+
+  const response = await httpsRequest(
+    "POST",
+    "oauth2.googleapis.com",
+    "/token",
+    { "Content-Type": "application/x-www-form-urlencoded" },
+    tokenBody
+  );
+
+  if (response.status !== 200) {
+    throw new Error(
+      `Google OAuth failed (${response.status}): ${JSON.stringify(response.body)}`
+    );
+  }
+
+  return response.body.access_token;
+}
+
+async function fetchCalendarEvents(accessToken) {
+  const now = new Date();
+  const twoMonthsOut = new Date(now);
+  twoMonthsOut.setMonth(twoMonthsOut.getMonth() + 2);
+
+  const params = new URLSearchParams({
+    timeMin: now.toISOString(),
+    timeMax: twoMonthsOut.toISOString(),
+    singleEvents: "true",
+    orderBy: "startTime",
+    maxResults: "250",
+  });
+
+  const calId = encodeURIComponent(GOOGLE_CALENDAR_ID);
+  const response = await httpsRequest(
+    "GET",
+    "www.googleapis.com",
+    `/calendar/v3/calendars/${calId}/events?${params.toString()}`,
+    { Authorization: `Bearer ${accessToken}` }
+  );
+
+  if (response.status !== 200) {
+    throw new Error(
+      `Google Calendar API failed (${response.status}): ${JSON.stringify(response.body)}`
+    );
+  }
+
+  const allEvents = response.body.items || [];
+  const isBirthday = (e) => (e.summary || "").toLowerCase().includes("birthday");
+  const filtered = allEvents.filter((e) => !e.recurringEventId || isBirthday(e));
+
+  console.log(
+    `Calendar: ${allEvents.length} total events, ${filtered.length} kept (${allEvents.length - filtered.length} recurring filtered out, birthdays preserved)`
+  );
+
+  return filtered.map((e) => ({
+    id: e.id,
+    title: e.summary || "(no title)",
+    start: e.start?.dateTime || e.start?.date || null,
+    end: e.end?.dateTime || e.end?.date || null,
+    all_day: !!e.start?.date,
+    location: e.location || null,
+  }));
+}
+
 // ─── Claude + Craft MCP ─────────────────────────────────────────────────────
 
-async function generateFocusEngineJson() {
+async function generateFocusEngineJson(calendarEvents) {
   const now = new Date();
   const hour = now.getHours();
+  const dayOfWeek = now.toLocaleDateString("en-US", { weekday: "long" }).toLowerCase();
+  const isWeekend = ["saturday", "sunday"].includes(dayOfWeek);
+  const isWorkHours = hour >= 10 && hour < 16 && !isWeekend;
   const energyBand = getEnergyBand(hour);
 
-  const systemPrompt = `You are the Focus Engine generator for Hugo's personal life dashboard called Cerebro.
+  const systemPrompt = `You are the Focus Engine generator for Hugo's personal life dashboard.
 
-Your job is to read Hugo's working memory and select the 3 most important threads to surface as "quest cards." For each thread, write a narrative hook that makes Hugo want to start working on it, and suggest a micro-first-step.
+You select the 3 most important things Hugo should focus on RIGHT NOW and present them as engaging "quest cards" that make him want to start working.
 
-Rules:
-- Slot 1 is ALWAYS a work item
-- Slots 2-3 are the next highest priority items from any category
-- Narrative hooks: 2-3 sentences, conversational tone, connects the task to something that matters
-- next_step: the smallest possible action to begin — something you could do in 2 minutes
-- effort: high (deep focus required), medium (moderate concentration), low (can do while tired or distracted)
-- countdown: express time remaining in relative terms — "3 days away", "2 weekends left". NEVER use day-of-week names or calendar dates
-- Use countdowns that create urgency: "3 days" not "Saturday"
-- active_slot: pick the slot whose effort level best matches the current energy band
-  (high effort for prime_work/high_energy, low effort for wind_down/ramp_up, medium for others)
+## Data Sources
+1. **Craft MCP** — Read working memory (ID: ${WORKING_MEMORY_DOC_ID}) via blocks_get with format="markdown". Contains Hugo's active projects, threads, trips, events with heat levels and context.
+2. **Google Calendar** — Provided below. Upcoming events for the next 2 months.
 
-Be decisive. Do not hedge. Hugo trusts you to make the call.
-Do NOT invent data. Everything must come from working memory.`;
-
-  const userMessage = `## STEP 1: READ WORKING MEMORY
-
-Use the MCP tool now:
-blocks_get with id="${WORKING_MEMORY_DOC_ID}" and format="markdown"
-
-Read the response carefully. All output must be derived from this data.
-
-## STEP 2: SELECT 3 QUEST CARDS
+## Slot Rules
 
 Current time: ${now.toISOString()}
-Current energy band: ${energyBand}
+Energy band: ${energyBand}
+Is weekend: ${isWeekend}
+Is work hours (10am-4pm weekday): ${isWorkHours}
 
-Select:
-- Slot 1: Best work item (hot or warm heat, most urgent or impactful)
-- Slot 2: Second highest priority (any category)
-- Slot 3: Third highest priority (any category)
+WEEKDAY WORK HOURS (10am-4pm):
+- Slot 1: MUST be a work item
+- Slot 2: Work item preferred, or high-priority personal item with deadline within 7 days
+- Slot 3: Quick personal win ONLY — something doable from a desk in 5 minutes (set a reminder, send a text, quick message). NO trip planning, NO deep personal projects.
 
-For each, write a narrative hook (2-3 sentences), a micro-first-step, assign effort level, and compute a relative countdown.
+WEEKDAY AFTER 5PM:
+- Slot 1: Still work if something urgent, otherwise highest priority anything
+- Slots 2-3: Personal, travel, social — whatever scores highest
+- Trip planning and personal projects are welcome here
 
-Determine active_slot: which slot's effort level best matches the current energy band?
-- prime_work / high_energy → prefer high effort
-- ramp_up / lunch_dip / planning → prefer medium effort
-- wind_down / chores → prefer low effort
+WEEKENDS:
+- All slots open to any category
+- Work items only if deadline within 3 days
 
-## STEP 3: OUTPUT
+## How to Write Each Quest Card
 
-Respond with ONLY the JSON object below. No explanation. No markdown fences. No commentary.
+For each of the 3 slots, generate:
+
+**hook**: A 2-3 sentence narrative that makes Hugo WANT to engage. Write in second person ("you"). Reference specific details from working memory. Connect to what's interesting about the task, not just that it's due. Make it feel like a story continuation, not a task list.
+
+**next_step**: The absolute smallest first action. Must be completable in under 2 minutes. Start with an imperative verb. Examples: "Open the failing test and read the assertion", "Search 'Ginza fountain pen shops' and bookmark one", "Text Mariano 'what dates work for you?'"
+
+**effort**: "high", "medium", or "low" based on the cognitive demand of the full task (not the next_step).
+- high: Deep focus work, coding, writing, complex planning
+- medium: Research, coordination, moderate thinking
+- low: Quick messages, simple lookups, reminders
+
+**countdown**: Express time remaining in relative human terms. NEVER use day names ("Saturday") or calendar dates ("March 15th"). Use:
+- Within 3 days: "3 days away" / "tomorrow" / "tonight"
+- Within 2 weeks: "next weekend" / "2 weekends left"
+- Within a month: "3 weeks out" / "just under a month"
+- Further: "about 2 months"
+- Exception: "this weekend" is OK because it frames planning time
+
+**category**: "work", "personal", or "travel"
+
+**thread_name**: The name of the working memory item this card is about
+
+## Output
+
+After reading working memory and calendar data, respond with ONLY the JSON below. No preamble, no markdown fences, no commentary.
 
 {
   "generated_at": "${now.toISOString()}",
   "energy_band": "${energyBand}",
+  "is_work_hours": ${isWorkHours},
+  "is_weekend": ${isWeekend},
   "slots": [
     {
       "slot": 1,
-      "category": "work",
-      "thread_name": "",
-      "hook": "",
-      "next_step": "",
-      "effort": "high|medium|low",
-      "countdown": ""
-    },
-    {
-      "slot": 2,
       "category": "work|personal|travel",
-      "thread_name": "",
-      "hook": "",
-      "next_step": "",
+      "thread_name": "string",
+      "hook": "string",
+      "next_step": "string",
       "effort": "high|medium|low",
-      "countdown": ""
+      "countdown": "string"
     },
-    {
-      "slot": 3,
-      "category": "work|personal|travel",
-      "thread_name": "",
-      "hook": "",
-      "next_step": "",
-      "effort": "high|medium|low",
-      "countdown": ""
-    }
+    { "slot": 2, "category": "work|personal|travel", "thread_name": "string", "hook": "string", "next_step": "string", "effort": "high|medium|low", "countdown": "string" },
+    { "slot": 3, "category": "work|personal|travel", "thread_name": "string", "hook": "string", "next_step": "string", "effort": "high|medium|low", "countdown": "string" }
   ],
   "active_slot": 1
 }
 
-Remember: the string fields above are empty placeholders. Fill them with real data from working memory.`;
+active_slot = the slot number whose effort best matches current energy:
+- prime_work / high_energy → prefer high effort slot
+- ramp_up / lunch_dip / transition → prefer medium effort slot
+- chores / planning / wind_down → prefer low effort slot
+If multiple slots match, pick the one with the most urgent countdown.`;
+
+  const userMessage = calendarEvents.length > 0
+    ? `Read Hugo's working memory from Craft, then combine with these calendar events to generate the Focus Engine JSON.
+
+Calendar events:
+${JSON.stringify(calendarEvents, null, 2)}
+
+Current time context:
+- Time: ${now.toISOString()}
+- Energy band: ${energyBand}
+- Work hours: ${isWorkHours}
+- Weekend: ${isWeekend}
+- Day: ${dayOfWeek}`
+    : `Read Hugo's working memory from Craft to generate the Focus Engine JSON. No calendar events are available — rely solely on working memory for dates and context.
+
+Current time context:
+- Time: ${now.toISOString()}
+- Energy band: ${energyBand}
+- Work hours: ${isWorkHours}
+- Weekend: ${isWeekend}
+- Day: ${dayOfWeek}`;
 
   console.log("Calling Claude with Craft MCP connector...");
 
@@ -270,7 +371,7 @@ async function pushFocusEngineJson(outputJson) {
   const existing = await httpsRequest(
     "GET",
     "api.github.com",
-    `/repos/${GITHUB_REPO}/contents/${OUTPUT_JSON_PATH}?ref=${GITHUB_BRANCH}`,
+    `/repos/${GITHUB_REPO}/contents/${FOCUS_ENGINE_JSON_PATH}?ref=${GITHUB_BRANCH}`,
     {
       Authorization: `Bearer ${GITHUB_TOKEN}`,
       "User-Agent": "cerebro-focus-engine-generator",
@@ -290,7 +391,7 @@ async function pushFocusEngineJson(outputJson) {
   const result = await httpsRequest(
     "PUT",
     "api.github.com",
-    `/repos/${GITHUB_REPO}/contents/${OUTPUT_JSON_PATH}`,
+    `/repos/${GITHUB_REPO}/contents/${FOCUS_ENGINE_JSON_PATH}`,
     {
       Authorization: `Bearer ${GITHUB_TOKEN}`,
       "User-Agent": "cerebro-focus-engine-generator",
@@ -316,8 +417,22 @@ async function main() {
   if (!ANTHROPIC_API_KEY) throw new Error("Missing ANTHROPIC_API_KEY");
   if (!GITHUB_TOKEN) throw new Error("Missing GITHUB_TOKEN");
 
-  console.log("Generating focus-engine.json via Claude + Craft MCP...");
-  const outputJson = await generateFocusEngineJson();
+  let calendarEvents = [];
+  if (GOOGLE_CLIENT_ID && GOOGLE_CLIENT_SECRET && GOOGLE_REFRESH_TOKEN) {
+    console.log("Fetching Google Calendar events...");
+    try {
+      const accessToken = await getGoogleAccessToken();
+      calendarEvents = await fetchCalendarEvents(accessToken);
+      console.log(`Got ${calendarEvents.length} events for next 2 months`);
+    } catch (err) {
+      console.warn("Google Calendar fetch failed, continuing without:", err.message);
+    }
+  } else {
+    console.log("Google Calendar credentials not configured, skipping.");
+  }
+
+  console.log(`Generating focus-engine.json via Claude + Craft MCP${calendarEvents.length > 0 ? " + Calendar" : ""}...`);
+  const outputJson = await generateFocusEngineJson(calendarEvents);
 
   console.log("Pushing focus-engine.json to GitHub...");
   await pushFocusEngineJson(outputJson);
