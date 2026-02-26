@@ -1,10 +1,16 @@
 {
-  "generated_at": "2026-02-26T02:39:54.115Z",
+  "generated_at": "2026-02-26T02:58:21.570Z",
   "events": [
+    {
+      "name": "Reservation at Holywater",
+      "date": "2026-02-27",
+      "weight": 2,
+      "actions": []
+    },
     {
       "name": "Dana's 30th Birthday",
       "date": "2026-02-28",
-      "weight": 6,
+      "weight": 5,
       "actions": [
         {
           "name": "Find Jell-O shot recipe",
@@ -13,9 +19,21 @@
       ]
     },
     {
-      "name": "Mariano's 30th / Chicago",
+      "name": "Online Consultation & Diagnosis (Regine Blaise PMHNP)",
+      "date": "2026-03-06",
+      "weight": 2,
+      "actions": []
+    },
+    {
+      "name": "Catherine Wu visiting",
+      "date": "2026-03-07",
+      "weight": 4,
+      "actions": []
+    },
+    {
+      "name": "Chicago",
       "date": "2026-03-13",
-      "weight": 8,
+      "weight": 7,
       "actions": [
         {
           "name": "Find warm backpacking destination",
@@ -34,16 +52,34 @@
           "status": "todo"
         },
         {
-          "name": "Buy Mariano a gift (maybe)",
+          "name": "Buy Mariano a gift",
           "status": "todo"
         }
       ]
     },
     {
-      "name": "Japan Trip 2026",
+      "name": "Mariano's Birthday",
+      "date": "2026-03-19",
+      "weight": 5,
+      "actions": []
+    },
+    {
+      "name": "JAPAN!",
       "date": "2026-03-23",
-      "weight": 10,
+      "weight": 9,
       "actions": [
+        {
+          "name": "Flight to TAIPEI (BR 55)",
+          "status": "todo"
+        },
+        {
+          "name": "Flight to OSAKA (BR 130)",
+          "status": "todo"
+        },
+        {
+          "name": "Stay at Travelodge Kyoto Shijo Kawaramachi",
+          "status": "todo"
+        },
         {
           "name": "Plan activities in Kyoto",
           "status": "todo"
@@ -55,8 +91,41 @@
         {
           "name": "Plan activities in Tokyo",
           "status": "todo"
+        },
+        {
+          "name": "Decide on pen before trip",
+          "status": "todo"
+        },
+        {
+          "name": "Research sibling price-point options",
+          "status": "todo"
+        },
+        {
+          "name": "Find good dot grid fountain pen paper",
+          "status": "todo"
         }
       ]
+    },
+    {
+      "name": "Dad's Birthday",
+      "date": "2026-04-07",
+      "weight": 5,
+      "actions": [
+        {
+          "name": "Flight to Honolulu (ZG 2)",
+          "status": "todo"
+        },
+        {
+          "name": "Flight to New York (DL 650)",
+          "status": "todo"
+        }
+      ]
+    },
+    {
+      "name": "Mariel's Birthday",
+      "date": "2026-04-23",
+      "weight": 5,
+      "actions": []
     }
   ]
 }
