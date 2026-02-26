@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-26T04:18:26.241Z",
+  "generated_at": "2026-02-26T05:07:34.239Z",
   "events": [
     {
       "name": "Reservation at Holywater",
@@ -69,11 +69,11 @@
       "weight": 9,
       "actions": [
         {
-          "name": "Flight to TAIPEI (BR 55)",
+          "name": "Flight to Taipei (BR 55)",
           "status": "todo"
         },
         {
-          "name": "Flight to OSAKA (BR 130)",
+          "name": "Flight to Osaka (BR 130)",
           "status": "todo"
         },
         {
@@ -91,35 +91,20 @@
         {
           "name": "Plan activities in Tokyo",
           "status": "todo"
-        },
-        {
-          "name": "Decide on pen before trip",
-          "status": "todo"
-        },
-        {
-          "name": "Research sibling price-point options",
-          "status": "todo"
-        },
-        {
-          "name": "Find good dot grid fountain pen paper",
-          "status": "todo"
         }
       ]
+    },
+    {
+      "name": "Dana Spring Break",
+      "date": "2026-03-23",
+      "weight": 6,
+      "actions": []
     },
     {
       "name": "Dad's Birthday",
       "date": "2026-04-07",
       "weight": 5,
-      "actions": [
-        {
-          "name": "Flight to Honolulu (ZG 2)",
-          "status": "todo"
-        },
-        {
-          "name": "Flight to New York (DL 650)",
-          "status": "todo"
-        }
-      ]
+      "actions": []
     },
     {
       "name": "Mariels Birthday",
