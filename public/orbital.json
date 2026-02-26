@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-02-26T02:39:54.115Z",
+  "events": [
+    {
+      "name": "Dana's 30th Birthday",
+      "date": "2026-02-28",
+      "weight": 6,
+      "actions": [
+        {
+          "name": "Find Jell-O shot recipe",
+          "status": "todo"
+        }
+      ]
+    },
+    {
+      "name": "Mariano's 30th / Chicago",
+      "date": "2026-03-13",
+      "weight": 8,
+      "actions": [
+        {
+          "name": "Find warm backpacking destination",
+          "status": "todo"
+        },
+        {
+          "name": "Book flights to backpacking location",
+          "status": "todo"
+        },
+        {
+          "name": "Book flight from backpacking to Chicago",
+          "status": "todo"
+        },
+        {
+          "name": "Figure out REI gear rentals",
+          "status": "todo"
+        },
+        {
+          "name": "Buy Mariano a gift (maybe)",
+          "status": "todo"
+        }
+      ]
+    },
+    {
+      "name": "Japan Trip 2026",
+      "date": "2026-03-23",
+      "weight": 10,
+      "actions": [
+        {
+          "name": "Plan activities in Kyoto",
+          "status": "todo"
+        },
+        {
+          "name": "Plan activities in Takayama",
+          "status": "todo"
+        },
+        {
+          "name": "Plan activities in Tokyo",
+          "status": "todo"
+        }
+      ]
+    }
+  ]
+}
