@@ -38,40 +38,34 @@ export function TemplateRenderer({ config, data }: TemplateRendererProps) {
   );
 }
 
-// The default layout config — matches the original base.ts grid
+// The default layout config
 export const defaultTemplate: TemplateConfig = {
   name: "Default",
   columns: "repeat(12, 1fr)",
-  rows: "repeat(5, 1fr)",
+  rows: "1fr 1fr",
   slots: [
     {
+      widgetId: "focus-engine",
+      gridColumn: "1 / 5",
+      gridRow: "1 / 3",
+      size: "large",
+    },
+    {
       widgetId: "temporal-bubble-map",
-      gridColumn: "1 / 9",
-      gridRow: "1 / 3",
+      gridColumn: "5 / 13",
+      gridRow: "1 / 2",
       size: "large",
-    },
-    {
-      widgetId: "active-threads",
-      gridColumn: "1 / 9",
-      gridRow: "3 / 6",
-      size: "large",
-    },
-    {
-      widgetId: "up-next",
-      gridColumn: "9 / 13",
-      gridRow: "1 / 3",
-      size: "default",
     },
     {
       widgetId: "calendar-embed",
-      gridColumn: "9 / 13",
-      gridRow: "3 / 5",
+      gridColumn: "5 / 9",
+      gridRow: "2 / 3",
       size: "default",
     },
     {
-      widgetId: "city-map",
+      widgetId: "action-items",
       gridColumn: "9 / 13",
-      gridRow: "5 / 6",
+      gridRow: "2 / 3",
       size: "default",
     },
   ],

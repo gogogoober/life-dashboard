@@ -120,6 +120,29 @@ export interface UpNextData {
   smart_priorities: UpNextPriority[];
 }
 
+// ─── Focus Engine ──────────────────────────────────────────────────
+
+export type EffortLevel = "high" | "medium" | "low";
+
+export interface QuestCard {
+  slot: string;
+  hook: string;
+  nextStep: string;
+  effort: EffortLevel;
+  countdown: string;
+  active: boolean;
+}
+
+// ─── Action Items (Dynamic Island) ─────────────────────────────────
+
+export type HeatLevel = "hot" | "warm" | "cool";
+
+export interface ActionThread {
+  name: string;
+  heat: HeatLevel;
+  lastTouched: string;
+}
+
 // ─── Placeholder ───────────────────────────────────────────────────
 
 export interface PlaceholderItem {

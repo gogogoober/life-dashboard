@@ -22,19 +22,8 @@ export default function App() {
     "temporal-bubble-map": {
       events: orbitalData ? toOrbitalEvents(orbitalData) : EVENTS,
     },
-    "context-resume": {
-      items: data ? toContextItems(data) : CONTEXT_STUB,
-    },
-    "city-map": {
-      city: "Tokyo",
-      pins: TOKYO_PINS,
-    },
-    "active-threads": {
-      items: data ? toActiveThreads(data) : ACTIVE_THREADS_STUB,
-    },
-    "up-next": {
-      data: upNextData ?? UP_NEXT_STUB,
-    },
+    "focus-engine": {},
+    "action-items": {},
   };
 
   const generatedAt = data
