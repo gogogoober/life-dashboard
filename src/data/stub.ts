@@ -1,6 +1,7 @@
 import type {
   DashboardEvent, ContextItem, MapPin, PinType, ActiveThread,
   UpNextThread, UpNextHabit, UpNextPriority, UpNextData,
+  CalendarEvent,
 } from "../types";
 
 export const EVENTS: DashboardEvent[] = [
@@ -165,6 +166,16 @@ export const UP_NEXT_STUB: UpNextData = {
     },
   ],
 };
+
+export const CALENDAR_EVENTS_STUB: CalendarEvent[] = [
+  { name: "Dana's 30th", start: new Date(2026, 1, 28), end: new Date(2026, 1, 28), type: "event" },
+  { name: "Cerebro Deploy", start: new Date(2026, 2, 1), end: new Date(2026, 2, 1), type: "deadline" },
+  { name: "Mariano Call", start: new Date(2026, 2, 3), end: new Date(2026, 2, 3), type: "event" },
+  { name: "Trip Planning", start: new Date(2026, 2, 5), end: new Date(2026, 2, 6), type: "event" },
+  { name: "Chicago Trip", start: new Date(2026, 2, 13), end: new Date(2026, 2, 15), type: "travel" },
+  { name: "Dentist", start: new Date(2026, 2, 15), end: new Date(2026, 2, 15), type: "event" },
+  { name: "Japan Trip", start: new Date(2026, 2, 24), end: new Date(2026, 3, 2), type: "travel" },
+];
 
 export const ACTIVE_THREADS_STUB: ActiveThread[] = [
   {

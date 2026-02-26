@@ -143,6 +143,17 @@ export interface ActionThread {
   lastTouched: string;
 }
 
+// ─── Timeline Ribbon ──────────────────────────────────────────────
+
+export type CalendarEventType = "event" | "deadline" | "travel";
+
+export interface CalendarEvent {
+  name: string;
+  start: Date;
+  end: Date;
+  type: CalendarEventType;
+}
+
 // ─── Placeholder ───────────────────────────────────────────────────
 
 export interface PlaceholderItem {

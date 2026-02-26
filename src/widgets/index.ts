@@ -10,6 +10,7 @@ import { ActiveThreads } from "./active-threads";
 import { UpNext } from "./up-next";
 import { FocusEngine } from "./focus-engine";
 import { ActionItems } from "./action-items";
+import { TimelineRibbon } from "./timeline-ribbon";
 
 export { TemporalBubbleMap } from "./temporal-bubble-map";
 export { CalendarEmbed } from "./calendar-embed";
@@ -20,6 +21,7 @@ export { ActiveThreads } from "./active-threads";
 export { UpNext } from "./up-next";
 export { FocusEngine } from "./focus-engine";
 export { ActionItems } from "./action-items";
+export { TimelineRibbon } from "./timeline-ribbon";
 
 // Registry: maps string keys to widget components.
 // To add a new widget, create the component file, then add an entry here.
@@ -33,4 +35,5 @@ export const widgetRegistry: Record<string, ComponentType<any>> = {
   "up-next": UpNext,
   "focus-engine": FocusEngine,
   "action-items": ActionItems,
+  "timeline-ribbon": TimelineRibbon,
 };
