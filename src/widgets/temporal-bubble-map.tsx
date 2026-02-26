@@ -351,11 +351,13 @@ function drawLabels(ctx: CanvasRenderingContext2D, node: BubbleNode, h: number) 
 // ═══════════════════════════════════════════
 
 export function TemporalBubbleMap({ events }: TemporalBubbleMapProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    const container = containerRef.current;
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!container || !canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
@@ -363,13 +365,16 @@ export function TemporalBubbleMap({ events }: TemporalBubbleMapProps) {
     const startTime = performance.now();
 
     function frame(now: number) {
-      if (!running || !canvas || !ctx) return;
+      if (!running || !container || !canvas || !ctx) return;
       const t = (now - startTime) / 1000;
 
       const dpr = window.devicePixelRatio || 1;
-      const rect = canvas.getBoundingClientRect();
-      const pixelW = Math.round(rect.width * dpr);
-      const pixelH = Math.round(rect.height * dpr);
+      // Read size from the container, not the canvas — avoids feedback loop
+      const rect = container.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
+      const pixelW = Math.round(w * dpr);
+      const pixelH = Math.round(h * dpr);
 
       if (canvas.width !== pixelW || canvas.height !== pixelH) {
         canvas.width = pixelW;
@@ -377,9 +382,6 @@ export function TemporalBubbleMap({ events }: TemporalBubbleMapProps) {
       }
 
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const w = rect.width;
-      const h = rect.height;
-
       ctx.clearRect(0, 0, w, h);
 
       const { nodes, dots } = buildNodes(events, w, h);
@@ -408,20 +410,25 @@ export function TemporalBubbleMap({ events }: TemporalBubbleMapProps) {
   }, [events]);
 
   return (
-    <Section use="base" className="h-full flex flex-col">
+    <Section use="base" className="h-full flex flex-col overflow-hidden">
       <div className="flex items-baseline justify-between mb-2">
         <Heading size="sm">What&apos;s Ahead</Heading>
         <Label variant="secondary">logarithmic time scale</Label>
       </div>
-      <canvas
-        ref={canvasRef}
-        className="w-full flex-1 rounded-xl"
+      <div
+        ref={containerRef}
+        className="flex-1 min-h-0 relative rounded-xl overflow-hidden"
         style={{
           background: canvasColors.bg.base,
           border: `1px solid ${canvasColors.border.secondary}`,
-          display: "block",
         }}
-      />
+      >
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full"
+          style={{ display: "block" }}
+        />
+      </div>
     </Section>
   );
 }
