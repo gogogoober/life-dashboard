@@ -43,10 +43,7 @@ export default function App() {
   return (
     <div
       className="relative w-screen h-screen p-5 overflow-hidden"
-      style={{
-        background: "#0f1117",
-        fontFamily: "'Inter', system-ui, sans-serif",
-      }}
+      style={{ background: "var(--bg-base)" }}
     >
       <TemplateRenderer config={defaultTemplate} data={widgetData} />
 

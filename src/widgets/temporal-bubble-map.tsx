@@ -1,12 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import type { WidgetProps, DashboardEvent } from "../types";
-import {
-  temporalColor,
-  temporalGlow,
-  daysFromNow,
-  logX,
-  MAX_DAYS,
-} from "../utils/temporal";
+import { daysFromNow, logX, MAX_DAYS } from "../utils/temporal";
+import { stressColor, stressGlow, hue, daysToHueValue } from "../design-system";
+import { Section, Heading, Label } from "../components";
 
 declare global {
   interface Window {
@@ -36,9 +32,9 @@ function buildChartOption(events: DashboardEvent[]) {
       name: event.name,
       symbolSize: size,
       itemStyle: {
-        color: temporalColor(days),
+        color: stressColor(days),
         shadowBlur: 18,
-        shadowColor: temporalGlow(days),
+        shadowColor: stressGlow(days),
       },
       label: {
         show: true,
@@ -47,7 +43,7 @@ function buildChartOption(events: DashboardEvent[]) {
         distance: 10,
         fontSize: Math.max(10, Math.min(14, 8 + event.weight * 0.6)),
         color: "#888",
-        textBorderColor: "#161920",
+        textBorderColor: "#0a0e0a",
         textBorderWidth: 3,
       },
       _date: event.date.toLocaleDateString("en-US", {
@@ -74,9 +70,9 @@ function buildChartOption(events: DashboardEvent[]) {
         orbitRadius,
         children: todoActions,
         childSizes,
-        childColor: temporalColor(days, 0.35),
-        childBorder: temporalColor(days, 0.5),
-        lineColor: temporalColor(days, 0.12),
+        childColor: hue(daysToHueValue(days, MAX_DAYS), 0.35),
+        childBorder: hue(daysToHueValue(days, MAX_DAYS), 0.5),
+        lineColor:   hue(daysToHueValue(days, MAX_DAYS), 0.12),
       });
     }
   });
@@ -112,7 +108,7 @@ function buildChartOption(events: DashboardEvent[]) {
             color: "#aaa",
             position: "right",
             distance: 6,
-            textBorderColor: "#161920",
+            textBorderColor: "#0a0e0a",
             textBorderWidth: 2,
           },
           itemStyle: { opacity: 0.9, shadowBlur: 8 },
@@ -131,9 +127,9 @@ function buildChartOption(events: DashboardEvent[]) {
 
   const markers = [
     { label: "Tomorrow", days: 1 },
-    { label: "1 Week", days: 7 },
-    { label: "2 Weeks", days: 14 },
-    { label: "1 Month", days: 30 },
+    { label: "1 Week",   days: 7 },
+    { label: "2 Weeks",  days: 14 },
+    { label: "1 Month",  days: 30 },
     { label: "2 Months", days: 60 },
   ];
 
@@ -143,17 +139,12 @@ function buildChartOption(events: DashboardEvent[]) {
     for (let d = 0; d <= 14; d++) {
       const date = new Date(base);
       date.setDate(base.getDate() + d);
-      const dow = date.getDay(); // 0=Sun, 6=Sat
+      const dow = date.getDay();
       if (dow === 0 || dow === 6) {
         lines.push({
           xAxis: logX(d === 0 ? 0 : d),
           label: { show: false },
-          lineStyle: {
-            color: "#232840",
-            type: "solid",
-            width: 1,
-            opacity: 1,
-          },
+          lineStyle: { color: "#232840", type: "solid", width: 1, opacity: 1 },
         });
       }
     }
@@ -207,28 +198,13 @@ function buildChartOption(events: DashboardEvent[]) {
           data: [
             {
               xAxis: logX(0),
-              label: {
-                formatter: "TODAY",
-                position: "start",
-                color: "#f97316",
-                fontSize: 9,
-              },
-              lineStyle: {
-                color: "#f97316",
-                type: "solid",
-                width: 1.5,
-                opacity: 0.65,
-              },
+              label: { formatter: "TODAY", position: "start", color: "#f97316", fontSize: 9 },
+              lineStyle: { color: "#f97316", type: "solid", width: 1.5, opacity: 0.65 },
             },
             ...getWeekendLines(),
             ...markers.map((m) => ({
               xAxis: logX(m.days),
-              label: {
-                formatter: m.label,
-                position: "start",
-                color: "#2a2f3a",
-                fontSize: 10,
-              },
+              label: { formatter: m.label, position: "start", color: "#2a2f3a", fontSize: 10 },
               lineStyle: { color: "#1c2030", type: [4, 4], width: 1 },
             })),
           ],
@@ -258,7 +234,7 @@ function buildChartOption(events: DashboardEvent[]) {
           .sort((a: number[], b: number[]) => a[0] - b[0]),
       },
       { id: "children", type: "scatter", data: childData, z: 2 },
-      { id: "parents", type: "scatter", data: parentData, z: 3 },
+      { id: "parents",  type: "scatter", data: parentData, z: 3 },
       {
         id: "dayLabels",
         type: "scatter",
@@ -316,27 +292,20 @@ export function TemporalBubbleMap({ events }: TemporalBubbleMapProps) {
   }, [events, ready]);
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex items-baseline justify-between px-1 mb-2">
-        <h2
-          className="text-xs font-medium tracking-widest uppercase"
-          style={{ color: "#555" }}
-        >
-          What's Ahead
-        </h2>
-        <span className="text-xs" style={{ color: "#333" }}>
-          logarithmic time scale
-        </span>
+    <Section use="base" className="h-full">
+      <div className="flex items-baseline justify-between mb-2">
+        <Heading size="sm">What's Ahead</Heading>
+        <Label variant="secondary">logarithmic time scale</Label>
       </div>
       <div
         ref={chartRef}
         className="flex-1 rounded-xl"
         style={{
-          background: "#161920",
-          border: "1px solid #1e2230",
+          background: "var(--bg-base)",
+          border: "1px solid var(--border-secondary)",
           minHeight: 280,
         }}
       />
-    </div>
+    </Section>
   );
 }

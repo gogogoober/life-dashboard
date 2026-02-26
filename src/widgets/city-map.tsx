@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import type { WidgetProps, MapPin, PinType } from "../types";
 import { PIN_COLORS } from "../data/stub";
-import { ModuleCard } from "./module-card";
+import { Section } from "../components";
 
 declare global {
   interface Window {
@@ -78,7 +78,7 @@ export function CityMap({ city, pins, center, zoom }: CityMapProps) {
     }).addTo(map);
 
     pins.forEach((pin) => {
-      const color = PIN_COLORS[pin.type] || "#888";
+      const color = PIN_COLORS[pin.type as PinType] || "#888";
       const dotSize = pin.type === "stay" ? 14 : 9;
 
       const html =
@@ -115,11 +115,11 @@ export function CityMap({ city, pins, center, zoom }: CityMapProps) {
   }, [ready, pins, mapCenter, mapZoom]);
 
   return (
-    <ModuleCard title={`${city} — Trip Map`} icon="✈">
+    <Section use="primary" title={`${city} — Trip Map`} className="h-full">
       <style>{`
         @keyframes mapPulse {
-          0% { transform: scale(0.8); opacity: 0.6; }
-          100% { transform: scale(2); opacity: 0; }
+          0%   { transform: scale(0.8); opacity: 0.6; }
+          100% { transform: scale(2);   opacity: 0; }
         }
         .leaflet-tooltip {
           background: #1a1d28ee !important;
@@ -130,19 +130,14 @@ export function CityMap({ city, pins, center, zoom }: CityMapProps) {
           padding: 6px 10px !important;
           box-shadow: 0 4px 12px rgba(0,0,0,0.4) !important;
         }
-        .leaflet-tooltip-top::before {
-          border-top-color: #2a2d3a !important;
-        }
-        .leaflet-container {
-          background: #12151c !important;
-          font-family: inherit !important;
-        }
+        .leaflet-tooltip-top::before { border-top-color: #2a2d3a !important; }
+        .leaflet-container { background: #12151c !important; font-family: inherit !important; }
       `}</style>
       <div
         ref={mapRef}
-        className="w-full h-full rounded-lg overflow-hidden"
+        className="flex-1 w-full rounded-lg overflow-hidden"
         style={{ minHeight: 160, background: "#12151c" }}
       />
-    </ModuleCard>
+    </Section>
   );
 }

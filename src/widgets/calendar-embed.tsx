@@ -1,4 +1,5 @@
 import type { WidgetProps } from "../types";
+import { Section, Heading, Label } from "../components";
 
 interface CalendarEmbedProps extends WidgetProps {
   calendarSrc?: string;
@@ -19,25 +20,14 @@ export function CalendarEmbed({ calendarSrc }: CalendarEmbedProps) {
     "&showTz=0";
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex items-baseline justify-between px-1 mb-2">
-        <h2
-          className="text-xs font-medium tracking-widest uppercase"
-          style={{ color: "#555" }}
-        >
-          This & Next Week
-        </h2>
-        <span className="text-xs" style={{ color: "#333" }}>
-          Google Calendar
-        </span>
+    <Section use="primary" className="h-full">
+      <div className="flex items-baseline justify-between mb-2">
+        <Heading size="sm">This &amp; Next Week</Heading>
+        <Label variant="secondary">Google Calendar</Label>
       </div>
       <div
         className="flex-1 rounded-xl overflow-hidden flex items-center justify-center"
-        style={{
-          background: "#161920",
-          border: "1px solid #1e2230",
-          minHeight: 240,
-        }}
+        style={{ minHeight: 240 }}
       >
         <iframe
           src={src}
@@ -52,6 +42,6 @@ export function CalendarEmbed({ calendarSrc }: CalendarEmbedProps) {
           title="Google Calendar"
         />
       </div>
-    </div>
+    </Section>
   );
 }

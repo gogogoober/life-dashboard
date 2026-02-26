@@ -6,10 +6,11 @@ interface PanelProps {
   divider?: boolean;
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 export const Panel = React.forwardRef<HTMLDivElement, PanelProps>(
-  ({ status = 'none', divider = false, children, className }, ref) => {
+  ({ status = 'none', divider = false, children, className, style }, ref) => {
     const classes = [
       styles.panel,
       divider ? styles.divider : null,
@@ -18,7 +19,7 @@ export const Panel = React.forwardRef<HTMLDivElement, PanelProps>(
     ].filter(Boolean).join(' ');
 
     return (
-      <div ref={ref} className={classes}>
+      <div ref={ref} className={classes} style={style}>
         {children}
       </div>
     );

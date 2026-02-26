@@ -1,6 +1,7 @@
 import type { WidgetProps } from "../types";
 import type { FocusSlot } from "../data/dashboard";
-import { ModuleCard } from "./module-card";
+import { Section, Panel, Text, Label, Pill } from "../components";
+import { focusEffortToStatus } from "../utils/status-mapping";
 
 const MOCK_QUESTS: Array<FocusSlot & { active: boolean }> = [
   {
@@ -35,16 +36,16 @@ const MOCK_QUESTS: Array<FocusSlot & { active: boolean }> = [
   },
 ];
 
-const EFFORT_STYLES: Record<"high" | "medium" | "low", { bg: string; color: string; label: string }> = {
-  high:   { bg: "#ff884422", color: "#ffaa66", label: "High Effort" },
-  medium: { bg: "#ffdd4422", color: "#ffdd66", label: "Medium Effort" },
-  low:    { bg: "#44aaff22", color: "#66bbff", label: "Low Effort" },
+const EFFORT_LABEL: Record<"high" | "medium" | "low", string> = {
+  high:   "High Effort",
+  medium: "Med Effort",
+  low:    "Low Effort",
 };
 
-function countdownColor(countdown: string): string {
+function countdownVariant(countdown: string): "alert" | "secondary" {
   const match = countdown.match(/(\d+)\s*day/i);
-  if (match && parseInt(match[1], 10) < 5) return "#ff8866";
-  return "#888";
+  if (match && parseInt(match[1], 10) < 5) return "alert";
+  return "secondary";
 }
 
 interface FocusEngineProps extends WidgetProps {
@@ -58,67 +59,37 @@ export function FocusEngine({ size: _, slots, activeSlot }: FocusEngineProps) {
     : MOCK_QUESTS;
 
   return (
-    <ModuleCard title="Focus Engine" icon="⚡">
-      <div className="flex flex-col gap-3 h-full">
+    <Section use="primary" title="Focus Engine" className="h-full">
+      <div className="flex flex-col gap-3 flex-1">
         {quests.map((quest, i) => {
-          const effort = EFFORT_STYLES[quest.effort];
           const label = quest.active
             ? quest.thread_name
             : quest.category.charAt(0).toUpperCase() + quest.category.slice(1);
+
           return (
-            <div
-              key={i}
-              style={{
-                background: quest.active ? "#1a2220" : "#1a1d28",
-                borderRadius: 10,
-                padding: "12px 14px",
-                borderLeft: quest.active ? "3px solid #6bffaa" : "3px solid transparent",
-                opacity: quest.active ? 1 : 0.5,
-                flex: quest.active ? "1.2" : "1",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 9,
-                  fontWeight: 600,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#555",
-                  marginBottom: 6,
-                }}
-              >
-                {label}
-              </div>
-
-              <p style={{ fontSize: 12, color: "#ccc", lineHeight: 1.6, margin: 0, marginBottom: 10 }}>
-                {quest.hook}
-              </p>
-
-              <div style={{ fontSize: 11, color: "#888", marginBottom: 8 }}>
-                <span style={{ color: "#6bffaa", marginRight: 4 }}>→</span>
-                {quest.next_step}
-              </div>
-
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span
-                  style={{
-                    fontSize: 10,
-                    background: effort.bg,
-                    color: effort.color,
-                    padding: "2px 7px",
-                    borderRadius: 4,
-                  }}
-                >
-                  {effort.label}
-                </span>
-                <span style={{ fontSize: 10, color: countdownColor(quest.countdown) }}>
-                  {quest.countdown}
-                </span>
-              </div>
+            <div key={i} style={{ flex: quest.active ? "1.2" : "1" }}>
+              <Panel status={quest.active ? "primary" : "none"}>
+                <div className="flex flex-col gap-1.5">
+                  <Label variant="secondary">{label}</Label>
+                  <Text variant="primary" as="p">{quest.hook}</Text>
+                  <div className="flex items-center gap-1.5">
+                    <Text variant="primary">→</Text>
+                    <Text variant="secondary">{quest.next_step}</Text>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Pill position="inline" status={focusEffortToStatus(quest.effort)}>
+                      {EFFORT_LABEL[quest.effort]}
+                    </Pill>
+                    <Text variant={countdownVariant(quest.countdown)}>
+                      {quest.countdown}
+                    </Text>
+                  </div>
+                </div>
+              </Panel>
             </div>
           );
         })}
       </div>
-    </ModuleCard>
+    </Section>
   );
 }

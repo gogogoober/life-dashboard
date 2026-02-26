@@ -1,5 +1,6 @@
 import type { WidgetProps } from "../types";
-import { ModuleCard } from "./module-card";
+import { Section, Panel, Text, Label, Pill } from "../components";
+import { heatToStatus } from "../utils/status-mapping";
 
 const MOCK_THREADS = [
   { name: "API rate limiting PR",   heat: "hot"  as const, lastTouched: "today" },
@@ -11,69 +12,28 @@ const MOCK_THREADS = [
   { name: "Follow up with Jake",    heat: "cool" as const, lastTouched: "3d ago" },
 ];
 
-const HEAT_DOT: Record<"hot" | "warm" | "cool", string> = {
-  hot:  "#ff6b6b",
-  warm: "#ffcc66",
-  cool: "#6699ff",
-};
-
-const HEAT_BADGE: Record<"hot" | "warm" | "cool", { bg: string; color: string }> = {
-  hot:  { bg: "#ff6b6b22", color: "#ff8888" },
-  warm: { bg: "#ffcc6622", color: "#ffdd88" },
-  cool: { bg: "#6699ff22", color: "#88aaff" },
-};
-
 export function ActionItems({ size: _ }: WidgetProps) {
   return (
-    <ModuleCard title="Action Items" icon="📋">
-      <div className="flex flex-col gap-2">
-        {MOCK_THREADS.map((thread, i) => {
-          const badge = HEAT_BADGE[thread.heat];
-          return (
-            <div
-              key={i}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-                padding: "5px 0",
-                borderBottom: i < MOCK_THREADS.length - 1 ? "1px solid #1e2230" : "none",
-              }}
-            >
-              <span
-                style={{
-                  width: 6,
-                  height: 6,
-                  borderRadius: "50%",
-                  background: HEAT_DOT[thread.heat],
-                  flexShrink: 0,
-                }}
-              />
-
-              <span style={{ fontSize: 12, color: "#ccc", flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                {thread.name}
-              </span>
-
-              <span
-                style={{
-                  fontSize: 10,
-                  background: badge.bg,
-                  color: badge.color,
-                  padding: "1px 6px",
-                  borderRadius: 3,
-                  flexShrink: 0,
-                }}
+    <Section use="primary" title="Action Items" className="h-full">
+      <div className="flex flex-col">
+        {MOCK_THREADS.map((thread, i) => (
+          <Panel key={i} divider={i > 0}>
+            <div className="flex items-center gap-2">
+              <Text
+                variant="primary"
+                as="span"
+                className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap"
               >
+                {thread.name}
+              </Text>
+              <Pill position="inline" status={heatToStatus(thread.heat)}>
                 {thread.heat.charAt(0).toUpperCase() + thread.heat.slice(1)}
-              </span>
-
-              <span style={{ fontSize: 10, color: "#444", flexShrink: 0, minWidth: 38, textAlign: "right" }}>
-                {thread.lastTouched}
-              </span>
+              </Pill>
+              <Label variant="secondary">{thread.lastTouched}</Label>
             </div>
-          );
-        })}
+          </Panel>
+        ))}
       </div>
-    </ModuleCard>
+    </Section>
   );
 }

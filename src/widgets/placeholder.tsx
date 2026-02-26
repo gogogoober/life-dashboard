@@ -1,5 +1,5 @@
 import type { WidgetProps, PlaceholderItem } from "../types";
-import { ModuleCard } from "./module-card";
+import { Section, Panel, Text } from "../components";
 
 interface PlaceholderModuleProps extends WidgetProps {
   title: string;
@@ -7,33 +7,19 @@ interface PlaceholderModuleProps extends WidgetProps {
   items: PlaceholderItem[];
 }
 
-export function PlaceholderModule({
-  title,
-  icon,
-  items,
-}: PlaceholderModuleProps) {
+export function PlaceholderModule({ title, items }: PlaceholderModuleProps) {
   return (
-    <ModuleCard title={title} icon={icon}>
-      <div className="flex flex-col gap-3">
+    <Section use="primary" title={title} className="h-full">
+      <div className="flex flex-col">
         {items.map((item, i) => (
-          <div key={i} className="flex items-start gap-3">
-            <div
-              className="mt-1 w-2 h-2 rounded-full flex-shrink-0"
-              style={{ background: item.color || "#333" }}
-            />
-            <div className="flex-1 min-w-0">
-              <div className="text-sm" style={{ color: "#aaa" }}>
-                {item.label}
-              </div>
-              {item.sub && (
-                <div className="text-xs mt-0.5" style={{ color: "#555" }}>
-                  {item.sub}
-                </div>
-              )}
-            </div>
-          </div>
+          <Panel key={i} divider={i > 0}>
+            <Text variant="primary" as="div">{item.label}</Text>
+            {item.sub && (
+              <Text variant="secondary" as="div">{item.sub}</Text>
+            )}
+          </Panel>
         ))}
       </div>
-    </ModuleCard>
+    </Section>
   );
 }

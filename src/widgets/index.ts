@@ -11,7 +11,6 @@ import { UpNext } from "./up-next";
 import { FocusEngine } from "./focus-engine";
 import { ActionItems } from "./action-items";
 
-export { ModuleCard } from "./module-card";
 export { TemporalBubbleMap } from "./temporal-bubble-map";
 export { CalendarEmbed } from "./calendar-embed";
 export { ContextResume } from "./context-resume";
