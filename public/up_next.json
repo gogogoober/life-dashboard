@@ -1,77 +1,68 @@
 {
-  "generated_at": "2026-02-25T04:25:31.172Z",
+  "generated_at": "2026-02-26T03:36:07.532Z",
   "context": {
-    "day_of_week": "wednesday",
+    "day_of_week": "thursday",
     "time_of_day": "morning",
     "is_weekend": false,
     "after_6pm": false
   },
   "active_threads": [
     {
-      "task": "Find yellow Jell-O shot recipe",
+      "task": "Find Jell-O shot recipe",
       "epic": "Dana's 30th Birthday",
       "category": "personal",
-      "left_off": "Organized laser tag event with Shar, gift purchased",
+      "left_off": "Gift already bought, coordinating with Shar on group plans",
       "left_off_date": "Feb 23",
       "urgency": "active"
     },
     {
-      "task": "Finish updating working memory system",
-      "epic": "Life Dashboard",
+      "task": "Find warm backpacking destination and book flights",
+      "epic": "Mariano's 30th / Chicago",
       "category": "personal",
-      "left_off": "Four widgets built, working memory feeds live data",
+      "left_off": "Chicago flights booked, backpacking weekend needs destination",
       "left_off_date": "Feb 23",
       "urgency": "active"
     },
     {
-      "task": "Get components registered under entities",
-      "epic": "Go Game Engine / ECS",
+      "task": "Plan activities in Kyoto, Takayama, and Tokyo",
+      "epic": "Japan Trip 2026",
       "category": "personal",
-      "left_off": "Snake prototype works, migrating to ECS pattern",
+      "left_off": "All accommodations booked, now in activity planning phase",
       "left_off_date": "Feb 23",
       "urgency": "active"
     }
   ],
   "pickup_notes": [
-    "Life dashboard has four widgets live, updating working memory feeds",
-    "ECS migration in progress, snake prototype functional"
+    "Dana's birthday Saturday: need Jell-O shot recipe",
+    "Mariano trip needs warm backpacking destination booked"
   ],
   "habits": [
     {
       "id": "workout",
       "label": "Workout",
-      "status": "ok",
-      "completions_this_week": 0,
-      "target_this_week": 4,
-      "next_expected": "today"
+      "status": "ok"
     },
     {
       "id": "laundry",
       "label": "Laundry",
-      "status": "ok",
-      "completions_this_week": 0,
-      "target_this_week": 1,
-      "next_expected": "thu"
+      "status": "ok"
     },
     {
       "id": "cleaning",
       "label": "Cleaning",
-      "status": "ok",
-      "completions_this_week": 0,
-      "target_this_week": 2,
-      "next_expected": "sun"
+      "status": "ok"
     }
   ],
   "smart_priorities": [
     {
       "label": "Dana's 30th Birthday",
-      "reason": "Saturday deadline, Jell-O shots still unresolved",
+      "reason": "2 days away, Jell-O shots still needed",
       "urgency": "high"
     },
     {
       "label": "Mariano's 30th / Chicago",
-      "reason": "Flights booked but no backpacking destination found",
-      "urgency": "medium"
+      "reason": "backpacking destination and flights unbooked, 15 days out",
+      "urgency": "high"
     }
   ]
 }
