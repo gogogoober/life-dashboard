@@ -16,12 +16,12 @@
       "open_actions": [
         "Find Jell-O shot recipe"
       ],
-      "start_date": null,
-      "end_date": null,
+      "start_date": "2026-02-28",
+      "end_date": "2026-03-01",
       "deadline": "2026-02-28",
       "pinned": false,
       "days_until_deadline": 2,
-      "calendar_source": false
+      "calendar_source": true
     },
     {
       "id": "marianos-30th-chicago",
@@ -194,20 +194,6 @@
       "related_item_id": null
     },
     {
-      "id": "3g2nuc1lkf69p4ticcr6d0tmjh_20260228",
-      "title": "Dana's Birthday",
-      "type": "birthday",
-      "start": "2026-02-28",
-      "end": "2026-03-01",
-      "all_day": true,
-      "location": null,
-      "description": null,
-      "attendees": [],
-      "weight": 5,
-      "days_until": 2,
-      "related_item_id": "danas-30th"
-    },
-    {
       "id": "_68o32e9o6kqj6e9j70pjee1g74r3cd0",
       "title": "Online Consultation & Diagnosis (Regine Blaise PMHNP)",
       "type": "appointment",
@@ -215,7 +201,7 @@
       "end": "2026-03-06T12:40:00-05:00",
       "all_day": false,
       "location": "https://portal.getmindfulhealth.com/appointments/fcgaza027jeo",
-      "description": "Mindful health consultation - medical intake form required",
+      "description": "Medical consultation",
       "attendees": [],
       "weight": 3,
       "days_until": 8,
@@ -230,9 +216,7 @@
       "all_day": true,
       "location": null,
       "description": null,
-      "attendees": [
-        "Catherine Wu"
-      ],
+      "attendees": [],
       "weight": 6,
       "days_until": 9,
       "related_item_id": null
@@ -263,7 +247,7 @@
       "attendees": [],
       "weight": 4,
       "days_until": 25,
-      "related_item_id": "japan-trip-2026"
+      "related_item_id": null
     },
     {
       "id": "6d4rdeq1hv4rd02oglbj0d829c",
@@ -273,7 +257,7 @@
       "end": "2026-03-23T17:25:00-04:00",
       "all_day": false,
       "location": "CHICAGO ORD",
-      "description": "First leg to Japan trip",
+      "description": "First leg of Japan trip",
       "attendees": [],
       "weight": 7,
       "days_until": 25,
@@ -287,7 +271,7 @@
       "end": "2026-03-24T03:55:00-04:00",
       "all_day": false,
       "location": "TAIPEI TPE",
-      "description": "Second leg to Japan trip",
+      "description": "Second leg to Osaka",
       "attendees": [],
       "weight": 7,
       "days_until": 26,
@@ -301,7 +285,7 @@
       "end": "2026-03-29",
       "all_day": true,
       "location": "Kyoto, Kyoto, 240 Yamazakicho, 2 Kawaramachi-dori Sanjosagaru, Nakakyo-ku, Japan",
-      "description": "Hotel stay in Kyoto",
+      "description": null,
       "attendees": [],
       "weight": 4,
       "days_until": 27,
@@ -329,7 +313,7 @@
       "end": "2026-04-07T13:25:00-04:00",
       "all_day": false,
       "location": "Tokyo NRT",
-      "description": "Return flight from Japan",
+      "description": "Departure from Japan via Honolulu",
       "attendees": [],
       "weight": 7,
       "days_until": 40,
@@ -345,7 +329,7 @@
       "location": "Honolulu HNL",
       "description": "Final leg back to New York",
       "attendees": [],
-      "weight": 7,
+      "weight": 6,
       "days_until": 40,
       "related_item_id": "japan-trip-2026"
     },
