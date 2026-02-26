@@ -1,0 +1,27 @@
+.panel {
+  padding: 12px 0;
+}
+
+.divider {
+  border-top: var(--border-width-primary) solid var(--border-secondary);
+}
+
+.status-alert {
+  border-left: 3px solid var(--status-alert);
+  padding-left: 12px;
+}
+
+.status-warning {
+  border-left: 3px solid var(--status-warning);
+  padding-left: 12px;
+}
+
+.status-primary {
+  border-left: 3px solid var(--status-primary);
+  padding-left: 12px;
+}
+
+.status-secondary {
+  border-left: 3px solid var(--status-secondary);
+  padding-left: 12px;
+}

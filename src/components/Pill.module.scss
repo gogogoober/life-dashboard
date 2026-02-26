@@ -1,0 +1,33 @@
+@use '../design-system/components' as *;
+@use '../design-system/typography' as *;
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+}
+
+.overlay {
+  @include pill('overlay');
+  @include body-secondary;
+  padding: 4px 12px;
+
+  &.status-alert {
+    border-color: var(--border-alert);
+    box-shadow: var(--shadow-pill-emphasis);
+  }
+
+  &.status-warning {
+    border-color: var(--border-warning);
+  }
+}
+
+.inline {
+  @include pill('inline');
+  @include label-primary;
+  padding: 3px 8px;
+}
+
+.status-alert    { color: var(--status-alert); }
+.status-warning  { color: var(--status-warning); }
+.status-primary  { color: var(--status-primary); }
+.status-secondary { color: var(--status-secondary); }

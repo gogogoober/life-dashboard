@@ -1,0 +1,16 @@
+@use '../design-system/typography' as *;
+
+.emphasis {
+  @include label-emphasis;
+  color: var(--text-emphasis);
+}
+
+.primary {
+  @include label-primary;
+  color: var(--text-primary);
+}
+
+.secondary {
+  @include label-secondary;
+  color: var(--text-secondary);
+}

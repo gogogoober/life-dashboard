@@ -1,0 +1,54 @@
+@use '../design-system/components' as *;
+@use '../design-system/elevation' as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 8px;
+}
+
+// base: invisible wrapper — no styling
+.base {
+  // intentionally empty
+}
+
+// primary: standard surface panel
+.primary {
+  @include surface('primary');
+  border-radius: 12px;
+  padding: 16px;
+}
+
+// overlay: floating surface with stronger blur
+.overlay {
+  @include surface('secondary');
+  @include blur-overlay;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: var(--shadow-overlay-primary);
+}
+
+// ghost: no surface, just padding; title in tertiary color
+.ghost {
+  padding: 12px;
+
+  .title {
+    color: var(--text-tertiary);
+  }
+}
+
+// Flush modifiers — override radius/border on whichever variant
+.flush-top {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-top: none !important;
+}
+
+.flush-bottom {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom: none !important;
+}

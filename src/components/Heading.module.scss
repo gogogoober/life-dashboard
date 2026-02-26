@@ -1,0 +1,16 @@
+@use '../design-system/typography' as *;
+
+.lg {
+  @include heading-lg;
+  color: var(--text-emphasis);
+}
+
+.md {
+  @include heading-md;
+  color: var(--text-primary);
+}
+
+.sm {
+  @include heading-sm;
+  color: var(--text-secondary);
+}

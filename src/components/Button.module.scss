@@ -1,0 +1,49 @@
+@use '../design-system/colors' as c;
+
+.button {
+  cursor: pointer;
+  transition: all 150ms ease;
+  border-radius: var(--radius-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.sm { padding: 6px 12px; }
+.md { padding: 8px 16px; }
+
+// Ghost variant
+.ghost {
+  background: transparent;
+  border: var(--border-width-primary) solid var(--border-secondary);
+  color: var(--text-secondary);
+
+  &:hover:not(:disabled) {
+    border-color: var(--border-primary);
+    color: var(--text-primary);
+  }
+}
+
+// Primary + status combinations
+.primary.status-alert {
+  background: rgba(c.$status-alert, 0.2);
+  border: var(--border-width-primary) solid rgba(c.$status-alert, 0.4);
+  color: c.$status-alert;
+}
+
+.primary.status-warning {
+  background: rgba(c.$status-warning, 0.2);
+  border: var(--border-width-primary) solid rgba(c.$status-warning, 0.4);
+  color: c.$status-warning;
+}
+
+.primary.status-primary {
+  background: rgba(c.$status-primary, 0.2);
+  border: var(--border-width-primary) solid rgba(c.$status-primary, 0.4);
+  color: c.$status-primary;
+}

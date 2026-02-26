@@ -1,0 +1,15 @@
+.emphasis {
+  border-top: var(--border-width-emphasis) solid var(--border-emphasis);
+}
+
+.primary {
+  border-top: var(--border-width-primary) solid var(--border-primary);
+}
+
+.secondary {
+  border-top: var(--border-width-primary) solid var(--border-secondary);
+}
+
+.spacing-sm { margin: 4px 0; }
+.spacing-md { margin: 8px 0; }
+.spacing-lg { margin: 16px 0; }

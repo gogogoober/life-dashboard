@@ -1,0 +1,31 @@
+@use '../design-system/typography' as *;
+
+.emphasis {
+  @include body-primary;
+  color: var(--text-emphasis);
+}
+
+.primary {
+  @include body-primary;
+  color: var(--text-primary);
+}
+
+.secondary {
+  @include body-secondary;
+  color: var(--text-secondary);
+}
+
+.tertiary {
+  @include body-secondary;
+  color: var(--text-tertiary);
+}
+
+.alert {
+  @include body-primary;
+  color: var(--text-alert);
+}
+
+.warning {
+  @include body-primary;
+  color: var(--text-warning);
+}
