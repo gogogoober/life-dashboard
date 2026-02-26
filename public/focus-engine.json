@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-02-26T02:39:53.395Z",
+  "energy_band": "ramp_up",
+  "slots": [
+    {
+      "slot": 1,
+      "category": "work",
+      "thread_name": "Cerebro",
+      "hook": "The developer portal is waiting. It's pinned warm for a reason — once you get it running locally, you can start connecting communication and platform info for the team. Getting past this setup hurdle unlocks the real work.",
+      "next_step": "Open the Cerebro repo and locate the README or setup documentation",
+      "effort": "medium",
+      "countdown": "no deadline set"
+    },
+    {
+      "slot": 2,
+      "category": "personal",
+      "thread_name": "Dana's 30th Birthday",
+      "hook": "Saturday is Dana's 30th — laser tag, drinks, and yellow Jell-O shots with the crew. You've got the gift sorted, but you still need that Jell-O shot recipe to make it happen. Two days out, this is the moment to lock it down.",
+      "next_step": "Search for a yellow Jell-O shot recipe online",
+      "effort": "low",
+      "countdown": "2 days away"
+    },
+    {
+      "slot": 3,
+      "category": "personal",
+      "thread_name": "Mariano's 30th / Chicago",
+      "hook": "Mariano turns 30 in 15 days and you're planning a warm backpacking weekend before Chicago. Flights to Chicago are booked, but the backpacking destination is still wide open. Finding that spot unlocks everything else — gear, flights, the whole adventure.",
+      "next_step": "Open a search for warm backpacking destinations accessible mid-March",
+      "effort": "medium",
+      "countdown": "15 days away"
+    }
+  ],
+  "active_slot": 2
+}
