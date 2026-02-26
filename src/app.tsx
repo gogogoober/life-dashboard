@@ -1,16 +1,19 @@
 import { TemplateRenderer, defaultTemplate } from "./templates";
 import { EVENTS, CONTEXT_STUB, TOKYO_PINS, ACTIVE_THREADS_STUB, UP_NEXT_STUB } from "./data/stub";
-import { useDashboard, useUpNext, useOrbital, toOrbitalEvents, toContextItems, toActiveThreads } from "./data/dashboard";
+import { useDashboard, useUpNext, useOrbital, useFocusEngine, toOrbitalEvents, toContextItems, toActiveThreads } from "./data/dashboard";
 
 export default function App() {
   const { data, error } = useDashboard();
   const { data: upNextData, error: upNextError } = useUpNext();
   const { data: orbitalData, error: orbitalError } = useOrbital();
+  const { data: focusData, error: focusError } = useFocusEngine();
 
   if (orbitalError) {
     console.warn("[orbital] Failed to load orbital.json, using stubs:", orbitalError);
   }
-
+  if (focusError) {
+    console.warn("[focus-engine] Failed to load focus-engine.json, using stubs:", focusError);
+  }
   if (error) {
     console.warn("[dashboard] Failed to load dashboard.json, using stubs:", error);
   }
@@ -22,7 +25,9 @@ export default function App() {
     "temporal-bubble-map": {
       events: orbitalData ? toOrbitalEvents(orbitalData) : EVENTS,
     },
-    "focus-engine": {},
+    "focus-engine": focusData
+      ? { slots: focusData.slots, activeSlot: focusData.active_slot }
+      : {},
     "action-items": {},
   };
 

@@ -66,6 +66,47 @@ export function useDashboard() {
   return { data, loading, error };
 }
 
+// ─── Focus Engine data ────────────────────────────────────────────────────────
+
+export interface FocusSlot {
+  slot: number;
+  category: "work" | "personal" | "travel";
+  thread_name: string;
+  hook: string;
+  next_step: string;
+  effort: "high" | "medium" | "low";
+  countdown: string;
+}
+
+interface FocusEngineData {
+  generated_at: string;
+  energy_band: string;
+  is_work_hours: boolean;
+  is_weekend: boolean;
+  slots: FocusSlot[];
+  active_slot: number;
+}
+
+export async function fetchFocusEngine(): Promise<FocusEngineData> {
+  const url = import.meta.env.BASE_URL + "focus-engine.json";
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Failed to fetch focus-engine.json (${res.status})`);
+  return res.json();
+}
+
+export function useFocusEngine() {
+  const [data, setData] = useState<FocusEngineData | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchFocusEngine()
+      .then(setData)
+      .catch((e: Error) => setError(e.message));
+  }, []);
+
+  return { data, error };
+}
+
 // ─── Orbital data ─────────────────────────────────────────────────────────────
 
 interface OrbitalEvent {

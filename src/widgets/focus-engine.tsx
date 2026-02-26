@@ -1,28 +1,35 @@
 import type { WidgetProps } from "../types";
+import type { FocusSlot } from "../data/dashboard";
 import { ModuleCard } from "./module-card";
 
-const MOCK_QUESTS = [
+const MOCK_QUESTS: Array<FocusSlot & { active: boolean }> = [
   {
-    slot: "Work",
+    slot: 1,
+    category: "work",
+    thread_name: "Work",
     hook: "That burst limit edge case in the rate limiter has been nagging at you. Sarah's review is pending but this bug is yours to squash.",
-    nextStep: "Open the failing test and read the assertion",
-    effort: "high" as const,
+    next_step: "Open the failing test and read the assertion",
+    effort: "high",
     countdown: "4 days left",
     active: true,
   },
   {
-    slot: "Travel",
+    slot: 2,
+    category: "travel",
+    thread_name: "Travel",
     hook: "26 days until Tokyo. You mentioned wanting to find that fountain pen shop in Ginza. One search could lock down Day 3's afternoon.",
-    nextStep: "Open Japan doc and add one stop to Day 3",
-    effort: "low" as const,
+    next_step: "Open Japan doc and add one stop to Day 3",
+    effort: "low",
     countdown: "26 days",
     active: false,
   },
   {
-    slot: "Quick Win",
+    slot: 3,
+    category: "personal",
+    thread_name: "Quick Win",
     hook: "Dana's 30th is 3 days away. Jell-O shots need 4 hours to set — are you making them tonight or tomorrow morning?",
-    nextStep: "Pick a time and set a reminder",
-    effort: "low" as const,
+    next_step: "Pick a time and set a reminder",
+    effort: "low",
     countdown: "3 days away",
     active: false,
   },
@@ -40,12 +47,24 @@ function countdownColor(countdown: string): string {
   return "#888";
 }
 
-export function FocusEngine({ size: _ }: WidgetProps) {
+interface FocusEngineProps extends WidgetProps {
+  slots?: FocusSlot[];
+  activeSlot?: number;
+}
+
+export function FocusEngine({ size: _, slots, activeSlot }: FocusEngineProps) {
+  const quests = slots
+    ? slots.map((s) => ({ ...s, active: s.slot === (activeSlot ?? 1) }))
+    : MOCK_QUESTS;
+
   return (
     <ModuleCard title="Focus Engine" icon="⚡">
       <div className="flex flex-col gap-3 h-full">
-        {MOCK_QUESTS.map((quest, i) => {
+        {quests.map((quest, i) => {
           const effort = EFFORT_STYLES[quest.effort];
+          const label = quest.active
+            ? quest.thread_name
+            : quest.category.charAt(0).toUpperCase() + quest.category.slice(1);
           return (
             <div
               key={i}
@@ -68,7 +87,7 @@ export function FocusEngine({ size: _ }: WidgetProps) {
                   marginBottom: 6,
                 }}
               >
-                {quest.slot}
+                {label}
               </div>
 
               <p style={{ fontSize: 12, color: "#ccc", lineHeight: 1.6, margin: 0, marginBottom: 10 }}>
@@ -77,7 +96,7 @@ export function FocusEngine({ size: _ }: WidgetProps) {
 
               <div style={{ fontSize: 11, color: "#888", marginBottom: 8 }}>
                 <span style={{ color: "#6bffaa", marginRight: 4 }}>→</span>
-                {quest.nextStep}
+                {quest.next_step}
               </div>
 
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
