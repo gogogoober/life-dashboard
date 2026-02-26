@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-26T03:36:05.447Z",
+  "generated_at": "2026-02-26T04:18:23.763Z",
   "energy_band": "ramp_up",
   "is_work_hours": false,
   "is_weekend": false,
@@ -8,28 +8,28 @@
       "slot": 1,
       "category": "personal",
       "thread_name": "Dana's 30th Birthday",
-      "hook": "Dana's laser tag party is Saturday night and you promised yellow Jell-O shots. Shar's coordinating the group, the gift's wrapped, but you still need the recipe. This is the last piece before you can fully show up and celebrate her turning 30.",
-      "next_step": "Search 'yellow Jell-O shot recipe vodka' and bookmark one that looks easy",
+      "hook": "Dana turns 30 in 2 days and you promised yellow Jell-O shots. They need at least 4 hours to set — tonight or tomorrow morning?",
+      "next_step": "Search 'yellow Jell-O shot recipe vodka' and bookmark the top result",
       "effort": "low",
       "countdown": "2 days away"
     },
     {
       "slot": 2,
       "category": "travel",
-      "thread_name": "Mariano's 30th / Chicago",
-      "hook": "Mariano turns 30 on the 19th and you've got this beautiful plan: a warm backpacking weekend (Mar 14-15) then Chicago for the birthday. Your Japan return already routes through Chicago, but you haven't picked where to hike or booked those flights yet. The window for cheap flights is closing fast.",
-      "next_step": "Search 'warm backpacking destinations March weekend USA' and save three options",
+      "thread_name": "Japan Trip 2026",
+      "hook": "You're in Kyoto in 27 days with four hotel nights and zero planned activities. One search right now locks down a shrine or restaurant.",
+      "next_step": "Search 'best things to do Kyoto' and open three tabs",
       "effort": "medium",
-      "countdown": "just under 3 weeks"
+      "countdown": "27 days"
     },
     {
       "slot": 3,
-      "category": "travel",
-      "thread_name": "Japan Trip 2026",
-      "hook": "You're landing in Osaka in 25 days with Dana for two weeks of trains, temples, and fountain pens. Flights and hotels are locked in, but Kyoto, Takayama, and Tokyo are still blank canvases. Time to turn that route into an itinerary with pen shops, outdoor adventures, and ways to celebrate Dana's 30th in Japan.",
-      "next_step": "Open the Japan trip doc and list 3 must-do activities for Kyoto",
-      "effort": "medium",
-      "countdown": "just under a month"
+      "category": "personal",
+      "thread_name": "Mariano's 30th / Chicago",
+      "hook": "Mariano's birthday is 21 days out and the backpacking weekend still has no destination. Can you find one warm spot before breakfast?",
+      "next_step": "Search 'warm backpacking destinations mid-March USA' and bookmark two options",
+      "effort": "low",
+      "countdown": "21 days"
     }
   ],
   "active_slot": 2
