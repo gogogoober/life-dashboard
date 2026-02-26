@@ -17,7 +17,7 @@
         "Find Jell-O shot recipe"
       ],
       "start_date": "2026-02-28",
-      "end_date": "2026-03-01",
+      "end_date": "2026-02-28",
       "deadline": "2026-02-28",
       "pinned": false,
       "days_until_deadline": 2,
@@ -176,20 +176,54 @@
       "pinned": false,
       "days_until_deadline": null,
       "calendar_source": false
+    },
+    {
+      "id": "catherine-wu-visit",
+      "title": "Catherine Wu visiting",
+      "category": "people",
+      "tag": "personal",
+      "heat": "warm",
+      "heat_reason": "upcoming visit (9 days)",
+      "summary": "Catherine Wu is visiting from March 7-13.",
+      "sub_threads": [],
+      "open_actions": [],
+      "start_date": "2026-03-07",
+      "end_date": "2026-03-13",
+      "deadline": null,
+      "pinned": false,
+      "days_until_deadline": null,
+      "calendar_source": true
+    },
+    {
+      "id": "dana-spring-break",
+      "title": "Dana Spring Break",
+      "category": "trip-event",
+      "tag": "personal",
+      "heat": "warm",
+      "heat_reason": "overlaps with Japan trip",
+      "summary": "Dana's spring break from March 23-28, coinciding with the start of the Japan trip.",
+      "sub_threads": [],
+      "open_actions": [],
+      "start_date": "2026-03-23",
+      "end_date": "2026-03-28",
+      "deadline": null,
+      "pinned": false,
+      "days_until_deadline": null,
+      "calendar_source": true
     }
   ],
   "calendar_events": [
     {
       "id": "hnidfrcpndgv4om68be96k2ils",
       "title": "Reservation at Holywater",
-      "type": "appointment",
+      "type": "social",
       "start": "2026-02-27T21:30:00-05:00",
       "end": "2026-02-27T22:30:00-05:00",
       "all_day": false,
       "location": "Holywater, 112 Reade St, New York, NY 10013",
-      "description": "Dinner reservation",
+      "description": "Restaurant reservation",
       "attendees": [],
-      "weight": 3,
+      "weight": 4,
       "days_until": 1,
       "related_item_id": null
     },
@@ -201,28 +235,14 @@
       "end": "2026-03-06T12:40:00-05:00",
       "all_day": false,
       "location": "https://portal.getmindfulhealth.com/appointments/fcgaza027jeo",
-      "description": "Mindful health consultation appointment (25 minutes)",
+      "description": "25 minute virtual appointment with ✌️Mindful",
       "attendees": [],
       "weight": 3,
       "days_until": 8,
       "related_item_id": null
     },
     {
-      "id": "_750jaca368p4cba18ks32b9k6h338ba168r30ba36cp30ca56l0j8chj8g",
-      "title": "Catherine Wu visiting",
-      "type": "social",
-      "start": "2026-03-07",
-      "end": "2026-03-13",
-      "all_day": true,
-      "location": null,
-      "description": null,
-      "attendees": [],
-      "weight": 6,
-      "days_until": 9,
-      "related_item_id": null
-    },
-    {
-      "id": "c9gmapb36op3gbb36tijcb9k64qmcbb2ckp3eb9h6cpm4php74omcp1j68_20260319",
+      "id": "c9gmapb36op3gbb2ckp3eb9h6cpm4php74omcp1j68_20260319",
       "title": "Mariano birthday",
       "type": "birthday",
       "start": "2026-03-19",
@@ -234,20 +254,6 @@
       "weight": 5,
       "days_until": 21,
       "related_item_id": "marianos-30th-chicago"
-    },
-    {
-      "id": "494jl6gb7u75ro4fqjidqjikt6",
-      "title": "Dana Spring Break",
-      "type": "other",
-      "start": "2026-03-23",
-      "end": "2026-03-28",
-      "all_day": true,
-      "location": null,
-      "description": null,
-      "attendees": [],
-      "weight": 4,
-      "days_until": 25,
-      "related_item_id": null
     },
     {
       "id": "6d4rdeq1hv4rd02oglbj0d829c",
@@ -370,8 +376,8 @@
   },
   "meta": {
     "hot_count": 5,
-    "warm_count": 2,
+    "warm_count": 4,
     "archived_count": 0,
-    "upcoming_events_count": 13
+    "upcoming_events_count": 10
   }
 }
