@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-26T04:18:23.763Z",
+  "generated_at": "2026-02-26T05:07:35.641Z",
   "energy_band": "ramp_up",
   "is_work_hours": false,
   "is_weekend": false,
@@ -8,28 +8,28 @@
       "slot": 1,
       "category": "personal",
       "thread_name": "Dana's 30th Birthday",
-      "hook": "Dana turns 30 in 2 days and you promised yellow Jell-O shots. They need at least 4 hours to set — tonight or tomorrow morning?",
-      "next_step": "Search 'yellow Jell-O shot recipe vodka' and bookmark the top result",
+      "hook": "Dana's 30th is in 2 days and you promised yellow Jell-O shots. They need 4 hours to set — tonight or tomorrow morning?",
+      "next_step": "Search 'yellow Jell-O shot recipe vodka' and bookmark one",
       "effort": "low",
       "countdown": "2 days away"
     },
     {
       "slot": 2,
       "category": "travel",
-      "thread_name": "Japan Trip 2026",
-      "hook": "You're in Kyoto in 27 days with four hotel nights and zero planned activities. One search right now locks down a shrine or restaurant.",
-      "next_step": "Search 'best things to do Kyoto' and open three tabs",
+      "thread_name": "Mariano's 30th / Chicago",
+      "hook": "That warm backpacking trip with Mariano is in 15 days and you still have zero location leads. One search right now locks down a destination.",
+      "next_step": "Search 'warm backpacking destinations mid-March weekend trips USA' and read top 3 results",
       "effort": "medium",
-      "countdown": "27 days"
+      "countdown": "15 days"
     },
     {
       "slot": 3,
-      "category": "personal",
-      "thread_name": "Mariano's 30th / Chicago",
-      "hook": "Mariano's birthday is 21 days out and the backpacking weekend still has no destination. Can you find one warm spot before breakfast?",
-      "next_step": "Search 'warm backpacking destinations mid-March USA' and bookmark two options",
+      "category": "travel",
+      "thread_name": "Japan Trip 2026",
+      "hook": "You're in Kyoto in 27 days with no activity plan. One search right now locks down a day.",
+      "next_step": "Search 'best things to do in Kyoto first time visitor' and bookmark one guide",
       "effort": "low",
-      "countdown": "21 days"
+      "countdown": "27 days"
     }
   ],
   "active_slot": 2
