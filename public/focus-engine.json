@@ -1,33 +1,35 @@
 {
-  "generated_at": "2026-02-26T02:58:21.125Z",
+  "generated_at": "2026-02-26T03:36:05.447Z",
   "energy_band": "ramp_up",
+  "is_work_hours": false,
+  "is_weekend": false,
   "slots": [
     {
       "slot": 1,
-      "category": "work",
-      "thread_name": "Cerebro",
-      "hook": "The developer portal is waiting for you, but right now it's blocked on one thing: getting it running locally. Once you crack that setup barrier, you can start connecting the dots between communication and platform info for the whole team.",
-      "next_step": "Open the Cerebro project repo and locate the README or setup docs",
-      "effort": "medium",
-      "countdown": "no deadline"
-    },
-    {
-      "slot": 2,
       "category": "personal",
       "thread_name": "Dana's 30th Birthday",
-      "hook": "Dana's 30th is 2 days away. The laser tag party with Shar's crew is set, gift's wrapped, but you still need to nail down that yellow Jell-O shot recipe everyone's expecting.",
-      "next_step": "Search for yellow Jell-O shot recipes and pick one",
+      "hook": "Dana's laser tag party is Saturday night and you promised yellow Jell-O shots. Shar's coordinating the group, the gift's wrapped, but you still need the recipe. This is the last piece before you can fully show up and celebrate her turning 30.",
+      "next_step": "Search 'yellow Jell-O shot recipe vodka' and bookmark one that looks easy",
       "effort": "low",
       "countdown": "2 days away"
     },
     {
-      "slot": 3,
-      "category": "personal",
+      "slot": 2,
+      "category": "travel",
       "thread_name": "Mariano's 30th / Chicago",
-      "hook": "Mariano turns 30 in 15 days, and you've got a backpacking-then-Chicago plan brewing. The Chicago leg is booked, but the warm backpacking weekend (Mar 14-15) needs a destination, flights, and gear sorted before it slips away.",
-      "next_step": "Open a search for warm backpacking destinations within reach of Chicago for mid-March",
+      "hook": "Mariano turns 30 on the 19th and you've got this beautiful plan: a warm backpacking weekend (Mar 14-15) then Chicago for the birthday. Your Japan return already routes through Chicago, but you haven't picked where to hike or booked those flights yet. The window for cheap flights is closing fast.",
+      "next_step": "Search 'warm backpacking destinations March weekend USA' and save three options",
       "effort": "medium",
-      "countdown": "15 days away"
+      "countdown": "just under 3 weeks"
+    },
+    {
+      "slot": 3,
+      "category": "travel",
+      "thread_name": "Japan Trip 2026",
+      "hook": "You're landing in Osaka in 25 days with Dana for two weeks of trains, temples, and fountain pens. Flights and hotels are locked in, but Kyoto, Takayama, and Tokyo are still blank canvases. Time to turn that route into an itinerary with pen shops, outdoor adventures, and ways to celebrate Dana's 30th in Japan.",
+      "next_step": "Open the Japan trip doc and list 3 must-do activities for Kyoto",
+      "effort": "medium",
+      "countdown": "just under a month"
     }
   ],
   "active_slot": 2
