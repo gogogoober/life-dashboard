@@ -8,6 +8,9 @@ on:
     paths-ignore:
       - "public/dashboard.json"
       - "public/up_next.json"
+      - "public/focus-engine.json"
+      - "public/orbital.json"
+      - "public/dynamic-island.json"
   workflow_run:
     # Runs after all Generate Data jobs complete
     workflows: ["Generate Data"]

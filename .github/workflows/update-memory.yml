@@ -23,4 +23,4 @@ jobs:
       - name: Update Working Memory
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: node scripts/update-working-memory.js
+        run: node scripts/update/working-memory.js
