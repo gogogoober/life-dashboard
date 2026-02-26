@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-26T02:58:21.570Z",
+  "generated_at": "2026-02-26T03:36:03.721Z",
   "events": [
     {
       "name": "Reservation at Holywater",
@@ -33,7 +33,7 @@
     {
       "name": "Chicago",
       "date": "2026-03-13",
-      "weight": 7,
+      "weight": 8,
       "actions": [
         {
           "name": "Find warm backpacking destination",
@@ -52,13 +52,13 @@
           "status": "todo"
         },
         {
-          "name": "Buy Mariano a gift",
+          "name": "Buy Mariano a gift (maybe)",
           "status": "todo"
         }
       ]
     },
     {
-      "name": "Mariano's Birthday",
+      "name": "Mariano birthday",
       "date": "2026-03-19",
       "weight": 5,
       "actions": []
@@ -66,7 +66,7 @@
     {
       "name": "JAPAN!",
       "date": "2026-03-23",
-      "weight": 9,
+      "weight": 10,
       "actions": [
         {
           "name": "Flight to TAIPEI (BR 55)",
@@ -91,18 +91,6 @@
         {
           "name": "Plan activities in Tokyo",
           "status": "todo"
-        },
-        {
-          "name": "Decide on pen before trip",
-          "status": "todo"
-        },
-        {
-          "name": "Research sibling price-point options",
-          "status": "todo"
-        },
-        {
-          "name": "Find good dot grid fountain pen paper",
-          "status": "todo"
         }
       ]
     },
@@ -122,7 +110,7 @@
       ]
     },
     {
-      "name": "Mariel's Birthday",
+      "name": "Mariels Birthday",
       "date": "2026-04-23",
       "weight": 5,
       "actions": []
