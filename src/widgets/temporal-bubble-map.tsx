@@ -1,309 +1,425 @@
-import { useState, useEffect, useRef } from "react";
-import type { WidgetProps, DashboardEvent } from "../types";
+import { useEffect, useRef } from "react";
+import type { WidgetProps, DashboardEvent, EventAction } from "../types";
 import { daysFromNow, logX, MAX_DAYS } from "../utils/temporal";
-import { stressColor, stressGlow, hue, daysToHueValue } from "../design-system";
+import {
+  canvasColors,
+  stressColor,
+  stressGlow,
+  distanceOpacity,
+  hue,
+  daysToHueValue,
+} from "../design-system";
 import { Section, Heading, Label } from "../components";
 
-declare global {
-  interface Window {
-    echarts: any;
-  }
-}
+// ═══════════════════════════════════════════
+// Types
+// ═══════════════════════════════════════════
 
 interface TemporalBubbleMapProps extends WidgetProps {
   events: DashboardEvent[];
 }
 
-function buildChartOption(events: DashboardEvent[]) {
-  const parentData: any[] = [];
-  const parentMeta: any[] = [];
+interface BubbleNode {
+  event: DashboardEvent;
+  days: number;
+  xNorm: number;
+  yNorm: number;
+  x: number;
+  y: number;
+  radius: number;
+  color: string;
+  glowColor: string;
+  opacity: number;
+  daysLabel: string;
+  todoActions: EventAction[];
+  hash: number;
+}
 
-  events.forEach((event) => {
-    const todoActions = event.actions.filter((a) => a.status === "todo");
-    const days = daysFromNow(event.date);
-    const x = logX(days);
-    const childFactor = todoActions.length * 2.5;
-    const weightFactor = event.weight * 4;
-    const y = Math.min(85, childFactor + weightFactor + 8);
-    const size = 18 + event.weight * 4 + todoActions.length * 2.5;
+interface ActionDot {
+  parent: BubbleNode;
+  index: number;
+  size: number;
+  color: string;
+  borderColor: string;
+  lineColor: string;
+}
 
-    parentData.push({
-      value: [x, y],
-      name: event.name,
-      symbolSize: size,
-      itemStyle: {
-        color: stressColor(days),
-        shadowBlur: 18,
-        shadowColor: stressGlow(days),
-      },
-      label: {
-        show: true,
-        formatter: "{b}",
-        position: y > 55 ? "bottom" : "top",
-        distance: 10,
-        fontSize: Math.max(10, Math.min(14, 8 + event.weight * 0.6)),
-        color: "#888",
-        textBorderColor: "#0a0e0a",
-        textBorderWidth: 3,
-      },
-      _date: event.date.toLocaleDateString("en-US", {
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-      }),
-      _daysAway: Math.round(days),
-      _childCount: todoActions.length,
-      _size: size,
-    });
+// ═══════════════════════════════════════════
+// Constants
+// ═══════════════════════════════════════════
 
-    if (todoActions.length > 0) {
-      const orbitRadius = size / 10 + 2.5;
-      const childSizes = todoActions.map((_, i) => {
-        const base = 6;
-        const variation = ((i * 7 + 3) % 5) + 1;
-        return base + variation;
-      });
-      parentMeta.push({
-        x,
-        y,
-        days,
-        orbitRadius,
-        children: todoActions,
-        childSizes,
-        childColor: hue(daysToHueValue(days, MAX_DAYS), 0.35),
-        childBorder: hue(daysToHueValue(days, MAX_DAYS), 0.5),
-        lineColor:   hue(daysToHueValue(days, MAX_DAYS), 0.12),
-      });
-    }
+const TAU = Math.PI * 2;
+const PADDING = { top: 30, right: 40, bottom: 45, left: 30 };
+const GRID_MARKERS = [
+  { label: "1d", days: 1 },
+  { label: "3d", days: 3 },
+  { label: "1w", days: 7 },
+  { label: "2w", days: 14 },
+  { label: "1mo", days: 30 },
+  { label: "2mo", days: 60 },
+];
+const FONT = "'JetBrains Mono', monospace";
+
+// ═══════════════════════════════════════════
+// Layout
+// ═══════════════════════════════════════════
+
+function nameHash(name: string): number {
+  return name.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
+}
+
+function toPixelX(logVal: number, w: number): number {
+  const drawW = w - PADDING.left - PADDING.right;
+  return PADDING.left + (logVal / 100) * drawW;
+}
+
+function buildNodes(
+  events: DashboardEvent[],
+  w: number,
+  h: number
+): { nodes: BubbleNode[]; dots: ActionDot[] } {
+  const drawH = h - PADDING.top - PADDING.bottom;
+
+  const nodes: BubbleNode[] = events.map((ev) => {
+    const days = daysFromNow(ev.date);
+    const todoActions = ev.actions.filter((a) => a.status === "todo");
+    const xNorm = logX(days) / 100;
+    const hash = nameHash(ev.name);
+    const yNorm = 0.18 + (hash % 58) / 100;
+    const baseRadius = (18 + ev.weight * 4 + todoActions.length * 2.5) / 2;
+    const proximityMultiplier = 1 + 2 / (days + 1);
+    const radius = baseRadius * proximityMultiplier;
+
+    return {
+      event: ev,
+      days,
+      xNorm,
+      yNorm,
+      x: PADDING.left + xNorm * (w - PADDING.left - PADDING.right),
+      y: PADDING.top + yNorm * drawH,
+      radius,
+      color: stressColor(days),
+      glowColor: stressGlow(days),
+      opacity: distanceOpacity(days),
+      daysLabel: Math.round(days) <= 0 ? "!" : String(Math.round(days)),
+      todoActions,
+      hash,
+    };
   });
 
-  const childData: any[] = [];
-  const lineSegments: any[] = [];
-  const angleOffset = -Math.PI / 2;
-
-  parentMeta.forEach((parent) => {
-    const n = parent.children.length;
-    const angleStep = (Math.PI * 2) / n;
-
-    parent.children.forEach((child: any, i: number) => {
-      const a = angleOffset + angleStep * i;
-      const cx = parent.x + Math.cos(a) * parent.orbitRadius;
-      const cy = parent.y + Math.sin(a) * parent.orbitRadius;
-
-      childData.push({
-        value: [cx, cy],
-        name: child.name,
-        symbolSize: parent.childSizes[i],
-        itemStyle: {
-          color: parent.childColor,
-          borderColor: parent.childBorder,
-          borderWidth: 0.5,
-        },
-        label: { show: false },
-        emphasis: {
-          label: {
-            show: true,
-            formatter: "{b}",
-            fontSize: 10,
-            color: "#aaa",
-            position: "right",
-            distance: 6,
-            textBorderColor: "#0a0e0a",
-            textBorderWidth: 2,
-          },
-          itemStyle: { opacity: 0.9, shadowBlur: 8 },
-        },
-      });
-
-      lineSegments.push({
-        coords: [
-          [parent.x, parent.y],
-          [cx, cy],
-        ],
-        color: parent.lineColor,
-      });
-    });
-  });
-
-  const markers = [
-    { label: "Tomorrow", days: 1 },
-    { label: "1 Week",   days: 7 },
-    { label: "2 Weeks",  days: 14 },
-    { label: "1 Month",  days: 30 },
-    { label: "2 Months", days: 60 },
-  ];
-
-  function getWeekendLines() {
-    const lines = [];
-    const base = new Date();
-    for (let d = 0; d <= 14; d++) {
-      const date = new Date(base);
-      date.setDate(base.getDate() + d);
-      const dow = date.getDay();
-      if (dow === 0 || dow === 6) {
-        lines.push({
-          xAxis: logX(d === 0 ? 0 : d),
-          label: { show: false },
-          lineStyle: { color: "#232840", type: "solid", width: 1, opacity: 1 },
-        });
+  // Anti-overlap Y nudging
+  nodes.sort((a, b) => a.xNorm - b.xNorm);
+  for (let i = 1; i < nodes.length; i++) {
+    for (let j = 0; j < i; j++) {
+      const dx = Math.abs(nodes[i].xNorm - nodes[j].xNorm);
+      const dy = Math.abs(nodes[i].yNorm - nodes[j].yNorm);
+      if (dx < 0.1 && dy < 0.14) {
+        nodes[i].yNorm = Math.min(0.82, nodes[j].yNorm + 0.16);
+        nodes[i].y = PADDING.top + nodes[i].yNorm * drawH;
       }
     }
-    return lines;
   }
 
+  // Build action dots
+  const dots: ActionDot[] = [];
+  nodes.forEach((node) => {
+    const hueVal = daysToHueValue(node.days, MAX_DAYS);
+    node.todoActions.forEach((_, i) => {
+      dots.push({
+        parent: node,
+        index: i,
+        size: 3 + ((i * 7 + 3) % 5) * 0.6,
+        color: hue(hueVal, 0.35),
+        borderColor: hue(hueVal, 0.5),
+        lineColor: hue(hueVal, 0.12),
+      });
+    });
+  });
+
+  return { nodes, dots };
+}
+
+// ═══════════════════════════════════════════
+// Drawing functions
+// ═══════════════════════════════════════════
+
+function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number) {
+  const yTop = PADDING.top;
+  const yBot = h - PADDING.bottom;
+
+  // Time marker lines
+  ctx.lineWidth = 1;
+  GRID_MARKERS.forEach((m) => {
+    const x = toPixelX(logX(m.days), w);
+    ctx.beginPath();
+    ctx.setLineDash([2, 10]);
+    ctx.strokeStyle = canvasColors.grid;
+    ctx.moveTo(x, yTop);
+    ctx.lineTo(x, yBot);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = canvasColors.text.tertiary + "70";
+    ctx.font = `10px ${FONT}`;
+    ctx.textAlign = "center";
+    ctx.fillText(m.label, x, h - 8);
+  });
+
+  // TODAY marker
+  const todayX = toPixelX(logX(0), w);
+  ctx.strokeStyle = canvasColors.text.alert + "50";
+  ctx.lineWidth = 2;
+  ctx.setLineDash([4, 6]);
+  ctx.beginPath();
+  ctx.moveTo(todayX, yTop - 10);
+  ctx.lineTo(todayX, yBot);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.fillStyle = canvasColors.text.alert;
+  ctx.font = `bold 11px ${FONT}`;
+  ctx.textAlign = "center";
+  ctx.fillText("TODAY", todayX, yTop - 2);
+}
+
+function drawSpine(ctx: CanvasRenderingContext2D, nodes: BubbleNode[]) {
+  const sorted = [...nodes].sort((a, b) => a.xNorm - b.xNorm);
+  if (sorted.length < 2) return;
+
+  ctx.beginPath();
+  ctx.strokeStyle = canvasColors.text.tertiary + "35";
+  ctx.lineWidth = 1.5;
+
+  ctx.moveTo(sorted[0].x, sorted[0].y);
+  for (let i = 1; i < sorted.length; i++) {
+    const prev = sorted[i - 1];
+    const curr = sorted[i];
+    const cpx1 = prev.x + (curr.x - prev.x) * 0.5;
+    const cpx2 = prev.x + (curr.x - prev.x) * 0.5;
+    ctx.bezierCurveTo(cpx1, prev.y, cpx2, curr.y, curr.x, curr.y);
+  }
+  ctx.stroke();
+}
+
+function getOrbitPos(
+  parent: BubbleNode,
+  dot: ActionDot,
+  totalChildren: number,
+  t: number
+): { ax: number; ay: number } {
+  const orbitR = parent.radius + 20;
+  const angle =
+    (TAU * dot.index) / totalChildren + t * 0.25 + parent.hash;
   return {
-    backgroundColor: "transparent",
-    animationDuration: 1200,
-    animationEasing: "cubicOut",
-    tooltip: {
-      trigger: "item",
-      backgroundColor: "#1a1d28ee",
-      borderColor: "#2a2d3a",
-      borderWidth: 1,
-      textStyle: { color: "#e0e0e0", fontSize: 12 },
-      formatter(params: any) {
-        if (!params.data) return "";
-        const d = params.data;
-        if (d._daysAway != null) {
-          let h = `<strong style="font-size:13px">${d.name}</strong><br/>`;
-          h += `<span style="color:#888">${d._date} · ${d._daysAway} day${d._daysAway !== 1 ? "s" : ""} away</span>`;
-          if (d._childCount > 0)
-            h += `<br/><span style="color:#666">${d._childCount} action items</span>`;
-          return h;
-        }
-        return `<span style="color:#ccc">${d.name}</span>`;
-      },
-    },
-    grid: { left: 8, right: 40, top: 30, bottom: 45 },
-    xAxis: {
-      type: "value",
-      min: -1,
-      max: 105,
-      axisLine: { show: false },
-      axisTick: { show: false },
-      splitLine: { show: false },
-      axisLabel: { show: false },
-    },
-    yAxis: { type: "value", min: -8, max: 100, show: false },
-    series: [
-      {
-        id: "markers",
-        type: "scatter",
-        data: [],
-        silent: true,
-        markLine: {
-          silent: true,
-          symbol: "none",
-          animation: false,
-          data: [
-            {
-              xAxis: logX(0),
-              label: { formatter: "TODAY", position: "start", color: "#f97316", fontSize: 9 },
-              lineStyle: { color: "#f97316", type: "solid", width: 1.5, opacity: 0.65 },
-            },
-            ...getWeekendLines(),
-            ...markers.map((m) => ({
-              xAxis: logX(m.days),
-              label: { formatter: m.label, position: "start", color: "#2a2f3a", fontSize: 10 },
-              lineStyle: { color: "#1c2030", type: [4, 4], width: 1 },
-            })),
-          ],
-        },
-      },
-      {
-        id: "connections",
-        type: "lines",
-        coordinateSystem: "cartesian2d",
-        z: 1,
-        silent: true,
-        lineStyle: { width: 1 },
-        data: lineSegments.map((seg) => ({
-          coords: seg.coords,
-          lineStyle: { color: seg.color },
-        })),
-      },
-      {
-        id: "spine",
-        type: "line",
-        z: 0,
-        smooth: 0.3,
-        showSymbol: false,
-        lineStyle: { color: "#2a2f3a", width: 2 },
-        data: parentData
-          .map((d) => d.value)
-          .sort((a: number[], b: number[]) => a[0] - b[0]),
-      },
-      { id: "children", type: "scatter", data: childData, z: 2 },
-      { id: "parents",  type: "scatter", data: parentData, z: 3 },
-      {
-        id: "dayLabels",
-        type: "scatter",
-        silent: true,
-        z: 4,
-        data: parentData.map((d) => ({
-          value: d.value,
-          symbolSize: 0,
-          label: {
-            show: true,
-            formatter: String(d._daysAway),
-            position: "inside",
-            fontSize: Math.min(18, Math.max(7, Math.round(d._size * 0.3))),
-            fontWeight: "bold",
-            color: "rgba(255,255,255,0.8)",
-            textBorderColor: "rgba(0,0,0,0.25)",
-            textBorderWidth: 1,
-          },
-        })),
-      },
-    ],
+    ax: parent.x + Math.cos(angle) * orbitR,
+    ay: parent.y + Math.sin(angle) * orbitR,
   };
 }
 
+function drawConnectionLines(
+  ctx: CanvasRenderingContext2D,
+  node: BubbleNode,
+  nodeDots: ActionDot[],
+  t: number
+) {
+  const n = node.todoActions.length;
+  if (n === 0) return;
+
+  ctx.globalAlpha = node.opacity;
+  nodeDots.forEach((dot) => {
+    const { ax, ay } = getOrbitPos(node, dot, n, t);
+    const midX = (node.x + ax) / 2;
+    const midY = (node.y + ay) / 2 - 4;
+
+    ctx.beginPath();
+    ctx.moveTo(node.x, node.y);
+    ctx.quadraticCurveTo(midX + 3, midY - 3, ax, ay);
+    ctx.strokeStyle = dot.lineColor;
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+  });
+  ctx.globalAlpha = 1;
+}
+
+function drawBubble(
+  ctx: CanvasRenderingContext2D,
+  node: BubbleNode,
+  t: number
+) {
+  const { x, y, radius, color, glowColor, opacity } = node;
+  ctx.globalAlpha = opacity;
+
+  // Radial glow
+  const glowR = radius * 2.5;
+  const grad = ctx.createRadialGradient(x, y, radius * 0.3, x, y, glowR);
+  grad.addColorStop(0, glowColor);
+  grad.addColorStop(1, "transparent");
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.arc(x, y, glowR, 0, TAU);
+  ctx.fill();
+
+  // Pulsating rings (≤3 days)
+  if (node.days <= 3) {
+    const pulse1 = radius + 8 + Math.sin(t * 2.5 + node.hash) * 5;
+    ctx.beginPath();
+    ctx.arc(x, y, pulse1, 0, TAU);
+    ctx.strokeStyle = color + "25";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    const pulse2 = radius + 18 + Math.sin(t * 2.5 + node.hash + 1) * 4;
+    ctx.beginPath();
+    ctx.arc(x, y, pulse2, 0, TAU);
+    ctx.strokeStyle = color + "10";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Outer ring
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, TAU);
+  ctx.fillStyle = color + "10";
+  ctx.fill();
+  ctx.strokeStyle = color + "35";
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Inner core
+  ctx.beginPath();
+  ctx.arc(x, y, radius * 0.55, 0, TAU);
+  ctx.fillStyle = color + "18";
+  ctx.fill();
+
+  // Day count centered
+  ctx.fillStyle = color;
+  ctx.font = `bold ${Math.max(7, Math.round(radius * 0.7))}px ${FONT}`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(node.daysLabel, x, y);
+  ctx.textBaseline = "alphabetic";
+
+  ctx.globalAlpha = 1;
+}
+
+function drawActionDots(
+  ctx: CanvasRenderingContext2D,
+  node: BubbleNode,
+  nodeDots: ActionDot[],
+  t: number
+) {
+  const n = node.todoActions.length;
+  if (n === 0) return;
+
+  ctx.globalAlpha = node.opacity;
+  nodeDots.forEach((dot) => {
+    const { ax, ay } = getOrbitPos(node, dot, n, t);
+
+    ctx.beginPath();
+    ctx.arc(ax, ay, dot.size, 0, TAU);
+    ctx.fillStyle = dot.color;
+    ctx.fill();
+    ctx.strokeStyle = dot.borderColor;
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  });
+  ctx.globalAlpha = 1;
+}
+
+function drawLabels(ctx: CanvasRenderingContext2D, node: BubbleNode, h: number) {
+  const { x, y, radius, opacity } = node;
+  ctx.globalAlpha = opacity;
+
+  const labelAbove = y > h * 0.55;
+  const labelY = labelAbove ? y - radius - 10 : y + radius + 16;
+  const fontSize = Math.max(10, Math.min(14, 8 + node.event.weight * 0.6));
+
+  // Text with outline for legibility
+  ctx.font = `500 ${fontSize}px ${FONT}`;
+  ctx.textAlign = "center";
+  ctx.strokeStyle = canvasColors.bg.base;
+  ctx.lineWidth = 3;
+  ctx.strokeText(node.event.name, x, labelY);
+  ctx.fillStyle = canvasColors.text.primary + "cc";
+  ctx.fillText(node.event.name, x, labelY);
+
+  ctx.globalAlpha = 1;
+}
+
+// ═══════════════════════════════════════════
+// Component
+// ═══════════════════════════════════════════
+
 export function TemporalBubbleMap({ events }: TemporalBubbleMapProps) {
-  const chartRef = useRef<HTMLDivElement>(null);
-  const instanceRef = useRef<any>(null);
-  const [ready, setReady] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (window.echarts) {
-      setReady(true);
-      return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let running = true;
+    const startTime = performance.now();
+
+    function frame(now: number) {
+      if (!running || !canvas || !ctx) return;
+      const t = (now - startTime) / 1000;
+
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      const pixelW = Math.round(rect.width * dpr);
+      const pixelH = Math.round(rect.height * dpr);
+
+      if (canvas.width !== pixelW || canvas.height !== pixelH) {
+        canvas.width = pixelW;
+        canvas.height = pixelH;
+      }
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const w = rect.width;
+      const h = rect.height;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const { nodes, dots } = buildNodes(events, w, h);
+
+      // Build dots-by-node lookup
+      const dotsByNode = new Map<BubbleNode, ActionDot[]>();
+      nodes.forEach((n) => dotsByNode.set(n, []));
+      dots.forEach((d) => dotsByNode.get(d.parent)?.push(d));
+
+      // Draw in z-order
+      drawGrid(ctx, w, h);
+      drawSpine(ctx, nodes);
+      nodes.forEach((n) => drawConnectionLines(ctx, n, dotsByNode.get(n) || [], t));
+      nodes.forEach((n) => drawBubble(ctx, n, t));
+      nodes.forEach((n) => drawActionDots(ctx, n, dotsByNode.get(n) || [], t));
+      nodes.forEach((n) => drawLabels(ctx, n, h));
+
+      requestAnimationFrame(frame);
     }
-    const script = document.createElement("script");
-    script.src =
-      "https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js";
-    script.onload = () => setReady(true);
-    document.head.appendChild(script);
-  }, []);
 
-  useEffect(() => {
-    if (!ready || !chartRef.current) return;
-    const chart = window.echarts.init(chartRef.current);
-    instanceRef.current = chart;
-    chart.setOption(buildChartOption(events));
-
-    const handleResize = () => chart.resize();
-    window.addEventListener("resize", handleResize);
+    requestAnimationFrame(frame);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
-      chart.dispose();
+      running = false;
     };
-  }, [events, ready]);
+  }, [events]);
 
   return (
-    <Section use="base" className="h-full">
+    <Section use="base" className="h-full flex flex-col">
       <div className="flex items-baseline justify-between mb-2">
-        <Heading size="sm">What's Ahead</Heading>
+        <Heading size="sm">What&apos;s Ahead</Heading>
         <Label variant="secondary">logarithmic time scale</Label>
       </div>
-      <div
-        ref={chartRef}
-        className="flex-1 rounded-xl"
+      <canvas
+        ref={canvasRef}
+        className="w-full flex-1 rounded-xl"
         style={{
-          background: "var(--bg-base)",
-          border: "1px solid var(--border-secondary)",
-          minHeight: 280,
+          background: canvasColors.bg.base,
+          border: `1px solid ${canvasColors.border.secondary}`,
+          display: "block",
         }}
       />
     </Section>
