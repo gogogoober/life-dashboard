@@ -51,7 +51,9 @@ interface ActionDot {
 // ═══════════════════════════════════════════
 
 const TAU = Math.PI * 2;
-const PADDING = { top: 30, right: 40, bottom: 45, left: 30 };
+const PADDING = { top: 30, right: 20, bottom: 45, left: 96 };
+const X_MIN = 3;
+const X_MAX = 120;
 const GRID_MARKERS = [
   { label: "1d", days: 1 },
   { label: "3d", days: 3 },
@@ -72,7 +74,7 @@ function nameHash(name: string): number {
 
 function toPixelX(logVal: number, w: number): number {
   const drawW = w - PADDING.left - PADDING.right;
-  return PADDING.left + (logVal / 100) * drawW;
+  return PADDING.left + ((logVal - X_MIN) / (X_MAX - X_MIN)) * drawW;
 }
 
 function buildNodes(
@@ -97,7 +99,7 @@ function buildNodes(
       days,
       xNorm,
       yNorm,
-      x: PADDING.left + xNorm * (w - PADDING.left - PADDING.right),
+      x: toPixelX(logX(days), w),
       y: PADDING.top + yNorm * drawH,
       radius,
       color: stressColor(days),
@@ -149,19 +151,10 @@ function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number) {
   const yTop = PADDING.top;
   const yBot = h - PADDING.bottom;
 
-  // Time marker lines
-  ctx.lineWidth = 1;
+  // Time marker labels only (no lines)
   GRID_MARKERS.forEach((m) => {
     const x = toPixelX(logX(m.days), w);
-    ctx.beginPath();
-    ctx.setLineDash([2, 10]);
-    ctx.strokeStyle = canvasColors.grid;
-    ctx.moveTo(x, yTop);
-    ctx.lineTo(x, yBot);
-    ctx.stroke();
-    ctx.setLineDash([]);
-
-    ctx.fillStyle = canvasColors.text.tertiary + "70";
+    ctx.fillStyle = "#5c6580";
     ctx.font = `10px ${FONT}`;
     ctx.textAlign = "center";
     ctx.fillText(m.label, x, h - 8);
@@ -182,6 +175,54 @@ function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number) {
   ctx.font = `bold 11px ${FONT}`;
   ctx.textAlign = "center";
   ctx.fillText("TODAY", todayX, yTop - 2);
+}
+
+function getUpcomingWeekendDays(count: number): { days: number; label: string }[] {
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  const result: { days: number; label: string }[] = [];
+  const d = new Date(now);
+  d.setDate(d.getDate() + 1); // start from tomorrow
+  while (result.length < count) {
+    if (d.getDay() === 0 || d.getDay() === 6) {
+      const daysDiff = Math.round((d.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+      result.push({
+        days: daysDiff,
+        label: d.toLocaleDateString("en-US", { weekday: "short" }),
+      });
+    }
+    d.setDate(d.getDate() + 1);
+  }
+  return result;
+}
+
+function drawWeekendLines(ctx: CanvasRenderingContext2D, w: number, h: number) {
+  const yTop = PADDING.top;
+  const yBot = h - PADDING.bottom;
+  const weekendDays = getUpcomingWeekendDays(4);
+
+  weekendDays.forEach((wd) => {
+    const x = toPixelX(logX(wd.days), w);
+
+    // Gradient line: visible at bottom, fading out quickly
+    const fadeTop = yBot - (yBot - yTop) * 0.35;
+    const grad = ctx.createLinearGradient(x, yBot, x, fadeTop);
+    grad.addColorStop(0, "rgba(60, 70, 90, 0.45)");
+    grad.addColorStop(1, "rgba(60, 70, 90, 0)");
+
+    ctx.beginPath();
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 1;
+    ctx.moveTo(x, yTop);
+    ctx.lineTo(x, yBot);
+    ctx.stroke();
+
+    // Label at bottom
+    ctx.fillStyle = "#3a4050";
+    ctx.font = `9px ${FONT}`;
+    ctx.textAlign = "center";
+    ctx.fillText(wd.label, x, yBot + 12);
+  });
 }
 
 function drawSpine(ctx: CanvasRenderingContext2D, nodes: BubbleNode[]) {
@@ -328,15 +369,20 @@ function drawActionDots(
   ctx.globalAlpha = 1;
 }
 
+function formatDateLabel(startDate: string): string {
+  const d = new Date(startDate + "T00:00:00");
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
+
 function drawLabels(ctx: CanvasRenderingContext2D, node: BubbleNode, h: number) {
   const { x, y, radius, opacity } = node;
   ctx.globalAlpha = opacity;
 
   const labelAbove = y > h * 0.55;
-  const labelY = labelAbove ? y - radius - 10 : y + radius + 16;
+  const labelY = labelAbove ? y - radius - 14 : y + radius + 18;
   const fontSize = Math.max(10, Math.min(14, 8 + node.event.importance * 0.6));
 
-  // Text with outline for legibility
+  // Event name with outline for legibility
   ctx.font = `500 ${fontSize}px ${FONT}`;
   ctx.textAlign = "center";
   ctx.strokeStyle = canvasColors.bg.base;
@@ -344,6 +390,16 @@ function drawLabels(ctx: CanvasRenderingContext2D, node: BubbleNode, h: number) 
   ctx.strokeText(node.event.name, x, labelY);
   ctx.fillStyle = canvasColors.text.primary + "cc";
   ctx.fillText(node.event.name, x, labelY);
+
+  // Date below the name
+  const dateY = labelAbove ? labelY - fontSize - 2 : labelY + 12;
+  const dateStr = formatDateLabel(node.event.startDate);
+  ctx.font = `9px ${FONT}`;
+  ctx.strokeStyle = canvasColors.bg.base;
+  ctx.lineWidth = 3;
+  ctx.strokeText(dateStr, x, dateY);
+  ctx.fillStyle = "#4a5060";
+  ctx.fillText(dateStr, x, dateY);
 
   ctx.globalAlpha = 1;
 }
@@ -395,6 +451,7 @@ export function TemporalBubbleMap({ events }: TemporalBubbleMapProps) {
 
       // Draw in z-order
       drawGrid(ctx, w, h);
+      drawWeekendLines(ctx, w, h);
       drawSpine(ctx, nodes);
       nodes.forEach((n) => drawConnectionLines(ctx, n, dotsByNode.get(n) || [], t));
       nodes.forEach((n) => drawBubble(ctx, n, t));
