@@ -76,7 +76,7 @@ export function TemplateRenderer({ config, data }: TemplateRendererProps) {
             zIndex: LAYER_Z.foreground,
             gridTemplateColumns: config.columns,
             gridTemplateRows: config.rows,
-            padding: "var(--dashboard-inset)",
+            padding: "0 var(--dashboard-inset) var(--dashboard-inset)",
           }}
         >
           {foregroundGrid.map((slot, i) => (
