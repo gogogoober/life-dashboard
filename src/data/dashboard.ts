@@ -107,6 +107,30 @@ export function useFocusEngine() {
   return { data, error };
 }
 
+// ─── Dates (unified schema) ──────────────────────────────────────────────────
+
+import type { DatesData } from "../types/dates";
+
+export async function fetchDates(): Promise<DatesData> {
+  const url = import.meta.env.BASE_URL + "dates.json";
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Failed to fetch dates.json (${res.status})`);
+  return res.json();
+}
+
+export function useDates() {
+  const [data, setData] = useState<DatesData | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchDates()
+      .then(setData)
+      .catch((e: Error) => setError(e.message));
+  }, []);
+
+  return { data, error };
+}
+
 // ─── Orbital data ─────────────────────────────────────────────────────────────
 
 interface OrbitalEvent {

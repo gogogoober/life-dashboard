@@ -1,13 +1,17 @@
 import { TemplateRenderer, defaultTemplate } from "./templates";
-import { EVENTS, CONTEXT_STUB, TOKYO_PINS, ACTIVE_THREADS_STUB, UP_NEXT_STUB, CALENDAR_EVENTS_STUB } from "./data/stub";
-import { useDashboard, useUpNext, useOrbital, useFocusEngine, toOrbitalEvents, toContextItems, toActiveThreads } from "./data/dashboard";
+import { EVENTS, CONTEXT_STUB, TOKYO_PINS, ACTIVE_THREADS_STUB, UP_NEXT_STUB } from "./data/stub";
+import { useDashboard, useUpNext, useOrbital, useFocusEngine, useDates, toOrbitalEvents, toContextItems, toActiveThreads } from "./data/dashboard";
 
 export default function App() {
   const { data, error } = useDashboard();
   const { data: upNextData, error: upNextError } = useUpNext();
   const { data: orbitalData, error: orbitalError } = useOrbital();
   const { data: focusData, error: focusError } = useFocusEngine();
+  const { data: datesData, error: datesError } = useDates();
 
+  if (datesError) {
+    console.warn("[dates] Failed to load dates.json, using stubs:", datesError);
+  }
   if (orbitalError) {
     console.warn("[orbital] Failed to load orbital.json, using stubs:", orbitalError);
   }
@@ -21,11 +25,11 @@ export default function App() {
     console.warn("[up-next] Failed to load up_next.json, using stub:", upNextError);
   }
 
+  const dateEvents = datesData?.events ?? EVENTS;
+
   const widgetData: Record<string, Record<string, unknown>> = {
-    "temporal-bubble-map": {
-      events: orbitalData ? toOrbitalEvents(orbitalData) : EVENTS,
-    },
-    "timeline-ribbon": { events: CALENDAR_EVENTS_STUB },
+    "temporal-bubble-map": { events: dateEvents },
+    "timeline-ribbon": { events: dateEvents },
     "focus-engine": focusData
       ? { slots: focusData.slots, activeSlot: focusData.active_slot }
       : {},
