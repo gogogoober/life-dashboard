@@ -146,7 +146,7 @@ export const defaultTemplate: TemplateConfig = {
         top: "calc(var(--ribbon-height) + 5rem)",
         left: "0",
         bottom: "0",
-        width: "80%",
+        width: "95%",
       },
     },
     // Layer 1 grid — Timeline ribbon full width top row

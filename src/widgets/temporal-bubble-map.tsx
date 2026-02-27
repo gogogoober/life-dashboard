@@ -51,8 +51,8 @@ interface ActionDot {
 // ═══════════════════════════════════════════
 
 const TAU = Math.PI * 2;
-const PADDING = { top: 30, right: 20, bottom: 45, left: 96 };
-const X_MIN = 3;
+const PADDING = { top: 30, right: 0, bottom: 45, left: 0 };
+const X_MIN = -8;
 const X_MAX = 120;
 const GRID_MARKERS = [
   { label: "1d", days: 1 },
