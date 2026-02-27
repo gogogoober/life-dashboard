@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lordicon/react": "^1.11.0",
+    "lottie-web": "^5.13.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
