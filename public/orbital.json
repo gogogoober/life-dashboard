@@ -1,6 +1,12 @@
 {
-  "generated_at": "2026-02-26T05:07:34.239Z",
+  "generated_at": "2026-02-27T14:34:46.541Z",
   "events": [
+    {
+      "name": "Yoga",
+      "date": "2026-02-27",
+      "weight": 2,
+      "actions": []
+    },
     {
       "name": "Reservation at Holywater",
       "date": "2026-02-27",
@@ -69,11 +75,11 @@
       "weight": 9,
       "actions": [
         {
-          "name": "Flight to Taipei (BR 55)",
+          "name": "Flight to TAIPEI (BR 55)",
           "status": "todo"
         },
         {
-          "name": "Flight to Osaka (BR 130)",
+          "name": "Flight to OSAKA (BR 130)",
           "status": "todo"
         },
         {
@@ -97,14 +103,23 @@
     {
       "name": "Dana Spring Break",
       "date": "2026-03-23",
-      "weight": 6,
+      "weight": 5,
       "actions": []
     },
     {
       "name": "Dad's Birthday",
       "date": "2026-04-07",
       "weight": 5,
-      "actions": []
+      "actions": [
+        {
+          "name": "Flight to Honolulu (ZG 2)",
+          "status": "todo"
+        },
+        {
+          "name": "Flight to New York (DL 650)",
+          "status": "todo"
+        }
+      ]
     },
     {
       "name": "Mariels Birthday",
