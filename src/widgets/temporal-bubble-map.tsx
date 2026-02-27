@@ -64,6 +64,27 @@ const GRID_MARKERS = [
 ];
 const FONT = "'JetBrains Mono', monospace";
 
+// ─── Bubble sizing ───
+const RADIUS_MIN = 12;
+const RADIUS_MAX = 52;
+const BASE_RADIUS = 14;
+const ACTION_WEIGHT = 2.5;
+const PROX_SIZE_FACTOR = 1.5;
+
+// ─── Y-axis attention scoring ───
+const CATEGORY_MULTIPLIER: Record<string, number> = {
+  trip: 1.4,
+  travel: 1.4,
+  work: 1.0,
+  personal: 1.0,
+  social: 0.9,
+};
+const RECURRING_DAMPER = 0.6;
+const DANA_BOOST = 1.15;
+const TODO_Y_WEIGHT = 1.5;
+const PROX_Y_MAX = 8;
+const MAX_Y = 35;
+
 // ═══════════════════════════════════════════
 // Layout
 // ═══════════════════════════════════════════
@@ -89,10 +110,33 @@ function buildNodes(
     const todoActions = ev.actions.filter((a: DateAction) => a.status === "todo");
     const xNorm = logX(days) / 100;
     const hash = nameHash(ev.name);
-    const yNorm = 0.18 + (hash % 58) / 100;
-    const baseRadius = (18 + ev.importance * 4 + todoActions.length * 2.5) / 2;
-    const proximityMultiplier = 1 + 2 / (days + 1);
-    const radius = baseRadius * proximityMultiplier;
+
+    // ─── Size = "how much stuff is attached" ───
+    const totalActions = ev.actions.length; // todo + done — scale doesn't shrink
+    const baseRadius = BASE_RADIUS + totalActions * ACTION_WEIGHT;
+    const proxSizeBoost = 1 + PROX_SIZE_FACTOR / (days + 1);
+    const radius = Math.min(RADIUS_MAX, Math.max(RADIUS_MIN, baseRadius * proxSizeBoost));
+
+    // ─── Y-axis = "how much this demands attention right now" ───
+    const catMult = CATEGORY_MULTIPLIER[ev.category] ?? 1.0;
+    const recurMult = ev.isRecurring ? RECURRING_DAMPER : 1.0;
+    const peopleMult = ev.people.some((p) => p.toLowerCase().includes("dana"))
+      ? DANA_BOOST
+      : 1.0;
+
+    const attentionScore = ev.importance * catMult * recurMult * peopleMult;
+
+    const openTodos = todoActions.length;
+    const todoBoost = openTodos * TODO_Y_WEIGHT;
+
+    // Proximity curve: steep inside 7 days, fades to zero at 14 days
+    // log(15 / (days+1)) / log(15) → ~1.0 at day 0, ~0.7 at day 3, ~0.35 at day 7, 0 at day 14
+    const proximityBoost = days <= 14
+      ? PROX_Y_MAX * Math.log(15 / (days + 1)) / Math.log(15)
+      : 0;
+
+    const rawY = attentionScore + todoBoost + Math.max(0, proximityBoost);
+    const yNorm = Math.min(0.92, Math.max(0.08, rawY / MAX_Y));
 
     return {
       event: ev,
@@ -100,7 +144,7 @@ function buildNodes(
       xNorm,
       yNorm,
       x: toPixelX(logX(days), w),
-      y: PADDING.top + yNorm * drawH,
+      y: PADDING.top + (1 - yNorm) * drawH,
       radius,
       color: stressColor(days),
       glowColor: stressGlow(days),
@@ -119,7 +163,7 @@ function buildNodes(
       const dy = Math.abs(nodes[i].yNorm - nodes[j].yNorm);
       if (dx < 0.1 && dy < 0.14) {
         nodes[i].yNorm = Math.min(0.82, nodes[j].yNorm + 0.16);
-        nodes[i].y = PADDING.top + nodes[i].yNorm * drawH;
+        nodes[i].y = PADDING.top + (1 - nodes[i].yNorm) * drawH;
       }
     }
   }
