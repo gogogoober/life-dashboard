@@ -65,11 +65,12 @@ const GRID_MARKERS = [
 const FONT = "'JetBrains Mono', monospace";
 
 // ─── Bubble sizing ───
-const RADIUS_MIN = 12;
-const RADIUS_MAX = 52;
+const RADIUS_MIN = 16;
+const RADIUS_MAX = 62;
 const BASE_RADIUS = 14;
 const ACTION_WEIGHT = 2.5;
 const PROX_SIZE_FACTOR = 1.5;
+const TRIP_DURATION_WEIGHT = 1.5;
 
 // ─── Y-axis attention scoring ───
 const CATEGORY_MULTIPLIER: Record<string, number> = {
@@ -114,8 +115,14 @@ function buildNodes(
     // ─── Size = "how much stuff is attached" ───
     const totalActions = ev.actions.length; // todo + done — scale doesn't shrink
     const baseRadius = BASE_RADIUS + totalActions * ACTION_WEIGHT;
+
+    // Multi-day trips get bigger — a 14-day Japan trip is a bigger deal than a day trip
+    const durationBonus = (ev.category === "trip" || ev.category === "travel")
+      ? ev.durationDays * TRIP_DURATION_WEIGHT
+      : 0;
+
     const proxSizeBoost = 1 + PROX_SIZE_FACTOR / (days + 1);
-    const radius = Math.min(RADIUS_MAX, Math.max(RADIUS_MIN, baseRadius * proxSizeBoost));
+    const radius = Math.min(RADIUS_MAX, Math.max(RADIUS_MIN, (baseRadius + durationBonus) * proxSizeBoost));
 
     // ─── Y-axis = "how much this demands attention right now" ───
     const catMult = CATEGORY_MULTIPLIER[ev.category] ?? 1.0;
