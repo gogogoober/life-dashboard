@@ -52,7 +52,7 @@ interface ActionDot {
 
 const TAU = Math.PI * 2;
 const PADDING = { top: 30, right: 0, bottom: 45, left: 0 };
-const X_MIN = -8;
+const X_MIN = -6;
 const X_MAX = 120;
 const GRID_MARKERS = [
   { label: "1d", days: 1 },
@@ -425,6 +425,12 @@ function formatDateLabel(startDate: string): string {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
+const LABEL_MAX_CHARS = 18;
+
+function truncateLabel(name: string): string {
+  return name.length > LABEL_MAX_CHARS ? name.slice(0, LABEL_MAX_CHARS - 1) + "…" : name;
+}
+
 function drawLabels(ctx: CanvasRenderingContext2D, node: BubbleNode, h: number) {
   const { x, y, radius, opacity } = node;
   ctx.globalAlpha = opacity;
@@ -432,15 +438,16 @@ function drawLabels(ctx: CanvasRenderingContext2D, node: BubbleNode, h: number) 
   const labelAbove = y > h * 0.55;
   const labelY = labelAbove ? y - radius - 14 : y + radius + 18;
   const fontSize = Math.max(10, Math.min(14, 8 + node.event.importance * 0.6));
+  const label = truncateLabel(node.event.name);
 
   // Event name with outline for legibility
   ctx.font = `500 ${fontSize}px ${FONT}`;
   ctx.textAlign = "center";
   ctx.strokeStyle = canvasColors.bg.base;
   ctx.lineWidth = 3;
-  ctx.strokeText(node.event.name, x, labelY);
+  ctx.strokeText(label, x, labelY);
   ctx.fillStyle = canvasColors.text.primary + "cc";
-  ctx.fillText(node.event.name, x, labelY);
+  ctx.fillText(label, x, labelY);
 
   // Date below the name
   const dateY = labelAbove ? labelY - fontSize - 2 : labelY + 12;
