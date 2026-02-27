@@ -1,21 +1,22 @@
 import { useMemo } from "react";
-import type { WidgetProps, CalendarEvent } from "../types";
+import type { WidgetProps } from "../types";
+import type { DateEvent, EventCategory } from "../types/dates";
 import { canvasColors } from "../design-system";
-import { Section, Label } from "../components";
+import { Section } from "../components";
 
 interface TimelineRibbonProps extends WidgetProps {
-  events: CalendarEvent[];
+  events: DateEvent[];
+  windowDays?: number;
+  showRecurring?: boolean;
 }
-
-const TODAY = new Date();
-TODAY.setHours(0, 0, 0, 0);
 
 const FONT = "'JetBrains Mono', monospace";
 
-const TYPE_COLORS: Record<CalendarEvent["type"], string> = {
-  deadline: canvasColors.status.alert,
-  travel: canvasColors.status.primary,
-  event: canvasColors.status.warning,
+const CATEGORY_COLORS: Record<EventCategory, string> = {
+  work: canvasColors.category.project.primary,
+  personal: canvasColors.category.personal.primary,
+  travel: canvasColors.category.travel.primary,
+  social: canvasColors.status.warning,
 };
 
 interface DayCell {
@@ -27,18 +28,33 @@ interface DayCell {
 }
 
 interface EventSpan {
+  id: string;
   name: string;
   startIdx: number;
   endIdx: number;
   color: string;
   row: number;
+  importance: number;
+  isRecurring: boolean;
 }
 
-export function TimelineRibbon({ events }: TimelineRibbonProps) {
+function todayMidnight(): Date {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+export function TimelineRibbon({
+  events,
+  windowDays = 30,
+  showRecurring = true,
+}: TimelineRibbonProps) {
+  const today = useMemo(() => todayMidnight(), []);
+
   const days: DayCell[] = useMemo(() => {
     const arr: DayCell[] = [];
-    for (let i = 0; i < 30; i++) {
-      const d = new Date(TODAY);
+    for (let i = 0; i < windowDays; i++) {
+      const d = new Date(today);
       d.setDate(d.getDate() + i);
       arr.push({
         date: d,
@@ -49,28 +65,33 @@ export function TimelineRibbon({ events }: TimelineRibbonProps) {
       });
     }
     return arr;
-  }, []);
+  }, [today, windowDays]);
 
   const assignedSpans: EventSpan[] = useMemo(() => {
-    const spans = events
+    const filtered = showRecurring
+      ? events
+      : events.filter((e) => !e.isRecurring);
+
+    const spans = filtered
       .map((ev) => {
-        const startIdx = Math.max(
-          0,
-          Math.round((ev.start.getTime() - TODAY.getTime()) / (1000 * 60 * 60 * 24))
+        const start = new Date(ev.startDate + "T00:00:00");
+        const startIdx = Math.round(
+          (start.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
         );
-        const endIdx = Math.min(
-          29,
-          Math.round((ev.end.getTime() - TODAY.getTime()) / (1000 * 60 * 60 * 24))
-        );
+        const endIdx = startIdx + ev.durationDays - 1;
+
         return {
+          id: ev.id,
           name: ev.name,
-          startIdx,
-          endIdx,
-          color: TYPE_COLORS[ev.type],
+          startIdx: Math.max(0, startIdx),
+          endIdx: Math.min(windowDays - 1, endIdx),
+          color: CATEGORY_COLORS[ev.category],
           row: 0,
+          importance: ev.importance,
+          isRecurring: ev.isRecurring,
         };
       })
-      .filter((ev) => ev.endIdx >= 0 && ev.startIdx < 30);
+      .filter((s) => s.endIdx >= 0 && s.startIdx < windowDays);
 
     // Row assignment — avoid overlaps
     const rows: EventSpan[][] = [];
@@ -92,7 +113,7 @@ export function TimelineRibbon({ events }: TimelineRibbonProps) {
     });
 
     return sorted;
-  }, [events]);
+  }, [events, today, windowDays, showRecurring]);
 
   const maxRows = Math.max(1, ...assignedSpans.map((s) => s.row + 1));
   const ribbonHeight = 50 + maxRows * 26;
@@ -208,32 +229,36 @@ export function TimelineRibbon({ events }: TimelineRibbonProps) {
             pointerEvents: "none",
           }}
         >
-          {assignedSpans.map((ev, i) => {
-            const leftPct = (ev.startIdx / 30) * 100;
-            const widthPct = ((ev.endIdx - ev.startIdx + 1) / 30) * 100;
+          {assignedSpans.map((ev) => {
+            const leftPct = (ev.startIdx / windowDays) * 100;
+            const widthPct = ((ev.endIdx - ev.startIdx + 1) / windowDays) * 100;
+            const isHighImportance = ev.importance >= 7;
+            const barOpacity = ev.isRecurring ? 0.5 : 1;
+
             return (
               <div
-                key={i}
+                key={ev.id}
                 style={{
                   position: "absolute",
                   left: `${leftPct}%`,
                   width: `${Math.max(widthPct, 3.3)}%`,
                   top: ev.row * 26,
-                  height: 22,
+                  height: isHighImportance ? 24 : 22,
                   background: ev.color + "18",
-                  border: `1px solid ${ev.color}30`,
+                  border: `1px ${ev.isRecurring ? "dashed" : "solid"} ${ev.color}30`,
                   borderRadius: 5,
                   display: "flex",
                   alignItems: "center",
                   paddingLeft: 6,
                   paddingRight: 4,
                   overflow: "hidden",
+                  opacity: barOpacity,
                 }}
               >
                 <span
                   style={{
                     fontSize: 9,
-                    fontWeight: 500,
+                    fontWeight: isHighImportance ? 600 : 500,
                     color: ev.color + "dd",
                     fontFamily: FONT,
                     whiteSpace: "nowrap",
