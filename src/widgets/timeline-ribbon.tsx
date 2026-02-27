@@ -49,7 +49,7 @@ function todayMidnight(): Date {
 
 export function TimelineRibbon({
   events,
-  windowDays = 20,
+  windowDays = 30,
   showRecurring = true,
 }: TimelineRibbonProps) {
   const today = useMemo(() => todayMidnight(), []);
@@ -126,7 +126,7 @@ export function TimelineRibbon({
   const ribbonHeight = 50 + maxRows * 30;
 
   return (
-    <Section use="primary" flush="top" className="w-full" style={{ padding: 0 }}>
+    <Section use="primary" flush="top" className="w-full" style={{ paddingTop: "0" }}>
       <div
         style={{
           height: ribbonHeight,
@@ -135,7 +135,7 @@ export function TimelineRibbon({
         }}
       >
         {/* Day columns */}
-        <div style={{ display: "flex", height: 44, position: "relative" }}>
+        <div style={{ display: "flex", height: 44, position: "relative", paddingTop: 5}}>
           {days.map((day) => {
             const dayName = day.date.toLocaleDateString("en-US", { weekday: "short" });
             const dayNum = day.date.getDate();
