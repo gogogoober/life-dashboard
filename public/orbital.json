@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-27T14:34:46.541Z",
+  "generated_at": "2026-02-27T20:11:43.980Z",
   "events": [
     {
       "name": "Yoga",
@@ -16,7 +16,7 @@
     {
       "name": "Dana's 30th Birthday",
       "date": "2026-02-28",
-      "weight": 5,
+      "weight": 6,
       "actions": [
         {
           "name": "Find Jell-O shot recipe",
@@ -39,7 +39,7 @@
     {
       "name": "Chicago",
       "date": "2026-03-13",
-      "weight": 7,
+      "weight": 8,
       "actions": [
         {
           "name": "Find warm backpacking destination",
@@ -58,7 +58,7 @@
           "status": "todo"
         },
         {
-          "name": "Buy Mariano a gift",
+          "name": "Buy Mariano a gift (maybe)",
           "status": "todo"
         }
       ]
@@ -72,7 +72,7 @@
     {
       "name": "JAPAN!",
       "date": "2026-03-23",
-      "weight": 9,
+      "weight": 10,
       "actions": [
         {
           "name": "Flight to TAIPEI (BR 55)",
@@ -101,25 +101,10 @@
       ]
     },
     {
-      "name": "Dana Spring Break",
-      "date": "2026-03-23",
-      "weight": 5,
-      "actions": []
-    },
-    {
       "name": "Dad's Birthday",
       "date": "2026-04-07",
       "weight": 5,
-      "actions": [
-        {
-          "name": "Flight to Honolulu (ZG 2)",
-          "status": "todo"
-        },
-        {
-          "name": "Flight to New York (DL 650)",
-          "status": "todo"
-        }
-      ]
+      "actions": []
     },
     {
       "name": "Mariels Birthday",
