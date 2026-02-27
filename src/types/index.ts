@@ -143,16 +143,10 @@ export interface ActionThread {
   lastTouched: string;
 }
 
-// ─── Timeline Ribbon ──────────────────────────────────────────────
+// ─── Dates (unified schema) ───────────────────────────────────────
 
-export type CalendarEventType = "event" | "deadline" | "travel";
-
-export interface CalendarEvent {
-  name: string;
-  start: Date;
-  end: Date;
-  type: CalendarEventType;
-}
+export type { DateEvent, DateAction, DatesData, EventCategory, EventSource, ActionStatus } from "./dates";
+export { daysUntil, isMultiDay, openActionCount, withinDays } from "./dates";
 
 // ─── Placeholder ───────────────────────────────────────────────────
 
