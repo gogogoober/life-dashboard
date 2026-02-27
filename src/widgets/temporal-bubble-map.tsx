@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
-import type { WidgetProps, DashboardEvent, EventAction } from "../types";
-import { daysFromNow, logX, MAX_DAYS } from "../utils/temporal";
+import type { WidgetProps } from "../types";
+import type { DateEvent, DateAction } from "../types/dates";
+import { daysUntil } from "../types/dates";
+import { logX, MAX_DAYS } from "../utils/temporal";
 import {
   canvasColors,
   stressColor,
@@ -16,11 +18,11 @@ import {
 // ═══════════════════════════════════════════
 
 interface TemporalBubbleMapProps extends WidgetProps {
-  events: DashboardEvent[];
+  events: DateEvent[];
 }
 
 interface BubbleNode {
-  event: DashboardEvent;
+  event: DateEvent;
   days: number;
   xNorm: number;
   yNorm: number;
@@ -31,7 +33,7 @@ interface BubbleNode {
   glowColor: string;
   opacity: number;
   daysLabel: string;
-  todoActions: EventAction[];
+  todoActions: DateAction[];
   hash: number;
 }
 
@@ -74,19 +76,19 @@ function toPixelX(logVal: number, w: number): number {
 }
 
 function buildNodes(
-  events: DashboardEvent[],
+  events: DateEvent[],
   w: number,
   h: number
 ): { nodes: BubbleNode[]; dots: ActionDot[] } {
   const drawH = h - PADDING.top - PADDING.bottom;
 
   const nodes: BubbleNode[] = events.map((ev) => {
-    const days = daysFromNow(ev.date);
-    const todoActions = ev.actions.filter((a) => a.status === "todo");
+    const days = daysUntil(ev);
+    const todoActions = ev.actions.filter((a: DateAction) => a.status === "todo");
     const xNorm = logX(days) / 100;
     const hash = nameHash(ev.name);
     const yNorm = 0.18 + (hash % 58) / 100;
-    const baseRadius = (18 + ev.weight * 4 + todoActions.length * 2.5) / 2;
+    const baseRadius = (18 + ev.importance * 4 + todoActions.length * 2.5) / 2;
     const proximityMultiplier = 1 + 2 / (days + 1);
     const radius = baseRadius * proximityMultiplier;
 
@@ -332,7 +334,7 @@ function drawLabels(ctx: CanvasRenderingContext2D, node: BubbleNode, h: number) 
 
   const labelAbove = y > h * 0.55;
   const labelY = labelAbove ? y - radius - 10 : y + radius + 16;
-  const fontSize = Math.max(10, Math.min(14, 8 + node.event.weight * 0.6));
+  const fontSize = Math.max(10, Math.min(14, 8 + node.event.importance * 0.6));
 
   // Text with outline for legibility
   ctx.font = `500 ${fontSize}px ${FONT}`;
