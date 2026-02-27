@@ -1,0 +1,254 @@
+{
+  "generatedAt": "2026-02-27T14:34:43.510Z",
+  "windowDays": 60,
+  "events": [
+    {
+      "id": "yoga-2026-02-27",
+      "name": "Yoga",
+      "startDate": "2026-02-27",
+      "durationDays": 1,
+      "importance": 2,
+      "category": "personal",
+      "source": "google",
+      "isRecurring": false,
+      "context": "Evening yoga session.",
+      "actions": [],
+      "people": []
+    },
+    {
+      "id": "holywater-reservation",
+      "name": "Reservation at Holywater",
+      "startDate": "2026-02-27",
+      "durationDays": 1,
+      "importance": 3,
+      "category": "social",
+      "source": "google",
+      "isRecurring": false,
+      "context": "Dinner reservation at Holywater in Manhattan.",
+      "actions": [],
+      "people": []
+    },
+    {
+      "id": "danas-30th-birthday",
+      "name": "Dana's 30th Birthday",
+      "startDate": "2026-02-28",
+      "durationDays": 1,
+      "importance": 8,
+      "category": "social",
+      "source": "both",
+      "isRecurring": false,
+      "context": "Dana turns 30 this Saturday. Laser tag with a bigger group, organized with her best friend Shar. Drinks, food, yellow Jell-O shots.",
+      "hook": "Find Jell-O shot recipe and finalize group coordination with Shar.",
+      "actions": [
+        {
+          "id": "jelloshop-recipe",
+          "name": "Find Jell-O shot recipe",
+          "status": "todo"
+        }
+      ],
+      "people": [
+        "Dana",
+        "Shar"
+      ]
+    },
+    {
+      "id": "mindful-health-consultation",
+      "name": "Online Consultation & Diagnosis (Regine Blaise PMHNP)",
+      "startDate": "2026-03-06",
+      "durationDays": 1,
+      "importance": 4,
+      "category": "personal",
+      "source": "google",
+      "isRecurring": false,
+      "context": "25-minute telehealth consultation with Mindful Health. Complete medical intake form required.",
+      "actions": [],
+      "people": [
+        "Regine Blaise"
+      ]
+    },
+    {
+      "id": "catherine-wu-visiting",
+      "name": "Catherine Wu visiting",
+      "startDate": "2026-03-07",
+      "durationDays": 6,
+      "importance": 5,
+      "category": "social",
+      "source": "google",
+      "isRecurring": false,
+      "context": "Catherine Wu visiting for the week.",
+      "actions": [],
+      "people": [
+        "Catherine Wu"
+      ]
+    },
+    {
+      "id": "chicago-trip",
+      "name": "Chicago Trip",
+      "startDate": "2026-03-13",
+      "durationDays": 10,
+      "importance": 8,
+      "category": "travel",
+      "source": "both",
+      "isRecurring": false,
+      "context": "Trip to Chicago for Mariano's 30th birthday celebration on March 19th. Flights already booked (return leg routed through Chicago from Japan).",
+      "hook": "Finalize warm backpacking destination for Mar 14-15 weekend and arrange gear rentals from REI.",
+      "actions": [
+        {
+          "id": "backpacking-destination",
+          "name": "Find warm backpacking destination",
+          "status": "todo"
+        },
+        {
+          "id": "backpack-flights",
+          "name": "Book flights to backpacking location and from backpacking to Chicago",
+          "status": "todo"
+        },
+        {
+          "id": "rei-gear",
+          "name": "Figure out REI gear rentals",
+          "status": "todo"
+        },
+        {
+          "id": "mariano-gift",
+          "name": "Buy Mariano a gift",
+          "status": "todo"
+        }
+      ],
+      "people": [
+        "Mariano"
+      ]
+    },
+    {
+      "id": "mariano-30th-birthday",
+      "name": "Mariano's 30th Birthday",
+      "startDate": "2026-03-19",
+      "durationDays": 1,
+      "importance": 6,
+      "category": "social",
+      "source": "google",
+      "isRecurring": false,
+      "context": "Mariano turns 30. Birthday celebration in Chicago.",
+      "actions": [],
+      "people": [
+        "Mariano"
+      ]
+    },
+    {
+      "id": "dana-spring-break",
+      "name": "Dana Spring Break",
+      "startDate": "2026-03-23",
+      "durationDays": 5,
+      "importance": 5,
+      "category": "personal",
+      "source": "google",
+      "isRecurring": false,
+      "context": "Dana's spring break.",
+      "actions": [],
+      "people": [
+        "Dana"
+      ]
+    },
+    {
+      "id": "japan-trip-2026",
+      "name": "Japan Trip 2026",
+      "startDate": "2026-03-23",
+      "durationDays": 16,
+      "importance": 9,
+      "category": "travel",
+      "source": "both",
+      "isRecurring": false,
+      "context": "Two-week trip with Dana, March 23 – April 7. Route: Osaka → Nara → Kyoto → Takayama → Tokyo. All flights and hotels booked. Also celebrating Dana's 30th during the trip.",
+      "hook": "Plan activities in Kyoto and Takayama. Finalize fountain pen purchases (Sailor Pro Gear Slim limited editions in Tokyo) and research sibling gift pens.",
+      "actions": [
+        {
+          "id": "flight-chicago-taipei",
+          "name": "Flight to Taipei (BR 55) from Chicago",
+          "status": "done"
+        },
+        {
+          "id": "flight-taipei-osaka",
+          "name": "Flight to Osaka (BR 130) from Taipei",
+          "status": "done"
+        },
+        {
+          "id": "hotel-kyoto",
+          "name": "Stay at Travelodge Kyoto Shijo Kawaramachi (Mar 25-29)",
+          "status": "done"
+        },
+        {
+          "id": "flight-tokyo-honolulu",
+          "name": "Flight to Honolulu (ZG 2) from Tokyo",
+          "status": "done"
+        },
+        {
+          "id": "flight-honolulu-ny",
+          "name": "Flight to New York (DL 650) from Honolulu",
+          "status": "done"
+        },
+        {
+          "id": "plan-kyoto-activities",
+          "name": "Plan activities in Kyoto",
+          "status": "todo"
+        },
+        {
+          "id": "plan-takayama-activities",
+          "name": "Plan activities in Takayama",
+          "status": "todo"
+        },
+        {
+          "id": "plan-tokyo-activities",
+          "name": "Plan activities in Tokyo",
+          "status": "todo"
+        },
+        {
+          "id": "pen-decision",
+          "name": "Decide on pen and purchase limited editions before trip",
+          "status": "todo"
+        },
+        {
+          "id": "sibling-pens",
+          "name": "Research sibling gift pens (~$100 price point)",
+          "status": "todo"
+        },
+        {
+          "id": "fountain-pen-paper",
+          "name": "Find dot grid fountain pen paper",
+          "status": "todo"
+        }
+      ],
+      "people": [
+        "Dana"
+      ]
+    },
+    {
+      "id": "dads-birthday",
+      "name": "Dad's Birthday",
+      "startDate": "2026-04-07",
+      "durationDays": 1,
+      "importance": 6,
+      "category": "social",
+      "source": "google",
+      "isRecurring": false,
+      "context": "Dad's birthday. Hugo arrives back in New York the same day.",
+      "actions": [],
+      "people": [
+        "Dad"
+      ]
+    },
+    {
+      "id": "mariels-birthday",
+      "name": "Mariel's Birthday",
+      "startDate": "2026-04-23",
+      "durationDays": 1,
+      "importance": 5,
+      "category": "social",
+      "source": "google",
+      "isRecurring": false,
+      "context": "Mariel's birthday.",
+      "actions": [],
+      "people": [
+        "Mariel"
+      ]
+    }
+  ]
+}
