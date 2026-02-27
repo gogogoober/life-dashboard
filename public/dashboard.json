@@ -30,11 +30,12 @@
       "tag": "personal",
       "heat": "hot",
       "heat_reason": "deadline approaching (14 days), multiple unresolved actions",
-      "summary": "Mariano turns 30 on March 19th. Plan is a 1-2 night backpacking trip somewhere warm (weekend of Mar 14-15), then Chicago for the birthday celebration. Flights to Chicago already booked (return leg from Japan routed through Chicago). Need to find a warm backpacking destination and sort gear.",
+      "summary": "Mariano turns 30 on March 19th. Plan is a 1-2 night backpacking trip somewhere warm (weekend of Mar 14-15), then Chicago for the birthday celebration. Flights to Chicago already booked (return leg from Japan routed through Chicago). Need to find a warm backpacking destination and sort gear. Camping near Chicago mentioned.",
       "sub_threads": [
         "backpacking destination search",
         "REI gear rental",
-        "Chicago birthday plans"
+        "Chicago birthday plans",
+        "camping near Chicago"
       ],
       "open_actions": [
         "Find warm backpacking destination",
@@ -44,7 +45,7 @@
         "Buy Mariano a gift (maybe)"
       ],
       "start_date": "2026-03-13",
-      "end_date": "2026-03-23",
+      "end_date": "2026-03-22",
       "deadline": "2026-03-13",
       "pinned": false,
       "days_until_deadline": 14,
@@ -236,20 +237,6 @@
       "related_item_id": null
     },
     {
-      "id": "c9gmapb36op3gbb36tijcb9k64qmcbb2ckp3eb9h6cpm4php74omcp1j68_20260319",
-      "title": "Mariano birthday",
-      "type": "birthday",
-      "start": "2026-03-19",
-      "end": "2026-03-20",
-      "all_day": true,
-      "location": null,
-      "description": null,
-      "attendees": [],
-      "weight": 5,
-      "days_until": 20,
-      "related_item_id": "marianos-30th-chicago"
-    },
-    {
       "id": "494jl6gb7u75ro4fqjidqjikt6",
       "title": "Dana Spring Break",
       "type": "other",
@@ -306,18 +293,18 @@
       "related_item_id": "japan-trip-2026"
     },
     {
-      "id": "_60s42h1i8p0k4ba360p34b9k8cs4cb9p8oqjgba3752k4chm70q42ca560_20260407",
-      "title": "Dad's Birthday",
+      "id": "c9gmapb36op3gbb36tijcb9k64qmcbb2ckp3eb9h6cpm4php74omcp1j68_20260319",
+      "title": "Mariano birthday",
       "type": "birthday",
-      "start": "2026-04-07",
-      "end": "2026-04-08",
+      "start": "2026-03-19",
+      "end": "2026-03-20",
       "all_day": true,
       "location": null,
       "description": null,
       "attendees": [],
       "weight": 5,
-      "days_until": 39,
-      "related_item_id": null
+      "days_until": 20,
+      "related_item_id": "marianos-30th-chicago"
     },
     {
       "id": "lbbtvqoodaj63htsvbpnsto1vg",
@@ -346,6 +333,20 @@
       "weight": 7,
       "days_until": 39,
       "related_item_id": "japan-trip-2026"
+    },
+    {
+      "id": "_60s42h1i8p0k4ba360p34b9k8cs4cb9p8oqjgba3752k4chm70q42ca560_20260407",
+      "title": "Dad's Birthday",
+      "type": "birthday",
+      "start": "2026-04-07",
+      "end": "2026-04-08",
+      "all_day": true,
+      "location": null,
+      "description": null,
+      "attendees": [],
+      "weight": 5,
+      "days_until": 39,
+      "related_item_id": null
     },
     {
       "id": "1r463ark52knto3itt9cr2kr45_20260423",
