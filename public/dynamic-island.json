@@ -1,19 +1,47 @@
 {
-  "generated_at": "2026-02-26T05:07:38.317Z",
-  "type": "knockout",
-  "height": "tall",
+  "generated_at": "2026-02-27T20:11:43.812Z",
+  "type": "threads",
+  "height": "short",
   "content": {
-    "knockout": {
-      "prompt": "Dana's 30th is in 2 days. Quick wins to lock in the details.",
-      "tasks": [
-        "Find and save the Jell-O shot recipe for Saturday's laser tag party",
-        "Confirm final headcount with Shar for food/drink quantities",
-        "Pack a small bag for the weekend (Dana's party Saturday)"
-      ],
-      "points_each": 5,
-      "bonus": 15
-    },
-    "threads": null,
+    "threads": [
+      {
+        "name": "Dana's 30th Birthday",
+        "heat": "hot",
+        "last_touched": "2026-02-23",
+        "category": "personal"
+      },
+      {
+        "name": "Mariano's 30th / Chicago",
+        "heat": "hot",
+        "last_touched": "2026-02-27",
+        "category": "personal"
+      },
+      {
+        "name": "Japan Trip 2026",
+        "heat": "hot",
+        "last_touched": "2026-02-23",
+        "category": "personal"
+      },
+      {
+        "name": "Life Dashboard",
+        "heat": "warm",
+        "last_touched": "2026-02-23",
+        "category": "personal"
+      },
+      {
+        "name": "Go Game Engine / ECS",
+        "heat": "warm",
+        "last_touched": "2026-02-23",
+        "category": "personal"
+      },
+      {
+        "name": "Fountain Pen Research",
+        "heat": "warm",
+        "last_touched": "2026-02-23",
+        "category": "personal"
+      }
+    ],
+    "knockout": null,
     "nudge": null,
     "quote": null
   }
