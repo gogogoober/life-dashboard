@@ -117,7 +117,7 @@ function buildNodes(
     const baseRadius = BASE_RADIUS + totalActions * ACTION_WEIGHT;
 
     // Multi-day trips get bigger — a 14-day Japan trip is a bigger deal than a day trip
-    const durationBonus = (ev.category === "trip" || ev.category === "travel")
+    const durationBonus = ev.category === "travel"
       ? ev.durationDays * TRIP_DURATION_WEIGHT
       : 0;
 
