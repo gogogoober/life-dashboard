@@ -1,15 +1,9 @@
 {
-  "generated_at": "2026-02-28T04:51:30.588Z",
+  "generated_at": "2026-02-28T20:13:19.245Z",
   "type": "threads",
   "height": "short",
   "content": {
     "threads": [
-      {
-        "name": "Dana's 30th Birthday",
-        "heat": "hot",
-        "last_touched": "2026-02-23",
-        "category": "personal"
-      },
       {
         "name": "Mariano's 30th / Chicago",
         "heat": "hot",
@@ -30,6 +24,18 @@
       },
       {
         "name": "Go Game Engine / ECS",
+        "heat": "warm",
+        "last_touched": "2026-02-23",
+        "category": "personal"
+      },
+      {
+        "name": "Cerebro",
+        "heat": "warm",
+        "last_touched": "2026-02-23",
+        "category": "work"
+      },
+      {
+        "name": "Fountain Pen Research",
         "heat": "warm",
         "last_touched": "2026-02-23",
         "category": "personal"
