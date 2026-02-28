@@ -70,12 +70,12 @@ export function useDashboard() {
 
 export interface FocusSlot {
   slot: number;
-  category: string;
+  category: "work" | "personal" | "travel";
   thread_name: string;
-  question: string;       // Why now — shown at BOTTOM of card
-  answer: string[];       // 3 research nuggets — shown as bullet points MIDDLE
-  next_step: string;      // CTA ≤10 words — shown at TOP of card (emphasis)
-  effort: "low" | "medium" | "high";
+  question: string;
+  answer: string | string[];
+  next_step: string;
+  effort: "high" | "medium" | "low";
   countdown: string;
   tags: string[];
 }
