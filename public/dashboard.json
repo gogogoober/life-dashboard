@@ -126,7 +126,7 @@
       "start_date": null,
       "end_date": null,
       "deadline": null,
-      "pinned": false,
+      "pinned": true,
       "days_until_deadline": null,
       "calendar_source": false
     },
@@ -169,29 +169,15 @@
         "group coordination with Shar"
       ],
       "open_actions": [],
-      "start_date": null,
-      "end_date": null,
+      "start_date": "2026-02-28",
+      "end_date": "2026-03-01",
       "deadline": "2026-02-28",
       "pinned": false,
       "days_until_deadline": 0,
-      "calendar_source": false
+      "calendar_source": true
     }
   ],
   "calendar_events": [
-    {
-      "id": "3g2nuc1lkf69p4ticcr6d0tmjh_20260228",
-      "title": "Dana's Birthday",
-      "type": "birthday",
-      "start": "2026-02-28",
-      "end": "2026-03-01",
-      "all_day": true,
-      "location": null,
-      "description": null,
-      "attendees": [],
-      "weight": 5,
-      "days_until": 0,
-      "related_item_id": "danas-30th"
-    },
     {
       "id": "_68o32e9o6kqj6e9j70pjee1g74r3cd0",
       "title": "Online Consultation & Diagnosis (Regine Blaise PMHNP)",
@@ -207,7 +193,7 @@
       "related_item_id": null
     },
     {
-      "id": "_750jaca368p4cba18ks32b9k6h338ba36cp30ba36cp30ca56l0j8chj8g",
+      "id": "_750jaca368p4cba18ks32b9k6h338ba168r30ba36cp30ca56l0j8chj8g",
       "title": "Catherine Wu visiting",
       "type": "social",
       "start": "2026-03-07",
@@ -219,6 +205,20 @@
       "weight": 6,
       "days_until": 7,
       "related_item_id": null
+    },
+    {
+      "id": "c9gmapb36op3gbb36tijcb9k64qmcbb2ckp3eb9h6cpm4php74omcp1j68_20260319",
+      "title": "Mariano birthday",
+      "type": "birthday",
+      "start": "2026-03-19",
+      "end": "2026-03-20",
+      "all_day": true,
+      "location": null,
+      "description": null,
+      "attendees": [],
+      "weight": 5,
+      "days_until": 19,
+      "related_item_id": "marianos-30th-chicago"
     },
     {
       "id": "494jl6gb7u75ro4fqjidqjikt6",
@@ -277,18 +277,18 @@
       "related_item_id": "japan-trip-2026"
     },
     {
-      "id": "c9gmapb36op3gbb36tijcb9k64qmcbb2ckp3eb9h6cpm4php74omcp1j68_20260319",
-      "title": "Mariano birthday",
+      "id": "_60s42h1i8p0k4ba360p34b9k8cs4cb9p8oqjgba3752k4chm70q42ca560_20260407",
+      "title": "Dad's Birthday",
       "type": "birthday",
-      "start": "2026-03-19",
-      "end": "2026-03-20",
+      "start": "2026-04-07",
+      "end": "2026-04-08",
       "all_day": true,
       "location": null,
       "description": null,
       "attendees": [],
       "weight": 5,
-      "days_until": 19,
-      "related_item_id": "marianos-30th-chicago"
+      "days_until": 38,
+      "related_item_id": null
     },
     {
       "id": "lbbtvqoodaj63htsvbpnsto1vg",
@@ -300,7 +300,7 @@
       "location": "Tokyo NRT",
       "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DMBpVtxvsiTp7w48uplTmripc0XlF2O_Jw\n",
       "attendees": [],
-      "weight": 6,
+      "weight": 7,
       "days_until": 38,
       "related_item_id": "japan-trip-2026"
     },
@@ -314,23 +314,9 @@
       "location": "Honolulu HNL",
       "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DN2YgD6ie69-LUcHMGNhRbvrD7KCojA_0g\n",
       "attendees": [],
-      "weight": 6,
+      "weight": 7,
       "days_until": 38,
       "related_item_id": "japan-trip-2026"
-    },
-    {
-      "id": "_60s42h1i8p0k4ba360p34b9k8cs4cb9p8oqjgba3752k4chm70q42ca560_20260407",
-      "title": "Dad's Birthday",
-      "type": "birthday",
-      "start": "2026-04-07",
-      "end": "2026-04-08",
-      "all_day": true,
-      "location": null,
-      "description": null,
-      "attendees": [],
-      "weight": 5,
-      "days_until": 38,
-      "related_item_id": null
     },
     {
       "id": "1r463ark52knto3itt9cr2kr45_20260423",
@@ -371,6 +357,6 @@
     "hot_count": 2,
     "warm_count": 4,
     "archived_count": 1,
-    "upcoming_events_count": 12
+    "upcoming_events_count": 11
   }
 }
