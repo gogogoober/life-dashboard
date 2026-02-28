@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-28T21:29:39.887Z",
+  "generated_at": "2026-02-28T21:46:45.730Z",
   "energy_band": "wind_down",
   "is_work_hours": false,
   "is_weekend": true,
@@ -8,54 +8,66 @@
       "slot": 1,
       "category": "travel",
       "thread_name": "Mariano's 30th / Chicago",
-      "question": "You're 13 days from Chicago with no backpacking destination picked and no gear sorted. You promised Mariano a warm weekend trip before his 30th.",
-      "answer": "Arizona and Southern Utah have 70°F+ temps mid-March — Superstition Wilderness near Phoenix needs no permit for overnight trips. REI rents full backpacking kits for ~$70/weekend including tent, sleeping bag, pad, and pack.",
-      "next_step": "Search 'REI Adventure Rentals backpacking package' and save rental cost + pickup location to your Chicago Craft doc",
-      "effort": "low",
+      "question": "Mariano's birthday is in 19 days, but you leave for Chicago in 13 days for the backpacking trip. You still need to find a warm March destination, book flights there, and figure out REI gear rentals.",
+      "answer": [
+        "Zion 60-70°F mid-March, best warm option",
+        "REI rents full kits ~$50-70/weekend",
+        "Chicago Lincoln Park REI has gear pickup"
+      ],
+      "next_step": "Search warm March backpacking near Chicago",
+      "effort": "medium",
       "countdown": "13 days",
       "tags": [
         "backpack",
-        "tent",
         "mountain",
-        "travel",
-        "desert",
-        "gear"
+        "tent",
+        "hiking",
+        "boot",
+        "personal"
       ]
     },
     {
       "slot": 2,
       "category": "travel",
-      "thread_name": "Fountain Pen Research",
-      "question": "You're hunting Sailor Pro Gear limited editions in Tokyo and ~$100 pens for your siblings. You have 23 days before the trip.",
-      "answer": "Sailor Pro Gear Slims run ¥22,000-35,000 ($150-240) — Tokyo limited editions at Kingdom Note in Shinjuku. For siblings: Pilot Custom 74 is ¥10,000 (~$70) in Japan vs $170 US. Itoya Ginza stocks both and has 12 floors of stationery.",
-      "next_step": "Save 'Kingdom Note Shinjuku' and 'Itoya Ginza' with addresses to your Tokyo Craft doc",
-      "effort": "low",
-      "countdown": "23 days",
-      "tags": [
-        "pen",
-        "ink",
-        "japan",
-        "shop",
-        "travel",
-        "writing"
-      ]
-    },
-    {
-      "slot": 3,
-      "category": "travel",
       "thread_name": "Japan Trip 2026",
-      "question": "You have 3 days in Kyoto with no activity plan. Dana's 30th happens during this trip too.",
-      "answer": "Fushimi Inari has 10,000 vermillion torii gates you walk through — no reservation needed, best at sunrise. Arashiyama bamboo grove opens at 8am, gets crowded by 10am. Philosopher's Path is a 2km canal walk connecting temples.",
-      "next_step": "Add 'Fushimi Inari sunrise', 'Arashiyama bamboo before 10am', and 'Philosopher's Path' to your Kyoto Craft doc",
+      "question": "Japan trip is 23 days away. All logistics locked but zero activities planned for Kyoto (4 nights), Takayama, or Tokyo. Need to start building the itinerary now.",
+      "answer": [
+        "Fushimi Inari + Arashiyama bamboo most popular",
+        "Philosopher's Path quieter, cherry blossom route",
+        "Nishiki Market for food, near hotel"
+      ],
+      "next_step": "Save Fushimi Inari + Arashiyama to Kyoto doc",
       "effort": "low",
       "countdown": "23 days",
       "tags": [
         "temple",
         "gate",
         "japan",
-        "bamboo",
+        "shrine",
         "travel",
-        "shrine"
+        "personal"
+      ]
+    },
+    {
+      "slot": 3,
+      "category": "personal",
+      "thread_name": "Fountain Pen Research",
+      "question": "You're going to Japan in 23 days specifically for fountain pen shopping but haven't decided what to buy. Sailor Pro Gear Slim is the front-runner for Tokyo limited editions.",
+      "answer": [
+        "Pilot CH92 ~$110 in Japan vs $180 US",
+        "Sailor Pro Gear Slim ~$130 Japan price",
+        "Itoya Ginza 12-floor stationery, one-stop shop"
+      ],
+      "next_step": "Compare Sailor Pro Gear Slim limited editions",
+      "effort": "low",
+      "countdown": "23 days",
+      "tags": [
+        "pen",
+        "ink",
+        "writing",
+        "shop",
+        "japan",
+        "personal"
       ]
     }
   ],
