@@ -1,36 +1,36 @@
 {
-  "generated_at": "2026-02-27T20:11:43.046Z",
-  "energy_band": "wind_down",
+  "generated_at": "2026-02-28T04:51:30.383Z",
+  "energy_band": "ramp_up",
   "is_work_hours": false,
-  "is_weekend": false,
+  "is_weekend": true,
   "slots": [
     {
       "slot": 1,
       "category": "personal",
       "thread_name": "Dana's 30th Birthday",
-      "hook": "Dana's party is tomorrow and you promised yellow Jell-O shots. They need 4 hours to set — tonight's your last window.",
+      "hook": "Dana's laser tag party is today and you promised yellow Jell-O shots. They need 4 hours to set.",
       "next_step": "Search 'yellow Jell-O shot recipe vodka' and pick one with good reviews",
       "effort": "low",
-      "countdown": "tomorrow"
+      "countdown": "today"
     },
     {
       "slot": 2,
       "category": "travel",
       "thread_name": "Mariano's 30th / Chicago",
-      "hook": "You're backpacking in 14 days with no destination and no gear. One good search tonight narrows the location list.",
-      "next_step": "Search 'warm weather backpacking mid-March southeast destinations'",
+      "hook": "You're flying into Chicago in 13 days with no backpacking destination locked. One search for warm weekend trails could close the biggest open question.",
+      "next_step": "Search 'warm backpacking trails March 14-15 weekend' and bookmark three options",
       "effort": "medium",
-      "countdown": "14 days"
+      "countdown": "13 days"
     },
     {
       "slot": 3,
       "category": "travel",
       "thread_name": "Japan Trip 2026",
-      "hook": "You land in Kyoto in 26 days with zero activity plans. One search right now locks down a must-do for day one.",
-      "next_step": "Search 'best things to do Kyoto first time visitor' and bookmark top 3",
+      "hook": "Kyoto has no activity plan yet and you land there in 25 days. What's one thing you absolutely want to do?",
+      "next_step": "Open Google and search 'best things to do in Kyoto first time'",
       "effort": "low",
-      "countdown": "26 days"
+      "countdown": "23 days"
     }
   ],
-  "active_slot": 1
+  "active_slot": 2
 }
