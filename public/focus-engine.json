@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-28T20:13:21.415Z",
+  "generated_at": "2026-02-28T21:29:39.887Z",
   "energy_band": "wind_down",
   "is_work_hours": false,
   "is_weekend": true,
@@ -8,56 +8,56 @@
       "slot": 1,
       "category": "travel",
       "thread_name": "Mariano's 30th / Chicago",
-      "question": "You're 13 days out from Chicago with no backpacking destination booked — the warm weekend trip is March 14-15. You also need to lock down flights and REI gear rentals.",
-      "answer": "Southern Utah (Zion/Capitol Reef) is 60-70°F mid-March, Texas has Big Bend at similar temps, or Joshua Tree in California hits 75°F. REI rents complete backpacking kits for ~$50-70/weekend — you can reserve online and pick up at Chicago Lincoln Park or Northbrook stores.",
-      "next_step": "Search 'March weather Zion vs Big Bend vs Joshua Tree' and save the best option to your Chicago Craft doc",
-      "effort": "medium",
+      "question": "You're 13 days from Chicago with no backpacking destination picked and no gear sorted. You promised Mariano a warm weekend trip before his 30th.",
+      "answer": "Arizona and Southern Utah have 70°F+ temps mid-March — Superstition Wilderness near Phoenix needs no permit for overnight trips. REI rents full backpacking kits for ~$70/weekend including tent, sleeping bag, pad, and pack.",
+      "next_step": "Search 'REI Adventure Rentals backpacking package' and save rental cost + pickup location to your Chicago Craft doc",
+      "effort": "low",
       "countdown": "13 days",
       "tags": [
         "backpack",
-        "mountain",
         "tent",
-        "airplane",
+        "mountain",
         "travel",
-        "camping"
+        "desert",
+        "gear"
       ]
     },
     {
       "slot": 2,
       "category": "travel",
+      "thread_name": "Fountain Pen Research",
+      "question": "You're hunting Sailor Pro Gear limited editions in Tokyo and ~$100 pens for your siblings. You have 23 days before the trip.",
+      "answer": "Sailor Pro Gear Slims run ¥22,000-35,000 ($150-240) — Tokyo limited editions at Kingdom Note in Shinjuku. For siblings: Pilot Custom 74 is ¥10,000 (~$70) in Japan vs $170 US. Itoya Ginza stocks both and has 12 floors of stationery.",
+      "next_step": "Save 'Kingdom Note Shinjuku' and 'Itoya Ginza' with addresses to your Tokyo Craft doc",
+      "effort": "low",
+      "countdown": "23 days",
+      "tags": [
+        "pen",
+        "ink",
+        "japan",
+        "shop",
+        "travel",
+        "writing"
+      ]
+    },
+    {
+      "slot": 3,
+      "category": "travel",
       "thread_name": "Japan Trip 2026",
-      "question": "You have 4 nights in Kyoto starting March 25 but no plan for what to do. Dana's turning 30 on this trip — Kyoto is the perfect place to make that memorable.",
-      "answer": "Fushimi Inari has 10,000 vermillion torii gates you walk through — no reservation needed, best at sunrise or sunset. Arashiyama bamboo grove opens at 8am (go early to avoid crowds). Kinkaku-ji (Golden Pavilion) is the iconic photo spot, and Philosopher's Path is a 2km canal walk connecting temples.",
-      "next_step": "Save 'Fushimi Inari sunrise', 'Arashiyama bamboo 8am', 'Kinkaku-ji', and 'Philosopher's Path' to your Kyoto section in the Japan Craft doc",
+      "question": "You have 3 days in Kyoto with no activity plan. Dana's 30th happens during this trip too.",
+      "answer": "Fushimi Inari has 10,000 vermillion torii gates you walk through — no reservation needed, best at sunrise. Arashiyama bamboo grove opens at 8am, gets crowded by 10am. Philosopher's Path is a 2km canal walk connecting temples.",
+      "next_step": "Add 'Fushimi Inari sunrise', 'Arashiyama bamboo before 10am', and 'Philosopher's Path' to your Kyoto Craft doc",
       "effort": "low",
       "countdown": "23 days",
       "tags": [
         "temple",
         "gate",
         "japan",
-        "shrine",
+        "bamboo",
         "travel",
-        "bamboo"
-      ]
-    },
-    {
-      "slot": 3,
-      "category": "personal",
-      "thread_name": "Fountain Pen Research",
-      "question": "You want sibling gifts from Japan — fountain pens in the ~$100 range that you can't easily get in the US.",
-      "answer": "Pilot Custom Heritage 92 runs ¥11,000 (~$110) in Japan vs $180 in the US — transparent demonstrator with piston fill. Sailor Pro Gear Slim is ¥13,000 (~$130) in Japan. Tokyo's Itoya Ginza has 12 floors of stationery and is the best one-stop shop.",
-      "next_step": "Save 'Itoya Ginza' and note 'Pilot CH92 ¥11k, Sailor PG Slim ¥13k' to your pen shopping section in the Japan Craft doc",
-      "effort": "low",
-      "countdown": "23 days",
-      "tags": [
-        "pen",
-        "ink",
-        "writing",
-        "shop",
-        "japan",
-        "gift"
+        "shrine"
       ]
     }
   ],
-  "active_slot": 2
+  "active_slot": 1
 }
