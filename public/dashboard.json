@@ -126,7 +126,7 @@
       "start_date": null,
       "end_date": null,
       "deadline": null,
-      "pinned": true,
+      "pinned": false,
       "days_until_deadline": null,
       "calendar_source": false
     },
@@ -147,7 +147,7 @@
       "open_actions": [
         "Decide on pen before trip",
         "Research sibling price-point options",
-        "Find good dot grid fountain pen pen paper"
+        "Find good dot grid fountain pen paper"
       ],
       "start_date": null,
       "end_date": null,
@@ -162,8 +162,8 @@
       "category": "trip-event",
       "tag": "personal",
       "heat": "archived",
-      "heat_reason": "deadline passed (event date reached)",
-      "summary": "Dana turns 30 this Saturday. Laser tag with a bigger group, organized with her best friend Shar. Drinks, food, yellow Jell-O shots. Gift already bought.",
+      "heat_reason": "event completed (deadline reached)",
+      "summary": "Dana's 30th birthday celebration on Feb 28. Laser tag with a bigger group, organized with her best friend Shar. Included drinks, food, and yellow Jell-O shots. Gift was purchased in advance.",
       "sub_threads": [
         "Jell-O shot recipe",
         "group coordination with Shar"
@@ -207,7 +207,7 @@
       "related_item_id": null
     },
     {
-      "id": "_750jaca368p4cba18ks32ba6h338ba168r30ba36cp30ca56l0j8chj8g",
+      "id": "_750jaca368p4cba18ks32b9k6h338ba36cp30ba36cp30ca56l0j8chj8g",
       "title": "Catherine Wu visiting",
       "type": "social",
       "start": "2026-03-07",
@@ -237,7 +237,7 @@
     {
       "id": "494jl6gb7u75ro4fqjidqjikt6",
       "title": "Dana Spring Break",
-      "type": "other",
+      "type": "social",
       "start": "2026-03-23",
       "end": "2026-03-28",
       "all_day": true,
@@ -371,6 +371,6 @@
     "hot_count": 2,
     "warm_count": 4,
     "archived_count": 1,
-    "upcoming_events_count": 13
+    "upcoming_events_count": 12
   }
 }
