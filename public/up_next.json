@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-28T21:46:44.623Z",
+  "generated_at": "2026-02-28T22:07:23.799Z",
   "context": {
     "day_of_week": "saturday",
     "time_of_day": "evening",
@@ -11,7 +11,7 @@
       "task": "Find warm backpacking destination and book flights",
       "epic": "Mariano's 30th / Chicago",
       "category": "personal",
-      "left_off": "Multiple open actions including destination search and gear rental",
+      "left_off": "Multiple unresolved actions: backpacking destination, flights, gear rental",
       "left_off_date": "Feb 27",
       "urgency": "active"
     },
@@ -19,22 +19,22 @@
       "task": "Plan activities in Kyoto, Takayama, and Tokyo",
       "epic": "Japan Trip 2026",
       "category": "personal",
-      "left_off": "City activity planning phase underway",
+      "left_off": "In activity planning phase after booking all flights and hotels",
       "left_off_date": "Feb 23",
       "urgency": "active"
     },
     {
-      "task": "Decide on pen before trip and research sibling options",
+      "task": "Decide on Sailor Pro Gear Slim and research sibling gift pens",
       "epic": "Fountain Pen Research",
       "category": "personal",
-      "left_off": "Leaning toward Sailor Pro Gear Slim for limited editions",
+      "left_off": "Leaning toward Sailor Pro Gear Slim, researching limited editions for Tokyo",
       "left_off_date": "Feb 23",
       "urgency": "active"
     }
   ],
   "pickup_notes": [
-    "Mariano's trip: need to find warm backpacking location",
-    "Japan trip: activity planning for three cities"
+    "Backpacking trip for Mariano's 30th needs destination and flights booked",
+    "Japan trip activity planning in progress for Kyoto, Takayama, Tokyo"
   ],
   "habits": [
     {
@@ -56,12 +56,12 @@
   "smart_priorities": [
     {
       "label": "Mariano's 30th / Chicago",
-      "reason": "Deadline in 13 days with unresolved flights",
+      "reason": "Deadline in 13 days with unresolved bookings",
       "urgency": "high"
     },
     {
       "label": "Japan Trip 2026",
-      "reason": "Departure in 23 days needs activity planning",
+      "reason": "Departure in 23 days, activities still unplanned",
       "urgency": "medium"
     }
   ]
