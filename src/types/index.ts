@@ -126,10 +126,12 @@ export type EffortLevel = "high" | "medium" | "low";
 
 export interface QuestCard {
   slot: string;
-  hook: string;
+  question: string;
+  answer: string;
   nextStep: string;
   effort: EffortLevel;
   countdown: string;
+  tags: string[];
   active: boolean;
 }
 

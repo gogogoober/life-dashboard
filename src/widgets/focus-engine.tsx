@@ -1,23 +1,30 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import type { WidgetProps } from "../types";
 import type { FocusSlot } from "../data/dashboard";
 import { Section } from "../components";
 import { Player } from "@lordicon/react";
-import travelIcon from "../assets/icons/travel.json";
-import workIcon from "../assets/icons/work.json";
-import personalIcon from "../assets/icons/personal.json";
-import socialIcon from "../assets/icons/social.json";
+import { getIconForTags } from "../utils/get-icon-for-tags";
 
 // ═══════════════════════════════════════════
-// Icon registry — map categories to Lordicon JSON objects
+// Dynamic icon loading via Vite lazy glob
 // ═══════════════════════════════════════════
 
-const CATEGORY_ICONS: Record<string, object> = {
-  travel: travelIcon,
-  work: workIcon,
-  personal: personalIcon,
-  social: socialIcon,
-};
+const iconModules = import.meta.glob<{ default: object }>(
+  "../assets/icons/lordicon/*.json"
+);
+
+function useIconData(hash: string): object | null {
+  const [data, setData] = useState<object | null>(null);
+
+  useEffect(() => {
+    const key = `../assets/icons/lordicon/${hash}.json`;
+    const loader = iconModules[key];
+    if (!loader) return;
+    loader().then((mod) => setData(mod.default));
+  }, [hash]);
+
+  return data;
+}
 
 const CATEGORY_FALLBACK: Record<string, string> = {
   travel: "✈",
@@ -65,30 +72,36 @@ const MOCK_QUESTS: Array<FocusSlot & { active: boolean }> = [
     slot: 1,
     category: "travel",
     thread_name: "Japan Trip Planning",
-    hook: "Japan trip is fast approaching — let's get some activities for Kyoto bookmarked! Kyoto is the historical heart of Japan with stunning temples.",
-    next_step: "In your Kyoto Craft doc, save three temples to visit",
+    question: "You're 23 days out with no Kyoto plan — you have 3 days there.",
+    answer: "Fushimi Inari has 10,000 vermillion torii gates you walk through — no reservation needed. Arashiyama bamboo grove is best before 8am.",
+    next_step: "Save 'Fushimi Inari' and 'Arashiyama bamboo grove' to your Kyoto Craft doc",
     effort: "low",
-    countdown: "26 days",
+    countdown: "23 days",
+    tags: ["temple", "gate", "japan", "shrine", "travel", "building"],
     active: true,
   },
   {
     slot: 2,
     category: "work",
     thread_name: "Rate Limiter PR",
-    hook: "That burst limit edge case has been nagging at you. Sarah's review is pending but this bug is yours to squash.",
-    next_step: "Open the failing test and read the assertion",
+    question: "Your Snake prototype works but components aren't registered to entities yet.",
+    answer: "In most ECS systems, entities are just integer IDs — components live in typed arrays indexed by that ID. Your Snake already has the entities; you need the typed storage layer.",
+    next_step: "Open your ECS repo and create a ComponentStore struct with a map[EntityID]interface{}",
     effort: "high",
     countdown: "4 days",
+    tags: ["computer", "code", "laptop", "game", "desk"],
     active: false,
   },
   {
     slot: 3,
     category: "personal",
     thread_name: "Dana's 30th Birthday",
-    hook: "Dana's 30th is 3 days away. Jell-O shots need 4 hours to set — tonight or tomorrow morning?",
+    question: "Dana's 30th is 3 days away. Jell-O shots need 4 hours to set.",
+    answer: "The classic ratio is 1 cup boiling water + 1 cup vodka per 3oz Jello box. Yellow works with lemon Jello + Absolut Citron. Makes about 20 shots per batch.",
     next_step: "Pick a time and set a reminder for Jell-O shots",
     effort: "low",
     countdown: "3 days",
+    tags: ["party", "cake", "drink", "gift", "person"],
     active: false,
   },
 ];
@@ -113,22 +126,17 @@ function parseDays(countdown: string): number {
 }
 
 // ═══════════════════════════════════════════
-// Icon component with fallback
+// Icon component — tag-matched with fallback
 // ═══════════════════════════════════════════
 
-function CategoryIcon({ category }: { category: string }) {
+function SlotIcon({ tags, category }: { tags: string[]; category: string }) {
   const playerRef = useRef<Player>(null);
   const colors = CATEGORY_COLORS[category] || CATEGORY_COLORS.personal;
-  const iconData = CATEGORY_ICONS[category];
   const fallback = CATEGORY_FALLBACK[category] || "•";
-  const iconLoaded = useRef(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      playerRef.current?.playFromBeginning();
-    }, 300);
-    return () => clearTimeout(timer);
-  }, []);
+  // Stable hash: compute once per tag set (avoids re-roll on re-render)
+  const hash = useState(() => getIconForTags(tags, category))[0];
+  const iconData = useIconData(hash);
 
   if (!iconData) {
     return (
@@ -143,29 +151,11 @@ function CategoryIcon({ category }: { category: string }) {
         icon={iconData}
         size={56}
         colors={`primary:${colors.primary},secondary:${colors.emphasis}`}
-        onReady={() => {
-          iconLoaded.current = true;
-          playerRef.current?.playFromBeginning();
-        }}
+        onReady={() => playerRef.current?.playFromBeginning()}
         onComplete={() => {
           setTimeout(() => playerRef.current?.playFromBeginning(), 2000);
         }}
       />
-      {!iconLoaded.current && (
-        <span
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: 36,
-            color: colors.primary,
-          }}
-        >
-          {fallback}
-        </span>
-      )}
     </div>
   );
 }
@@ -192,7 +182,7 @@ function FocusCard({ quest }: FocusCardProps) {
         padding: 20,
         display: "grid",
         gridTemplateColumns: "80px 1fr",
-        gridTemplateRows: "auto auto auto",
+        gridTemplateRows: "auto auto auto auto",
         gap: 0,
         position: "relative",
         overflow: "hidden",
@@ -228,10 +218,10 @@ function FocusCard({ quest }: FocusCardProps) {
           justifyContent: "center",
         }}
       >
-        <CategoryIcon category={quest.category} />
+        <SlotIcon tags={quest.tags} category={quest.category} />
       </div>
 
-      {/* Row 1: CTA */}
+      {/* Row 1: Question (the reminder) */}
       <div
         style={{
           gridColumn: 2,
@@ -244,38 +234,54 @@ function FocusCard({ quest }: FocusCardProps) {
       >
         <div
           style={{
-            fontSize: 13,
-            fontWeight: 600,
-            color: "var(--text-emphasis, #d4f5d4)",
-            lineHeight: 1.3,
-            letterSpacing: "-0.01em",
+            fontSize: 11,
+            fontWeight: 400,
+            color: "var(--text-secondary, #5a7a5a)",
+            lineHeight: 1.5,
+            letterSpacing: "0.01em",
           }}
         >
-          {quest.next_step}
+          {quest.question}
         </div>
       </div>
 
-      {/* Row 2: Hook */}
+      {/* Row 2: Answer (research nugget) */}
       <div
         style={{
           gridColumn: "1 / -1",
           gridRow: 2,
-          paddingTop: 14,
+          paddingTop: 12,
           fontSize: 10,
           fontWeight: 400,
-          color: "var(--text-secondary, #5a7a5a)",
+          color: "var(--text-primary, #c8d8c8)",
           lineHeight: 1.6,
           letterSpacing: "0.01em",
         }}
       >
-        {quest.hook}
+        {quest.answer}
       </div>
 
-      {/* Row 3: Footer */}
+      {/* Row 3: Next step (2-minute action) */}
       <div
         style={{
           gridColumn: "1 / -1",
           gridRow: 3,
+          paddingTop: 10,
+          fontSize: 13,
+          fontWeight: 600,
+          color: "var(--text-emphasis, #d4f5d4)",
+          lineHeight: 1.3,
+          letterSpacing: "-0.01em",
+        }}
+      >
+        {quest.next_step}
+      </div>
+
+      {/* Row 4: Footer */}
+      <div
+        style={{
+          gridColumn: "1 / -1",
+          gridRow: 4,
           paddingTop: 16,
           display: "flex",
           alignItems: "baseline",

@@ -72,10 +72,12 @@ export interface FocusSlot {
   slot: number;
   category: "work" | "personal" | "travel";
   thread_name: string;
-  hook: string;
+  question: string;
+  answer: string;
   next_step: string;
   effort: "high" | "medium" | "low";
   countdown: string;
+  tags: string[];
 }
 
 interface FocusEngineData {
