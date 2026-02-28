@@ -1,68 +1,65 @@
 {
-  "generated_at": "2026-02-28T04:51:30.537Z",
+  "generated_at": "2026-02-28T20:13:20.177Z",
   "context": {
     "day_of_week": "saturday",
-    "time_of_day": "morning",
+    "time_of_day": "evening",
     "is_weekend": true,
-    "after_6pm": false
+    "after_6pm": true
   },
   "active_threads": [
     {
-      "task": "Find yellow Jell-O shot recipe",
-      "epic": "Dana's 30th Birthday",
-      "category": "personal",
-      "left_off": "Party organized with Shar, gift bought, recipe still needed",
-      "left_off_date": "Feb 23",
-      "urgency": "active"
-    },
-    {
-      "task": "Find warm backpacking destination for Mar 14-15",
+      "task": "Find warm backpacking destination and book flights",
       "epic": "Mariano's 30th / Chicago",
       "category": "personal",
-      "left_off": "Flights to Chicago booked, backpacking trip unplanned",
+      "left_off": "Last mentioned Feb 27. Multiple unresolved: backpacking destination, flights, REI gear, gift",
       "left_off_date": "Feb 27",
       "urgency": "active"
     },
     {
-      "task": "Plan activities in Kyoto",
+      "task": "Plan activities in Kyoto, Takayama, and Tokyo",
       "epic": "Japan Trip 2026",
       "category": "personal",
-      "left_off": "All flights and hotels booked, now planning activities",
+      "left_off": "Last mentioned Feb 23. All flights and hotels booked. Now in activity planning phase",
+      "left_off_date": "Feb 23",
+      "urgency": "active"
+    },
+    {
+      "task": "Decide on pen model and research sibling gift options",
+      "epic": "Fountain Pen Research",
+      "category": "personal",
+      "left_off": "Last mentioned Feb 23. Leaning toward Sailor Pro Gear Slim for Tokyo limited editions",
       "left_off_date": "Feb 23",
       "urgency": "active"
     }
   ],
   "pickup_notes": [
-    "Dana's birthday party tonight — need Jell-O shot recipe",
-    "Mariano's trip in 13 days — find warm backpacking spot"
+    "Mariano's trip needs destination and flights booked soon",
+    "Japan activities planning still open for three cities"
   ],
   "habits": [
     {
-      "id": "workout",
       "label": "Workout",
       "status": "ok"
     },
     {
-      "id": "laundry",
       "label": "Laundry",
       "status": "ok"
     },
     {
-      "id": "cleaning",
       "label": "Cleaning",
       "status": "ok"
     }
   ],
   "smart_priorities": [
     {
-      "label": "Dana's 30th Birthday",
-      "reason": "Party is today — find recipe now",
+      "label": "Mariano's 30th / Chicago",
+      "reason": "Deadline in 13 days with flights unbooked",
       "urgency": "high"
     },
     {
-      "label": "Mariano's 30th / Chicago",
-      "reason": "13 days out — book backpacking flights soon",
-      "urgency": "high"
+      "label": "Japan Trip 2026",
+      "reason": "Departure in 23 days, activities still unplanned",
+      "urgency": "medium"
     }
   ]
 }
