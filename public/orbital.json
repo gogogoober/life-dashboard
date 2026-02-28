@@ -1,28 +1,11 @@
 {
-  "generated_at": "2026-02-27T20:11:43.980Z",
+  "generated_at": "2026-02-28T20:13:19.664Z",
   "events": [
     {
-      "name": "Yoga",
-      "date": "2026-02-27",
-      "weight": 2,
-      "actions": []
-    },
-    {
-      "name": "Reservation at Holywater",
-      "date": "2026-02-27",
-      "weight": 2,
-      "actions": []
-    },
-    {
-      "name": "Dana's 30th Birthday",
+      "name": "Dana's Birthday",
       "date": "2026-02-28",
-      "weight": 6,
-      "actions": [
-        {
-          "name": "Find Jell-O shot recipe",
-          "status": "todo"
-        }
-      ]
+      "weight": 5,
+      "actions": []
     },
     {
       "name": "Online Consultation & Diagnosis (Regine Blaise PMHNP)",
@@ -70,9 +53,15 @@
       "actions": []
     },
     {
+      "name": "Dana Spring Break",
+      "date": "2026-03-23",
+      "weight": 6,
+      "actions": []
+    },
+    {
       "name": "JAPAN!",
       "date": "2026-03-23",
-      "weight": 10,
+      "weight": 9,
       "actions": [
         {
           "name": "Flight to TAIPEI (BR 55)",
@@ -96,6 +85,18 @@
         },
         {
           "name": "Plan activities in Tokyo",
+          "status": "todo"
+        },
+        {
+          "name": "Decide on pen before trip",
+          "status": "todo"
+        },
+        {
+          "name": "Research sibling price-point options",
+          "status": "todo"
+        },
+        {
+          "name": "Find good dot grid fountain pen paper",
           "status": "todo"
         }
       ]
