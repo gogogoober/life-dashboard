@@ -2,28 +2,6 @@
   "generated_at": "2026-02-28T00:00:00Z",
   "items": [
     {
-      "id": "danas-30th",
-      "title": "Dana's 30th Birthday",
-      "category": "trip-event",
-      "tag": "personal",
-      "heat": "hot",
-      "heat_reason": "deadline (today)",
-      "summary": "Dana turns 30 this Saturday. Laser tag with a bigger group, organized with her best friend Shar. Drinks, food, yellow Jell-O shots. Gift already bought.",
-      "sub_threads": [
-        "Jell-O shot recipe",
-        "group coordination with Shar"
-      ],
-      "open_actions": [
-        "Find Jell-O shot recipe"
-      ],
-      "start_date": "2026-02-28",
-      "end_date": "2026-02-28",
-      "deadline": "2026-02-28",
-      "pinned": false,
-      "days_until_deadline": 0,
-      "calendar_source": true
-    },
-    {
       "id": "marianos-30th-chicago",
       "title": "Mariano's 30th / Chicago",
       "category": "trip-event",
@@ -83,7 +61,7 @@
       "category": "project",
       "tag": "personal",
       "heat": "warm",
-      "heat_reason": "heat decay (5 days silence)",
+      "heat_reason": "heat decay (5 days since last mention)",
       "summary": "Personal life dashboard built in React + Vite + Tailwind + TypeScript. Deployed to GitHub Pages, semi-functional. Four widgets built: calendar embed, temporal bubble map (ECharts), context resume, city map mini. Currently updating working memory to feed real data into it.",
       "sub_threads": [
         "working memory accuracy",
@@ -110,7 +88,7 @@
       "category": "project",
       "tag": "personal",
       "heat": "warm",
-      "heat_reason": "heat decay (5 days silence)",
+      "heat_reason": "heat decay (5 days since last mention)",
       "summary": "Building an ECS game engine on top of Ebitengine in Go. Intentionally avoiding LLMs — this is a Go learning exercise. Snake prototype already works, now migrating to ECS pattern.",
       "sub_threads": [
         "Go programming language",
@@ -137,7 +115,7 @@
       "category": "project",
       "tag": "work",
       "heat": "warm",
-      "heat_reason": "pinned:warm, parked until local setup done",
+      "heat_reason": "pinned:warm",
       "summary": "Developer portal — a one-stop shop connecting communication and platform info for engineers. Currently parked until it's running locally.",
       "sub_threads": [
         "local setup"
@@ -148,7 +126,7 @@
       "start_date": null,
       "end_date": null,
       "deadline": null,
-      "pinned": true,
+      "pinned": false,
       "days_until_deadline": null,
       "calendar_source": false
     },
@@ -177,9 +155,43 @@
       "pinned": false,
       "days_until_deadline": null,
       "calendar_source": false
+    },
+    {
+      "id": "danas-30th",
+      "title": "Dana's 30th Birthday",
+      "category": "trip-event",
+      "tag": "personal",
+      "heat": "archived",
+      "heat_reason": "deadline passed (event date reached)",
+      "summary": "Dana turns 30 this Saturday. Laser tag with a bigger group, organized with her best friend Shar. Drinks, food, yellow Jell-O shots. Gift already bought.",
+      "sub_threads": [
+        "Jell-O shot recipe",
+        "group coordination with Shar"
+      ],
+      "open_actions": [],
+      "start_date": null,
+      "end_date": null,
+      "deadline": "2026-02-28",
+      "pinned": false,
+      "days_until_deadline": 0,
+      "calendar_source": false
     }
   ],
   "calendar_events": [
+    {
+      "id": "3g2nuc1lkf69p4ticcr6d0tmjh_20260228",
+      "title": "Dana's Birthday",
+      "type": "birthday",
+      "start": "2026-02-28",
+      "end": "2026-03-01",
+      "all_day": true,
+      "location": null,
+      "description": null,
+      "attendees": [],
+      "weight": 5,
+      "days_until": 0,
+      "related_item_id": "danas-30th"
+    },
     {
       "id": "_68o32e9o6kqj6e9j70pjee1g74r3cd0",
       "title": "Online Consultation & Diagnosis (Regine Blaise PMHNP)",
@@ -195,7 +207,7 @@
       "related_item_id": null
     },
     {
-      "id": "_750jaca368p4cba18ks32b9k6h338ba168r30ba36cp30ca56l0j8chj8g",
+      "id": "_750jaca368p4cba18ks32ba36h338ba168r30ba36cp30ca56l0j8chj8g",
       "title": "Catherine Wu visiting",
       "type": "social",
       "start": "2026-03-07",
@@ -232,7 +244,7 @@
       "location": null,
       "description": null,
       "attendees": [],
-      "weight": 4,
+      "weight": 6,
       "days_until": 23,
       "related_item_id": null
     },
@@ -356,9 +368,9 @@
     ]
   },
   "meta": {
-    "hot_count": 3,
+    "hot_count": 2,
     "warm_count": 4,
-    "archived_count": 0,
-    "upcoming_events_count": 11
+    "archived_count": 1,
+    "upcoming_events_count": 12
   }
 }
