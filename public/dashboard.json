@@ -147,7 +147,7 @@
       "open_actions": [
         "Decide on pen before trip",
         "Research sibling price-point options",
-        "Find good dot grid fountain pen paper"
+        "Find good dot grid fountain pen pen paper"
       ],
       "start_date": null,
       "end_date": null,
@@ -169,15 +169,29 @@
         "group coordination with Shar"
       ],
       "open_actions": [],
-      "start_date": "2026-02-28",
-      "end_date": "2026-03-01",
+      "start_date": null,
+      "end_date": null,
       "deadline": "2026-02-28",
       "pinned": false,
       "days_until_deadline": 0,
-      "calendar_source": true
+      "calendar_source": false
     }
   ],
   "calendar_events": [
+    {
+      "id": "3g2nuc1lkf69p4ticcr6d0tmjh_20260228",
+      "title": "Dana's Birthday",
+      "type": "birthday",
+      "start": "2026-02-28",
+      "end": "2026-03-01",
+      "all_day": true,
+      "location": null,
+      "description": null,
+      "attendees": [],
+      "weight": 5,
+      "days_until": 0,
+      "related_item_id": "danas-30th"
+    },
     {
       "id": "_68o32e9o6kqj6e9j70pjee1g74r3cd0",
       "title": "Online Consultation & Diagnosis (Regine Blaise PMHNP)",
@@ -193,7 +207,7 @@
       "related_item_id": null
     },
     {
-      "id": "_750jaca368p4cba18ks32b9k6h338ba168r30ba36cp30ca56l0j8chj8g",
+      "id": "_750jaca368p4cba18ks32ba6h338ba168r30ba36cp30ca56l0j8chj8g",
       "title": "Catherine Wu visiting",
       "type": "social",
       "start": "2026-03-07",
@@ -202,7 +216,7 @@
       "location": null,
       "description": null,
       "attendees": [],
-      "weight": 6,
+      "weight": 7,
       "days_until": 7,
       "related_item_id": null
     },
@@ -230,7 +244,7 @@
       "location": null,
       "description": null,
       "attendees": [],
-      "weight": 4,
+      "weight": 6,
       "days_until": 23,
       "related_item_id": null
     },
@@ -357,6 +371,6 @@
     "hot_count": 2,
     "warm_count": 4,
     "archived_count": 1,
-    "upcoming_events_count": 11
+    "upcoming_events_count": 13
   }
 }
