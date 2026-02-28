@@ -1,70 +1,67 @@
 {
-  "generated_at": "2026-02-27T20:11:43.072Z",
+  "generated_at": "2026-02-28T04:51:30.537Z",
   "context": {
-    "day_of_week": "friday",
-    "time_of_day": "evening",
-    "is_weekend": false,
-    "after_6pm": true
+    "day_of_week": "saturday",
+    "time_of_day": "morning",
+    "is_weekend": true,
+    "after_6pm": false
   },
   "active_threads": [
     {
       "task": "Find yellow Jell-O shot recipe",
       "epic": "Dana's 30th Birthday",
       "category": "personal",
-      "left_off": "Laser tag organized with Shar, gift bought, drinks and food arranged",
+      "left_off": "Party organized with Shar, gift bought, recipe still needed",
       "left_off_date": "Feb 23",
       "urgency": "active"
     },
     {
-      "task": "Find warm backpacking destination and book flights",
+      "task": "Find warm backpacking destination for Mar 14-15",
       "epic": "Mariano's 30th / Chicago",
       "category": "personal",
-      "left_off": "Chicago flights booked through Japan return, need backpacking destination and gear",
+      "left_off": "Flights to Chicago booked, backpacking trip unplanned",
       "left_off_date": "Feb 27",
       "urgency": "active"
     },
     {
-      "task": "Plan activities in Kyoto, Takayama, and Tokyo",
+      "task": "Plan activities in Kyoto",
       "epic": "Japan Trip 2026",
       "category": "personal",
-      "left_off": "All flights and hotels booked, entered activity planning phase",
+      "left_off": "All flights and hotels booked, now planning activities",
       "left_off_date": "Feb 23",
       "urgency": "active"
     }
   ],
   "pickup_notes": [
-    "Dana's birthday is tomorrow—just need Jell-O shot recipe",
-    "Mariano's backpacking trip needs destination and flights ASAP"
+    "Dana's birthday party tonight — need Jell-O shot recipe",
+    "Mariano's trip in 13 days — find warm backpacking spot"
   ],
   "habits": [
     {
       "id": "workout",
       "label": "Workout",
-      "status": "late",
-      "detail": "0 of 3 minimum done, target days: mon, wed, thu, fri"
+      "status": "ok"
     },
     {
       "id": "laundry",
       "label": "Laundry",
-      "status": "ok",
-      "detail": "Due today, 0 of 1 minimum done"
+      "status": "ok"
     },
     {
       "id": "cleaning",
       "label": "Cleaning",
-      "status": "ok",
-      "detail": "Due today and Sunday, 0 of 2 minimum done"
+      "status": "ok"
     }
   ],
   "smart_priorities": [
     {
       "label": "Dana's 30th Birthday",
-      "reason": "Tomorrow—need Jell-O shot recipe now",
+      "reason": "Party is today — find recipe now",
       "urgency": "high"
     },
     {
-      "label": "Mariano's 30th backpacking trip",
-      "reason": "14 days out, no destination or flights",
+      "label": "Mariano's 30th / Chicago",
+      "reason": "13 days out — book backpacking flights soon",
       "urgency": "high"
     }
   ]
