@@ -244,13 +244,26 @@ BAD: Full sentences. Paragraphs. Repeating what working memory already says.
 - **countdown**: Use pre-computed string from calendar. For non-calendar items, format as: "today"/"tomorrow"/"{N} days away" (2-6)/"{N} days" (7-29)/"about {N} weeks" (30-44)/"about {N} months" (45+)
 - **category**: "work", "personal", or "travel"
 - **thread_name**: Working memory item name
-- **tags**: 4-6 concrete nouns (objects, tools, places). NO abstract words, NO verbs. Include category as tag. Think "what physical things are involved?"
+- **tags**: Pick 4-6 words ONLY from this vocabulary (the icon library only understands these):
 
-Tag examples:
-- Chicago backpacking → ["backpack", "mountain", "tent", "hiking", "boot", "trail"]
-- Japan / Kyoto → ["temple", "gate", "japan", "shrine", "travel", "building"]
-- Fountain pens → ["pen", "ink", "writing", "shop", "japan", "notebook"]
-- Go ECS project → ["computer", "code", "laptop", "game", "desk", "keyboard"]
+  Outdoor: backpack, camping, hiking, mountain, trail, forest, campfire, climb, nature, wildlife, safari, binoculars
+  Travel: airplane, airport, flight, suitcase, luggage, passport, map, landmark, hotel, boat, cruise, ferry
+  Japan: japan, temple, shrine, torii, pagoda, origami
+  Tech: computer, laptop, code, keyboard, desk, programming, software, robot, dashboard
+  Writing: pen, ink, writing, notebook, quill, book, reading, art, paint, brush, canvas
+  Food: cooking, kitchen, food, dinner, meal, breakfast, plate
+  Fitness: gym, exercise, yoga, swimming, cycling, running, barbell, dumbbell, boxing
+  Music: music, concert, cinema, camera, film, karaoke, arcade, gaming
+  Events: birthday, party, celebration, wedding, gift, meeting, conference
+  Nature: beach, island, ocean, snow, rain, lake, river, sun
+  Home: home, garden, bed, bathroom, cleaning, laundry, furniture
+  Finance: money, bank, chart, contract, document, calendar
+
+  Examples:
+  - Backpacking trip → ["backpack", "mountain", "hiking", "camping", "trail", "nature"]
+  - Japan Kyoto → ["japan", "temple", "shrine", "torii", "landmark", "map"]
+  - Fountain pens → ["pen", "ink", "writing", "notebook", "japan", "art"]
+  - Go ECS project → ["computer", "code", "laptop", "programming", "keyboard", "dashboard"]
 
 ## Output
 
