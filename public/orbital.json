@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-28T22:07:23.727Z",
+  "generated_at": "2026-02-28T22:30:07.576Z",
   "events": [
     {
       "name": "Dana's Birthday",
@@ -20,7 +20,38 @@
       "actions": []
     },
     {
-      "name": "Chicago",
+      "name": "Japan Trip 2026",
+      "date": "2026-03-23",
+      "weight": 9,
+      "actions": [
+        {
+          "name": "Plan activities in Kyoto",
+          "status": "todo"
+        },
+        {
+          "name": "Plan activities in Takayama",
+          "status": "todo"
+        },
+        {
+          "name": "Plan activities in Tokyo",
+          "status": "todo"
+        },
+        {
+          "name": "Flight to TAIPEI (BR 55)",
+          "status": "todo"
+        },
+        {
+          "name": "Flight to OSAKA (BR 130)",
+          "status": "todo"
+        },
+        {
+          "name": "Stay at Travelodge Kyoto Shijo Kawaramachi",
+          "status": "todo"
+        }
+      ]
+    },
+    {
+      "name": "Mariano's 30th / Chicago",
       "date": "2026-03-13",
       "weight": 8,
       "actions": [
@@ -51,37 +82,6 @@
       "date": "2026-03-19",
       "weight": 5,
       "actions": []
-    },
-    {
-      "name": "JAPAN!",
-      "date": "2026-03-23",
-      "weight": 9,
-      "actions": [
-        {
-          "name": "Flight to TAIPEI (BR 55)",
-          "status": "todo"
-        },
-        {
-          "name": "Flight to OSAKA (BR 130)",
-          "status": "todo"
-        },
-        {
-          "name": "Stay at Travelodge Kyoto Shijo Kawaramachi",
-          "status": "todo"
-        },
-        {
-          "name": "Plan activities in Kyoto",
-          "status": "todo"
-        },
-        {
-          "name": "Plan activities in Takayama",
-          "status": "todo"
-        },
-        {
-          "name": "Plan activities in Tokyo",
-          "status": "todo"
-        }
-      ]
     },
     {
       "name": "Dad's Birthday",
