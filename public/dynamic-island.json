@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-27T20:11:43.812Z",
+  "generated_at": "2026-02-28T04:51:30.588Z",
   "type": "threads",
   "height": "short",
   "content": {
@@ -30,12 +30,6 @@
       },
       {
         "name": "Go Game Engine / ECS",
-        "heat": "warm",
-        "last_touched": "2026-02-23",
-        "category": "personal"
-      },
-      {
-        "name": "Fountain Pen Research",
         "heat": "warm",
         "last_touched": "2026-02-23",
         "category": "personal"
