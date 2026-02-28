@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import type { WidgetProps } from "../types";
 import type { DateEvent, EventCategory } from "../types/dates";
-import { canvasColors } from "../design-system";
+import { canvasColors, stressColor } from "../design-system";
 import { Section } from "../components";
 
 interface TimelineRibbonProps extends WidgetProps {
@@ -36,6 +36,9 @@ interface EventSpan {
   row: number;
   importance: number;
   isRecurring: boolean;
+  openActionCount: number;
+  isUrgent: boolean;
+  daysUntilStart: number;
 }
 
 function todayMidnight(): Date {
@@ -75,20 +78,24 @@ export function TimelineRibbon({
     const spans = filtered
       .map((ev) => {
         const start = new Date(ev.startDate + "T00:00:00");
-        const startIdx = Math.round(
+        const daysUntilStart = Math.round(
           (start.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
         );
-        const endIdx = startIdx + ev.durationDays - 1;
+        const endIdx = daysUntilStart + ev.durationDays - 1;
+        const openActions = ev.actions.filter((a) => a.status === "todo").length;
 
         return {
           id: ev.id,
           name: ev.name,
-          startIdx: Math.max(0, startIdx),
+          startIdx: Math.max(0, daysUntilStart),
           endIdx: Math.min(windowDays - 1, endIdx),
           color: CATEGORY_COLORS[ev.category],
           row: 0,
           importance: ev.importance,
           isRecurring: ev.isRecurring,
+          openActionCount: openActions,
+          isUrgent: daysUntilStart >= 0 && daysUntilStart <= 7,
+          daysUntilStart,
         };
       })
       .filter((s) => s.endIdx >= 0 && s.startIdx < windowDays);
@@ -116,10 +123,10 @@ export function TimelineRibbon({
   }, [events, today, windowDays, showRecurring]);
 
   const maxRows = Math.max(1, ...assignedSpans.map((s) => s.row + 1));
-  const ribbonHeight = 50 + maxRows * 26;
+  const ribbonHeight = 50 + maxRows * 30;
 
   return (
-    <Section use="primary" flush="top" className="w-full">
+    <Section use="primary" flush="top" className="w-full" style={{ paddingTop: "0" }}>
       <div
         style={{
           height: ribbonHeight,
@@ -128,7 +135,7 @@ export function TimelineRibbon({
         }}
       >
         {/* Day columns */}
-        <div style={{ display: "flex", height: 44, position: "relative" }}>
+        <div style={{ display: "flex", height: 44, position: "relative", paddingTop: 5}}>
           {days.map((day) => {
             const dayName = day.date.toLocaleDateString("en-US", { weekday: "short" });
             const dayNum = day.date.getDate();
@@ -225,14 +232,13 @@ export function TimelineRibbon({
             bottom: 6,
             left: 0,
             right: 0,
-            height: maxRows * 26,
+            height: maxRows * 30,
             pointerEvents: "none",
           }}
         >
           {assignedSpans.map((ev) => {
             const leftPct = (ev.startIdx / windowDays) * 100;
             const widthPct = ((ev.endIdx - ev.startIdx + 1) / windowDays) * 100;
-            const isHighImportance = ev.importance >= 7;
             const barOpacity = ev.isRecurring ? 0.5 : 1;
 
             return (
@@ -242,28 +248,47 @@ export function TimelineRibbon({
                   position: "absolute",
                   left: `${leftPct}%`,
                   width: `${Math.max(widthPct, 3.3)}%`,
-                  top: ev.row * 26,
-                  height: isHighImportance ? 24 : 22,
+                  top: ev.row * 30,
+                  height: 28,
                   background: ev.color + "18",
                   border: `1px ${ev.isRecurring ? "dashed" : "solid"} ${ev.color}30`,
                   borderRadius: 5,
                   display: "flex",
-                  alignItems: "center",
+                  alignItems: "flex-start",
                   paddingLeft: 6,
                   paddingRight: 4,
+                  paddingTop: 3,
                   overflow: "hidden",
                   opacity: barOpacity,
                 }}
               >
+                {ev.openActionCount > 0 && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 3,
+                      left: 3,
+                      width: 4,
+                      height: 4,
+                      borderRadius: "50%",
+                      background: ev.isUrgent
+                        ? stressColor(Math.max(0, ev.daysUntilStart))
+                        : ev.color,
+                    }}
+                  />
+                )}
                 <span
                   style={{
                     fontSize: 9,
-                    fontWeight: isHighImportance ? 600 : 500,
+                    fontWeight: 500,
                     color: ev.color + "dd",
                     fontFamily: FONT,
-                    whiteSpace: "nowrap",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
                     overflow: "hidden",
-                    textOverflow: "ellipsis",
+                    lineHeight: 1.2,
+                    wordBreak: "break-word",
                   }}
                 >
                   {ev.name}

@@ -1,40 +1,19 @@
 {
-  "generated_at": "2026-02-27T00:00:00Z",
+  "generated_at": "2026-02-28T00:00:00Z",
   "items": [
-    {
-      "id": "danas-30th",
-      "title": "Dana's 30th Birthday",
-      "category": "trip-event",
-      "tag": "personal",
-      "heat": "hot",
-      "heat_reason": "deadline (1 day away)",
-      "summary": "Dana turns 30 this Saturday. Laser tag with a bigger group, organized with her best friend Shar. Drinks, food, yellow Jell-O shots. Gift already bought.",
-      "sub_threads": [
-        "Jell-O shot recipe",
-        "group coordination with Shar"
-      ],
-      "open_actions": [
-        "Find Jell-O shot recipe"
-      ],
-      "start_date": "2026-02-28",
-      "end_date": "2026-02-28",
-      "deadline": "2026-02-28",
-      "pinned": false,
-      "days_until_deadline": 1,
-      "calendar_source": true
-    },
     {
       "id": "marianos-30th-chicago",
       "title": "Mariano's 30th / Chicago",
       "category": "trip-event",
       "tag": "personal",
       "heat": "hot",
-      "heat_reason": "deadline approaching (14 days), multiple unresolved actions",
-      "summary": "Mariano turns 30 on March 19th. Plan is a 1-2 night backpacking trip somewhere warm (weekend of Mar 14-15), then Chicago for the birthday celebration. Flights to Chicago already booked (return leg from Japan routed through Chicago). Need to find a warm backpacking destination and sort gear.",
+      "heat_reason": "deadline approaching (13 days), multiple unresolved actions",
+      "summary": "Mariano turns 30 on March 19th. Plan is a 1-2 night backpacking trip somewhere warm (weekend of Mar 14-15), then Chicago for the birthday celebration. Flights to Chicago already booked (return leg from Japan routed through Chicago). Need to find a warm backpacking destination and sort gear. Camping near Chicago mentioned.",
       "sub_threads": [
         "backpacking destination search",
         "REI gear rental",
-        "Chicago birthday plans"
+        "Chicago birthday plans",
+        "camping near Chicago"
       ],
       "open_actions": [
         "Find warm backpacking destination",
@@ -47,7 +26,7 @@
       "end_date": "2026-03-23",
       "deadline": "2026-03-13",
       "pinned": false,
-      "days_until_deadline": 14,
+      "days_until_deadline": 13,
       "calendar_source": true
     },
     {
@@ -56,7 +35,7 @@
       "category": "trip-event",
       "tag": "personal",
       "heat": "hot",
-      "heat_reason": "pinned:hot, deadline approaching (24 days)",
+      "heat_reason": "pinned:hot, deadline approaching (23 days)",
       "summary": "Two-week trip with Dana, March 23 – April 7. Route: Osaka → Nara → Kyoto → Takayama → Tokyo. All flights and hotels booked. Now in activity planning phase. Also celebrating Dana's 30th during the trip.",
       "sub_threads": [
         "pen shopping",
@@ -73,7 +52,7 @@
       "end_date": "2026-04-08",
       "deadline": "2026-03-23",
       "pinned": true,
-      "days_until_deadline": 24,
+      "days_until_deadline": 23,
       "calendar_source": true
     },
     {
@@ -82,7 +61,7 @@
       "category": "project",
       "tag": "personal",
       "heat": "warm",
-      "heat_reason": "heat decay (4 days silence)",
+      "heat_reason": "heat decay (5 days since last mention)",
       "summary": "Personal life dashboard built in React + Vite + Tailwind + TypeScript. Deployed to GitHub Pages, semi-functional. Four widgets built: calendar embed, temporal bubble map (ECharts), context resume, city map mini. Currently updating working memory to feed real data into it.",
       "sub_threads": [
         "working memory accuracy",
@@ -109,7 +88,7 @@
       "category": "project",
       "tag": "personal",
       "heat": "warm",
-      "heat_reason": "heat decay (4 days silence)",
+      "heat_reason": "heat decay (5 days since last mention)",
       "summary": "Building an ECS game engine on top of Ebitengine in Go. Intentionally avoiding LLMs — this is a Go learning exercise. Snake prototype already works, now migrating to ECS pattern.",
       "sub_threads": [
         "Go programming language",
@@ -136,7 +115,7 @@
       "category": "project",
       "tag": "work",
       "heat": "warm",
-      "heat_reason": "pinned:warm, parked until local setup done",
+      "heat_reason": "pinned:warm",
       "summary": "Developer portal — a one-stop shop connecting communication and platform info for engineers. Currently parked until it's running locally.",
       "sub_threads": [
         "local setup"
@@ -147,7 +126,7 @@
       "start_date": null,
       "end_date": null,
       "deadline": null,
-      "pinned": true,
+      "pinned": false,
       "days_until_deadline": null,
       "calendar_source": false
     },
@@ -176,36 +155,42 @@
       "pinned": false,
       "days_until_deadline": null,
       "calendar_source": false
+    },
+    {
+      "id": "danas-30th",
+      "title": "Dana's 30th Birthday",
+      "category": "trip-event",
+      "tag": "personal",
+      "heat": "archived",
+      "heat_reason": "deadline passed (event date reached)",
+      "summary": "Dana turns 30 this Saturday. Laser tag with a bigger group, organized with her best friend Shar. Drinks, food, yellow Jell-O shots. Gift already bought.",
+      "sub_threads": [
+        "Jell-O shot recipe",
+        "group coordination with Shar"
+      ],
+      "open_actions": [],
+      "start_date": null,
+      "end_date": null,
+      "deadline": "2026-02-28",
+      "pinned": false,
+      "days_until_deadline": 0,
+      "calendar_source": false
     }
   ],
   "calendar_events": [
     {
-      "id": "_6514cca56d0j4ba66ooj2b9k8kq3cba28gqj8b9h6d2kaghh8cpjecq284",
-      "title": "Yoga",
-      "type": "other",
-      "start": "2026-02-27T19:30:00-05:00",
-      "end": "2026-02-27T20:30:00-05:00",
-      "all_day": false,
+      "id": "3g2nuc1lkf69p4ticcr6d0tmjh_20260228",
+      "title": "Dana's Birthday",
+      "type": "birthday",
+      "start": "2026-02-28",
+      "end": "2026-03-01",
+      "all_day": true,
       "location": null,
       "description": null,
       "attendees": [],
-      "weight": 3,
+      "weight": 5,
       "days_until": 0,
-      "related_item_id": null
-    },
-    {
-      "id": "hnidfrcpndgv4om68be96k2ils",
-      "title": "Reservation at Holywater",
-      "type": "social",
-      "start": "2026-02-27T21:30:00-05:00",
-      "end": "2026-02-27T22:30:00-05:00",
-      "all_day": false,
-      "location": "Holywater, 112 Reade St, New York, NY 10013",
-      "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DNMPt_fPgrptWDR-bI8vk32MLzujaoty1I\n",
-      "attendees": [],
-      "weight": 4,
-      "days_until": 0,
-      "related_item_id": null
+      "related_item_id": "danas-30th"
     },
     {
       "id": "_68o32e9o6kqj6e9j70pjee1g74r3cd0",
@@ -218,11 +203,11 @@
       "description": "Client Time zone: America/New_York \n\nChange Appointment: https://portal.getmindfulhealth.com\n\n\n\nThanks for scheduling an appointment with ✌️Mindful. Set aside 25 minutes for the appointment.\n\nPlease check your email for a booking confirmation and next steps to complete the medical intake form. This is required to confirm your appointment.\n",
       "attendees": [],
       "weight": 3,
-      "days_until": 7,
+      "days_until": 6,
       "related_item_id": null
     },
     {
-      "id": "_750jaca368p4cba18ks32b9k6h338ba168r30ba36cp30ca56l0j8chj8g",
+      "id": "_750jaca368p4cba18ks32ba36h338ba168r30ba36cp30ca56l0j8chj8g",
       "title": "Catherine Wu visiting",
       "type": "social",
       "start": "2026-03-07",
@@ -232,7 +217,7 @@
       "description": null,
       "attendees": [],
       "weight": 6,
-      "days_until": 8,
+      "days_until": 7,
       "related_item_id": null
     },
     {
@@ -246,7 +231,7 @@
       "description": null,
       "attendees": [],
       "weight": 5,
-      "days_until": 20,
+      "days_until": 19,
       "related_item_id": "marianos-30th-chicago"
     },
     {
@@ -259,8 +244,8 @@
       "location": null,
       "description": null,
       "attendees": [],
-      "weight": 5,
-      "days_until": 24,
+      "weight": 6,
+      "days_until": 23,
       "related_item_id": null
     },
     {
@@ -274,7 +259,7 @@
       "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DNf1UtGtGvtWV54khhjALSFqDUkuDs_5fo\n",
       "attendees": [],
       "weight": 7,
-      "days_until": 24,
+      "days_until": 23,
       "related_item_id": "japan-trip-2026"
     },
     {
@@ -288,7 +273,7 @@
       "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DNf1UtGtGvtWV54khhjALSFqDUkuDs_5fo\n",
       "attendees": [],
       "weight": 7,
-      "days_until": 25,
+      "days_until": 24,
       "related_item_id": "japan-trip-2026"
     },
     {
@@ -302,7 +287,7 @@
       "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DMj2WhsRAQIQvwSFvONlcjKuxteZ95sDnk\n",
       "attendees": [],
       "weight": 4,
-      "days_until": 26,
+      "days_until": 25,
       "related_item_id": "japan-trip-2026"
     },
     {
@@ -316,7 +301,7 @@
       "description": null,
       "attendees": [],
       "weight": 5,
-      "days_until": 39,
+      "days_until": 38,
       "related_item_id": null
     },
     {
@@ -330,7 +315,7 @@
       "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DMBpVtxvsiTp7w48uplTmripc0XlF2O_Jw\n",
       "attendees": [],
       "weight": 7,
-      "days_until": 39,
+      "days_until": 38,
       "related_item_id": "japan-trip-2026"
     },
     {
@@ -344,7 +329,7 @@
       "description": "To see detailed information for automatically created events like this one, use the official Google Calendar app. https://g.co/calendar\n\nThis event was created from an email you received in Gmail. https://mail.google.com/mail?extsrc=cal&plid=ACUX6DN2YgD6ie69-LUcHMGNhRbvrD7KCojA_0g\n",
       "attendees": [],
       "weight": 7,
-      "days_until": 39,
+      "days_until": 38,
       "related_item_id": "japan-trip-2026"
     },
     {
@@ -358,7 +343,7 @@
       "description": null,
       "attendees": [],
       "weight": 5,
-      "days_until": 55,
+      "days_until": 54,
       "related_item_id": null
     }
   ],
@@ -383,9 +368,9 @@
     ]
   },
   "meta": {
-    "hot_count": 3,
+    "hot_count": 2,
     "warm_count": 4,
-    "archived_count": 0,
-    "upcoming_events_count": 13
+    "archived_count": 1,
+    "upcoming_events_count": 12
   }
 }
