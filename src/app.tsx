@@ -1,8 +1,13 @@
 import { TemplateRenderer, defaultTemplate } from "./templates";
 import { EVENTS, CONTEXT_STUB, TOKYO_PINS, ACTIVE_THREADS_STUB, UP_NEXT_STUB } from "./data/stub";
 import { useDashboard, useUpNext, useOrbital, useFocusEngine, useDates, toOrbitalEvents, toContextItems, toActiveThreads } from "./data/dashboard";
+import IconsPage from "./pages/icons";
 
 export default function App() {
+  if (window.location.pathname.endsWith("/icons")) {
+    return <IconsPage />;
+  }
+
   const { data, error } = useDashboard();
   const { data: upNextData, error: upNextError } = useUpNext();
   const { data: orbitalData, error: orbitalError } = useOrbital();
