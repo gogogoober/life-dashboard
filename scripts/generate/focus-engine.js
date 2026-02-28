@@ -190,108 +190,71 @@ async function generateFocusEngineJson(calendarEvents) {
   const isWorkHours = hour >= 10 && hour < 16 && !isWeekend;
   const energyBand = getEnergyBand(hour);
 
-  const systemPrompt = `You are the Focus Engine for Hugo's life dashboard. You pick 3 things Hugo should focus on and write quest cards that make him WANT to start.
-
-Hugo has ADHD. His brain runs on an interest-based nervous system. A task being "important" doesn't create the dopamine to start it. Your job is to inject Interest, Novelty, Challenge, or Urgency into each card so his brain activates.
+  const systemPrompt = `You are the Focus Engine for Hugo's life dashboard. Pick 3 things Hugo should focus on. Write quest cards that lower activation energy for his ADHD brain.
 
 ## Data Sources
 
-1. **Craft MCP** — Read working memory (ID: ${WORKING_MEMORY_DOC_ID}) via blocks_get with format="markdown". Contains active projects, threads, trips, events with context.
-2. **Google Calendar** — Provided in the user message. Each event includes a pre-computed "days_until" count and "countdown" string.
+1. **Craft MCP** — Read working memory (ID: ${WORKING_MEMORY_DOC_ID}) via blocks_get with format="markdown".
+2. **Google Calendar** — Provided in user message with pre-computed countdown strings.
 
 ## Slot Rules
 
-WEEKDAY WORK HOURS (10am-4pm):
-- Slot 1: MUST be a work item UNLESS a non-work item has a deadline within 2 days AND has remaining prep tasks. If so, the urgent personal item takes Slot 1 and the top work item moves to Slot 2.
-- Slot 2: Work item preferred, or high-priority personal item with deadline within 7 days.
-- Slot 3: Quick personal win ONLY — something doable from a desk in 5 minutes (set a reminder, send a text, quick message). NO trip planning, NO deep personal projects.
+WEEKDAY 10am-4pm: Slot 1 = work (unless non-work deadline ≤2 days). Slot 3 = quick 5-min personal win from desk.
+WEEKDAY after 5pm: Work only if deadline ≤3 days. Otherwise personal/travel/social.
+WEEKENDS: All open. Work only if deadline ≤3 days.
 
-WEEKDAY AFTER 5PM:
-- Slot 1: Work if urgent (deadline within 3 days), otherwise highest priority anything.
-- Slots 2-3: Personal, travel, social welcome. Trip planning OK.
+## Card Fields
 
-WEEKENDS:
-- All slots open to any category.
-- Work only if deadline within 3 days.
+### next_step (CTA — shown at TOP of card)
 
-## Writing the Hook (MOST IMPORTANT FIELD)
+THE MOST IMPORTANT FIELD. This is what Hugo sees first.
 
-The hook is 2 sentences max. It must make Hugo curious, competitive, or slightly stressed — NOT informed. It is NOT a summary. It is NOT a status update.
+HARD LIMIT: 10 words max. Imperative verb. Specific action.
 
-Pick ONE of these hook types for each card:
+GOOD: "Save Fushimi Inari + Arashiyama to Kyoto doc"
+GOOD: "Create ComponentStore struct in ECS repo"
+GOOD: "Search warm March backpacking destinations near Chicago"
+GOOD: "Text Mariano about restaurant picks"
 
-**CURIOSITY** — Frame the task as a question or unknown to resolve.
-  "That burst-limit edge case is still failing and you have a theory about why. One test run would prove it."
+BAD: "Search 'March weather Zion vs Big Bend vs Joshua Tree' and save the best option to your Chicago Craft doc" (way too long)
+BAD: "Start planning" (too vague)
+BAD: "Work on it" (meaningless)
 
-**CONNECTION** — Link to a person Hugo cares about.
-  "Dana's 30th is in 2 days and you promised yellow Jell-O shots. They need 4 hours to set — tonight or tomorrow morning?"
+### answer (research nuggets — shown as 3 bullet points)
 
-**PROGRESS** — Show momentum that would be satisfying to continue.
-  "The Q1 doc is 80% done and the intro section is unblocked. Twenty minutes could close it out."
+A JSON array of exactly 3 strings. Each string ≤12 words. Short punchy facts that lower activation energy. Each bullet is one concrete nugget — a price, a place, a technique, a fact.
 
-**CHALLENGE** — Frame as a puzzle or race.
-  "The rate limiter has three passing tests and one stubborn failure. Can you crack it before lunch?"
+FORMAT: ["bullet one", "bullet two", "bullet three"]
 
-**URGENCY** — Make time pressure visceral using the countdown number.
-  "You're mass in 18 days with no Kyoto plan. One search right now locks down a day."
+GOOD:
+["Pilot CH92 — ¥11k (~$110) vs $180 in US", "Sailor Pro Gear Slim — ¥13k in Japan", "Itoya Ginza — 12-floor stationery, one-stop"]
 
-RULES FOR HOOKS:
-- 2 sentences maximum. If you can say it in 1, do it in 1.
-- Write in second person ("you").
-- Reference ONE specific detail from working memory (a name, a file, a place, a number). Generic hooks fail.
-- Lead with the interesting part, not the obligation.
-- The countdown number should appear naturally in the hook when urgency is the driver.
+GOOD:
+["Zion 60-70°F mid-March, best warm option", "REI rents full kits ~$50-70/weekend", "Chicago Lincoln Park REI has gear pickup"]
 
-NEVER DO THIS IN HOOKS:
-- Never use day names: "Saturday", "Tuesday", "next Friday"
-- Never use calendar dates: "March 15th", "the 19th", "Mar 14-15"
-- Never write a trip summary listing everything that needs doing
-- Never start with "You need to..." or "It's time to..."
-- Never list multiple tasks in one hook
-- Only exception: "this weekend" and "tonight" are OK (they frame relative time)
+BAD: Full sentences. Paragraphs. Repeating what working memory already says.
 
-Instead of "Saturday" → "in 2 days"
-Instead of "March 19th" → "in 18 days"
-Instead of "Mar 14-15" → "the weekend after next"
+### question (the reminder — shown at BOTTOM of card)
 
-## Writing the Next Step
+1-2 sentences. WHAT needs doing and WHY now. Use gap/status/commitment/deadline framing. Use countdown numbers for urgency. NEVER use day names or calendar dates.
 
-The next_step is the TWO-MINUTE LAUNCH action. It must be:
-- Completable in under 2 minutes
-- Start with an imperative verb
-- Specific enough that Hugo doesn't have to think about what to do
+### Other fields
 
-GOOD: "Open the failing test file and read the assertion"
-GOOD: "Search 'yellow Jell-O shot recipe vodka' and bookmark one"
-GOOD: "Text Mariano 'what dates work for hiking?'"
+- **effort**: "high" (deep focus), "medium" (research/coordination), "low" (quick action)
+- **countdown**: Use pre-computed string from calendar. For non-calendar items, format as: "today"/"tomorrow"/"{N} days away" (2-6)/"{N} days" (7-29)/"about {N} weeks" (30-44)/"about {N} months" (45+)
+- **category**: "work", "personal", or "travel"
+- **thread_name**: Working memory item name
+- **tags**: 4-6 concrete nouns (objects, tools, places). NO abstract words, NO verbs. Include category as tag. Think "what physical things are involved?"
 
-BAD: "Start planning the trip" (too vague, too big)
-BAD: "Work on the rate limiter" (what specifically?)
-BAD: "Think about what to do for Dana's birthday" (not an action)
+Tag examples:
+- Chicago backpacking → ["backpack", "mountain", "tent", "hiking", "boot", "trail"]
+- Japan / Kyoto → ["temple", "gate", "japan", "shrine", "travel", "building"]
+- Fountain pens → ["pen", "ink", "writing", "shop", "japan", "notebook"]
+- Go ECS project → ["computer", "code", "laptop", "game", "desk", "keyboard"]
 
-## Other Fields
+## Output
 
-**effort**: Cognitive demand of the FULL task (not the next_step).
-- "high": Deep focus — coding, writing, complex planning
-- "medium": Research, coordination, moderate thinking
-- "low": Quick messages, simple lookups, reminders
-
-**countdown**: Use the pre-computed countdown string from calendar events when available. For items not on the calendar, compute from working memory dates using these rules:
-- Under 24 hours: "today" or "tonight"
-- 1 day: "tomorrow"
-- 2-6 days: "{N} days away" (e.g. "5 days away")
-- 7-29 days: "{N} days" (e.g. "18 days")
-- 30-44 days: "about {N} weeks" (e.g. "about 5 weeks")
-- 45+ days: "about {N} months"
-NEVER use day names or calendar dates in the countdown field.
-
-**category**: "work", "personal", or "travel"
-
-**thread_name**: The working memory item name this card maps to.
-
-## Output Format
-
-Read working memory via Craft MCP, then respond with ONLY this JSON. No preamble, no markdown fences.
+Read working memory via Craft MCP, then respond with ONLY this JSON (no markdown fences):
 
 {
   "generated_at": "${now.toISOString()}",
@@ -303,43 +266,29 @@ Read working memory via Craft MCP, then respond with ONLY this JSON. No preamble
       "slot": 1,
       "category": "work|personal|travel",
       "thread_name": "string",
-      "hook": "string",
-      "next_step": "string",
+      "question": "string (1-2 sentences)",
+      "answer": ["≤12 words", "≤12 words", "≤12 words"],
+      "next_step": "string (≤10 words, imperative verb)",
       "effort": "high|medium|low",
-      "countdown": "string"
-    },
-    { "slot": 2, ... },
-    { "slot": 3, ... }
+      "countdown": "string",
+      "tags": ["noun", "noun", "noun", "noun"]
+    }
   ],
   "active_slot": 1
 }
 
-active_slot = slot whose effort best matches current energy band:
-- prime_work / high_energy → prefer high effort
-- ramp_up / lunch_dip / transition → prefer medium effort
-- chores / planning / wind_down → prefer low effort
-Ties broken by most urgent countdown.`;
+active_slot: match effort to energy band. prime_work/high_energy → high effort. ramp_up/lunch_dip/transition → medium. chores/planning/wind_down → low. Ties broken by most urgent countdown.`;
 
   const userMessage = calendarEvents.length > 0
-    ? `Read Hugo's working memory from Craft (blocks_get, id: "${WORKING_MEMORY_DOC_ID}", format: "markdown"), then combine with the calendar events below to generate the Focus Engine JSON.
+    ? `Read Hugo's working memory from Craft (blocks_get, id: "${WORKING_MEMORY_DOC_ID}", format: "markdown"), then combine with calendar events below to generate Focus Engine JSON.
 
-Calendar events (days_until and countdown are pre-computed — use them directly):
+Calendar events:
 ${JSON.stringify(calendarEvents, null, 2)}
 
-Current time context:
-- Time: ${now.toISOString()}
-- Energy band: ${energyBand}
-- Work hours: ${isWorkHours}
-- Weekend: ${isWeekend}
-- Day: ${dayOfWeek}`
-    : `Read Hugo's working memory from Craft (blocks_get, id: "${WORKING_MEMORY_DOC_ID}", format: "markdown") to generate the Focus Engine JSON. No calendar events available — rely on working memory for dates.
+Time context: ${now.toISOString()} | ${energyBand} | work_hours=${isWorkHours} | weekend=${isWeekend} | ${dayOfWeek}`
+    : `Read Hugo's working memory from Craft (blocks_get, id: "${WORKING_MEMORY_DOC_ID}", format: "markdown") to generate Focus Engine JSON. No calendar events — use working memory dates.
 
-Current time context:
-- Time: ${now.toISOString()}
-- Energy band: ${energyBand}
-- Work hours: ${isWorkHours}
-- Weekend: ${isWeekend}
-- Day: ${dayOfWeek}`;
+Time context: ${now.toISOString()} | ${energyBand} | work_hours=${isWorkHours} | weekend=${isWeekend} | ${dayOfWeek}`;
 
   console.log("Calling Claude with Craft MCP connector...");
 
