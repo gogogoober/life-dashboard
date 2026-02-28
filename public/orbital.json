@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-28T20:13:19.664Z",
+  "generated_at": "2026-02-28T21:06:23.667Z",
   "events": [
     {
       "name": "Dana's Birthday",
@@ -22,7 +22,7 @@
     {
       "name": "Chicago",
       "date": "2026-03-13",
-      "weight": 8,
+      "weight": 7,
       "actions": [
         {
           "name": "Find warm backpacking destination",
@@ -41,7 +41,7 @@
           "status": "todo"
         },
         {
-          "name": "Buy Mariano a gift (maybe)",
+          "name": "Buy Mariano a gift",
           "status": "todo"
         }
       ]
@@ -53,22 +53,16 @@
       "actions": []
     },
     {
-      "name": "Dana Spring Break",
-      "date": "2026-03-23",
-      "weight": 6,
-      "actions": []
-    },
-    {
       "name": "JAPAN!",
       "date": "2026-03-23",
       "weight": 9,
       "actions": [
         {
-          "name": "Flight to TAIPEI (BR 55)",
+          "name": "Flight to Taipei (BR 55)",
           "status": "todo"
         },
         {
-          "name": "Flight to OSAKA (BR 130)",
+          "name": "Flight to Osaka (BR 130)",
           "status": "todo"
         },
         {
@@ -88,24 +82,39 @@
           "status": "todo"
         },
         {
-          "name": "Decide on pen before trip",
+          "name": "Celebrate Dana's 30th in Japan",
           "status": "todo"
         },
         {
-          "name": "Research sibling price-point options",
+          "name": "Pen shopping",
           "status": "todo"
         },
         {
-          "name": "Find good dot grid fountain pen paper",
+          "name": "Do something outdoorsy",
           "status": "todo"
         }
       ]
     },
     {
+      "name": "Dana Spring Break",
+      "date": "2026-03-23",
+      "weight": 6,
+      "actions": []
+    },
+    {
       "name": "Dad's Birthday",
       "date": "2026-04-07",
       "weight": 5,
-      "actions": []
+      "actions": [
+        {
+          "name": "Flight to Honolulu (ZG 2)",
+          "status": "todo"
+        },
+        {
+          "name": "Flight to New York (DL 650)",
+          "status": "todo"
+        }
+      ]
     },
     {
       "name": "Mariels Birthday",
