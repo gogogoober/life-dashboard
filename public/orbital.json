@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-28T21:06:23.667Z",
+  "generated_at": "2026-02-28T21:29:38.380Z",
   "events": [
     {
       "name": "Dana's Birthday",
@@ -41,7 +41,7 @@
           "status": "todo"
         },
         {
-          "name": "Buy Mariano a gift",
+          "name": "Buy Mariano a gift (maybe)",
           "status": "todo"
         }
       ]
@@ -53,16 +53,22 @@
       "actions": []
     },
     {
+      "name": "Dana Spring Break",
+      "date": "2026-03-23",
+      "weight": 6,
+      "actions": []
+    },
+    {
       "name": "JAPAN!",
       "date": "2026-03-23",
       "weight": 9,
       "actions": [
         {
-          "name": "Flight to Taipei (BR 55)",
+          "name": "Flight to TAIPEI (BR 55)",
           "status": "todo"
         },
         {
-          "name": "Flight to Osaka (BR 130)",
+          "name": "Flight to OSAKA (BR 130)",
           "status": "todo"
         },
         {
@@ -80,41 +86,14 @@
         {
           "name": "Plan activities in Tokyo",
           "status": "todo"
-        },
-        {
-          "name": "Celebrate Dana's 30th in Japan",
-          "status": "todo"
-        },
-        {
-          "name": "Pen shopping",
-          "status": "todo"
-        },
-        {
-          "name": "Do something outdoorsy",
-          "status": "todo"
         }
       ]
-    },
-    {
-      "name": "Dana Spring Break",
-      "date": "2026-03-23",
-      "weight": 6,
-      "actions": []
     },
     {
       "name": "Dad's Birthday",
       "date": "2026-04-07",
       "weight": 5,
-      "actions": [
-        {
-          "name": "Flight to Honolulu (ZG 2)",
-          "status": "todo"
-        },
-        {
-          "name": "Flight to New York (DL 650)",
-          "status": "todo"
-        }
-      ]
+      "actions": []
     },
     {
       "name": "Mariels Birthday",
