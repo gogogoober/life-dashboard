@@ -37,8 +37,10 @@ const CATEGORY_FALLBACK: Record<string, string> = {
 // Design tokens
 // ═══════════════════════════════════════════
 
-// Icon hex values must match the CSS tokens in :root (Lordicon can't use CSS vars)
-const CATEGORY_COLORS: Record<string, { primary: string; emphasis: string; bg: string }> = {
+const CATEGORY_COLORS: Record<
+  string,
+  { primary: string; emphasis: string; bg: string }
+> = {
   travel: {
     primary: "#0097a7",
     emphasis: "#00e5ff",
@@ -64,7 +66,7 @@ const CATEGORY_COLORS: Record<string, { primary: string; emphasis: string; bg: s
 const FONT = "'JetBrains Mono', monospace";
 
 // ═══════════════════════════════════════════
-// Mock data
+// Mock data (uses new string[] answer format)
 // ═══════════════════════════════════════════
 
 const MOCK_QUESTS: Array<FocusSlot & { active: boolean }> = [
@@ -72,9 +74,14 @@ const MOCK_QUESTS: Array<FocusSlot & { active: boolean }> = [
     slot: 1,
     category: "travel",
     thread_name: "Japan Trip Planning",
-    question: "You're 23 days out with no Kyoto plan — you have 3 days there.",
-    answer: "Fushimi Inari has 10,000 vermillion torii gates you walk through — no reservation needed. Arashiyama bamboo grove is best before 8am.",
-    next_step: "Save 'Fushimi Inari' and 'Arashiyama bamboo grove' to your Kyoto Craft doc",
+    question:
+      "You're 23 days out with no Kyoto plan — you have 3 days there.",
+    answer: [
+      "Fushimi Inari — 10k torii gates, no reservation",
+      "Arashiyama bamboo grove — best before 8am",
+      "Kinkaku-ji — iconic Golden Pavilion photo spot",
+    ],
+    next_step: "Save Fushimi Inari + Arashiyama to Kyoto doc",
     effort: "low",
     countdown: "23 days",
     tags: ["temple", "gate", "japan", "shrine", "travel", "building"],
@@ -83,10 +90,15 @@ const MOCK_QUESTS: Array<FocusSlot & { active: boolean }> = [
   {
     slot: 2,
     category: "work",
-    thread_name: "Rate Limiter PR",
-    question: "Your Snake prototype works but components aren't registered to entities yet.",
-    answer: "In most ECS systems, entities are just integer IDs — components live in typed arrays indexed by that ID. Your Snake already has the entities; you need the typed storage layer.",
-    next_step: "Open your ECS repo and create a ComponentStore struct with a map[EntityID]interface{}",
+    thread_name: "Go ECS Engine",
+    question:
+      "Snake prototype works but components aren't registered to entities yet.",
+    answer: [
+      "Entities = just integer IDs in most ECS systems",
+      "Components live in typed arrays indexed by entity",
+      "You need a ComponentStore with map[EntityID]interface{}",
+    ],
+    next_step: "Create ComponentStore struct in ECS repo",
     effort: "high",
     countdown: "4 days",
     tags: ["computer", "code", "laptop", "game", "desk"],
@@ -95,19 +107,24 @@ const MOCK_QUESTS: Array<FocusSlot & { active: boolean }> = [
   {
     slot: 3,
     category: "personal",
-    thread_name: "Dana's 30th Birthday",
-    question: "Dana's 30th is 3 days away. Jell-O shots need 4 hours to set.",
-    answer: "The classic ratio is 1 cup boiling water + 1 cup vodka per 3oz Jello box. Yellow works with lemon Jello + Absolut Citron. Makes about 20 shots per batch.",
-    next_step: "Pick a time and set a reminder for Jell-O shots",
+    thread_name: "Fountain Pen Research",
+    question:
+      "You want sibling gifts from Japan — pens in the ~$100 range.",
+    answer: [
+      "Pilot CH92 — ¥11k (~$110) vs $180 in US",
+      "Sailor Pro Gear Slim — ¥13k (~$130) in Japan",
+      "Itoya Ginza — 12-floor stationery, one-stop shop",
+    ],
+    next_step: "Save 'Itoya Ginza' to Tokyo Craft doc",
     effort: "low",
-    countdown: "3 days",
-    tags: ["party", "cake", "drink", "gift", "person"],
+    countdown: "23 days",
+    tags: ["pen", "ink", "writing", "shop", "japan", "gift"],
     active: false,
   },
 ];
 
 // ═══════════════════════════════════════════
-// Countdown font size — dynamic based on proximity
+// Countdown helpers
 // ═══════════════════════════════════════════
 
 function countdownFontSize(countdown: string): number {
@@ -134,7 +151,6 @@ function SlotIcon({ tags, category }: { tags: string[]; category: string }) {
   const colors = CATEGORY_COLORS[category] || CATEGORY_COLORS.personal;
   const fallback = CATEGORY_FALLBACK[category] || "•";
 
-  // Stable hash: compute once per tag set (avoids re-roll on re-render)
   const hash = useState(() => getIconForTags(tags, category))[0];
   const iconData = useIconData(hash);
 
@@ -145,11 +161,11 @@ function SlotIcon({ tags, category }: { tags: string[]; category: string }) {
   }
 
   return (
-    <div style={{ position: "relative", width: 56, height: 56 }}>
+    <div style={{ position: "relative", width: 48, height: 48 }}>
       <Player
         ref={playerRef}
         icon={iconData}
-        size={56}
+        size={48}
         colors={`primary:${colors.primary},secondary:${colors.emphasis}`}
         onReady={() => playerRef.current?.playFromBeginning()}
         onComplete={() => {
@@ -162,6 +178,12 @@ function SlotIcon({ tags, category }: { tags: string[]; category: string }) {
 
 // ═══════════════════════════════════════════
 // Focus Card
+//
+// Visual hierarchy (top → bottom):
+//   1. CTA (next_step)   — emphasis, bold, ≤10 words
+//   2. Answer bullets     — secondary, 3 short lines
+//   3. Question           — tertiary, italic, the "why now"
+//   4. Footer             — thread name + countdown
 // ═══════════════════════════════════════════
 
 interface FocusCardProps {
@@ -173,15 +195,20 @@ function FocusCard({ quest }: FocusCardProps) {
   const days = parseDays(quest.countdown);
   const fontSize = countdownFontSize(quest.countdown);
 
+  // answer can be string[] (new) or string (legacy fallback)
+  const answerBullets: string[] = Array.isArray(quest.answer)
+    ? quest.answer
+    : [quest.answer];
+
   return (
     <div
       style={{
         background: "rgba(var(--bg-surface, 10, 18, 10), 0.7)",
         border: "1px solid rgba(var(--bg-surface-secondary, 14, 22, 14), 0.5)",
         borderRadius: 12,
-        padding: 20,
+        padding: "14px 16px",
         display: "grid",
-        gridTemplateColumns: "80px 1fr",
+        gridTemplateColumns: "56px 1fr",
         gridTemplateRows: "auto auto auto auto",
         gap: 0,
         position: "relative",
@@ -203,86 +230,109 @@ function FocusCard({ quest }: FocusCardProps) {
         }}
       />
 
-      {/* Row 1: Icon */}
+      {/* Icon — spans rows 1-2 */}
       <div
         style={{
           gridColumn: 1,
-          gridRow: 1,
-          width: 68,
-          height: 88,
+          gridRow: "1 / 3",
+          width: 48,
+          height: 48,
           borderRadius: 10,
           background: colors.bg,
           border: `1px solid ${colors.primary}33`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          alignSelf: "start",
+          marginTop: 2,
         }}
       >
         <SlotIcon tags={quest.tags} category={quest.category} />
       </div>
 
-      {/* Row 1: Question (the reminder) */}
+      {/* ── Row 1: CTA — the action, emphasis weight, ≤10 words ── */}
       <div
         style={{
           gridColumn: 2,
           gridRow: 1,
-          paddingLeft: 12,
+          paddingLeft: 10,
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
+          alignItems: "center",
+          minHeight: 24,
         }}
       >
         <div
           style={{
-            fontSize: 11,
-            fontWeight: 400,
-            color: "var(--text-secondary, #5a7a5a)",
-            lineHeight: 1.5,
-            letterSpacing: "0.01em",
+            fontSize: 12,
+            fontWeight: 600,
+            color: "var(--text-emphasis, #d4f5d4)",
+            lineHeight: 1.3,
+            letterSpacing: "-0.01em",
           }}
         >
-          {quest.question}
+          {quest.next_step}
         </div>
       </div>
 
-      {/* Row 2: Answer (research nugget) */}
+      {/* ── Row 2: Answer bullets — bang bang bang ── */}
       <div
         style={{
-          gridColumn: "1 / -1",
+          gridColumn: 2,
           gridRow: 2,
-          paddingTop: 12,
-          fontSize: 10,
-          fontWeight: 400,
-          color: "var(--text-primary, #c8d8c8)",
-          lineHeight: 1.6,
-          letterSpacing: "0.01em",
+          paddingLeft: 10,
+          paddingTop: 4,
         }}
       >
-        {quest.answer}
+        {answerBullets.map((bullet, i) => (
+          <div
+            key={i}
+            style={{
+              fontSize: 9.5,
+              fontWeight: 400,
+              color: "var(--text-secondary, #5a7a5a)",
+              lineHeight: 1.5,
+              paddingLeft: 10,
+              position: "relative",
+              marginBottom: i < answerBullets.length - 1 ? 1 : 0,
+            }}
+          >
+            <span
+              style={{
+                position: "absolute",
+                left: 0,
+                color: colors.primary,
+                opacity: 0.6,
+              }}
+            >
+              ›
+            </span>
+            {bullet}
+          </div>
+        ))}
       </div>
 
-      {/* Row 3: Next step (2-minute action) */}
+      {/* ── Row 3: Question — the context/reminder ── */}
       <div
         style={{
           gridColumn: "1 / -1",
           gridRow: 3,
-          paddingTop: 10,
-          fontSize: 13,
-          fontWeight: 600,
-          color: "var(--text-emphasis, #d4f5d4)",
-          lineHeight: 1.3,
-          letterSpacing: "-0.01em",
+          paddingTop: 8,
+          fontSize: 9.5,
+          fontWeight: 400,
+          color: "var(--text-tertiary, #3d5a3d)",
+          lineHeight: 1.4,
+          fontStyle: "italic",
         }}
       >
-        {quest.next_step}
+        {quest.question}
       </div>
 
-      {/* Row 4: Footer */}
+      {/* ── Row 4: Footer — thread name + countdown ── */}
       <div
         style={{
           gridColumn: "1 / -1",
           gridRow: 4,
-          paddingTop: 16,
+          paddingTop: 8,
           display: "flex",
           alignItems: "baseline",
           justifyContent: "space-between",
@@ -290,7 +340,7 @@ function FocusCard({ quest }: FocusCardProps) {
       >
         <div
           style={{
-            fontSize: 10,
+            fontSize: 9,
             fontWeight: 500,
             color: "var(--text-primary, #c8d8c8)",
             textTransform: "uppercase",
@@ -311,7 +361,7 @@ function FocusCard({ quest }: FocusCardProps) {
           {days}
           <span
             style={{
-              fontSize: 11,
+              fontSize: 10,
               fontWeight: 500,
               color: "var(--text-secondary, #5a7a5a)",
               marginLeft: 3,

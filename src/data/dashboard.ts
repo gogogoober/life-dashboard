@@ -73,7 +73,7 @@ export interface FocusSlot {
   category: "work" | "personal" | "travel";
   thread_name: string;
   question: string;
-  answer: string;
+  answer: string | string[];
   next_step: string;
   effort: "high" | "medium" | "low";
   countdown: string;
