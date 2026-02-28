@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-28T22:07:23.799Z",
+  "generated_at": "2026-02-28T22:30:07.302Z",
   "context": {
     "day_of_week": "saturday",
     "time_of_day": "evening",
@@ -11,7 +11,7 @@
       "task": "Find warm backpacking destination and book flights",
       "epic": "Mariano's 30th / Chicago",
       "category": "personal",
-      "left_off": "Multiple unresolved actions: backpacking destination, flights, gear rental",
+      "left_off": "Planning backpacking trip for Mar 14-15 and Chicago celebration",
       "left_off_date": "Feb 27",
       "urgency": "active"
     },
@@ -19,49 +19,49 @@
       "task": "Plan activities in Kyoto, Takayama, and Tokyo",
       "epic": "Japan Trip 2026",
       "category": "personal",
-      "left_off": "In activity planning phase after booking all flights and hotels",
+      "left_off": "City activity planning phase with all flights and hotels booked",
       "left_off_date": "Feb 23",
       "urgency": "active"
     },
     {
-      "task": "Decide on Sailor Pro Gear Slim and research sibling gift pens",
+      "task": "Decide on fountain pen before trip",
       "epic": "Fountain Pen Research",
       "category": "personal",
-      "left_off": "Leaning toward Sailor Pro Gear Slim, researching limited editions for Tokyo",
+      "left_off": "Researching Sailor Pro Gear Slim and limited editions",
       "left_off_date": "Feb 23",
       "urgency": "active"
     }
   ],
   "pickup_notes": [
-    "Backpacking trip for Mariano's 30th needs destination and flights booked",
-    "Japan trip activity planning in progress for Kyoto, Takayama, Tokyo"
+    "Japan trip departs in 23 days, activity planning needed",
+    "Mariano's birthday backpacking trip in 13 days, destination and flights pending"
   ],
   "habits": [
     {
       "id": "workout",
       "label": "Workout",
-      "status": "ok"
+      "state": "ok"
     },
     {
       "id": "laundry",
       "label": "Laundry",
-      "status": "ok"
+      "state": "ok"
     },
     {
       "id": "cleaning",
       "label": "Cleaning",
-      "status": "ok"
+      "state": "ok"
     }
   ],
   "smart_priorities": [
     {
       "label": "Mariano's 30th / Chicago",
-      "reason": "Deadline in 13 days with unresolved bookings",
+      "reason": "13 days until trip, no backpacking destination booked",
       "urgency": "high"
     },
     {
       "label": "Japan Trip 2026",
-      "reason": "Departure in 23 days, activities still unplanned",
+      "reason": "23 days out, activities still need planning",
       "urgency": "medium"
     }
   ]
