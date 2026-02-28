@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-28T21:46:45.730Z",
+  "generated_at": "2026-02-28T22:07:23.708Z",
   "energy_band": "wind_down",
   "is_work_hours": false,
   "is_weekend": true,
@@ -8,66 +8,66 @@
       "slot": 1,
       "category": "travel",
       "thread_name": "Mariano's 30th / Chicago",
-      "question": "Mariano's birthday is in 19 days, but you leave for Chicago in 13 days for the backpacking trip. You still need to find a warm March destination, book flights there, and figure out REI gear rentals.",
+      "question": "Chicago trip in 13 days. Need warm backpacking destination for Mar 14-15 before birthday. Where should you go?",
       "answer": [
         "Zion 60-70°F mid-March, best warm option",
         "REI rents full kits ~$50-70/weekend",
         "Chicago Lincoln Park REI has gear pickup"
       ],
       "next_step": "Search warm March backpacking near Chicago",
-      "effort": "medium",
+      "effort": "low",
       "countdown": "13 days",
       "tags": [
         "backpack",
         "mountain",
-        "tent",
         "hiking",
-        "boot",
-        "personal"
+        "camping",
+        "airplane",
+        "map"
       ]
     },
     {
       "slot": 2,
       "category": "travel",
       "thread_name": "Japan Trip 2026",
-      "question": "Japan trip is 23 days away. All logistics locked but zero activities planned for Kyoto (4 nights), Takayama, or Tokyo. Need to start building the itinerary now.",
+      "question": "Japan trip in 23 days. Kyoto activities still undefined — what will you actually do in those 4 days?",
       "answer": [
-        "Fushimi Inari + Arashiyama bamboo most popular",
-        "Philosopher's Path quieter, cherry blossom route",
-        "Nishiki Market for food, near hotel"
+        "Fushimi Inari sunrise before crowds (6am)",
+        "Arashiyama bamboo forest + monkey park",
+        "Philosopher's Path for temple hopping"
       ],
       "next_step": "Save Fushimi Inari + Arashiyama to Kyoto doc",
       "effort": "low",
       "countdown": "23 days",
       "tags": [
-        "temple",
-        "gate",
         "japan",
+        "temple",
         "shrine",
-        "travel",
-        "personal"
+        "torii",
+        "map",
+        "landmark"
       ]
     },
     {
       "slot": 3,
       "category": "personal",
       "thread_name": "Fountain Pen Research",
-      "question": "You're going to Japan in 23 days specifically for fountain pen shopping but haven't decided what to buy. Sailor Pro Gear Slim is the front-runner for Tokyo limited editions.",
+      "question": "Japan pen shopping in 23 days. Need to decide what you're buying and where before you land.",
       "answer": [
-        "Pilot CH92 ~$110 in Japan vs $180 US",
-        "Sailor Pro Gear Slim ~$130 Japan price",
-        "Itoya Ginza 12-floor stationery, one-stop shop"
+        "Pilot CH92 — ¥11k (~$110) vs $180 US",
+        "Sailor Pro Gear Slim — ¥13k in Japan",
+        "Itoya Ginza — 12-floor stationery hub Tokyo"
       ],
-      "next_step": "Compare Sailor Pro Gear Slim limited editions",
+      "next_step": "Save Itoya Ginza address to Tokyo doc",
       "effort": "low",
       "countdown": "23 days",
       "tags": [
         "pen",
         "ink",
         "writing",
-        "shop",
+        "notebook",
         "japan",
-        "personal"
+        "art"
       ]
     }
   ],
