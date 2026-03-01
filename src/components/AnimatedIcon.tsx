@@ -1,29 +1,18 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import { Player } from "@lordicon/react";
 
 const iconModules = import.meta.glob<{ default: object }>(
-  "../assets/icons/lordicon/*.json"
+  "../assets/icons/lordicon/*.json",
+  { eager: true }
 );
 
 function useIconData(hash: string): { data: object | null; error: boolean } {
-  const [data, setData] = useState<object | null>(null);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    setData(null);
-    setError(false);
+  return useMemo(() => {
     const key = `../assets/icons/lordicon/${hash}.json`;
-    const loader = iconModules[key];
-    if (!loader) {
-      setError(true);
-      return;
-    }
-    loader()
-      .then((mod) => setData(mod.default))
-      .catch(() => setError(true));
+    const mod = iconModules[key];
+    if (!mod) return { data: null, error: true };
+    return { data: mod.default, error: false };
   }, [hash]);
-
-  return { data, error };
 }
 
 interface AnimatedIconProps {
@@ -36,17 +25,15 @@ interface AnimatedIconProps {
 }
 
 export function AnimatedIcon({
-  iconHash,
-  size,
-  primary,
-  secondary,
-  animateOn,
-  pauseFor,
+  iconHash = "wghpqwxd",
+  size = 48,
+  primary = "#4f6ee2",
+  secondary = "#364579",
+  animateOn = "load",
+  pauseFor = 2000,
 }: AnimatedIconProps) {
   const playerRef = useRef<Player>(null);
   const { data: iconData, error } = useIconData(iconHash);
-
-  const play = () => playerRef.current?.playFromBeginning();
 
   const colorProps = secondary
     ? { colors: `primary:${primary},secondary:${secondary}` }
@@ -70,22 +57,41 @@ export function AnimatedIcon({
     );
   }
 
+  // Trigger first play after mount — onReady doesn't fire reliably
+  useEffect(() => {
+    if (animateOn === "load") {
+      requestAnimationFrame(() => {
+        playerRef.current?.playFromBeginning();
+      });
+    }
+  }, [animateOn]);
+
   return (
     <div
       style={{ width: size, height: size }}
-      onMouseEnter={animateOn === "hover" ? play : undefined}
-      onClick={animateOn === "click" ? play : undefined}
+      onMouseEnter={
+        animateOn === "hover"
+          ? () => playerRef.current?.playFromBeginning()
+          : undefined
+      }
+      onClick={
+        animateOn === "click"
+          ? () => playerRef.current?.playFromBeginning()
+          : undefined
+      }
     >
       <Player
         ref={playerRef}
         icon={iconData}
         size={size}
         {...colorProps}
-        onReady={animateOn === "load" ? play : undefined}
         onComplete={
-          animateOn === "load" && pauseFor != null
+          animateOn === "load"
             ? () => {
-                setTimeout(play, pauseFor);
+                setTimeout(
+                  () => playerRef.current?.playFromBeginning(),
+                  pauseFor
+                );
               }
             : undefined
         }

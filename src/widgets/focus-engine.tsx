@@ -37,63 +37,6 @@ const CATEGORY_COLORS: Record<
 
 const FONT = "'JetBrains Mono', monospace";
 
-// ═══════════════════════════════════════════
-// Mock data (uses new string[] answer format)
-// ═══════════════════════════════════════════
-
-const MOCK_QUESTS: Array<FocusSlot & { active: boolean }> = [
-  {
-    slot: 1,
-    category: "travel",
-    thread_name: "Japan Trip Planning",
-    question:
-      "You're 23 days out with no Kyoto plan — you have 3 days there.",
-    answer: [
-      "Fushimi Inari — 10k torii gates, no reservation",
-      "Arashiyama bamboo grove — best before 8am",
-      "Kinkaku-ji — iconic Golden Pavilion photo spot",
-    ],
-    next_step: "Save Fushimi Inari + Arashiyama to Kyoto doc",
-    effort: "low",
-    countdown: "23 days",
-    tags: ["temple", "gate", "japan", "shrine", "travel", "building"],
-    active: true,
-  },
-  {
-    slot: 2,
-    category: "work",
-    thread_name: "Go ECS Engine",
-    question:
-      "Snake prototype works but components aren't registered to entities yet.",
-    answer: [
-      "Entities = just integer IDs in most ECS systems",
-      "Components live in typed arrays indexed by entity",
-      "You need a ComponentStore with map[EntityID]interface{}",
-    ],
-    next_step: "Create ComponentStore struct in ECS repo",
-    effort: "high",
-    countdown: "4 days",
-    tags: ["computer", "code", "laptop", "game", "desk"],
-    active: false,
-  },
-  {
-    slot: 3,
-    category: "personal",
-    thread_name: "Fountain Pen Research",
-    question:
-      "You want sibling gifts from Japan — pens in the ~$100 range.",
-    answer: [
-      "Pilot CH92 — ¥11k (~$110) vs $180 in US",
-      "Sailor Pro Gear Slim — ¥13k (~$130) in Japan",
-      "Itoya Ginza — 12-floor stationery, one-stop shop",
-    ],
-    next_step: "Save 'Itoya Ginza' to Tokyo Craft doc",
-    effort: "low",
-    countdown: "23 days",
-    tags: ["pen", "ink", "writing", "shop", "japan", "gift"],
-    active: false,
-  },
-];
 
 // ═══════════════════════════════════════════
 // Countdown helpers
@@ -348,7 +291,7 @@ interface FocusEngineProps extends WidgetProps {
 export function FocusEngine({ size: _, slots, activeSlot }: FocusEngineProps) {
   const quests = slots
     ? slots.map((s) => ({ ...s, active: s.slot === (activeSlot ?? 1) }))
-    : MOCK_QUESTS;
+    : [];
 
   return (
     <Section use="primary" title="Focus Engine" className="h-full">

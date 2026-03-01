@@ -26,9 +26,9 @@ function IconCard({ hash, name, tags }: IconEntry) {
       <AnimatedIcon
         iconHash={hash}
         size={64}
-        primary="#ffffff"
+        primary="#6580e4"
+        secondary="#3e4982"
         animateOn="load"
-        pauseFor={2000}
       />
       <div style={{ fontSize: 11, color: "#aaa", textAlign: "center" }}>
         {name}
