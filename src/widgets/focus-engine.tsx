@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import type { WidgetProps } from "../types";
 import type { FocusSlot } from "../data/dashboard";
 import { Section } from "../components";
@@ -17,6 +17,7 @@ function useIconData(hash: string): object | null {
   const [data, setData] = useState<object | null>(null);
 
   useEffect(() => {
+    setData(null); // reset on hash change
     const key = `../assets/icons/lordicon/${hash}.json`;
     const loader = iconModules[key];
     if (!loader) return;
@@ -151,7 +152,8 @@ function SlotIcon({ tags, category }: { tags: string[]; category: string }) {
   const colors = CATEGORY_COLORS[category] || CATEGORY_COLORS.personal;
   const fallback = CATEGORY_FALLBACK[category] || "•";
 
-  const hash = useState(() => getIconForTags(tags, category))[0];
+  // useMemo: recomputes when tags change, deterministic per tag-set (no flicker)
+  const hash = useMemo(() => getIconForTags(tags, category), [tags, category]);
   const iconData = useIconData(hash);
 
   if (!iconData) {
@@ -393,8 +395,8 @@ export function FocusEngine({ size: _, slots, activeSlot }: FocusEngineProps) {
   return (
     <Section use="primary" title="Focus Engine" className="h-full">
       <div className="flex flex-col gap-3 flex-1">
-        {quests.map((quest, i) => (
-          <FocusCard key={i} quest={quest} />
+        {quests.map((quest) => (
+          <FocusCard key={quest.slot} quest={quest} />
         ))}
       </div>
     </Section>
