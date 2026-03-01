@@ -1,6 +1,6 @@
 import { TemplateRenderer, defaultTemplate } from "./templates";
-import { EVENTS, CONTEXT_STUB, TOKYO_PINS, ACTIVE_THREADS_STUB, UP_NEXT_STUB } from "./data/stub";
-import { useDashboard, useUpNext, useOrbital, useFocusEngine, useDates, toOrbitalEvents, toContextItems, toActiveThreads } from "./data/dashboard";
+import { EVENTS } from "./data/stub";
+import { useDashboard, useOrbital, useFocusEngine, useDates } from "./data/dashboard";
 import IconsPage from "./pages/icons";
 
 export default function App() {
@@ -9,7 +9,6 @@ export default function App() {
   }
 
   const { data, error } = useDashboard();
-  const { data: upNextData, error: upNextError } = useUpNext();
   const { data: orbitalData, error: orbitalError } = useOrbital();
   const { data: focusData, error: focusError } = useFocusEngine();
   const { data: datesData, error: datesError } = useDates();
@@ -26,10 +25,6 @@ export default function App() {
   if (error) {
     console.warn("[dashboard] Failed to load dashboard.json, using stubs:", error);
   }
-  if (upNextError) {
-    console.warn("[up-next] Failed to load up_next.json, using stub:", upNextError);
-  }
-
   const dateEvents = datesData?.events ?? EVENTS;
 
   const widgetData: Record<string, Record<string, unknown>> = {

@@ -10,14 +10,7 @@ import type {
 } from "../types/dashboard";
 
 import type {
-  ContextItem,
-  ContextCategory,
-  UrgencyLevel,
   DashboardEvent,
-  ActiveThread,
-  ThreadTier,
-  ThreadDomain,
-  UpNextData,
 } from "../types";
 
 // ─── Fetch + hook ─────────────────────────────────────────────────────────────
@@ -177,26 +170,6 @@ export function toOrbitalEvents(data: OrbitalData): DashboardEvent[] {
   }));
 }
 
-export async function fetchUpNext(): Promise<UpNextData> {
-  const url = import.meta.env.BASE_URL + "up_next.json";
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Failed to fetch up_next.json (${res.status})`);
-  return res.json();
-}
-
-export function useUpNext() {
-  const [data, setData] = useState<UpNextData | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetchUpNext()
-      .then(setData)
-      .catch((e: Error) => setError(e.message));
-  }, []);
-
-  return { data, error };
-}
-
 // ─── Item selectors ───────────────────────────────────────────────────────────
 
 export function getHotItems(data: DashboardData): DashboardItem[] {
@@ -275,38 +248,6 @@ export function getTripWithLogistics(
 
 // ─── Adapters ─────────────────────────────────────────────────────────────────
 
-/** DashboardData → ContextItem[] for the ContextResume widget */
-export function toContextItems(data: DashboardData): ContextItem[] {
-  return data.items
-    .filter((i) => i.heat !== "archived")
-    .map((i) => {
-      const urgency: UrgencyLevel = i.heat === "hot" ? "active" : "waiting";
-
-      const category: ContextCategory =
-        i.tag === "work"
-          ? "work"
-          : i.category === "people"
-          ? "conversation"
-          : "personal";
-
-      const lastTouched =
-        i.deadline !== null
-          ? `Due ${new Date(i.deadline).toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-            })}`
-          : i.heat_reason;
-
-      return {
-        category,
-        label: i.title,
-        context: i.summary,
-        lastTouched,
-        urgency,
-      };
-    });
-}
-
 /**
  * DashboardData → DashboardEvent[] for the TemporalBubbleMap widget.
  *
@@ -376,35 +317,3 @@ export function toEvents(data: DashboardData): DashboardEvent[] {
   return events;
 }
 
-/** DashboardData → ActiveThread[] for the ActiveThreads widget */
-export function toActiveThreads(data: DashboardData): ActiveThread[] {
-  const bigRockItem = data.items.find(
-    (i) => i.heat === "hot" && i.pinned && i.open_actions.length > 0
-  );
-
-  const generatedDate = new Date(data.generated_at).toLocaleDateString(
-    "en-US",
-    { month: "short", day: "numeric" }
-  );
-
-  return data.items
-    .filter((i) => i.heat !== "archived")
-    .map((i) => {
-      const tier: ThreadTier = i.heat === "hot" ? "main" : "side";
-      const domain: ThreadDomain = i.tag === "work" ? "work" : "personal";
-
-      const tasks = i.open_actions.map((label, idx) => ({
-        label,
-        effort: "15 min" as const,
-        bigRock: i.id === bigRockItem?.id && idx === 0,
-      }));
-
-      return {
-        name: i.title,
-        tier,
-        domain,
-        tasks,
-        journal: [{ text: i.summary, date: generatedDate }],
-      };
-    });
-}
