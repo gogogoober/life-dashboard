@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-02-28T22:30:08.790Z",
-  "energy_band": "wind_down",
+  "generated_at": "2026-03-01T05:07:20.134Z",
+  "energy_band": "ramp_up",
   "is_work_hours": false,
   "is_weekend": true,
   "slots": [
@@ -8,66 +8,66 @@
       "slot": 1,
       "category": "travel",
       "thread_name": "Mariano's 30th / Chicago",
-      "question": "Mariano's birthday is 19 days away, but your Chicago trip starts in 13 days—and you still don't have a warm backpacking destination locked. Weekend of Mar 14-15 is your window.",
+      "question": "Backpacking trip with Mariano happens in 13 days (Mar 14-15), but you haven't picked a warm destination, booked flights, or sorted gear. Need to lock this down this weekend before it becomes a scramble.",
       "answer": [
         "Zion 60-70°F mid-March, best warm option",
-        "REI rents full kits ~$50-70 per weekend",
+        "REI rents full kits ~$50-70/weekend",
         "Chicago Lincoln Park REI has gear pickup"
       ],
-      "next_step": "Search warm March backpacking near Chicago",
-      "effort": "low",
-      "countdown": "13 days",
+      "next_step": "Search warm March backpacking spots near Chicago",
+      "effort": "medium",
+      "countdown": "12 days",
       "tags": [
         "backpack",
         "mountain",
         "hiking",
         "camping",
-        "map",
-        "airplane"
+        "airplane",
+        "map"
       ]
     },
     {
       "slot": 2,
       "category": "travel",
       "thread_name": "Japan Trip 2026",
-      "question": "Japan trip is 23 days away. Kyoto is locked (hotel Mar 25-29) but you haven't planned activities yet—temples, food, outdoorsy stuff. Need specifics.",
+      "question": "Japan trip starts in 22 days. You've locked flights and hotels but Kyoto, Takayama, and Tokyo are still blank slates. Building the itinerary now means smoother travel and less decision fatigue when you're jet-lagged.",
       "answer": [
-        "Fushimi Inari shrine — 10k torii gates, half-day hike",
-        "Arashiyama bamboo grove + monkey park",
-        "Nishiki Market for street food + kaiseki research"
+        "Fushimi Inari + Arashiyama bamboo — Kyoto classics",
+        "Takayama old town + morning market walkable",
+        "Tokyo Tsukiji Outer Market + teamLab digital art"
       ],
       "next_step": "Save Fushimi Inari + Arashiyama to Kyoto doc",
-      "effort": "low",
-      "countdown": "23 days",
+      "effort": "medium",
+      "countdown": "22 days",
       "tags": [
         "japan",
         "temple",
         "shrine",
-        "torii",
         "landmark",
-        "map"
+        "map",
+        "camera"
       ]
     },
     {
       "slot": 3,
       "category": "personal",
       "thread_name": "Fountain Pen Research",
-      "question": "You're leaning toward Sailor Pro Gear Slim for Tokyo limited editions. Nail down the exact model + budget so you can hunt it in 23 days.",
+      "question": "You're heading to Japan in 22 days with fountain pens on the list. Narrowing down Sailor vs Pilot now saves you decision paralysis in Tokyo stationery stores.",
       "answer": [
-        "Pilot CH92 — ¥11k (~$110) vs $180 in US",
-        "Sailor Pro Gear Slim — ¥13k in Japan",
-        "Itoya Ginza — 12-floor stationery, one-stop"
+        "Pilot CH92 — ¥11k (~$110) vs $180 US",
+        "Sailor Pro Gear Slim — ¥13k, Tokyo exclusives",
+        "Itoya Ginza — 12-floor pen heaven, one-stop"
       ],
-      "next_step": "Pick Sailor model and set Japan pen budget",
+      "next_step": "Add Pilot CH92 vs Sailor comparison to notes",
       "effort": "low",
-      "countdown": "23 days",
+      "countdown": "22 days",
       "tags": [
         "pen",
         "ink",
         "writing",
-        "notebook",
         "japan",
-        "art"
+        "art",
+        "notebook"
       ]
     }
   ],
