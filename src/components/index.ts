@@ -8,3 +8,4 @@ export { Banner } from './Banner';
 export { Notification } from './Notification';
 export { Section } from './Section';
 export { Panel } from './Panel';
+export { AnimatedIcon } from './AnimatedIcon';

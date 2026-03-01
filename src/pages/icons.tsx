@@ -1,5 +1,5 @@
-import { useRef, useEffect, useState, useMemo } from "react";
-import { Player } from "@lordicon/react";
+import { useEffect, useState, useMemo } from "react";
+import { AnimatedIcon } from "../components/AnimatedIcon";
 import iconRegistry from "../assets/icons/icon-registry.json";
 
 type IconEntry = { hash: string; name: string; tags: string[] };
@@ -8,33 +8,7 @@ const ALL_ICONS: IconEntry[] = Object.entries(
   iconRegistry as Record<string, { name: string; tags: string[] }>
 ).map(([hash, { name, tags }]) => ({ hash, name, tags }));
 
-const iconModules = import.meta.glob<{ default: object }>(
-  "../assets/icons/lordicon/*.json"
-);
-
-function useIconData(hash: string): { data: object | null; error: boolean } {
-  const [data, setData] = useState<object | null>(null);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    setData(null);
-    setError(false);
-    const key = `../assets/icons/lordicon/${hash}.json`;
-    const loader = iconModules[key];
-    if (!loader) {
-      setError(true);
-      return;
-    }
-    loader().then((mod) => setData(mod.default)).catch(() => setError(true));
-  }, [hash]);
-
-  return { data, error };
-}
-
 function IconCard({ hash, name, tags }: IconEntry) {
-  const playerRef = useRef<Player>(null);
-  const { data: iconData, error } = useIconData(hash);
-
   return (
     <div
       style={{
@@ -48,34 +22,14 @@ function IconCard({ hash, name, tags }: IconEntry) {
         gap: 8,
         cursor: "pointer",
       }}
-      onClick={() => playerRef.current?.playFromBeginning()}
     >
-      {iconData ? (
-        <Player
-          ref={playerRef}
-          icon={iconData}
-          size={64}
-          colorize="#ffffff"
-          onReady={() => playerRef.current?.playFromBeginning()}
-          onComplete={() => {
-            setTimeout(() => playerRef.current?.playFromBeginning(), 2000);
-          }}
-        />
-      ) : (
-        <div
-          style={{
-            width: 64,
-            height: 64,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: error ? "#f44" : "#555",
-            fontSize: 12,
-          }}
-        >
-          {error ? "err" : "..."}
-        </div>
-      )}
+      <AnimatedIcon
+        iconHash={hash}
+        size={64}
+        primary="#ffffff"
+        animateOn="load"
+        pauseFor={2000}
+      />
       <div style={{ fontSize: 11, color: "#aaa", textAlign: "center" }}>
         {name}
       </div>

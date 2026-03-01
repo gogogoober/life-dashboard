@@ -1,38 +1,9 @@
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useMemo } from "react";
 import type { WidgetProps } from "../types";
 import type { FocusSlot } from "../data/dashboard";
 import { Section } from "../components";
-import { Player } from "@lordicon/react";
+import { AnimatedIcon } from "../components/AnimatedIcon";
 import { getIconForTags } from "../utils/get-icon-for-tags";
-
-// ═══════════════════════════════════════════
-// Dynamic icon loading via Vite lazy glob
-// ═══════════════════════════════════════════
-
-const iconModules = import.meta.glob<{ default: object }>(
-  "../assets/icons/lordicon/*.json"
-);
-
-function useIconData(hash: string): object | null {
-  const [data, setData] = useState<object | null>(null);
-
-  useEffect(() => {
-    setData(null); // reset on hash change
-    const key = `../assets/icons/lordicon/${hash}.json`;
-    const loader = iconModules[key];
-    if (!loader) return;
-    loader().then((mod) => setData(mod.default));
-  }, [hash]);
-
-  return data;
-}
-
-const CATEGORY_FALLBACK: Record<string, string> = {
-  travel: "✈",
-  work: "◆",
-  personal: "◎",
-  social: "◇",
-};
 
 // ═══════════════════════════════════════════
 // Design tokens
@@ -148,33 +119,20 @@ function parseDays(countdown: string): number {
 // ═══════════════════════════════════════════
 
 function SlotIcon({ tags, category }: { tags: string[]; category: string }) {
-  const playerRef = useRef<Player>(null);
   const colors = CATEGORY_COLORS[category] || CATEGORY_COLORS.personal;
-  const fallback = CATEGORY_FALLBACK[category] || "•";
 
   // useMemo: recomputes when tags change, deterministic per tag-set (no flicker)
   const hash = useMemo(() => getIconForTags(tags, category), [tags, category]);
-  const iconData = useIconData(hash);
-
-  if (!iconData) {
-    return (
-      <span style={{ fontSize: 36, color: colors.primary }}>{fallback}</span>
-    );
-  }
 
   return (
-    <div style={{ position: "relative", width: 48, height: 48 }}>
-      <Player
-        ref={playerRef}
-        icon={iconData}
-        size={48}
-        colors={`primary:${colors.primary},secondary:${colors.emphasis}`}
-        onReady={() => playerRef.current?.playFromBeginning()}
-        onComplete={() => {
-          setTimeout(() => playerRef.current?.playFromBeginning(), 2000);
-        }}
-      />
-    </div>
+    <AnimatedIcon
+      iconHash={hash}
+      size={48}
+      primary={colors.primary}
+      secondary={colors.emphasis}
+      animateOn="load"
+      pauseFor={2000}
+    />
   );
 }
 
