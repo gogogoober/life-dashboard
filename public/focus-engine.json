@@ -1,40 +1,40 @@
 {
-  "generated_at": "2026-03-02T05:05:54.509Z",
-  "energy_band": "ramp_up",
+  "generated_at": "2026-03-02T23:57:44.879Z",
+  "energy_band": "wind_down",
   "is_work_hours": false,
   "is_weekend": false,
   "slots": [
     {
       "slot": 1,
-      "category": "travel",
+      "category": "personal",
       "thread_name": "Mariano's 30th / Chicago",
-      "question": "Mariano's birthday trip needs a warm backpacking destination picked in 11 days. You need somewhere 60°F+ mid-March, REI gear rentals figured out, and flights to/from booked.",
+      "question": "Chicago trip starts in 11 days, but you need to book a warm backpacking destination for March 14-15 first. No location = no gear planning.",
       "answer": [
-        "Zion 60-70°F mid-March, best warm option",
-        "REI rents full kits ~$50-70/weekend",
-        "Chicago Lincoln Park REI has gear pickup"
+        "Zion 60-70°F mid-March, best warm option near Chicago",
+        "Big Bend Texas also warm, more remote",
+        "Need flights by this week to avoid price spike"
       ],
-      "next_step": "Search warm March backpacking near Chicago",
-      "effort": "medium",
+      "next_step": "Search warm March backpacking spots near Chicago",
+      "effort": "low",
       "countdown": "11 days",
       "tags": [
         "backpack",
         "mountain",
         "hiking",
         "camping",
-        "flight",
+        "airplane",
         "map"
       ]
     },
     {
       "slot": 2,
-      "category": "travel",
+      "category": "personal",
       "thread_name": "Japan Trip 2026",
-      "question": "Japan trip starts in 21 days. Kyoto and Tokyo activity planning are still blank—you're weeks out but activities book up fast in spring.",
+      "question": "Japan in 21 days. Kyoto hotel starts March 25, but you haven't planned any activities yet. Catherine visits in 5 days—won't have focus then.",
       "answer": [
-        "Fushimi Inari best at dawn, avoid crowds",
-        "Arashiyama Bamboo + monkey park combo",
-        "TeamLab Borderless Tokyo needs advance tickets"
+        "Fushimi Inari best early morning to avoid crowds",
+        "Arashiyama Bamboo Grove + monkey park half-day",
+        "Philosopher's Path connects Silver Pavilion to Nanzenji"
       ],
       "next_step": "Save Fushimi Inari + Arashiyama to Kyoto doc",
       "effort": "low",
@@ -51,23 +51,23 @@
     {
       "slot": 3,
       "category": "personal",
-      "thread_name": "Fountain Pen Research",
-      "question": "You're going to Japan in 21 days with pen shopping as a sub-goal. Sailor Pro Gear Slim pricing and sibling gift options (~$100) still need research.",
+      "thread_name": "Japan Trip 2026",
+      "question": "You're buying 4 pairs of eyeglasses in Japan (21 days) but haven't checked if insurance covers overseas purchases or what prescription format Japan needs.",
       "answer": [
-        "Pilot CH92 — ¥11k (~$110) vs $180 US",
-        "Sailor Pro Gear Slim — ¥13k in Japan",
-        "Itoya Ginza — 12-floor stationery, one-stop"
+        "Japan may need PD measurement on prescription",
+        "US insurance often reimburses overseas with receipts",
+        "Jins and Zoff in Kyoto do same-day glasses"
       ],
-      "next_step": "Compare Sailor Pro Gear Slim Tokyo prices",
+      "next_step": "Email insurance about Japan eyeglasses coverage",
       "effort": "low",
       "countdown": "21 days",
       "tags": [
-        "pen",
-        "ink",
-        "writing",
-        "notebook",
         "japan",
-        "art"
+        "map",
+        "landmark",
+        "document",
+        "money",
+        "chart"
       ]
     }
   ],
