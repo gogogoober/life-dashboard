@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-03-02T03:54:47.962Z",
+  "generated_at": "2026-03-02T05:05:54.509Z",
   "energy_band": "ramp_up",
   "is_work_hours": false,
   "is_weekend": false,
   "slots": [
     {
       "slot": 1,
-      "category": "personal",
+      "category": "travel",
       "thread_name": "Mariano's 30th / Chicago",
-      "question": "You fly to Chicago in 11 days for Mariano's 30th on the 19th. The backpacking trip (Mar 14-15 weekend) needs a destination, flights, and REI gear rental locked in now.",
+      "question": "Mariano's birthday trip needs a warm backpacking destination picked in 11 days. You need somewhere 60°F+ mid-March, REI gear rentals figured out, and flights to/from booked.",
       "answer": [
         "Zion 60-70°F mid-March, best warm option",
         "REI rents full kits ~$50-70/weekend",
         "Chicago Lincoln Park REI has gear pickup"
       ],
-      "next_step": "Search warm March destinations near Chicago",
+      "next_step": "Search warm March backpacking near Chicago",
       "effort": "medium",
       "countdown": "11 days",
       "tags": [
@@ -22,19 +22,19 @@
         "mountain",
         "hiking",
         "camping",
-        "airplane",
+        "flight",
         "map"
       ]
     },
     {
       "slot": 2,
-      "category": "personal",
+      "category": "travel",
       "thread_name": "Japan Trip 2026",
-      "question": "Japan trip leaves in 21 days. Kyoto activities are completely unplanned—you're staying 4 nights with zero agenda besides 'pen shopping' and 'outdoorsy stuff.'",
+      "question": "Japan trip starts in 21 days. Kyoto and Tokyo activity planning are still blank—you're weeks out but activities book up fast in spring.",
       "answer": [
-        "Fushimi Inari hike—2-3 hours, iconic torii gates",
-        "Arashiyama bamboo grove + monkey park combo",
-        "Downtown pen shops: Kingdom Note, Tag Stationery"
+        "Fushimi Inari best at dawn, avoid crowds",
+        "Arashiyama Bamboo + monkey park combo",
+        "TeamLab Borderless Tokyo needs advance tickets"
       ],
       "next_step": "Save Fushimi Inari + Arashiyama to Kyoto doc",
       "effort": "low",
@@ -44,7 +44,7 @@
         "temple",
         "shrine",
         "torii",
-        "hiking",
+        "landmark",
         "map"
       ]
     },
@@ -52,22 +52,22 @@
       "slot": 3,
       "category": "personal",
       "thread_name": "Fountain Pen Research",
-      "question": "You're researching fountain pens for Japan but haven't picked your pen or sibling gifts. Tokyo shopping is 3 weeks away—narrow this down so you know what to hunt.",
+      "question": "You're going to Japan in 21 days with pen shopping as a sub-goal. Sailor Pro Gear Slim pricing and sibling gift options (~$100) still need research.",
       "answer": [
-        "Pilot CH92 — ¥11k (~$110) vs $180 in US",
+        "Pilot CH92 — ¥11k (~$110) vs $180 US",
         "Sailor Pro Gear Slim — ¥13k in Japan",
         "Itoya Ginza — 12-floor stationery, one-stop"
       ],
-      "next_step": "Compare Pilot CH92 vs Sailor Pro Gear prices",
+      "next_step": "Compare Sailor Pro Gear Slim Tokyo prices",
       "effort": "low",
       "countdown": "21 days",
       "tags": [
         "pen",
         "ink",
         "writing",
+        "notebook",
         "japan",
-        "art",
-        "notebook"
+        "art"
       ]
     }
   ],
