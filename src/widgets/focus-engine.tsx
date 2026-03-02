@@ -37,26 +37,6 @@ const CATEGORY_COLORS: Record<
 
 const FONT = "'JetBrains Mono', monospace";
 
-
-// ═══════════════════════════════════════════
-// Countdown helpers
-// ═══════════════════════════════════════════
-
-function countdownFontSize(countdown: string): number {
-  const match = countdown.match(/(\d+)/);
-  if (!match) return 28;
-  const days = parseInt(match[1], 10);
-  if (days <= 3) return 40;
-  if (days <= 7) return 34;
-  if (days <= 14) return 30;
-  return 26;
-}
-
-function parseDays(countdown: string): number {
-  const match = countdown.match(/(\d+)/);
-  return match ? parseInt(match[1], 10) : 99;
-}
-
 // ═══════════════════════════════════════════
 // Icon component — tag-matched with fallback
 // ═══════════════════════════════════════════
@@ -70,7 +50,7 @@ function SlotIcon({ tags, category }: { tags: string[]; category: string }) {
   return (
     <AnimatedIcon
       iconHash={hash}
-      size={48}
+      size={58}
       primary={colors.primary}
       secondary={colors.emphasis}
       animateOn="load"
@@ -83,10 +63,10 @@ function SlotIcon({ tags, category }: { tags: string[]; category: string }) {
 // Focus Card
 //
 // Visual hierarchy (top → bottom):
-//   1. CTA (next_step)   — emphasis, bold, ≤10 words
-//   2. Answer bullets     — secondary, 3 short lines
-//   3. Question           — tertiary, italic, the "why now"
-//   4. Footer             — thread name + countdown
+//   1. Icon + thread_name — primary H2
+//   2. next_step          — emphasis body text
+//   3. Answer bullets     — secondary, 3 short lines
+//   4. Progress bar       — thin bar + done/total label
 // ═══════════════════════════════════════════
 
 interface FocusCardProps {
@@ -95,13 +75,14 @@ interface FocusCardProps {
 
 function FocusCard({ quest }: FocusCardProps) {
   const colors = CATEGORY_COLORS[quest.category] || CATEGORY_COLORS.personal;
-  const days = parseDays(quest.countdown);
-  const fontSize = countdownFontSize(quest.countdown);
 
   // answer can be string[] (new) or string (legacy fallback)
   const answerBullets: string[] = Array.isArray(quest.answer)
     ? quest.answer
     : [quest.answer];
+
+  const total = answerBullets.length;
+  const done = 0; // hardcoded until data shape includes tasks_done
 
   return (
     <div
@@ -110,9 +91,8 @@ function FocusCard({ quest }: FocusCardProps) {
         border: "1px solid rgba(var(--bg-surface-secondary, 14, 22, 14), 0.5)",
         borderRadius: 12,
         padding: "14px 16px",
-        display: "grid",
-        gridTemplateColumns: "56px 1fr",
-        gridTemplateRows: "auto auto auto auto",
+        display: "flex",
+        flexDirection: "column",
         gap: 0,
         position: "relative",
         overflow: "hidden",
@@ -133,59 +113,57 @@ function FocusCard({ quest }: FocusCardProps) {
         }}
       />
 
-      {/* Icon — spans rows 1-2 */}
+      {/* ── Row 1: Icon + header + call to action ── */}
       <div
         style={{
-          gridColumn: 1,
-          gridRow: "1 / 3",
-          width: 48,
-          height: 48,
-          borderRadius: 10,
-          background: colors.bg,
-          border: `1px solid ${colors.primary}33`,
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          alignSelf: "start",
-          marginTop: 2,
-        }}
-      >
-        <SlotIcon tags={quest.tags} category={quest.category} />
-      </div>
-
-      {/* ── Row 1: CTA — the action, emphasis weight, ≤10 words ── */}
-      <div
-        style={{
-          gridColumn: 2,
-          gridRow: 1,
-          paddingLeft: 10,
-          display: "flex",
-          alignItems: "center",
-          minHeight: 24,
+          gap: 12,
         }}
       >
         <div
           style={{
-            fontSize: 12,
-            fontWeight: 600,
-            color: "var(--text-emphasis, #d4f5d4)",
-            lineHeight: 1.3,
-            letterSpacing: "-0.01em",
+            width: 58,
+            height: 58,
+            borderRadius: 12,
+            background: colors.bg,
+            border: `1px solid ${colors.primary}33`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
           }}
         >
-          {quest.next_step}
+          <SlotIcon tags={quest.tags} category={quest.category} />
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <h2
+            style={{
+              margin: 0,
+              fontSize: 14,
+              fontWeight: 700,
+              color: "var(--text-primary, #c8d8c8)",
+              lineHeight: 1.3,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            {quest.thread_name}
+          </h2>
+          <div
+            style={{
+              fontSize: 12,
+              fontWeight: 500,
+              color: "var(--text-emphasis, #d4f5d4)",
+              lineHeight: 1.4,
+            }}
+          >
+            {quest.next_step}
+          </div>
         </div>
       </div>
 
-      {/* ── Row 2: Answer bullets — bang bang bang ── */}
-      <div
-        style={{
-          gridColumn: 2,
-          gridRow: 2,
-          paddingLeft: 10,
-          paddingTop: 4,
-        }}
-      >
+      {/* ── Row 3: Answer bullets ── */}
+      <div style={{ paddingTop: 6 }}>
         {answerBullets.map((bullet, i) => (
           <div
             key={i}
@@ -214,66 +192,44 @@ function FocusCard({ quest }: FocusCardProps) {
         ))}
       </div>
 
-      {/* ── Row 3: Question — the context/reminder ── */}
+      {/* ── Row 4: Progress bar ── */}
       <div
         style={{
-          gridColumn: "1 / -1",
-          gridRow: 3,
-          paddingTop: 8,
-          fontSize: 9.5,
-          fontWeight: 400,
-          color: "var(--text-tertiary, #3d5a3d)",
-          lineHeight: 1.4,
-          fontStyle: "italic",
-        }}
-      >
-        {quest.question}
-      </div>
-
-      {/* ── Row 4: Footer — thread name + countdown ── */}
-      <div
-        style={{
-          gridColumn: "1 / -1",
-          gridRow: 4,
-          paddingTop: 8,
+          paddingTop: 10,
           display: "flex",
-          alignItems: "baseline",
-          justifyContent: "space-between",
+          alignItems: "center",
+          gap: 8,
         }}
       >
         <div
+          style={{
+            flex: 1,
+            height: 4,
+            borderRadius: 2,
+            background: "rgba(255, 255, 255, 0.08)",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              width: total > 0 ? `${(done / total) * 100}%` : "0%",
+              height: "100%",
+              borderRadius: 2,
+              background: colors.primary,
+              transition: "width 0.3s ease",
+            }}
+          />
+        </div>
+        <span
           style={{
             fontSize: 9,
             fontWeight: 500,
-            color: "var(--text-primary, #c8d8c8)",
-            textTransform: "uppercase",
-            letterSpacing: "0.08em",
+            color: "var(--text-secondary, #5a7a5a)",
+            whiteSpace: "nowrap",
           }}
         >
-          {quest.thread_name}
-        </div>
-        <div
-          style={{
-            fontWeight: 700,
-            color: "var(--text-alert, #e85d35)",
-            lineHeight: 1,
-            letterSpacing: "-0.02em",
-            fontSize,
-          }}
-        >
-          {days}
-          <span
-            style={{
-              fontSize: 10,
-              fontWeight: 500,
-              color: "var(--text-secondary, #5a7a5a)",
-              marginLeft: 3,
-              letterSpacing: 0,
-            }}
-          >
-            days
-          </span>
-        </div>
+          {done}/{total}
+        </span>
       </div>
     </div>
   );
