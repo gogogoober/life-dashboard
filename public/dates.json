@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-02T05:05:54.488Z",
+  "generatedAt": "2026-03-02T23:57:45.642Z",
   "windowDays": 60,
   "events": [
     {
@@ -7,24 +7,26 @@
       "name": "Online Consultation & Diagnosis",
       "startDate": "2026-03-06",
       "durationDays": 1,
-      "importance": 3,
+      "importance": 4,
       "category": "personal",
       "source": "google",
       "isRecurring": false,
-      "context": "25-minute virtual consultation with Regine Blaise PMHNP via Mindful. Medical intake form required.",
+      "context": "Mental health consultation with Regine Blaise PMHNP. 25 minutes via portal.",
       "actions": [],
-      "people": []
+      "people": [
+        "Regine Blaise PMHNP"
+      ]
     },
     {
       "id": "catherine-wu-visiting",
-      "name": "Catherine Wu visiting",
+      "name": "Catherine Wu Visiting",
       "startDate": "2026-03-07",
       "durationDays": 6,
       "importance": 5,
       "category": "social",
       "source": "google",
       "isRecurring": false,
-      "context": "Catherine Wu is visiting. Time to catch up with an old friend.",
+      "context": "Catherine Wu is visiting for a week.",
       "actions": [],
       "people": [
         "Catherine Wu"
@@ -35,16 +37,16 @@
       "name": "Mariano's 30th / Chicago",
       "startDate": "2026-03-13",
       "durationDays": 10,
-      "importance": 8,
-      "category": "personal",
+      "importance": 9,
+      "category": "travel",
       "source": "both",
       "isRecurring": false,
-      "context": "Trip to Chicago for Mariano's 30th birthday (Mar 19). Backpacking weekend beforehand somewhere warm, then Chicago for the celebration.",
-      "hook": "Find a warm backpacking destination and book connecting flights. Sort gear rental at REI. Pick a gift for Mariano.",
+      "context": "Chicago trip for Mariano's 30th birthday on March 19. Combining with a 1-2 night warm backpacking trip beforehand (pending destination selection). Flights booked.",
+      "hook": "Finalize warm backpacking destination and book corresponding flights; secure REI gear rentals; purchase gift for Mariano.",
       "actions": [
         {
           "id": "find-backpacking-destination",
-          "name": "Find warm backpacking destination",
+          "name": "Find warm backpacking destination (1-2 night, mid-March)",
           "status": "todo"
         },
         {
@@ -53,17 +55,17 @@
           "status": "todo"
         },
         {
-          "id": "book-return-flight",
+          "id": "book-backpacking-chicago-flight",
           "name": "Book flight from backpacking to Chicago",
           "status": "todo"
         },
         {
-          "id": "rei-gear-rentals",
-          "name": "Figure out REI gear rentals",
+          "id": "rent-rei-gear",
+          "name": "Figure out REI gear rentals (backpack, tent, sleeping bag)",
           "status": "todo"
         },
         {
-          "id": "mariano-gift",
+          "id": "buy-mariano-gift",
           "name": "Buy Mariano a gift",
           "status": "todo"
         }
@@ -73,7 +75,7 @@
       ]
     },
     {
-      "id": "mariano-birthday-2026",
+      "id": "mariano-birthday",
       "name": "Mariano's Birthday",
       "startDate": "2026-03-19",
       "durationDays": 1,
@@ -92,27 +94,47 @@
       "name": "Japan Trip 2026",
       "startDate": "2026-03-23",
       "durationDays": 16,
-      "importance": 9,
+      "importance": 10,
       "category": "travel",
       "source": "both",
       "isRecurring": false,
-      "context": "Two-week trip with Dana, Mar 23 – Apr 7. Route: Osaka → Nara → Kyoto → Takayama → Tokyo. All flights and hotels booked. Celebrating Dana's 30th during the trip. Pen shopping and outdoor activities planned.",
-      "hook": "Finalize activity plans for Kyoto, Takayama, and Tokyo. Confirm all bookings. Pack pen shopping destinations.",
+      "context": "Two-week trip with Dana March 23–April 7. Route: Osaka, Nara, Kyoto, Takayama, Tokyo. All flights and hotels booked. Shopping for eyeglasses and fountain pens.",
+      "hook": "Look up eyeglasses stores in Kyoto; validate insurance/prescription requirements; finalize activity plans for each city.",
       "actions": [
         {
           "id": "flight-chicago-taipei",
-          "name": "Flight to Taipei (BR 55) - Mar 23 01:30",
+          "name": "Flight to Taipei (BR 55) from Chicago ORD",
           "status": "done"
         },
         {
           "id": "flight-taipei-osaka",
-          "name": "Flight to Osaka (BR 130) - Mar 24 01:30",
+          "name": "Flight to Osaka (BR 130) from Taipei TPE",
           "status": "done"
         },
         {
-          "id": "stay-kyoto-travelodge",
-          "name": "Stay at Travelodge Kyoto Shijo Kawaramachi - Mar 25-29",
+          "id": "stay-kyoto",
+          "name": "Stay at Travelodge Kyoto Shijo Kawaramachi (Mar 25-29)",
           "status": "done"
+        },
+        {
+          "id": "flight-tokyo-honolulu",
+          "name": "Flight to Honolulu (ZG 2) from Tokyo NRT",
+          "status": "done"
+        },
+        {
+          "id": "flight-honolulu-new-york",
+          "name": "Flight to New York (DL 650) from Honolulu HNL",
+          "status": "done"
+        },
+        {
+          "id": "eyeglasses-stores-kyoto",
+          "name": "Look up eyeglasses stores in Kyoto for early trip shopping",
+          "status": "todo"
+        },
+        {
+          "id": "validate-insurance-glasses",
+          "name": "Validate insurance/prescription requirements for buying 4 pairs of glasses",
+          "status": "todo"
         },
         {
           "id": "plan-kyoto-activities",
@@ -128,31 +150,6 @@
           "id": "plan-tokyo-activities",
           "name": "Plan activities in Tokyo",
           "status": "todo"
-        },
-        {
-          "id": "celebrate-dana-30th",
-          "name": "Celebrate Dana's 30th in Japan",
-          "status": "todo"
-        },
-        {
-          "id": "outdoor-activity",
-          "name": "Do something outdoorsy",
-          "status": "todo"
-        },
-        {
-          "id": "pen-shopping",
-          "name": "Pen shopping (Sailor Pro Gear Slim)",
-          "status": "todo"
-        },
-        {
-          "id": "flight-tokyo-honolulu",
-          "name": "Flight to Honolulu (ZG 2) - Apr 7 06:10",
-          "status": "done"
-        },
-        {
-          "id": "flight-honolulu-newyork",
-          "name": "Flight to New York (DL 650) - Apr 7 23:24",
-          "status": "done"
         }
       ],
       "people": [
@@ -161,14 +158,14 @@
     },
     {
       "id": "dana-spring-break",
-      "name": "Dana Spring Break",
+      "name": "Dana's Spring Break",
       "startDate": "2026-03-23",
       "durationDays": 5,
-      "importance": 5,
+      "importance": 6,
       "category": "personal",
       "source": "google",
       "isRecurring": false,
-      "context": "Dana's spring break overlaps with the Japan trip.",
+      "context": "Dana's spring break (overlaps with Japan trip).",
       "actions": [],
       "people": [
         "Dana"
@@ -179,11 +176,11 @@
       "name": "Dad's Birthday",
       "startDate": "2026-04-07",
       "durationDays": 1,
-      "importance": 6,
+      "importance": 5,
       "category": "personal",
       "source": "google",
       "isRecurring": false,
-      "context": "Dad's birthday. Landing in Honolulu today, then flying to New York.",
+      "context": "Dad's birthday on April 7 (same day return flight from Japan lands in New York).",
       "actions": [],
       "people": [
         "Dad"
