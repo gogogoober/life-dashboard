@@ -303,37 +303,14 @@ function getOrbitPos(
 ): { ax: number; ay: number } {
   const orbitR = parent.radius + 20;
   const angle =
-    (TAU * dot.index) / totalChildren + t * 0.25 + parent.hash;
+    (TAU * dot.index) / totalChildren + t * 0.125 + parent.hash;
   return {
     ax: parent.x + Math.cos(angle) * orbitR,
     ay: parent.y + Math.sin(angle) * orbitR,
   };
 }
 
-function drawConnectionLines(
-  ctx: CanvasRenderingContext2D,
-  node: BubbleNode,
-  nodeDots: ActionDot[],
-  t: number
-) {
-  const n = node.todoActions.length;
-  if (n === 0) return;
 
-  ctx.globalAlpha = node.opacity;
-  nodeDots.forEach((dot) => {
-    const { ax, ay } = getOrbitPos(node, dot, n, t);
-    const midX = (node.x + ax) / 2;
-    const midY = (node.y + ay) / 2 - 4;
-
-    ctx.beginPath();
-    ctx.moveTo(node.x, node.y);
-    ctx.quadraticCurveTo(midX + 3, midY - 3, ax, ay);
-    ctx.strokeStyle = dot.lineColor;
-    ctx.lineWidth = 0.8;
-    ctx.stroke();
-  });
-  ctx.globalAlpha = 1;
-}
 
 function drawBubble(
   ctx: CanvasRenderingContext2D,
@@ -511,7 +488,6 @@ export function TemporalBubbleMap({ events }: TemporalBubbleMapProps) {
       drawGrid(ctx, w, h);
       drawWeekendLines(ctx, w, h);
       drawSpine(ctx, nodes);
-      nodes.forEach((n) => drawConnectionLines(ctx, n, dotsByNode.get(n) || [], t));
       nodes.forEach((n) => drawBubble(ctx, n, t));
       nodes.forEach((n) => drawActionDots(ctx, n, dotsByNode.get(n) || [], t));
       nodes.forEach((n) => drawLabels(ctx, n, h));
