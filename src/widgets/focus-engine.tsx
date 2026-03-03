@@ -170,18 +170,17 @@ function FocusCard({ task }: FocusCardProps) {
         <Text variant="primary" as="div">{task.hook_line}</Text>
       </div>
 
-      {/* ── Row 3: Pills — time, context, momentum ── */}
+      {/* ── Row 3: Pills — time, momentum ── */}
       <div
         style={{
           paddingTop: 6,
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "flex-end",
           gap: 6,
         }}
       >
         <Pill>{task.time_estimate}</Pill>
-        <Pill>{task.context_cost} context</Pill>
         <Pill>{task.momentum}</Pill>
       </div>
 
