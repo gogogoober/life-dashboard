@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import type { WidgetProps } from "../types";
 import type { FocusTask, FocusEngineData } from "../data/dashboard";
-import { Section } from "../components";
+import { Section, Heading, Text, Label, Pill } from "../components";
 import { AnimatedIcon } from "../components/AnimatedIcon";
 import { getIconForTags } from "../utils/get-icon-for-tags";
 
@@ -35,7 +35,15 @@ const CATEGORY_COLORS: Record<
   },
 };
 
-const FONT = "'JetBrains Mono', monospace";
+// ═══════════════════════════════════════════
+// Helpers
+// ═══════════════════════════════════════════
+
+function parseCountdownDays(countdown: string | null): number | null {
+  if (!countdown) return null;
+  const match = countdown.match(/(\d+)/);
+  return match ? parseInt(match[1], 10) : null;
+}
 
 // ═══════════════════════════════════════════
 // Icon component — tag-matched with fallback
@@ -44,13 +52,12 @@ const FONT = "'JetBrains Mono', monospace";
 function SlotIcon({ tags, category }: { tags: string[]; category: string }) {
   const colors = CATEGORY_COLORS[category] || CATEGORY_COLORS.personal;
 
-  // useMemo: recomputes when tags change, deterministic per tag-set (no flicker)
   const hash = useMemo(() => getIconForTags(tags, category), [tags, category]);
 
   return (
     <AnimatedIcon
       iconHash={hash}
-      size={58}
+      size={48}
       primary={colors.primary}
       secondary={colors.emphasis}
       animateOn="load"
@@ -63,15 +70,17 @@ function SlotIcon({ tags, category }: { tags: string[]; category: string }) {
 // Focus Card
 //
 // Visual hierarchy (top → bottom):
-//   1. Icon (clickable) + thread_name + task_name
-//   2. → first_domino    — tertiary CTA
-//   3. Nugget bullets     — secondary, 3 short lines
-//   4. Progress bar       — done_count / total_count
+//   1. Header     — icon + title group + countdown
+//   2. Hook line  — emotional pull (text primary)
+//   3. Hook type  — tiny badge, right-aligned
+//   4. Nuggets    — 3 research bullets
+//   5. Pills      — time, context, momentum
+//   6. Progress   — done_count / total_count bar
+//   7. Reward     — what finishing unlocks
 // ═══════════════════════════════════════════
 
 interface FocusCardProps {
   task: FocusTask;
-  active: boolean;
 }
 
 function FocusCard({ task }: FocusCardProps) {
@@ -80,6 +89,7 @@ function FocusCard({ task }: FocusCardProps) {
 
   const done = task.done_count ?? 0;
   const total = task.total_count ?? task.nuggets.length;
+  const days = parseCountdownDays(task.countdown);
 
   const handleIconClick = useCallback(() => {
     if (!task.system_prompt) return;
@@ -92,37 +102,37 @@ function FocusCard({ task }: FocusCardProps) {
   return (
     <div
       style={{
-        background: "rgba(var(--bg-surface, 10, 18, 10), 0.7)",
-        border: "1px solid rgba(var(--bg-surface-secondary, 14, 22, 14), 0.5)",
-        borderRadius: 12,
-        padding: "14px 16px",
+        background: "rgba(var(--bg-surface), 0.45)",
+        border: "1px solid var(--border-secondary)",
+        borderRadius: "var(--radius-primary)",
+        padding: "10px 16px",
         display: "flex",
         flexDirection: "column",
         gap: 0,
         overflow: "hidden",
-        fontFamily: FONT,
       }}
     >
-      {/* ── Row 1: Icon + thread_name + task_name ── */}
+      {/* ── Row 1: Header — icon | title group | countdown ── */}
       <div
         style={{
-          display: "flex",
+          display: "grid",
+          gridTemplateColumns: "48px 1fr auto",
           alignItems: "center",
           gap: 12,
         }}
       >
+        {/* Icon */}
         <div
           onClick={handleIconClick}
           style={{
-            width: 58,
-            height: 58,
-            borderRadius: 12,
+            width: 48,
+            height: 48,
+            borderRadius: "var(--radius-secondary)",
             background: colors.bg,
             border: `1px solid ${colors.primary}33`,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            flexShrink: 0,
             cursor: task.system_prompt ? "pointer" : "default",
             opacity: copied ? 0.4 : 1,
             transition: "opacity 0.2s ease",
@@ -130,55 +140,57 @@ function FocusCard({ task }: FocusCardProps) {
         >
           <SlotIcon tags={task.tags} category={task.category} />
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <h2
-            style={{
-              margin: 0,
-              fontSize: 14,
-              fontWeight: 700,
-              color: "var(--text-primary, #c8d8c8)",
-              lineHeight: 1.3,
-              letterSpacing: "-0.01em",
-            }}
-          >
-            {task.thread_name}
-          </h2>
-          <div
-            style={{
-              fontSize: 11,
-              fontWeight: 400,
-              color: "var(--text-secondary, #5a7a5a)",
-              lineHeight: 1.4,
-            }}
-          >
-            {task.task_name}
-          </div>
+
+        {/* Title group */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 2, minWidth: 0 }}>
+          <Heading size="md" as="h2"><span style={{ color: "var(--text-emphasis)" }}>{task.thread_name}</span></Heading>
+          <Label variant="secondary">{task.task_name}</Label>
         </div>
+
+        {/* Countdown */}
+        {days !== null && (
+          <div style={{ textAlign: "right", lineHeight: 1 }}>
+            <span
+              style={{
+                fontSize: 28,
+                fontWeight: 700,
+                color: "var(--text-alert)",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {days}
+            </span>
+            <Label variant="secondary"> days</Label>
+          </div>
+        )}
       </div>
 
-      {/* ── Row 2: → first_domino (CTA, tertiary) ── */}
+      {/* ── Row 2: Hook line ── */}
+      <div style={{ paddingTop: 6 }}>
+        <Text variant="primary" as="div">{task.hook_line}</Text>
+      </div>
+
+      {/* ── Row 3: Pills — time, context, momentum ── */}
       <div
         style={{
-          paddingTop: 8,
-          fontSize: 10,
-          fontWeight: 400,
-          color: "var(--text-tertiary, #3d5a3d)",
-          lineHeight: 1.4,
+          paddingTop: 6,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 6,
         }}
       >
-        → {task.first_domino}
+        <Pill>{task.time_estimate}</Pill>
+        <Pill>{task.context_cost} context</Pill>
+        <Pill>{task.momentum}</Pill>
       </div>
 
-      {/* ── Row 3: Nugget bullets ── */}
-      <div style={{ paddingTop: 6 }}>
+      {/* ── Row 4: Nuggets ── */}
+      <div style={{ paddingTop: 4 }}>
         {task.nuggets.map((nugget, i) => (
           <div
             key={i}
             style={{
-              fontSize: 9.5,
-              fontWeight: 400,
-              color: "var(--text-secondary, #5a7a5a)",
-              lineHeight: 1.5,
               paddingLeft: 10,
               position: "relative",
               marginBottom: i < task.nuggets.length - 1 ? 1 : 0,
@@ -188,21 +200,20 @@ function FocusCard({ task }: FocusCardProps) {
               style={{
                 position: "absolute",
                 left: 0,
-                color: colors.primary,
-                opacity: 0.6,
+                color: "var(--text-tertiary)",
               }}
             >
-              ›
+              <Text variant="tertiary">›</Text>
             </span>
-            {nugget}
+            <Text variant="secondary">{nugget}</Text>
           </div>
         ))}
       </div>
 
-      {/* ── Row 4: Progress bar ── */}
+      {/* ── Row 5: Progress bar ── */}
       <div
         style={{
-          paddingTop: 10,
+          paddingTop: 6,
           display: "flex",
           alignItems: "center",
           gap: 8,
@@ -212,8 +223,8 @@ function FocusCard({ task }: FocusCardProps) {
           style={{
             flex: 1,
             height: 4,
-            borderRadius: 2,
-            background: "rgba(255, 255, 255, 0.08)",
+            borderRadius: "var(--radius-tertiary)",
+            background: "var(--border-secondary)",
             overflow: "hidden",
           }}
         >
@@ -221,22 +232,18 @@ function FocusCard({ task }: FocusCardProps) {
             style={{
               width: total > 0 ? `${(done / total) * 100}%` : "0%",
               height: "100%",
-              borderRadius: 2,
-              background: colors.primary,
+              borderRadius: "var(--radius-tertiary)",
+              background: "var(--text-primary)",
               transition: "width 0.3s ease",
             }}
           />
         </div>
-        <span
-          style={{
-            fontSize: 9,
-            fontWeight: 500,
-            color: "var(--text-secondary, #5a7a5a)",
-            whiteSpace: "nowrap",
-          }}
-        >
-          {done}/{total}
-        </span>
+        <Label variant="secondary">{done}/{total}</Label>
+      </div>
+
+      {/* ── Row 6: Reward ── */}
+      <div style={{ paddingTop: 4 }}>
+        <Text variant="secondary" as="div">✓ {task.reward}</Text>
       </div>
     </div>
   );
@@ -268,19 +275,12 @@ interface FocusEngineProps extends WidgetProps {
 
 export function FocusEngine({ size: _, data }: FocusEngineProps) {
   const tasks = data ? getRecommendedTasks(data) : [];
-  const activeTaskId = data
-    ? data.recommended_slots.find((s) => s.slot === data.active_slot)?.task_id
-    : undefined;
 
   return (
     <Section use="primary" title="Focus Engine" className="h-full">
       <div className="flex flex-col gap-3 flex-1">
         {tasks.map((task) => (
-          <FocusCard
-            key={task.task_id}
-            task={task}
-            active={task.task_id === activeTaskId}
-          />
+          <FocusCard key={task.task_id} task={task} />
         ))}
       </div>
     </Section>

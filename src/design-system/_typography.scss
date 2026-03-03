@@ -28,7 +28,7 @@
 // ── Body scale
 @mixin body-primary {
   @include font-primary;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 500;
 }
 
@@ -42,21 +42,21 @@
 // ── Label scale
 @mixin label-emphasis {
   @include font-primary;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: capitalize;  // Title Case handled per-word in code
 }
 
 @mixin label-primary {
   @include font-primary;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: capitalize;
 }
 
 @mixin label-secondary {
   @include font-primary;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 400;
   text-transform: capitalize;
 }

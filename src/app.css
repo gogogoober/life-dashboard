@@ -3,6 +3,6 @@
 
 :root {
   --dashboard-inset: 1.25rem;
-  --focus-panel-width: clamp(19.2rem, 26.4vw, 26.4rem);
+  --focus-panel-width: clamp(21.1rem, 29vw, 29rem);
   --ribbon-height: 4.5rem;
 }
