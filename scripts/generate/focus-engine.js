@@ -459,7 +459,7 @@ Time context: ${now.toISOString()} | ${energyBand} | work_hours=${isWorkHours} |
       },
       {
         model: CLAUDE_MODEL,
-        max_tokens: 4096,
+        max_tokens: 16384,
         system: systemPrompt,
         messages: [
           {
@@ -515,21 +515,32 @@ Time context: ${now.toISOString()} | ${energyBand} | work_hours=${isWorkHours} |
     .filter((block) => block.type === "text")
     .map((block) => block.text);
 
-  const raw = textBlocks.join("\n").trim();
+  let raw = textBlocks.join("\n").trim();
   console.log("Claude raw output preview:", raw.slice(0, 500));
 
   if (!raw) {
     throw new Error("Claude returned no text content. Check MCP connectivity.");
   }
 
+  // Strip markdown fences (```json ... ``` or ``` ... ```)
+  raw = raw.replace(/^```(?:json)?\s*\n?/i, "").replace(/\n?```\s*$/i, "").trim();
+
   try {
     return JSON.parse(raw);
-  } catch {
+  } catch (err) {
+    // Fallback: extract outermost JSON object
     const jsonMatch = raw.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
-      return JSON.parse(jsonMatch[0]);
+      try {
+        return JSON.parse(jsonMatch[0]);
+      } catch {
+        // If still failing, it's likely truncated
+      }
     }
-    throw new Error("Could not extract valid JSON from Claude's response.");
+    console.error("JSON parse error:", err.message);
+    console.error("Raw output length:", raw.length);
+    console.error("Raw output tail:", raw.slice(-200));
+    throw new Error(`Could not extract valid JSON from Claude's response: ${err.message}`);
   }
 }
 
