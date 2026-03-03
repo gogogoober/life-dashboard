@@ -61,24 +61,65 @@ export function useDashboard() {
 
 // ─── Focus Engine data ────────────────────────────────────────────────────────
 
-export interface FocusSlot {
-  slot: number;
-  category: "work" | "personal" | "travel";
+export interface FocusTask {
+  task_id: string;
+  thread_id: string;
   thread_name: string;
-  question: string;
-  answer: string | string[];
-  next_step: string;
-  effort: "high" | "medium" | "low";
-  countdown: string;
+  task_name: string;
+  category: "work" | "personal" | "travel";
   tags: string[];
+  rank: number;
+
+  // Activation
+  first_domino: string;
+  time_estimate: string;
+  context_cost: "low" | "medium" | "high";
+  decision_load: "none" | "low" | "medium" | "high";
+  momentum: "cold" | "warm" | "hot";
+
+  // Motivation
+  hook_type: "curiosity" | "progress" | "urgency" | "challenge" | "novelty";
+  hook_line: string;
+  reward: string;
+  unblocks: string[];
+
+  // Content
+  nuggets: string[];
+  system_prompt: string;
+
+  // Grouping
+  energy_type: "deep_work" | "research" | "coordination" | "errand" | "physical";
+  batch_with: string[];
+  effort: "high" | "medium" | "low";
+  countdown: string | null;
+
+  // Progress (thread-level)
+  done_count: number;
+  total_count: number;
 }
 
-interface FocusEngineData {
+export interface FocusThread {
+  thread_id: string;
+  thread_name: string;
+  category: "work" | "personal" | "travel";
+  done_count: number;
+  total_count: number;
+  tasks: FocusTask[];
+}
+
+export interface RecommendedSlot {
+  slot: number;
+  task_id: string;
+  reason: string;
+}
+
+export interface FocusEngineData {
   generated_at: string;
   energy_band: string;
   is_work_hours: boolean;
   is_weekend: boolean;
-  slots: FocusSlot[];
+  threads: FocusThread[];
+  recommended_slots: RecommendedSlot[];
   active_slot: number;
 }
 

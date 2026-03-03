@@ -1,6 +1,6 @@
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import type { WidgetProps } from "../types";
-import type { FocusSlot } from "../data/dashboard";
+import type { FocusTask, FocusEngineData } from "../data/dashboard";
 import { Section } from "../components";
 import { AnimatedIcon } from "../components/AnimatedIcon";
 import { getIconForTags } from "../utils/get-icon-for-tags";
@@ -63,26 +63,31 @@ function SlotIcon({ tags, category }: { tags: string[]; category: string }) {
 // Focus Card
 //
 // Visual hierarchy (top → bottom):
-//   1. Icon + thread_name — primary H2
-//   2. next_step          — emphasis body text
-//   3. Answer bullets     — secondary, 3 short lines
-//   4. Progress bar       — thin bar + done/total label
+//   1. Icon (clickable) + thread_name + task_name
+//   2. → first_domino    — tertiary CTA
+//   3. Nugget bullets     — secondary, 3 short lines
+//   4. Progress bar       — done_count / total_count
 // ═══════════════════════════════════════════
 
 interface FocusCardProps {
-  quest: FocusSlot & { active: boolean };
+  task: FocusTask;
+  active: boolean;
 }
 
-function FocusCard({ quest }: FocusCardProps) {
-  const colors = CATEGORY_COLORS[quest.category] || CATEGORY_COLORS.personal;
+function FocusCard({ task }: FocusCardProps) {
+  const colors = CATEGORY_COLORS[task.category] || CATEGORY_COLORS.personal;
+  const [copied, setCopied] = useState(false);
 
-  // answer can be string[] (new) or string (legacy fallback)
-  const answerBullets: string[] = Array.isArray(quest.answer)
-    ? quest.answer
-    : [quest.answer];
+  const done = task.done_count ?? 0;
+  const total = task.total_count ?? task.nuggets.length;
 
-  const total = answerBullets.length;
-  const done = 0; // hardcoded until data shape includes tasks_done
+  const handleIconClick = useCallback(() => {
+    if (!task.system_prompt) return;
+    navigator.clipboard.writeText(task.system_prompt).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1000);
+    });
+  }, [task.system_prompt]);
 
   return (
     <div
@@ -94,26 +99,11 @@ function FocusCard({ quest }: FocusCardProps) {
         display: "flex",
         flexDirection: "column",
         gap: 0,
-        position: "relative",
         overflow: "hidden",
         fontFamily: FONT,
       }}
     >
-      {/* Left edge category tint */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: 3,
-          height: "100%",
-          background: colors.primary,
-          opacity: 0.6,
-          borderRadius: "12px 0 0 12px",
-        }}
-      />
-
-      {/* ── Row 1: Icon + header + call to action ── */}
+      {/* ── Row 1: Icon + thread_name + task_name ── */}
       <div
         style={{
           display: "flex",
@@ -122,6 +112,7 @@ function FocusCard({ quest }: FocusCardProps) {
         }}
       >
         <div
+          onClick={handleIconClick}
           style={{
             width: 58,
             height: 58,
@@ -132,9 +123,12 @@ function FocusCard({ quest }: FocusCardProps) {
             alignItems: "center",
             justifyContent: "center",
             flexShrink: 0,
+            cursor: task.system_prompt ? "pointer" : "default",
+            opacity: copied ? 0.4 : 1,
+            transition: "opacity 0.2s ease",
           }}
         >
-          <SlotIcon tags={quest.tags} category={quest.category} />
+          <SlotIcon tags={task.tags} category={task.category} />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
           <h2
@@ -147,24 +141,37 @@ function FocusCard({ quest }: FocusCardProps) {
               letterSpacing: "-0.01em",
             }}
           >
-            {quest.thread_name}
+            {task.thread_name}
           </h2>
           <div
             style={{
-              fontSize: 12,
-              fontWeight: 500,
-              color: "var(--text-emphasis, #d4f5d4)",
+              fontSize: 11,
+              fontWeight: 400,
+              color: "var(--text-secondary, #5a7a5a)",
               lineHeight: 1.4,
             }}
           >
-            {quest.next_step}
+            {task.task_name}
           </div>
         </div>
       </div>
 
-      {/* ── Row 3: Answer bullets ── */}
+      {/* ── Row 2: → first_domino (CTA, tertiary) ── */}
+      <div
+        style={{
+          paddingTop: 8,
+          fontSize: 10,
+          fontWeight: 400,
+          color: "var(--text-tertiary, #3d5a3d)",
+          lineHeight: 1.4,
+        }}
+      >
+        → {task.first_domino}
+      </div>
+
+      {/* ── Row 3: Nugget bullets ── */}
       <div style={{ paddingTop: 6 }}>
-        {answerBullets.map((bullet, i) => (
+        {task.nuggets.map((nugget, i) => (
           <div
             key={i}
             style={{
@@ -174,7 +181,7 @@ function FocusCard({ quest }: FocusCardProps) {
               lineHeight: 1.5,
               paddingLeft: 10,
               position: "relative",
-              marginBottom: i < answerBullets.length - 1 ? 1 : 0,
+              marginBottom: i < task.nuggets.length - 1 ? 1 : 0,
             }}
           >
             <span
@@ -187,7 +194,7 @@ function FocusCard({ quest }: FocusCardProps) {
             >
               ›
             </span>
-            {bullet}
+            {nugget}
           </div>
         ))}
       </div>
@@ -236,24 +243,44 @@ function FocusCard({ quest }: FocusCardProps) {
 }
 
 // ═══════════════════════════════════════════
+// Resolve recommended slots → tasks
+// ═══════════════════════════════════════════
+
+function getRecommendedTasks(data: FocusEngineData): FocusTask[] {
+  return data.recommended_slots
+    .map((slot) => {
+      for (const thread of data.threads) {
+        const task = thread.tasks.find((t) => t.task_id === slot.task_id);
+        if (task) return task;
+      }
+      return null;
+    })
+    .filter(Boolean) as FocusTask[];
+}
+
+// ═══════════════════════════════════════════
 // Focus Engine
 // ═══════════════════════════════════════════
 
 interface FocusEngineProps extends WidgetProps {
-  slots?: FocusSlot[];
-  activeSlot?: number;
+  data?: FocusEngineData;
 }
 
-export function FocusEngine({ size: _, slots, activeSlot }: FocusEngineProps) {
-  const quests = slots
-    ? slots.map((s) => ({ ...s, active: s.slot === (activeSlot ?? 1) }))
-    : [];
+export function FocusEngine({ size: _, data }: FocusEngineProps) {
+  const tasks = data ? getRecommendedTasks(data) : [];
+  const activeTaskId = data
+    ? data.recommended_slots.find((s) => s.slot === data.active_slot)?.task_id
+    : undefined;
 
   return (
     <Section use="primary" title="Focus Engine" className="h-full">
       <div className="flex flex-col gap-3 flex-1">
-        {quests.map((quest) => (
-          <FocusCard key={quest.slot} quest={quest} />
+        {tasks.map((task) => (
+          <FocusCard
+            key={task.task_id}
+            task={task}
+            active={task.task_id === activeTaskId}
+          />
         ))}
       </div>
     </Section>

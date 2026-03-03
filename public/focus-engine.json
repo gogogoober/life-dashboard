@@ -3,73 +3,189 @@
   "energy_band": "wind_down",
   "is_work_hours": false,
   "is_weekend": false,
-  "slots": [
+  "threads": [
     {
-      "slot": 1,
-      "category": "personal",
+      "thread_id": "marianos-30th-chicago",
       "thread_name": "Mariano's 30th / Chicago",
-      "question": "Chicago trip starts in 11 days, but you need to book a warm backpacking destination for March 14-15 first. No location = no gear planning.",
-      "answer": [
-        "Zion 60-70°F mid-March, best warm option near Chicago",
-        "Big Bend Texas also warm, more remote",
-        "Need flights by this week to avoid price spike"
-      ],
-      "next_step": "Search warm March backpacking spots near Chicago",
-      "effort": "low",
-      "countdown": "11 days",
-      "tags": [
-        "backpack",
-        "mountain",
-        "hiking",
-        "camping",
-        "airplane",
-        "map"
+      "category": "personal",
+      "done_count": 2,
+      "total_count": 6,
+      "tasks": [
+        {
+          "task_id": "marianos-30th-chicago_task_0",
+          "thread_id": "marianos-30th-chicago",
+          "thread_name": "Mariano's 30th / Chicago",
+          "task_name": "Find warm backpacking destination",
+          "category": "personal",
+          "tags": ["backpack", "mountain", "hiking", "camping", "airplane", "map"],
+          "rank": 1,
+          "first_domino": "Search warm March backpacking spots near Chicago",
+          "time_estimate": "~20 min",
+          "context_cost": "low",
+          "decision_load": "medium",
+          "momentum": "cold",
+          "hook_type": "urgency",
+          "hook_line": "Flight prices spike after this week",
+          "reward": "Locks in the outdoor weekend — gear planning can start",
+          "unblocks": ["marianos-30th-chicago_task_1"],
+          "nuggets": [
+            "Zion 60-70°F mid-March, best warm option near Chicago",
+            "Big Bend Texas also warm, more remote",
+            "Need flights by this week to avoid price spike"
+          ],
+          "system_prompt": "Help me find warm backpacking destinations reachable from Chicago for March 14-15 weekend. Priorities: warm weather (60°F+), scenic trails, 2-3 hour flight max. Compare Zion, Big Bend, and Joshua Tree on weather, flight cost, and trail difficulty. I'm an intermediate hiker. Give me a recommendation with reasoning.",
+          "energy_type": "research",
+          "batch_with": [],
+          "effort": "low",
+          "countdown": "11 days",
+          "done_count": 2,
+          "total_count": 6
+        },
+        {
+          "task_id": "marianos-30th-chicago_task_1",
+          "thread_id": "marianos-30th-chicago",
+          "thread_name": "Mariano's 30th / Chicago",
+          "task_name": "Book flights and campsite",
+          "category": "personal",
+          "tags": ["airplane", "camping", "map", "money", "calendar", "backpack"],
+          "rank": 2,
+          "first_domino": "Check Google Flights for March 14 departures",
+          "time_estimate": "~30 min",
+          "context_cost": "low",
+          "decision_load": "low",
+          "momentum": "cold",
+          "hook_type": "urgency",
+          "hook_line": "Campsites fill up fast for spring weekends",
+          "reward": "Trip is locked in — just need to pack",
+          "unblocks": [],
+          "nuggets": [
+            "Google Flights shows $120-180 RT to Las Vegas for Zion",
+            "Watchman Campground reservable on recreation.gov",
+            "Southwest has free cancellation if plans change"
+          ],
+          "system_prompt": "Help me book a backpacking trip from Chicago to Zion National Park for March 14-15. I need: cheapest flights (flexible on nearby airports), campsite reservation at Watchman or South Campground, and a 2-day trail itinerary for intermediate hikers.",
+          "energy_type": "errand",
+          "batch_with": [],
+          "effort": "low",
+          "countdown": "11 days",
+          "done_count": 2,
+          "total_count": 6
+        }
       ]
     },
     {
-      "slot": 2,
-      "category": "personal",
+      "thread_id": "japan-trip-2026",
       "thread_name": "Japan Trip 2026",
-      "question": "Japan in 21 days. Kyoto hotel starts March 25, but you haven't planned any activities yet. Catherine visits in 5 days—won't have focus then.",
-      "answer": [
-        "Fushimi Inari best early morning to avoid crowds",
-        "Arashiyama Bamboo Grove + monkey park half-day",
-        "Philosopher's Path connects Silver Pavilion to Nanzenji"
-      ],
-      "next_step": "Save Fushimi Inari + Arashiyama to Kyoto doc",
-      "effort": "low",
-      "countdown": "21 days",
-      "tags": [
-        "japan",
-        "temple",
-        "shrine",
-        "torii",
-        "landmark",
-        "map"
+      "category": "travel",
+      "done_count": 3,
+      "total_count": 8,
+      "tasks": [
+        {
+          "task_id": "japan-trip-2026_task_0",
+          "thread_id": "japan-trip-2026",
+          "thread_name": "Japan Trip 2026",
+          "task_name": "Plan activities in Kyoto",
+          "category": "travel",
+          "tags": ["japan", "temple", "shrine", "torii", "landmark", "map"],
+          "rank": 1,
+          "first_domino": "Save Fushimi Inari + Arashiyama to Kyoto doc",
+          "time_estimate": "~45 min",
+          "context_cost": "medium",
+          "decision_load": "high",
+          "momentum": "warm",
+          "hook_type": "curiosity",
+          "hook_line": "Kyoto has 2000+ temples — which ones are worth the early wake-up?",
+          "reward": "Closes out Kyoto planning — only Takayama and Tokyo left",
+          "unblocks": ["japan-trip-2026_task_1"],
+          "nuggets": [
+            "Fushimi Inari free entry, open 24hrs — best early morning",
+            "Arashiyama bamboo grove + monkey park half-day",
+            "Philosopher's Path connects Silver Pavilion to Nanzenji"
+          ],
+          "system_prompt": "Help me plan activities for 2.5 days in Kyoto (March 25-27). Traveling with my girlfriend Dana. We like temples, walking, outdoor spaces, and good food. Already have hotels booked in central Kyoto. I want a day-by-day itinerary with opening hours, Google Maps links, and a suggested walking route. Include a mix of major landmarks and less touristy spots.",
+          "energy_type": "research",
+          "batch_with": [],
+          "effort": "medium",
+          "countdown": "21 days",
+          "done_count": 3,
+          "total_count": 8
+        },
+        {
+          "task_id": "japan-trip-2026_task_1",
+          "thread_id": "japan-trip-2026",
+          "thread_name": "Japan Trip 2026",
+          "task_name": "Check insurance for eyeglasses",
+          "category": "travel",
+          "tags": ["japan", "document", "money", "map", "landmark", "chart"],
+          "rank": 2,
+          "first_domino": "Email insurance about Japan eyeglasses coverage",
+          "time_estimate": "~10 min",
+          "context_cost": "low",
+          "decision_load": "none",
+          "momentum": "cold",
+          "hook_type": "progress",
+          "hook_line": "One email now saves $400+ on 4 pairs of glasses in Japan",
+          "reward": "Know exactly what's covered before shopping at Jins/Zoff",
+          "unblocks": [],
+          "nuggets": [
+            "Japan may need PD measurement on prescription",
+            "US insurance often reimburses overseas with receipts",
+            "Jins and Zoff in Kyoto do same-day glasses"
+          ],
+          "system_prompt": "Help me draft an email to my vision insurance (VSP) asking: 1) Does my plan cover eyeglasses purchased overseas in Japan? 2) What documentation do I need for reimbursement? 3) Is there a per-pair or annual limit? I'm planning to buy 4 pairs at Jins and Zoff stores in Kyoto.",
+          "energy_type": "errand",
+          "batch_with": [],
+          "effort": "low",
+          "countdown": "21 days",
+          "done_count": 3,
+          "total_count": 8
+        }
       ]
     },
     {
-      "slot": 3,
-      "category": "personal",
-      "thread_name": "Japan Trip 2026",
-      "question": "You're buying 4 pairs of eyeglasses in Japan (21 days) but haven't checked if insurance covers overseas purchases or what prescription format Japan needs.",
-      "answer": [
-        "Japan may need PD measurement on prescription",
-        "US insurance often reimburses overseas with receipts",
-        "Jins and Zoff in Kyoto do same-day glasses"
-      ],
-      "next_step": "Email insurance about Japan eyeglasses coverage",
-      "effort": "low",
-      "countdown": "21 days",
-      "tags": [
-        "japan",
-        "map",
-        "landmark",
-        "document",
-        "money",
-        "chart"
+      "thread_id": "vscode-task-pilot",
+      "thread_name": "VS Code Task Pilot",
+      "category": "work",
+      "done_count": 1,
+      "total_count": 5,
+      "tasks": [
+        {
+          "task_id": "vscode-task-pilot_task_0",
+          "thread_id": "vscode-task-pilot",
+          "thread_name": "VS Code Task Pilot",
+          "task_name": "Implement task tree provider",
+          "category": "work",
+          "tags": ["computer", "code", "laptop", "programming", "keyboard", "dashboard"],
+          "rank": 1,
+          "first_domino": "Create TreeDataProvider skeleton in src/providers/",
+          "time_estimate": "~1.5 hrs",
+          "context_cost": "high",
+          "decision_load": "medium",
+          "momentum": "warm",
+          "hook_type": "challenge",
+          "hook_line": "The tree provider is the spine — everything else plugs into it",
+          "reward": "Tasks show up in the sidebar for the first time",
+          "unblocks": ["vscode-task-pilot_task_1"],
+          "nuggets": [
+            "VS Code TreeDataProvider needs getChildren + getTreeItem",
+            "Use vscode.EventEmitter for refresh events",
+            "Can extend with drag-drop via TreeDragAndDropController"
+          ],
+          "system_prompt": "Help me implement a VS Code TreeDataProvider for a task management extension called Task Pilot. The tree should show tasks grouped by project, with each task showing its title, status (todo/in-progress/done), and priority. I need the provider class, tree item class, and registration in extension.ts. Use TypeScript.",
+          "energy_type": "deep_work",
+          "batch_with": [],
+          "effort": "high",
+          "countdown": null,
+          "done_count": 1,
+          "total_count": 5
+        }
       ]
     }
+  ],
+  "recommended_slots": [
+    { "slot": 1, "task_id": "marianos-30th-chicago_task_0", "reason": "11 days out, flights need booking this week" },
+    { "slot": 2, "task_id": "japan-trip-2026_task_0", "reason": "Kyoto has no activity plan yet, 21 days out" },
+    { "slot": 3, "task_id": "japan-trip-2026_task_1", "reason": "Quick errand, low effort wind-down task" }
   ],
   "active_slot": 1
 }

@@ -30,9 +30,7 @@ export default function App() {
   const widgetData: Record<string, Record<string, unknown>> = {
     "temporal-bubble-map": { events: dateEvents },
     "timeline-ribbon": { events: dateEvents },
-    "focus-engine": focusData
-      ? { slots: focusData.slots, activeSlot: focusData.active_slot }
-      : {},
+    "focus-engine": focusData ? { data: focusData } : {},
   };
 
   const generatedAt = data
