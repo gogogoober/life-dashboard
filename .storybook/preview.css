@@ -1,0 +1,4 @@
+body,
+.sb-show-main {
+  background-color: var(--bg-base, #0a0e0a) !important;
+}
