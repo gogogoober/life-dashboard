@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-04T05:00:42.901Z",
+  "generated_at": "2026-03-05T05:04:11.944Z",
   "energy_band": "ramp_up",
   "is_work_hours": false,
   "is_weekend": false,
@@ -19,40 +19,38 @@
           "category": "personal",
           "tags": [
             "backpack",
-            "hiking",
             "camping",
             "mountain",
+            "hiking",
             "trail",
-            "nature"
+            "map"
           ],
           "rank": 1,
-          "first_domino": "Open Google and search 'warm backpacking March US'",
+          "first_domino": "Open Google and search 'warm backpacking March weekend US'",
           "time_estimate": "~1 hour",
           "context_cost": "low",
-          "decision_load": "medium",
+          "decision_load": "high",
           "momentum": "cold",
-          "hook_type": "urgency",
-          "hook_line": "9 days out and no destination locked — everything else depends on this.",
-          "reward": "Unlocks flight booking and gear planning for the whole trip",
+          "hook_type": "curiosity",
+          "hook_line": "Where can you backpack in March that's warm enough to enjoy but not booked solid?",
+          "reward": "Locks in the destination so you can book flights and focus on gear",
           "unblocks": [
             "marianos-30th-chicago_task_2",
             "marianos-30th-chicago_task_3",
             "marianos-30th-chicago_task_4"
           ],
           "nuggets": [
-            "Arizona temps 70-80F mid-March",
-            "Big Bend TX open year-round",
-            "Joshua Tree permits same-day available"
+            "Big Bend TX highs ~75°F mid-March",
+            "Red Rock Canyon NV permits not required",
+            "Joshua Tree CA campgrounds reservable now"
           ],
-          "system_prompt": "Help me find a warm backpacking destination for a 1-2 night trip the weekend of March 14-15, 2026. It's for my friend Mariano's 30th birthday — he wants something outdoorsy before we fly to Chicago for the party. I need somewhere in the US with temps above 60F, good for beginners, within 3-4 hours of major airports. Give me 3-5 options with pros/cons, difficulty level, permit requirements, and nearest airports.",
+          "system_prompt": "Help me find a warm backpacking destination for a 1-2 night trip on the weekend of March 14-15, 2026. I'm in the US and need somewhere with daytime temps above 65°F. Looking for a moderate trail with good scenery — this is for my friend's 30th birthday celebration. After this we're flying to Chicago for the actual party. I want 3-4 solid options with trail names, permit requirements, nearby airports, and current weather forecasts. Prioritize places with easy logistics and availability.",
           "energy_type": "research",
           "batch_with": [
             "marianos-30th-chicago_task_4"
           ],
           "effort": "medium",
-          "countdown": "9 days away",
-          "done_count": 0,
-          "total_count": 5
+          "countdown": "8 days away"
         },
         {
           "task_id": "marianos-30th-chicago_task_4",
@@ -63,35 +61,33 @@
           "tags": [
             "backpack",
             "camping",
+            "tent",
             "hiking",
-            "gear",
             "outdoor",
-            "shopping"
+            "gear"
           ],
           "rank": 2,
-          "first_domino": "Go to rei.com and search 'gear rental'",
-          "time_estimate": "~20 min",
+          "first_domino": "Go to REI.com and search 'gear rental backpacking'",
+          "time_estimate": "~30 min",
           "context_cost": "low",
           "decision_load": "low",
           "momentum": "cold",
           "hook_type": "novelty",
-          "hook_line": "First time renting gear from REI — they do full backpacking kits.",
-          "reward": "Solves the gear problem without buying $800 worth of equipment",
+          "hook_line": "REI rents full backpacking kits — first time trying rental instead of buying",
+          "reward": "Answers the gear question without a $500+ purchase commitment",
           "unblocks": [],
           "nuggets": [
-            "REI rents complete backpacking packages",
-            "Reserve online, pick up in-store",
-            "Sleeping bag rated to 20F available"
+            "REI rents 2-person tents ~$35/night",
+            "Backpack rental ~$25/night with frame",
+            "Sleeping bags rated to 20°F available"
           ],
-          "system_prompt": "Help me figure out REI gear rentals for a 1-2 night backpacking trip March 14-15. I need a backpack, tent, and sleeping bag. I've never rented from REI before. Tell me what their rental process looks like, what's included in typical packages, pricing, how far in advance to reserve, and if there are any gotchas. Also confirm if their gear works for warm-weather trips (60-80F temps).",
+          "system_prompt": "I need to rent backpacking gear from REI for a 1-2 night trip on March 14-15. I need a backpack (65L+), 2-person tent, and sleeping bag rated for ~40-50°F nights. Help me understand REI's rental process: what's available at my local store (search for stores near my zip code if needed), pricing, how far in advance to reserve, pickup/return logistics, and whether there are package deals. Also let me know if there are better alternatives to REI for short-term gear rental.",
           "energy_type": "research",
           "batch_with": [
             "marianos-30th-chicago_task_1"
           ],
           "effort": "low",
-          "countdown": "9 days away",
-          "done_count": 0,
-          "total_count": 5
+          "countdown": "8 days away"
         },
         {
           "task_id": "marianos-30th-chicago_task_2",
@@ -101,36 +97,36 @@
           "category": "personal",
           "tags": [
             "airplane",
-            "flight",
             "airport",
-            "travel",
+            "flight",
             "booking",
+            "travel",
             "map"
           ],
           "rank": 3,
-          "first_domino": "Open Google Flights for March 13 departures",
+          "first_domino": "Open Google Flights and enter destination airport",
           "time_estimate": "~30 min",
           "context_cost": "medium",
-          "decision_load": "low",
+          "decision_load": "medium",
           "momentum": "cold",
           "hook_type": "urgency",
-          "hook_line": "9 days out — prices only go up from here.",
-          "reward": "Locks in the trip logistics and calms the planning anxiety",
-          "unblocks": [],
-          "nuggets": [
-            "Southwest often cheapest to Phoenix/Tucson",
-            "Book 1-2 weeks out = $150-250 range",
-            "Friday departure needed for weekend trip"
+          "hook_line": "8 days out — flight prices will jump if you wait much longer",
+          "reward": "Commits the trip logistics and unblocks planning the actual route",
+          "unblocks": [
+            "marianos-30th-chicago_task_3"
           ],
-          "system_prompt": "Help me book flights for a backpacking trip March 13-15, 2026. I'm flying from [your home city] to [destination TBD — will provide once decided]. I need outbound Friday March 13 (early enough to start hiking that afternoon) and return Sunday March 15 (late afternoon/evening). Show me how to search efficiently, what to look for in timing, and any tips for last-minute weekend bookings.",
+          "nuggets": [
+            "Southwest often best for last-minute domestic",
+            "Friday afternoon departures fill fast",
+            "Allegiant serves some desert airports cheap"
+          ],
+          "system_prompt": "I need to book roundtrip flights for the weekend of March 14-15 to [DESTINATION — fill this in once I pick the backpacking location]. Flying from [MY HOME AIRPORT]. Need to depart Friday March 14 early/mid-day and return Sunday March 16 or fly direct to Chicago. Compare Southwest, United, and budget carriers. Show me the cheapest options that don't have brutal layovers. I'm flexible on times but want to maximize time on the trail.",
           "energy_type": "coordination",
           "batch_with": [
             "marianos-30th-chicago_task_3"
           ],
           "effort": "medium",
-          "countdown": "9 days away",
-          "done_count": 0,
-          "total_count": 5
+          "countdown": "8 days away"
         },
         {
           "task_id": "marianos-30th-chicago_task_3",
@@ -142,34 +138,32 @@
             "airplane",
             "flight",
             "airport",
-            "travel",
+            "chicago",
             "booking",
-            "chicago"
+            "travel"
           ],
           "rank": 4,
-          "first_domino": "Search flights [backpacking city] to Chicago March 15",
+          "first_domino": "Open Google Flights and search [backpacking airport] to Chicago",
           "time_estimate": "~20 min",
           "context_cost": "medium",
-          "decision_load": "none",
+          "decision_load": "low",
           "momentum": "cold",
           "hook_type": "progress",
-          "hook_line": "Chicago flights already booked — this is the last piece of the travel puzzle.",
-          "reward": "Completes the entire travel routing for Mariano's birthday",
+          "hook_line": "Chicago flights are booked — this is the last flight piece",
+          "reward": "Completes all travel logistics so you can focus on the fun",
           "unblocks": [],
           "nuggets": [
-            "Chicago has Midway and O'Hare options",
-            "Sunday evening arrival works best",
-            "United/Southwest likely have direct routes"
+            "Midway usually cheaper than O'Hare",
+            "Direct flights under 3hrs from most Southwest hubs",
+            "March 16 evening arrival works for party prep"
           ],
-          "system_prompt": "Help me book a flight from [backpacking destination] to Chicago on Sunday March 15, 2026. I'm finishing a backpacking trip that day and need to get to Chicago for my friend's 30th birthday celebration. Looking for late afternoon or evening departure (after 3pm), arriving Chicago by 9-10pm. Show me the best options balancing price and timing. I already have a return flight from Chicago booked.",
+          "system_prompt": "I need a one-way flight from [BACKPACKING DESTINATION AIRPORT] to Chicago on Sunday March 16, 2026. I'm going to Mariano's 30th birthday party — the actual birthday is March 19 but I want to arrive Sunday evening to have time to settle in. I already have a flight back home from Chicago. Compare Midway and O'Hare. Show me options that land by 8pm Sunday so I'm not wrecked Monday. Budget matters but reliability matters more.",
           "energy_type": "coordination",
           "batch_with": [
             "marianos-30th-chicago_task_2"
           ],
           "effort": "low",
-          "countdown": "9 days away",
-          "done_count": 0,
-          "total_count": 5
+          "countdown": "8 days away"
         },
         {
           "task_id": "marianos-30th-chicago_task_5",
@@ -181,32 +175,29 @@
             "gift",
             "birthday",
             "celebration",
-            "shopping",
             "party",
-            "friend"
+            "shopping"
           ],
           "rank": 5,
-          "first_domino": "Text Mariano asking what he actually wants",
-          "time_estimate": "~10 min",
+          "first_domino": "Text Mariano's partner or check his Instagram for hints",
+          "time_estimate": "~1 hour",
           "context_cost": "low",
           "decision_load": "high",
           "momentum": "cold",
           "hook_type": "challenge",
-          "hook_line": "What do you get someone who invited you on a backpacking trip for their own birthday?",
-          "reward": "Shows up with something thoughtful instead of scrambling last-minute",
+          "hook_line": "What do you get a 30-year-old who probably doesn't need anything?",
+          "reward": "Shows up with something thoughtful instead of scrambling at O'Hare",
           "unblocks": [],
           "nuggets": [
-            "30th birthdays often want experiences over stuff",
-            "Backpacking gear = already covered by trip",
-            "Chicago food/drink gift card could work"
+            "Experience gifts work well for milestone birthdays",
+            "Chicago has bourbon tasting experiences ~$75",
+            "Personalized barware ships in 3-5 days"
           ],
-          "system_prompt": "Help me figure out a gift for my friend Mariano's 30th birthday. He's the one who organized a backpacking trip for his own birthday weekend, then we're going to Chicago for the actual celebration on March 19. He's into outdoors, fitness, good food, and travel. Budget flexible but not trying to go overboard. Should I even get a gift given I'm flying out for his birthday? If yes, what are some thoughtful options that aren't generic?",
-          "energy_type": "errand",
+          "system_prompt": "Help me brainstorm a 30th birthday gift for my friend Mariano. We're doing a backpacking trip and then celebrating in Chicago. I don't want to carry anything heavy on the trail, so either a Chicago-delivery option or something small/experiential. Budget ~$50-100. He's into [INSERT WHAT YOU KNOW ABOUT MARIANO — outdoors? food? drinks? music?]. I want something thoughtful but not overly sentimental. Give me 5 ideas with where to buy and estimated delivery times.",
+          "energy_type": "research",
           "batch_with": [],
-          "effort": "low",
-          "countdown": "9 days away",
-          "done_count": 0,
-          "total_count": 5
+          "effort": "medium",
+          "countdown": "8 days away"
         }
       ]
     },
@@ -226,37 +217,36 @@
           "tags": [
             "japan",
             "shopping",
+            "kyoto",
             "map",
-            "landmark",
-            "store",
-            "search"
+            "temple",
+            "travel"
           ],
           "rank": 1,
-          "first_domino": "Google 'eyeglasses stores Kyoto Japan English'",
-          "time_estimate": "~20 min",
+          "first_domino": "Google 'best eyeglasses shops Kyoto English-friendly'",
+          "time_estimate": "~30 min",
           "context_cost": "low",
           "decision_load": "low",
           "momentum": "cold",
           "hook_type": "curiosity",
-          "hook_line": "4 pairs of glasses in Japan could save $400+ vs US prices.",
-          "reward": "Gets the shopping done early so the rest of the trip is pure exploration",
+          "hook_line": "Kyoto might have better frame selection than Tokyo — and you'll be fresh off the plane",
+          "reward": "Gets glasses shopping done early so you're not scrambling in Tokyo at the end",
           "unblocks": [
             "japan-trip-2026_task_2"
           ],
           "nuggets": [
-            "JINS and Zoff = Japanese chains with English",
-            "Kyoto downtown has 3-4 optical shops",
-            "Most stores make glasses same-day"
+            "Zoff and JINS have Kyoto locations near station",
+            "Kyoto Eyevan known for artisan frames",
+            "English service common in central Kyoto shops"
           ],
-          "system_prompt": "Help me find eyeglasses stores in Kyoto where I can buy prescription glasses as an American tourist. I'm visiting March 25-27 and want to buy 4 pairs early in the trip. I need stores that: speak some English, accept foreign prescriptions, can make glasses quickly (ideally same-day), and have good prices. Give me 3-5 specific stores with addresses, Google Maps links, and what to expect for pricing and turnaround time.",
+          "system_prompt": "Help me find eyeglasses stores in Kyoto where I can buy 4 pairs of prescription glasses. I'm arriving March 25 and staying until March 27. I want affordable but stylish options — Japanese brands like Zoff, JINS, or Owndays are perfect. I need stores with English-speaking staff or easy self-service kiosks. Give me 3-4 store recommendations with addresses, Google Maps links, typical price ranges, and whether they can do same-day prescriptions. Also let me know what the process is like for foreigners buying glasses in Japan.",
           "energy_type": "research",
           "batch_with": [
+            "japan-trip-2026_task_2",
             "japan-trip-2026_task_3"
           ],
           "effort": "low",
-          "countdown": "19 days away",
-          "done_count": 3,
-          "total_count": 8
+          "countdown": "18 days away"
         },
         {
           "task_id": "japan-trip-2026_task_2",
@@ -267,33 +257,33 @@
           "tags": [
             "document",
             "insurance",
-            "glasses",
-            "travel",
-            "paperwork",
-            "phone"
+            "health",
+            "eyeglasses",
+            "prescription",
+            "planning"
           ],
           "rank": 2,
-          "first_domino": "Call insurance company and ask about international glasses",
-          "time_estimate": "~15 min",
+          "first_domino": "Call insurance provider and ask about Japan glasses reimbursement",
+          "time_estimate": "~30 min",
           "context_cost": "low",
           "decision_load": "none",
           "momentum": "cold",
           "hook_type": "challenge",
-          "hook_line": "Can you actually get insurance reimbursement for glasses bought overseas?",
-          "reward": "Confirms you can buy with confidence and get reimbursed back home",
+          "hook_line": "If insurance covers it, 4 pairs in Japan could save $400+ vs US prices",
+          "reward": "Confirms you can actually expense these and aren't wasting money",
           "unblocks": [],
           "nuggets": [
-            "Most US vision plans reimburse foreign purchases",
-            "Need itemized receipt in English",
-            "Prescription needs to be current within 1-2 years"
+            "Most US vision insurance covers out-of-country",
+            "Need itemized receipt in English for reimbursement",
+            "Prescription must be <2 years old usually"
           ],
-          "system_prompt": "Help me figure out what I need to buy prescription glasses in Japan and get reimbursed by US insurance. I have vision insurance through [your provider]. I want to buy 4 pairs during my March 23-April 7 trip. What documentation do I need from the Japanese store? Will my US prescription work? How do I submit for reimbursement when I get back? Are there any limits on number of pairs or annual maximums I should know about?",
+          "system_prompt": "I'm buying 4 pairs of prescription eyeglasses in Japan (March 25-April 7, 2026) and want to understand the logistics. Help me figure out: (1) Will my US vision insurance reimburse for foreign purchases? What documentation do I need? (2) Do I need to bring my physical prescription or will the stores measure me? (3) Are there any customs/import limits on bringing back 4 pairs of glasses? (4) What's the typical cost for frames + lenses at Japanese chains like Zoff or JINS? I want to make sure this is actually cheaper than buying in the US.",
           "energy_type": "coordination",
-          "batch_with": [],
+          "batch_with": [
+            "japan-trip-2026_task_1"
+          ],
           "effort": "low",
-          "countdown": "19 days away",
-          "done_count": 3,
-          "total_count": 8
+          "countdown": "18 days away"
         },
         {
           "task_id": "japan-trip-2026_task_3",
@@ -303,17 +293,17 @@
           "category": "travel",
           "tags": [
             "japan",
+            "kyoto",
             "temple",
             "shrine",
-            "map",
-            "landmark",
-            "walking"
+            "torii",
+            "map"
           ],
           "rank": 3,
-          "first_domino": "Open Google Maps and search 'Kyoto temples'",
-          "time_estimate": "~1 hour",
+          "first_domino": "Open Google Maps and search 'best temples Kyoto'",
+          "time_estimate": "~2 hours",
           "context_cost": "low",
-          "decision_load": "medium",
+          "decision_load": "high",
           "momentum": "cold",
           "hook_type": "curiosity",
           "hook_line": "Kyoto has 2000+ temples — which ones are actually worth the early wake-up?",
@@ -321,19 +311,18 @@
           "unblocks": [],
           "nuggets": [
             "Fushimi Inari free entry, open 24hrs",
-            "Arashiyama bamboo grove best before 9am",
+            "Arashiyama bamboo best before 9am",
             "Kinkaku-ji ¥500 entry, opens 9am"
           ],
-          "system_prompt": "Help me plan activities for 2.5 days in Kyoto (March 25-27, 2026). Traveling with my girlfriend Dana. We like temples, walking, outdoor spaces, and good food. Already have hotels booked in central Kyoto. I want a day-by-day itinerary with opening hours, Google Maps links, and a suggested walking route. Include a mix of major landmarks and less touristy spots. Front-load the eyeglasses shopping on day 1.",
+          "system_prompt": "Help me plan activities for 2.5 days in Kyoto (March 25-27, 2026). Traveling with my girlfriend Dana. We like temples, walking, outdoor spaces, and good food. Already have hotels booked in central Kyoto. I want a day-by-day itinerary with opening hours, Google Maps links, and a suggested walking route. Include a mix of major landmarks (Fushimi Inari, Kinkaku-ji, Arashiyama) and less touristy spots. Also recommend 2-3 restaurants per day for lunch and dinner. We don't need to see everything — prioritize quality over quantity.",
           "energy_type": "research",
           "batch_with": [
             "japan-trip-2026_task_1",
-            "japan-trip-2026_task_4"
+            "japan-trip-2026_task_4",
+            "japan-trip-2026_task_5"
           ],
-          "effort": "medium",
-          "countdown": "19 days away",
-          "done_count": 3,
-          "total_count": 8
+          "effort": "high",
+          "countdown": "18 days away"
         },
         {
           "task_id": "japan-trip-2026_task_4",
@@ -343,37 +332,35 @@
           "category": "travel",
           "tags": [
             "japan",
-            "hiking",
+            "takayama",
             "mountain",
+            "hiking",
             "nature",
-            "map",
-            "landmark"
+            "temple"
           ],
           "rank": 4,
-          "first_domino": "Google 'things to do Takayama Japan'",
-          "time_estimate": "~45 min",
+          "first_domino": "Google 'things to do Takayama old town walking'",
+          "time_estimate": "~1 hour",
           "context_cost": "low",
           "decision_load": "medium",
           "momentum": "cold",
           "hook_type": "novelty",
-          "hook_line": "Takayama is the mountain town break between temple cities — what's actually there?",
-          "reward": "Locks in the mountain town itinerary for the trip's midpoint",
+          "hook_line": "Takayama is the mountain town break between temple-heavy Kyoto and Tokyo chaos",
+          "reward": "Finishes the mid-trip section so the whole route is mapped",
           "unblocks": [],
           "nuggets": [
-            "Old Town preserved Edo-period streets",
-            "Sake breweries offer tastings",
-            "Hiking trails in Japanese Alps nearby"
+            "Old town morning markets 7am-noon daily",
+            "Hida beef skewers famous street food",
+            "Shinhotaka Ropeway alpine views ~90min from town"
           ],
-          "system_prompt": "Help me plan activities for Takayama, Japan (dates TBD, probably 1-2 days in late March/early April 2026). Traveling with my girlfriend Dana. We're coming from Kyoto and going to Tokyo. We want a slower pace here — less temple-hopping, more nature and local culture. We like hiking, good food, sake, and charming towns. Give me a 1-2 day itinerary with specific recommendations, opening hours, and how to get around.",
+          "system_prompt": "Help me plan 1.5 days in Takayama, Japan (late March 2026). This is a breather stop between Kyoto and Tokyo. We want a mix of old town wandering, nature/mountain views, and good food (especially Hida beef). Hotel is near Takayama Station. Give me a loose itinerary with morning market timing, walking routes through the old town, any worthwhile day trips (like Shirakawa-go or alpine areas), and restaurant recommendations. We're not in a rush here — this is the 'slow down' part of the trip.",
           "energy_type": "research",
           "batch_with": [
             "japan-trip-2026_task_3",
             "japan-trip-2026_task_5"
           ],
           "effort": "medium",
-          "countdown": "19 days away",
-          "done_count": 3,
-          "total_count": 8
+          "countdown": "18 days away"
         },
         {
           "task_id": "japan-trip-2026_task_5",
@@ -383,36 +370,35 @@
           "category": "travel",
           "tags": [
             "japan",
-            "map",
-            "landmark",
-            "food",
+            "tokyo",
             "shopping",
-            "city"
+            "food",
+            "museum",
+            "nightlife"
           ],
           "rank": 5,
-          "first_domino": "Open Google Maps and create a 'Tokyo' saved list",
+          "first_domino": "Open Google Maps and pin Tokyo neighborhoods (Shibuya, Shinjuku, Asakusa)",
           "time_estimate": "~2 hours",
           "context_cost": "low",
           "decision_load": "high",
           "momentum": "cold",
           "hook_type": "curiosity",
-          "hook_line": "Tokyo is massive — how do you even begin to narrow it down?",
-          "reward": "Finishes all activity planning for the entire Japan trip",
+          "hook_line": "Tokyo is massive — how do you balance weird neighborhoods, food, and shopping in 4 days?",
+          "reward": "Completes all Japan planning — the entire trip is now mapped",
           "unblocks": [],
           "nuggets": [
-            "Shibuya/Shinjuku for city energy",
-            "Tsukiji Outer Market opens 5am",
-            "TeamLab Borderless needs advance tickets"
+            "TeamLab Borderless needs advance tickets",
+            "Tsukiji Outer Market best 8-10am",
+            "Nakano Broadway for anime/subculture shopping"
           ],
-          "system_prompt": "Help me plan activities for Tokyo (dates TBD, probably 4-5 days in early April 2026). This is the final leg of a 2-week Japan trip with my girlfriend Dana. We'll be templed-out by this point. Focus on: food markets, neighborhoods to wander, cool shopping (watches, fountain pens, stationery), and a couple unique Tokyo experiences. Give me a loose day-by-day structure with specific neighborhoods, must-visit spots, and things to book in advance. Keep it flexible — not a minute-by-minute plan.",
+          "system_prompt": "Help me plan 4 days in Tokyo (early April 2026). Traveling with Dana. We want a mix of food (ramen, sushi, izakayas), shopping (stationery, limited edition fountain pens, quirky stores), some culture (temples/museums but not too heavy), and nightlife (bars, karaoke). Hotels are in Shinjuku. Give me a neighborhood-by-neighborhood breakdown with must-dos, food recs, and a sense of pacing. We want to experience Tokyo's energy without overscheduling. Include day/night suggestions since Tokyo transforms after dark.",
           "energy_type": "research",
           "batch_with": [
+            "japan-trip-2026_task_3",
             "japan-trip-2026_task_4"
           ],
           "effort": "high",
-          "countdown": "19 days away",
-          "done_count": 3,
-          "total_count": 8
+          "countdown": "18 days away"
         }
       ]
     },
@@ -431,40 +417,37 @@
           "category": "personal",
           "tags": [
             "code",
-            "programming",
             "computer",
+            "programming",
             "software",
             "keyboard",
-            "desk"
+            "development"
           ],
           "rank": 1,
-          "first_domino": "Open VS Code and pull up the task-pilot project",
+          "first_domino": "Open VS Code and pull latest from task-pilot repo",
           "time_estimate": "~2 hours",
           "context_cost": "high",
           "decision_load": "medium",
           "momentum": "warm",
           "hook_type": "progress",
-          "hook_line": "Extension skeleton is done — now it's about making it actually useful.",
-          "reward": "Moves the project from concept to functional prototype",
+          "hook_line": "The extension shell works — now it's about making it actually useful",
+          "reward": "Gets you closer to a working prototype you can dogfood in real projects",
           "unblocks": [
             "vs-code-task-pilot_task_2",
             "vs-code-task-pilot_task_3"
           ],
           "nuggets": [
-            "VS Code API for editor integration",
-            "Need to track file changes in real-time",
-            "Markdown parser for task extraction"
+            "VS Code extension API well-documented",
+            "Cursor integration via workspace files",
+            "Task state can live in .vscode folder"
           ],
-          "system_prompt": "Help me continue building the VS Code AI Task Pilot extension. It's a tool to help with AI-assisted development while maintaining task focus. Core goal: visualize work in progress and provide AI with context of ongoing work while editing a shared document locally. Current state: basic extension structure exists. Next steps: implement file watching, task parsing from markdown, and basic UI panel. Walk me through the architecture decisions and code structure for these features.",
+          "system_prompt": "I'm building a VS Code extension called AI Task Pilot to help with AI-assisted development while maintaining focus. The extension should visualize work in progress and provide AI (like Cursor) with context about ongoing tasks. I want it to: (1) Track active tasks in a sidebar, (2) Let me update a shared working document locally, (3) Feed that context to AI conversations. I'm using TypeScript and the VS Code extension API. The project started 3 days ago — basic shell is set up. Help me prioritize the next features to build and sketch out the architecture for task state management and AI context injection.",
           "energy_type": "deep_work",
           "batch_with": [
-            "vs-code-task-pilot_task_2",
-            "vs-code-task-pilot_task_3"
+            "vs-code-task-pilot_task_2"
           ],
           "effort": "high",
-          "countdown": null,
-          "done_count": 0,
-          "total_count": 3
+          "countdown": null
         },
         {
           "task_id": "vs-code-task-pilot_task_2",
@@ -473,38 +456,35 @@
           "task_name": "Design task visualization UI",
           "category": "personal",
           "tags": [
-            "art",
             "design",
-            "computer",
             "dashboard",
-            "canvas",
-            "visual"
+            "computer",
+            "interface",
+            "visual",
+            "software"
           ],
           "rank": 2,
-          "first_domino": "Sketch out what the task panel should look like",
+          "first_domino": "Sketch out sidebar layout on paper or Figma",
           "time_estimate": "~1 hour",
           "context_cost": "medium",
           "decision_load": "high",
           "momentum": "cold",
           "hook_type": "challenge",
-          "hook_line": "How do you show task context without turning into another todo list?",
-          "reward": "Defines the UX that makes this extension different from everything else",
+          "hook_line": "How do you show work-in-progress without creating more distraction than you're solving?",
+          "reward": "Defines the UX so you're building toward a clear vision",
           "unblocks": [],
           "nuggets": [
-            "VS Code webview panels for custom UI",
-            "Can use React in VS Code extensions",
-            "Status bar items for quick access"
+            "VS Code webview API supports React",
+            "Sidebar real estate is limited ~300px",
+            "Task cards need collapse/expand for focus"
           ],
-          "system_prompt": "Help me design the UI for VS Code AI Task Pilot. It needs to show: current task context, work in progress, and recent changes — without becoming a cluttered todo list. Target user: ADHD developer who loses track of what they were doing. The UI should live in a VS Code panel, be glanceable, and help resume work quickly. Give me 2-3 design concepts with pros/cons, considering VS Code's UI patterns and webview capabilities.",
+          "system_prompt": "Help me design the UI for a VS Code extension that visualizes active tasks in a sidebar. The goal is helping ADHD developers stay focused by showing what they're working on and what's next. The sidebar should show: current task, task description/context, next 2-3 tasks in queue, and a way to quickly switch or mark done. It needs to be glanceable but not distracting. VS Code sidebars are narrow (~300px). Sketch out component structure, key interactions, and visual hierarchy. Reference examples from existing task/todo extensions if helpful.",
           "energy_type": "research",
           "batch_with": [
-            "vs-code-task-pilot_task_1",
-            "vs-code-task-pilot_task_3"
+            "vs-code-task-pilot_task_1"
           ],
           "effort": "medium",
-          "countdown": null,
-          "done_count": 0,
-          "total_count": 3
+          "countdown": null
         },
         {
           "task_id": "vs-code-task-pilot_task_3",
@@ -514,37 +494,34 @@
           "category": "personal",
           "tags": [
             "code",
+            "computer",
             "programming",
-            "software",
             "robot",
-            "document",
-            "system"
+            "ai",
+            "software"
           ],
           "rank": 3,
-          "first_domino": "Define what 'context' means for this extension",
+          "first_domino": "Research VS Code extension API for workspace file access",
           "time_estimate": "~2 hours",
           "context_cost": "high",
           "decision_load": "high",
           "momentum": "cold",
           "hook_type": "challenge",
-          "hook_line": "How do you give AI the right context without overwhelming it with noise?",
-          "reward": "Solves the core problem that makes this extension valuable",
+          "hook_line": "Can you inject task context into AI conversations without copy-paste hell?",
+          "reward": "Creates the core value prop — seamless AI context awareness",
           "unblocks": [],
           "nuggets": [
-            "Track file edits + timestamps",
-            "Summarize changes since last session",
-            "Export context as markdown for AI prompt"
+            "Cursor reads .cursorrules and workspace files",
+            "Extension can write to .vscode folder",
+            "Context injected via markdown snippets works"
           ],
-          "system_prompt": "Help me design the AI context management system for VS Code AI Task Pilot. The goal: automatically gather relevant context from the workspace and format it for pasting into an AI conversation. Context should include: current task description, recent file changes, open files, and any notes. It should be smart about what's relevant (not just dump everything). Walk me through: what data to track, how to store it, how to format it for AI consumption, and how to keep it lightweight.",
+          "system_prompt": "I'm building a VS Code extension that feeds task context to AI assistants like Cursor. The idea: I update a working document locally (markdown file in .vscode folder), and the extension makes that available to AI conversations without manual copy-paste. Help me design the context management system: (1) Where should task state live? (2) How do I make it readable by Cursor/Copilot? (3) What's the best format — markdown, JSON, custom DSL? (4) How do I keep it in sync as tasks change? I want it to feel automatic — the AI just 'knows' what I'm working on.",
           "energy_type": "deep_work",
           "batch_with": [
-            "vs-code-task-pilot_task_1",
-            "vs-code-task-pilot_task_2"
+            "vs-code-task-pilot_task_1"
           ],
           "effort": "high",
-          "countdown": null,
-          "done_count": 0,
-          "total_count": 3
+          "countdown": null
         }
       ]
     }
@@ -553,17 +530,17 @@
     {
       "slot": 1,
       "task_id": "marianos-30th-chicago_task_1",
-      "reason": "Most urgent with tight deadline (9 days) and blocks all other trip planning — perfect for ramp_up research energy"
+      "reason": "Urgent deadline (8 days), high-impact decision that unblocks all other trip logistics, and perfect for ramp_up research energy"
     },
     {
       "slot": 2,
       "task_id": "japan-trip-2026_task_1",
-      "reason": "Low context cost research task that advances a major trip — good for morning energy outside work hours"
+      "reason": "Low activation barrier research task that feeds into glasses shopping strategy, pairs well with morning energy"
     },
     {
       "slot": 3,
       "task_id": "marianos-30th-chicago_task_4",
-      "reason": "Quick 20-min task with novelty hook — palette cleanser that complements slot 1 planning"
+      "reason": "Quick win (30 min), low context cost, and batches naturally with slot 1 — both outdoor gear research"
     }
   ],
   "active_slot": 1
