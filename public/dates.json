@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-04T05:00:43.667Z",
+  "generatedAt": "2026-03-05T00:00:00.000Z",
   "windowDays": 60,
   "events": [
     {
@@ -11,16 +11,16 @@
       "category": "personal",
       "source": "craft",
       "isRecurring": false,
-      "context": "Mariano's 30th birthday celebration in Chicago. Flights already booked. Planning a 1-2 night warm backpacking trip beforehand (Mar 14-15 weekend), then heading to Chicago for the birthday party.",
-      "hook": "Book warm backpacking destination and flights for the pre-birthday trip. Figure out REI gear rentals and confirm logistics before the trip.",
+      "context": "Mariano turns 30 on March 19th. Weekend backpacking trip to a warm destination, then flights to Chicago for birthday celebration.",
+      "hook": "Need to find a warm backpacking destination, book flights, and arrange REI gear rentals ASAP.",
       "actions": [
         {
-          "id": "find-backpacking-destination",
+          "id": "find-backpack-destination",
           "name": "Find warm backpacking destination (1-2 night, mid-March)",
           "status": "todo"
         },
         {
-          "id": "book-backpacking-flights",
+          "id": "book-backpack-flights",
           "name": "Book flights to backpacking location",
           "status": "todo"
         },
@@ -35,7 +35,7 @@
           "status": "todo"
         },
         {
-          "id": "buy-mariano-gift",
+          "id": "buy-gift",
           "name": "Buy Mariano a gift (maybe)",
           "status": "todo"
         }
@@ -49,15 +49,15 @@
       "name": "Japan Trip 2026",
       "startDate": "2026-03-23",
       "durationDays": 16,
-      "importance": 10,
+      "importance": 9,
       "category": "travel",
       "source": "craft",
       "isRecurring": false,
-      "context": "Two-week trip with Dana, March 23 - April 7. Route: Osaka, Nara, Kyoto, Takayama, Tokyo. All flights and hotels booked. Now in activity planning and shopping phase. Planning to buy 4 pairs of eyeglasses in Japan.",
-      "hook": "Validate eyeglasses prescription requirements and finalize activity plans for Kyoto, Takayama, and Tokyo.",
+      "context": "Two-week trip with Dana through Osaka, Nara, Kyoto, Takayama, and Tokyo. All flights and hotels booked. Currently planning activities and shopping for 4 pairs of eyeglasses.",
+      "hook": "Validate eyeglasses prescription requirements and start planning activities in Kyoto, Takayama, and Tokyo.",
       "actions": [
         {
-          "id": "eyeglasses-stores-kyoto",
+          "id": "research-eyeglasses-kyoto",
           "name": "Look up eyeglasses stores in Kyoto for early trip shopping",
           "status": "todo"
         },
@@ -67,34 +67,19 @@
           "status": "todo"
         },
         {
-          "id": "plan-activities-kyoto",
+          "id": "plan-kyoto-activities",
           "name": "Plan activities in Kyoto",
           "status": "todo"
         },
         {
-          "id": "plan-activities-takayama",
+          "id": "plan-takayama-activities",
           "name": "Plan activities in Takayama",
           "status": "todo"
         },
         {
-          "id": "plan-activities-tokyo",
+          "id": "plan-tokyo-activities",
           "name": "Plan activities in Tokyo",
           "status": "todo"
-        },
-        {
-          "id": "book-flights",
-          "name": "Book all flights",
-          "status": "done"
-        },
-        {
-          "id": "book-hotels",
-          "name": "Book all hotels",
-          "status": "done"
-        },
-        {
-          "id": "plan-route",
-          "name": "Plan route",
-          "status": "done"
         }
       ],
       "people": [
