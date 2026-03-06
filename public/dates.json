@@ -1,41 +1,41 @@
 {
-  "generatedAt": "2026-03-05T00:00:00.000Z",
+  "generatedAt": "2026-03-06T05:01:53.522Z",
   "windowDays": 60,
   "events": [
     {
       "id": "marianos-30th-chicago",
-      "name": "Mariano's 30th / Chicago",
+      "name": "Mariano's 30th / Chicago Trip",
       "startDate": "2026-03-13",
       "durationDays": 3,
       "importance": 8,
       "category": "personal",
       "source": "craft",
       "isRecurring": false,
-      "context": "Mariano turns 30 on March 19th. Weekend backpacking trip to a warm destination, then flights to Chicago for birthday celebration.",
-      "hook": "Need to find a warm backpacking destination, book flights, and arrange REI gear rentals ASAP.",
+      "context": "Mariano turns 30 on March 19th. Plan is a 1-2 night backpacking trip somewhere warm (weekend of Mar 14-15), then Chicago for the birthday celebration. Flights to Chicago already booked.",
+      "hook": "Find and book warm backpacking destination immediately, then arrange onward flights to Chicago. Need to secure gear rentals from REI.",
       "actions": [
         {
-          "id": "find-backpack-destination",
+          "id": "find-warm-backpacking-destination",
           "name": "Find warm backpacking destination (1-2 night, mid-March)",
           "status": "todo"
         },
         {
-          "id": "book-backpack-flights",
+          "id": "book-flights-to-backpacking",
           "name": "Book flights to backpacking location",
           "status": "todo"
         },
         {
-          "id": "book-chicago-flight",
+          "id": "book-flight-to-chicago",
           "name": "Book flight from backpacking to Chicago",
           "status": "todo"
         },
         {
-          "id": "arrange-rei-gear",
+          "id": "arrange-rei-gear-rentals",
           "name": "Figure out REI gear rentals (backpack, tent, sleeping bag)",
           "status": "todo"
         },
         {
-          "id": "buy-gift",
+          "id": "buy-mariano-gift",
           "name": "Buy Mariano a gift (maybe)",
           "status": "todo"
         }
@@ -46,23 +46,23 @@
     },
     {
       "id": "japan-trip-2026",
-      "name": "Japan Trip 2026",
+      "name": "Japan Trip",
       "startDate": "2026-03-23",
       "durationDays": 16,
-      "importance": 9,
+      "importance": 10,
       "category": "travel",
       "source": "craft",
       "isRecurring": false,
-      "context": "Two-week trip with Dana through Osaka, Nara, Kyoto, Takayama, and Tokyo. All flights and hotels booked. Currently planning activities and shopping for 4 pairs of eyeglasses.",
-      "hook": "Validate eyeglasses prescription requirements and start planning activities in Kyoto, Takayama, and Tokyo.",
+      "context": "Two-week trip with Dana, March 23 - April 7. Route: Osaka, Nara, Kyoto, Takayama, Tokyo. All flights and hotels booked. Now in activity planning and shopping phase. Planning to buy 4 pairs of eyeglasses in Japan.",
+      "hook": "Finalize activity itineraries for Kyoto, Takayama, and Tokyo. Research eyeglasses stores in Kyoto and validate insurance/prescription requirements before arrival.",
       "actions": [
         {
-          "id": "research-eyeglasses-kyoto",
+          "id": "research-eyeglasses-stores-kyoto",
           "name": "Look up eyeglasses stores in Kyoto for early trip shopping",
           "status": "todo"
         },
         {
-          "id": "validate-eyeglasses-insurance",
+          "id": "validate-glasses-insurance-prescription",
           "name": "Validate insurance/prescription requirements for buying 4 pairs of glasses",
           "status": "todo"
         },
