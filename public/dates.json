@@ -1,41 +1,41 @@
 {
-  "generatedAt": "2026-03-09T05:08:30.328Z",
+  "generatedAt": "2026-03-10T05:01:14.400Z",
   "windowDays": 60,
   "events": [
     {
       "id": "marianos-30th-chicago",
-      "name": "Mariano's 30th Birthday & Chicago Trip",
+      "name": "Mariano's 30th / Chicago",
       "startDate": "2026-03-13",
-      "durationDays": 7,
-      "importance": 8,
-      "category": "personal",
+      "durationDays": 3,
+      "importance": 7,
+      "category": "social",
       "source": "craft",
       "isRecurring": false,
-      "context": "Mariano turns 30 on March 19th. Plan: 1-2 night warm backpacking trip (Mar 14-15), then fly to Chicago for birthday celebration (Mar 19). Flights to Chicago already booked.",
-      "hook": "Hugo needs to find a warm backpacking destination, book those flights, arrange gear rentals from REI, and pick out a gift for Mariano.",
+      "context": "Mariano turns 30 on March 19th. Plan includes a 1-2 night warm backpacking trip first (Mar 14-15), then fly to Chicago for the birthday celebration. Flights to Chicago already booked.",
+      "hook": "Book flights to backpacking destination, find warm backpacking spot for mid-March, figure out REI gear rentals, and finalize Mariano's gift.",
       "actions": [
         {
-          "id": "find-backpacking-destination",
+          "id": "find-warm-backpacking-destination",
           "name": "Find warm backpacking destination (1-2 night, mid-March)",
           "status": "todo"
         },
         {
-          "id": "book-backpacking-flights",
+          "id": "book-flights-to-backpacking",
           "name": "Book flights to backpacking location",
           "status": "todo"
         },
         {
-          "id": "book-chicago-flight",
+          "id": "book-flight-backpacking-to-chicago",
           "name": "Book flight from backpacking to Chicago",
           "status": "todo"
         },
         {
-          "id": "rei-gear-rentals",
+          "id": "figure-out-rei-gear-rentals",
           "name": "Figure out REI gear rentals (backpack, tent, sleeping bag)",
           "status": "todo"
         },
         {
-          "id": "mariano-gift",
+          "id": "buy-mariano-gift",
           "name": "Buy Mariano a gift (maybe)",
           "status": "todo"
         }
@@ -53,33 +53,48 @@
       "category": "travel",
       "source": "craft",
       "isRecurring": false,
-      "context": "Two-week trip with Dana, March 23 - April 7. Route: Osaka, Nara, Kyoto, Takayama, Tokyo. All flights and hotels booked. Planning to buy 4 pairs of eyeglasses in Japan.",
-      "hook": "Hugo should finalize activity plans for Kyoto, Takayama, and Tokyo, research eyeglasses stores in Kyoto, and validate insurance/prescription requirements for buying 4 pairs of glasses.",
+      "context": "Two-week trip with Dana, March 23 - April 7. Route: Osaka, Nara, Kyoto, Takayama, Tokyo. All flights and hotels booked. Currently in activity planning and shopping phase. Planning to buy 4 pairs of eyeglasses in Japan.",
+      "hook": "Look up eyeglasses stores in Kyoto for early trip shopping, validate insurance/prescription requirements, and finalize activity plans for Kyoto, Takayama, and Tokyo.",
       "actions": [
         {
-          "id": "eyeglasses-stores-kyoto",
+          "id": "look-up-eyeglasses-stores-kyoto",
           "name": "Look up eyeglasses stores in Kyoto for early trip shopping",
           "status": "todo"
         },
         {
-          "id": "validate-glasses-insurance",
+          "id": "validate-insurance-glasses-requirements",
           "name": "Validate insurance/prescription requirements for buying 4 pairs of glasses",
           "status": "todo"
         },
         {
-          "id": "plan-kyoto-activities",
+          "id": "plan-activities-kyoto",
           "name": "Plan activities in Kyoto",
           "status": "todo"
         },
         {
-          "id": "plan-takayama-activities",
+          "id": "plan-activities-takayama",
           "name": "Plan activities in Takayama",
           "status": "todo"
         },
         {
-          "id": "plan-tokyo-activities",
+          "id": "plan-activities-tokyo",
           "name": "Plan activities in Tokyo",
           "status": "todo"
+        },
+        {
+          "id": "book-all-flights",
+          "name": "Book all flights",
+          "status": "done"
+        },
+        {
+          "id": "book-all-hotels",
+          "name": "Book all hotels",
+          "status": "done"
+        },
+        {
+          "id": "plan-route",
+          "name": "Plan route",
+          "status": "done"
         }
       ],
       "people": [
