@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-11T05:02:32.401Z",
+  "generated_at": "2026-03-12T05:05:33.558Z",
   "energy_band": "ramp_up",
   "is_work_hours": false,
   "is_weekend": false,
@@ -23,34 +23,34 @@
             "hiking",
             "mountain",
             "trail",
-            "sun"
+            "nature"
           ],
           "rank": 1,
-          "first_domino": "Google 'warm backpacking March destinations near Chicago'",
+          "first_domino": "Open Google and search 'warm backpacking March USA'",
           "time_estimate": "~30 min",
           "context_cost": "low",
           "decision_load": "medium",
           "momentum": "cold",
           "hook_type": "urgency",
-          "hook_line": "2 days until the trip weekend — no destination yet.",
-          "reward": "Unlocks flight booking and gear planning — kills the biggest unknown",
+          "hook_line": "Weekend is in 2 days — nowhere to go yet.",
+          "reward": "Locks in the adventure piece of Mariano's birthday celebration",
           "unblocks": [
             "marianos-30th-chicago_task_2",
             "marianos-30th-chicago_task_3",
             "marianos-30th-chicago_task_4"
           ],
           "nuggets": [
-            "Red River Gorge (KY) 60°F mid-March",
-            "Big South Fork (TN) good for 1-night loops",
-            "Shawnee National Forest warmer than Chicago"
+            "Big Sur warm in March, 60°F days",
+            "Joshua Tree good for beginner backpacking",
+            "Smoky Mountains can still be cold, check forecast"
           ],
-          "system_prompt": "Help me find a warm backpacking destination for a 1-2 night trip on March 14-15, 2026. Flying from Chicago. It's for my friend Mariano's 30th birthday weekend — he wants to do a backpacking trip before the Chicago celebration on March 19th. Need somewhere warm (ideally 50°F+), beginner-friendly trails, and accessible by a short flight or drive from Chicago. Give me 3-5 options with trail names, distances, difficulty level, expected weather, and logistics (nearest airport or drive time).",
+          "system_prompt": "Help me find a warm backpacking destination for a 1-2 night trip this weekend (March 14-15, 2026). It's for my friend Mariano's 30th birthday. I'm based in the US and need somewhere I can fly to easily. I'm a backpacking beginner so I need established trails with clear routes. Warm weather is essential — ideally 55-70°F. Give me 3-5 destination options with trail recommendations, difficulty ratings, how to get there, and what gear I'd need. Include permit requirements if any.",
           "energy_type": "research",
           "batch_with": [
             "marianos-30th-chicago_task_4"
           ],
           "effort": "medium",
-          "countdown": "2 days away",
+          "countdown": "tomorrow",
           "done_count": 0,
           "total_count": 5
         },
@@ -66,32 +66,30 @@
             "flight",
             "suitcase",
             "map",
-            "booking"
+            "backpack"
           ],
           "rank": 2,
-          "first_domino": "Open Google Flights and search Chicago to [destination]",
+          "first_domino": "Open Google Flights and enter destination from Task 1",
           "time_estimate": "~15 min",
           "context_cost": "low",
           "decision_load": "low",
           "momentum": "cold",
           "hook_type": "urgency",
-          "hook_line": "Flight prices jump closer to departure — book now or pay extra.",
-          "reward": "Locks in the trip logistics — one less thing hanging over you",
-          "unblocks": [
-            "marianos-30th-chicago_task_3"
-          ],
+          "hook_line": "2 days out — prices climb every hour you wait.",
+          "reward": "Backpacking trip becomes real — no backing out now",
+          "unblocks": [],
           "nuggets": [
-            "Last-minute flights can be 2-3x normal price",
-            "Southwest often has deals 1-2 days out",
-            "Google Flights shows price calendar"
+            "Southwest often best for last-minute domestic",
+            "Thursday night flights usually cheaper",
+            "Budget $200-400 round trip domestic short notice"
           ],
-          "system_prompt": "I need to book flights from Chicago to [destination] for March 14-15, 2026. It's a quick backpacking trip for my friend Mariano's 30th. Need outbound Friday morning/midday March 14, return late Sunday March 15 or early Monday March 16 (flexible). Show me the cheapest options on Google Flights, Southwest, and United. I care more about price than time, but want to maximize time at the trail.",
+          "system_prompt": "I need to book flights for a backpacking trip this weekend (March 14-15). Departing from [your home airport]. Going to [destination from Task 1]. I need to fly out Thursday evening (March 13) or early Friday morning (March 14), and return Sunday evening (March 15) or Monday morning (March 16) because I fly to Chicago Monday afternoon. Find me the cheapest options on Google Flights, Southwest, or Delta. Show me total costs and times.",
           "energy_type": "errand",
           "batch_with": [
             "marianos-30th-chicago_task_3"
           ],
           "effort": "low",
-          "countdown": "2 days away",
+          "countdown": "tomorrow",
           "done_count": 0,
           "total_count": 5
         },
@@ -105,32 +103,32 @@
             "airplane",
             "airport",
             "flight",
-            "birthday",
-            "party",
-            "celebration"
+            "map",
+            "suitcase",
+            "calendar"
           ],
           "rank": 3,
-          "first_domino": "Open Google Flights and search [destination] to Chicago",
-          "time_estimate": "~10 min",
+          "first_domino": "Open Google Flights and search backpacking city to Chicago",
+          "time_estimate": "~15 min",
           "context_cost": "low",
-          "decision_load": "none",
+          "decision_load": "low",
           "momentum": "cold",
-          "hook_type": "progress",
-          "hook_line": "Last flight to book — gets you from trail to birthday party.",
-          "reward": "Completes the travel puzzle — ready for the celebration",
+          "hook_type": "urgency",
+          "hook_line": "Chicago flights for March 19th birthday — book now or pay double.",
+          "reward": "Full travel route locked — backpacking to Chicago seamless",
           "unblocks": [],
           "nuggets": [
-            "Need to arrive Chicago by March 19",
-            "Birthday celebration likely evening March 19",
-            "Direct flights save headache"
+            "Monday afternoon or evening flight ideal",
+            "O'Hare bigger hub, usually more options",
+            "Budget $150-300 depending on backpacking location"
           ],
-          "system_prompt": "I need to book a flight from [backpacking destination] to Chicago for Mariano's 30th birthday on March 19, 2026. The backpacking trip ends March 15-16, and the birthday celebration is March 19. I have flexibility on when I arrive in Chicago (March 16, 17, or 18) but want to minimize cost. Show me options and help me pick based on price and convenience.",
+          "system_prompt": "I need a flight from [backpacking destination] to Chicago on Monday March 16 or Tuesday March 17, 2026. Mariano's birthday is Thursday March 19 so I need to be there by Wednesday latest. I'm flexible on time but prefer afternoon/evening so I can finish the backpacking trip in the morning. Find me cheapest options to either O'Hare or Midway. Show total costs and times.",
           "energy_type": "errand",
           "batch_with": [
             "marianos-30th-chicago_task_2"
           ],
           "effort": "low",
-          "countdown": "8 days away",
+          "countdown": "tomorrow",
           "done_count": 0,
           "total_count": 5
         },
@@ -144,32 +142,32 @@
             "backpack",
             "camping",
             "tent",
-            "sleeping",
             "hiking",
+            "gear",
             "rei"
           ],
           "rank": 4,
-          "first_domino": "Google 'REI gear rental Chicago' and open REI website",
+          "first_domino": "Go to REI.com and click 'Rentals' in top nav",
           "time_estimate": "~20 min",
           "context_cost": "low",
           "decision_load": "low",
           "momentum": "cold",
-          "hook_type": "curiosity",
-          "hook_line": "REI does full backpacking kits — could solve the gear problem in one go.",
-          "reward": "Answers whether you need to scramble for gear or just show up at REI",
+          "hook_type": "novelty",
+          "hook_line": "REI rents full backpacking kits — never done this before.",
+          "reward": "Gear question answered — no last-minute scrambling or buying expensive stuff",
           "unblocks": [],
           "nuggets": [
-            "REI rents full backpacking kits",
-            "Includes backpack, tent, sleeping bag, pad",
-            "Can reserve online and pick up local"
+            "REI Adventure Kit includes pack, tent, bag, pad",
+            "Reserve online, pick up in store",
+            "~$50-80 for weekend rental vs $500+ to buy"
           ],
-          "system_prompt": "I'm doing a 1-2 night backpacking trip March 14-15 near Chicago and don't own backpacking gear. I've heard REI rents full backpacking kits. Help me figure out: (1) What REI locations near Chicago rent gear, (2) What's included in a typical kit and how much it costs, (3) Whether I need to reserve ahead or can walk in, (4) Any alternatives if REI doesn't work out. I need backpack, tent, sleeping bag, sleeping pad at minimum.",
+          "system_prompt": "Help me figure out REI gear rentals for a 1-2 night backpacking trip this weekend (March 14-15). I'm a beginner and don't own backpacking gear. I need: backpack (50-65L), tent (1-person or 2-person), sleeping bag (rated for 40-50°F), sleeping pad. Find the REI Adventure Kit or individual rental options. Tell me what's included, how much it costs, how to reserve it, and what I'd still need to bring (clothes, food, etc.). Include pickup/return process.",
           "energy_type": "research",
           "batch_with": [
             "marianos-30th-chicago_task_1"
           ],
-          "effort": "low",
-          "countdown": "2 days away",
+          "effort": "medium",
+          "countdown": "tomorrow",
           "done_count": 0,
           "total_count": 5
         },
@@ -183,30 +181,30 @@
             "gift",
             "birthday",
             "celebration",
+            "party",
             "shopping",
-            "money",
-            "chicago"
+            "friend"
           ],
           "rank": 5,
-          "first_domino": "Text Mariano: 'What do you want for your birthday?'",
-          "time_estimate": "~1 hour",
+          "first_domino": "Text Mariano: 'What do you want for your 30th?'",
+          "time_estimate": "~10 min",
           "context_cost": "low",
           "decision_load": "high",
           "momentum": "cold",
-          "hook_type": "novelty",
-          "hook_line": "A thoughtful gift beats showing up empty-handed to a 30th.",
-          "reward": "Checks the gift box — shows up to the party ready",
+          "hook_type": "challenge",
+          "hook_line": "What do you get someone turning 30 who already has everything?",
+          "reward": "Shows up with more than just 'happy birthday' — thoughtful gesture",
           "unblocks": [],
           "nuggets": [
-            "30th birthdays often appreciate experiences over things",
-            "Chicago has great food/drink gift options",
-            "Trip itself could count as the gift"
+            "Experience gifts good for milestone birthdays",
+            "Chicago restaurant gift card easy option",
+            "Trip itself might be gift enough"
           ],
-          "system_prompt": "My friend Mariano is turning 30 on March 19, 2026. I'm already doing a backpacking trip with him March 14-15 and going to Chicago for his birthday. Should I get him a separate gift? If yes, what's a good gift for a 30th birthday for someone who likes outdoor activities, travel, and good food/drink? Budget flexible but thinking $50-150. Give me 5-7 specific gift ideas with links if possible.",
+          "system_prompt": "Help me brainstorm a 30th birthday gift for my friend Mariano. I'm already flying to Chicago for his birthday and doing a backpacking trip beforehand. Budget around $50-100. He's into outdoor activities, good food, and Chicago nightlife. Give me 5-7 gift ideas that are either tangible items, experiences, or gift cards. Include where to buy them and why they'd be good for a milestone birthday.",
           "energy_type": "research",
           "batch_with": [],
-          "effort": "medium",
-          "countdown": "8 days away",
+          "effort": "low",
+          "countdown": "tomorrow",
           "done_count": 0,
           "total_count": 5
         }
@@ -231,31 +229,34 @@
             "shopping",
             "map",
             "landmark",
-            "temple"
+            "glasses"
           ],
           "rank": 1,
-          "first_domino": "Google 'best eyeglasses stores Kyoto English friendly'",
-          "time_estimate": "~20 min",
+          "first_domino": "Google 'eyeglasses stores Kyoto English speaking'",
+          "time_estimate": "~15 min",
           "context_cost": "low",
           "decision_load": "low",
           "momentum": "cold",
           "hook_type": "curiosity",
-          "hook_line": "Japanese glasses are cheaper and better quality — which Kyoto shops speak English?",
-          "reward": "Adds glasses shopping to your Kyoto itinerary — one less thing to figure out later",
-          "unblocks": [],
-          "nuggets": [
-            "JINS and Zoff are major chains with English",
-            "Kyoto has optical shops near Kawaramachi",
-            "Can get 4 pairs for under $400 total"
+          "hook_line": "Kyoto hits first — which optical shops open early in the trip?",
+          "reward": "Glasses shopping starts immediately when you land in Japan",
+          "unblocks": [
+            "japan-trip-2026_task_2"
           ],
-          "system_prompt": "I'm going to Kyoto March 25-27, 2026 and want to buy 4 pairs of eyeglasses early in the trip. I need to find eyeglasses stores in Kyoto that: (1) are English-friendly, (2) have good selection and quality, (3) can do prescriptions quickly (ideally same-day or next-day), (4) are reasonably priced. Give me a list of 5-7 stores with addresses, Google Maps links, price ranges, and notes on English service. Include both chains (JINS, Zoff) and local shops if they're good.",
+          "nuggets": [
+            "JINS and Zoff are major chains, English-friendly",
+            "Kyoto station area has most optical shops",
+            "Glasses ready same day or next day in Japan"
+          ],
+          "system_prompt": "Help me find eyeglasses stores in Kyoto, Japan that are foreigner-friendly. I'm visiting March 25-27, 2026 and want to buy 4 pairs of prescription glasses early in my trip. I need stores that: speak English or have English signage, can do eye exams with US prescription, have stylish frames, and offer same-day or next-day service. Give me 5-7 store names with Google Maps links, locations (near Kyoto Station ideal), price ranges, and what makes each one good. Include JINS, Zoff, and any local boutiques.",
           "energy_type": "research",
           "batch_with": [
-            "japan-trip-2026_task_2",
-            "japan-trip-2026_task_3"
+            "japan-trip-2026_task_3",
+            "japan-trip-2026_task_4",
+            "japan-trip-2026_task_5"
           ],
           "effort": "low",
-          "countdown": "12 days away",
+          "countdown": "11 days away",
           "done_count": 3,
           "total_count": 8
         },
@@ -266,35 +267,35 @@
           "task_name": "Validate insurance/prescription requirements for buying 4 pairs of glasses",
           "category": "travel",
           "tags": [
+            "glasses",
+            "insurance",
             "document",
-            "contract",
-            "money",
-            "japan",
-            "eyeglasses",
-            "insurance"
+            "paperwork",
+            "medical",
+            "eyeglasses"
           ],
           "rank": 2,
-          "first_domino": "Email insurance: 'Can I submit foreign eyeglass receipts?'",
-          "time_estimate": "~15 min",
+          "first_domino": "Open your insurance portal and search 'vision coverage'",
+          "time_estimate": "~20 min",
           "context_cost": "low",
-          "decision_load": "none",
+          "decision_load": "low",
           "momentum": "cold",
           "hook_type": "challenge",
-          "hook_line": "Can you get US insurance to cover Japanese glasses and skip the markup?",
-          "reward": "Confirms whether you can save $400+ or need to adjust the plan",
+          "hook_line": "Can you claim foreign optical purchases on US insurance?",
+          "reward": "Know exactly what to ask for at checkout — receipts, codes, prescriptions",
           "unblocks": [],
           "nuggets": [
-            "Vision insurance often covers 1-2 pairs per year",
-            "Need itemized receipt in English for submission",
-            "Prescription valid across countries"
+            "Most US vision insurance covers foreign receipts",
+            "Need itemized receipt with frame/lens breakdown",
+            "Bring current prescription or get eye exam in Japan"
           ],
-          "system_prompt": "I'm buying 4 pairs of eyeglasses in Japan in late March 2026. I have US vision insurance. Help me figure out: (1) Can I submit foreign eyeglass receipts for insurance reimbursement? (2) What documentation do I need (itemized receipt, prescription copy, etc.)? (3) Do I need to bring my current prescription or can Japanese opticians do a new eye exam? (4) Any issues using a US prescription in Japan? Draft an email to my insurance asking these questions clearly.",
-          "energy_type": "coordination",
+          "system_prompt": "Help me figure out how to buy prescription glasses in Japan and potentially get reimbursed by my US vision insurance. Questions: (1) What do I need from the optical store to submit for insurance reimbursement? (2) Can I use my US prescription in Japan or do I need a new eye exam? (3) What documentation should I ask for at checkout? (4) Are there any restrictions on claiming multiple pairs of glasses? Give me a checklist of what to bring (prescription, insurance card, etc.) and what to request from the store.",
+          "energy_type": "research",
           "batch_with": [
             "japan-trip-2026_task_1"
           ],
           "effort": "low",
-          "countdown": "12 days away",
+          "countdown": "11 days away",
           "done_count": 3,
           "total_count": 8
         },
@@ -309,11 +310,11 @@
             "kyoto",
             "temple",
             "shrine",
-            "map",
-            "landmark"
+            "torii",
+            "pagoda"
           ],
           "rank": 3,
-          "first_domino": "Open Google Maps and search 'Kyoto temples worth visiting'",
+          "first_domino": "Open Google Maps and search 'Kyoto temples'",
           "time_estimate": "~1 hour",
           "context_cost": "low",
           "decision_load": "high",
@@ -327,15 +328,14 @@
             "Arashiyama bamboo grove best before 9am",
             "Kinkaku-ji ¥500 entry, opens 9am"
           ],
-          "system_prompt": "Help me plan activities for 2.5 days in Kyoto (March 25-27, 2026). Traveling with my girlfriend Dana. We like temples, walking, outdoor spaces, and good food. Already have hotels booked in central Kyoto. I want a day-by-day itinerary with opening hours, Google Maps links, and a suggested walking route. Include a mix of major landmarks (Fushimi Inari, Kinkaku-ji, Arashiyama) and less touristy spots. Also factor in that I need to buy 4 pairs of eyeglasses early in the trip.",
+          "system_prompt": "Help me plan activities for 2.5 days in Kyoto (March 25-27, 2026). Traveling with my girlfriend Dana. We like temples, walking, outdoor spaces, and good food. Already have hotels booked in central Kyoto. I want a day-by-day itinerary with opening hours, Google Maps links, and a suggested walking route. Include a mix of major landmarks (Fushimi Inari, Kinkaku-ji, Arashiyama) and less touristy spots. Factor in time for eyeglasses shopping on day 1. Keep it realistic — don't overschedule.",
           "energy_type": "research",
           "batch_with": [
-            "japan-trip-2026_task_1",
             "japan-trip-2026_task_4",
             "japan-trip-2026_task_5"
           ],
-          "effort": "high",
-          "countdown": "12 days away",
+          "effort": "medium",
+          "countdown": "11 days away",
           "done_count": 3,
           "total_count": 8
         },
@@ -354,28 +354,28 @@
             "village"
           ],
           "rank": 4,
-          "first_domino": "Google 'Takayama day trips and things to do'",
+          "first_domino": "Google 'things to do Takayama Japan'",
           "time_estimate": "~45 min",
           "context_cost": "low",
           "decision_load": "medium",
           "momentum": "cold",
           "hook_type": "novelty",
-          "hook_line": "Takayama is the mountain town everyone says to visit but nobody explains why.",
-          "reward": "Unlocks the Takayama leg — gets you ready for the Alps",
+          "hook_line": "Takayama is the hidden mountain town — what makes it worth the detour?",
+          "reward": "Mountain village days planned — balance to the city rush",
           "unblocks": [],
           "nuggets": [
-            "Takayama old town is walkable in 2-3 hours",
-            "Shirakawa-go day trip is the main draw",
-            "Famous for sake breweries and morning markets"
+            "Old town walkable in 2-3 hours",
+            "Shirakawa-go day trip famous for thatched roofs",
+            "Morning markets 7am-noon, famous for local crafts"
           ],
-          "system_prompt": "Help me plan 1.5-2 days in Takayama, Japan (late March/early April 2026). Traveling with my girlfriend Dana. We like outdoor activities, walking, traditional villages, and local food. I've heard Shirakawa-go is a must-do day trip. Give me a suggested itinerary with: (1) What to do in Takayama itself (old town, sake breweries, markets), (2) Whether Shirakawa-go is worth it and how to get there, (3) Any other nearby day trips or hikes, (4) Food recommendations.",
+          "system_prompt": "Help me plan activities for Takayama, Japan (dates in late March/early April 2026). Traveling with Dana. We like walking, nature, traditional villages, and local food. Takayama is our mountain/rural break between Kyoto and Tokyo. I want: (1) a day-by-day plan for however many days we're there, (2) should we do a day trip to Shirakawa-go?, (3) best local food to try, (4) any outdoor activities or hikes nearby. Include opening hours, Google Maps links, and realistic timing.",
           "energy_type": "research",
           "batch_with": [
             "japan-trip-2026_task_3",
             "japan-trip-2026_task_5"
           ],
           "effort": "medium",
-          "countdown": "12 days away",
+          "countdown": "11 days away",
           "done_count": 3,
           "total_count": 8
         },
@@ -388,34 +388,34 @@
           "tags": [
             "japan",
             "tokyo",
-            "shopping",
             "city",
+            "shopping",
             "food",
-            "culture"
+            "landmark"
           ],
           "rank": 5,
-          "first_domino": "Google 'Tokyo neighborhoods worth visiting 2026'",
+          "first_domino": "Google 'Tokyo neighborhoods guide for first timers'",
           "time_estimate": "~1 hour",
           "context_cost": "low",
           "decision_load": "high",
           "momentum": "cold",
           "hook_type": "curiosity",
-          "hook_line": "Tokyo is massive — which neighborhoods match your vibe vs tourist traps?",
-          "reward": "Finishes all activity planning — trip is fully mapped",
+          "hook_line": "Tokyo is 23 wards and endless options — where do you even start?",
+          "reward": "Full Japan itinerary complete — ready to go",
           "unblocks": [],
           "nuggets": [
-            "Tokyo has 20+ distinct neighborhoods",
-            "Shibuya, Shinjuku, Harajuku all walkable cluster",
+            "Shibuya crossing iconic, best at sunset",
+            "Tsukiji outer market still open, breakfast destination",
             "TeamLab Borderless needs advance tickets"
           ],
-          "system_prompt": "Help me plan 5-6 days in Tokyo (early April 2026). Traveling with my girlfriend Dana. We like: outdoor spaces, interesting neighborhoods, good food, art/culture, and some shopping (fountain pens, watches). Not interested in: theme parks, nightlife clubs, super touristy stuff. Give me a day-by-day framework with neighborhood clusters, specific places to visit, and notes on what's worth pre-booking. Include time for Dana's 30th birthday on April 6.",
+          "system_prompt": "Help me plan activities for Tokyo, Japan (dates in early April 2026). Traveling with Dana. We like: walking, interesting neighborhoods, good food, art/museums, and some shopping (fountain pens, watches, eyeglasses). We've already hit temples hard in Kyoto so Tokyo should be more modern/urban exploration. I want a day-by-day plan for however many days we're there. Include: neighborhood recommendations (Shibuya, Harajuku, Shinjuku, etc.), must-see spots, fountain pen stores (Maruzen, Itoya), watch shopping areas, and food markets. Google Maps links and realistic timing.",
           "energy_type": "research",
           "batch_with": [
             "japan-trip-2026_task_3",
             "japan-trip-2026_task_4"
           ],
-          "effort": "high",
-          "countdown": "12 days away",
+          "effort": "medium",
+          "countdown": "11 days away",
           "done_count": 3,
           "total_count": 8
         }
@@ -438,26 +438,26 @@
             "computer",
             "laptop",
             "code",
-            "keyboard",
             "programming",
-            "software"
+            "software",
+            "developer"
           ],
           "rank": 1,
-          "first_domino": "Clone the Cerebro repo and open README.md",
-          "time_estimate": "~1 hour",
-          "context_cost": "medium",
-          "decision_load": "low",
+          "first_domino": "Open terminal and git clone the Cerebro repo",
+          "time_estimate": "~2 hours",
+          "context_cost": "high",
+          "decision_load": "medium",
           "momentum": "cold",
           "hook_type": "challenge",
-          "hook_line": "Can you crack the local setup before the next team sync?",
-          "reward": "Unblocks all future Cerebro work — no more waiting on staging",
+          "hook_line": "Developer portal that won't run locally — can you crack it?",
+          "reward": "Unblocks all Cerebro work — can actually develop instead of just reading code",
           "unblocks": [],
           "nuggets": [
-            "Developer portals often need Docker + Node",
-            "README usually has quickstart guide",
-            "Local setup reveals real dev workflow"
+            "Check README for Docker setup steps",
+            "Likely needs env vars or API keys",
+            "Ask team for local dev guide if stuck"
           ],
-          "system_prompt": "I'm trying to get Cerebro (our internal developer portal) running locally. It's been parked for a while because I haven't set it up on my machine yet. I need help with: (1) What dependencies are typically needed for a developer portal (Docker, Node, databases?), (2) How to interpret the README and get past common setup blockers, (3) What to do if the README is outdated or incomplete, (4) How to validate it's actually working once it starts. I'm comfortable with command line but want to avoid rabbit holes.",
+          "system_prompt": "Help me get the Cerebro developer portal running locally on my machine. It's a work project that's currently parked because I can't run it. I'm on macOS. Walk me through: (1) What dependencies I likely need (Node, Docker, database?), (2) Common setup steps for developer portals, (3) What to check first if it doesn't run (env vars, ports, database connections), (4) How to verify it's actually working once started. Assume I have basic dev tools but this is my first time setting up this specific project.",
           "energy_type": "deep_work",
           "batch_with": [],
           "effort": "high",
@@ -472,17 +472,17 @@
     {
       "slot": 1,
       "task_id": "marianos-30th-chicago_task_1",
-      "reason": "Most urgent: trip is in 2 days and destination is still unknown — blocks all other trip logistics"
+      "reason": "Tomorrow's deadline and unblocks all other trip tasks — highest urgency and impact"
     },
     {
       "slot": 2,
       "task_id": "japan-trip-2026_task_1",
-      "reason": "Quick research win that sets up Kyoto shopping early in the Japan trip — low effort, clear output"
+      "reason": "11 days out, low effort research that can batch with other Japan planning"
     },
     {
       "slot": 3,
       "task_id": "marianos-30th-chicago_task_4",
-      "reason": "Batches well with slot 1 (same trip context) and answers gear question before weekend departure"
+      "reason": "Quick novelty win — REI rentals are easy to research and unlock gear confidence"
     }
   ],
   "active_slot": 1
