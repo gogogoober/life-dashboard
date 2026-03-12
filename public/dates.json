@@ -1,36 +1,36 @@
 {
-  "generatedAt": "2026-03-11T05:02:30.172Z",
+  "generatedAt": "2026-03-12T05:05:32.673Z",
   "windowDays": 60,
   "events": [
     {
       "id": "marianos-30th-chicago",
-      "name": "Mariano's 30th Birthday & Chicago Trip",
+      "name": "Mariano's 30th / Chicago",
       "startDate": "2026-03-14",
       "durationDays": 6,
       "importance": 8,
       "category": "personal",
       "source": "craft",
       "isRecurring": false,
-      "context": "Mariano turns 30 on March 19th. Plan includes a 1-2 night warm backpacking trip (Mar 14-15), then flying to Chicago for the birthday celebration.",
-      "hook": "Book warm backpacking destination and flights for the pre-Chicago trip. Arrange REI gear rentals and finalize Mariano's gift.",
+      "context": "Mariano turns 30 on March 19th. Two-part trip: 1-2 nights backpacking somewhere warm (Mar 14-15), then Chicago for birthday celebration (Mar 16-19).",
+      "hook": "Book flights to backpacking location and from backpacking to Chicago. Find warm backpacking destination. Arrange REI gear rentals.",
       "actions": [
         {
-          "id": "find-backpacking-destination",
+          "id": "find-warm-backpacking-destination",
           "name": "Find warm backpacking destination (1-2 night, mid-March)",
           "status": "todo"
         },
         {
-          "id": "book-backpacking-flights",
+          "id": "book-flights-backpacking",
           "name": "Book flights to backpacking location",
           "status": "todo"
         },
         {
-          "id": "book-chicago-flights",
+          "id": "book-flight-backpacking-chicago",
           "name": "Book flight from backpacking to Chicago",
           "status": "todo"
         },
         {
-          "id": "arrange-gear-rentals",
+          "id": "arrange-rei-gear-rentals",
           "name": "Figure out REI gear rentals (backpack, tent, sleeping bag)",
           "status": "todo"
         },
@@ -49,52 +49,37 @@
       "name": "Japan Trip 2026",
       "startDate": "2026-03-23",
       "durationDays": 16,
-      "importance": 9,
+      "importance": 10,
       "category": "travel",
       "source": "craft",
       "isRecurring": false,
-      "context": "Two-week trip with Dana (Mar 23 - Apr 7). Route: Osaka, Nara, Kyoto, Takayama, Tokyo. All flights and hotels booked. Planning to buy 4 pairs of eyeglasses in Japan.",
-      "hook": "Finalize eyeglasses store locations in Kyoto and complete activity planning for all cities before departure.",
+      "context": "Two-week trip with Dana through Osaka, Nara, Kyoto, Takayama, Tokyo. All flights and hotels booked. Focus on activities, shopping, and buying 4 pairs of eyeglasses.",
+      "hook": "Look up eyeglasses stores in Kyoto. Validate prescription requirements. Plan activities in Kyoto, Takayama, and Tokyo.",
       "actions": [
         {
-          "id": "research-eyeglasses-kyoto",
+          "id": "eyeglasses-stores-kyoto",
           "name": "Look up eyeglasses stores in Kyoto for early trip shopping",
           "status": "todo"
         },
         {
-          "id": "validate-glasses-insurance",
+          "id": "validate-insurance-prescription",
           "name": "Validate insurance/prescription requirements for buying 4 pairs of glasses",
           "status": "todo"
         },
         {
-          "id": "plan-kyoto-activities",
+          "id": "plan-activities-kyoto",
           "name": "Plan activities in Kyoto",
           "status": "todo"
         },
         {
-          "id": "plan-takayama-activities",
+          "id": "plan-activities-takayama",
           "name": "Plan activities in Takayama",
           "status": "todo"
         },
         {
-          "id": "plan-tokyo-activities",
+          "id": "plan-activities-tokyo",
           "name": "Plan activities in Tokyo",
           "status": "todo"
-        },
-        {
-          "id": "book-flights",
-          "name": "Book all flights",
-          "status": "done"
-        },
-        {
-          "id": "book-hotels",
-          "name": "Book all hotels",
-          "status": "done"
-        },
-        {
-          "id": "plan-route",
-          "name": "Plan route",
-          "status": "done"
         }
       ],
       "people": [
