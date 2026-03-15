@@ -1,49 +1,7 @@
 {
-  "generatedAt": "2026-03-12T05:05:32.673Z",
+  "generatedAt": "2026-03-15T05:15:40.611Z",
   "windowDays": 60,
   "events": [
-    {
-      "id": "marianos-30th-chicago",
-      "name": "Mariano's 30th / Chicago",
-      "startDate": "2026-03-14",
-      "durationDays": 6,
-      "importance": 8,
-      "category": "personal",
-      "source": "craft",
-      "isRecurring": false,
-      "context": "Mariano turns 30 on March 19th. Two-part trip: 1-2 nights backpacking somewhere warm (Mar 14-15), then Chicago for birthday celebration (Mar 16-19).",
-      "hook": "Book flights to backpacking location and from backpacking to Chicago. Find warm backpacking destination. Arrange REI gear rentals.",
-      "actions": [
-        {
-          "id": "find-warm-backpacking-destination",
-          "name": "Find warm backpacking destination (1-2 night, mid-March)",
-          "status": "todo"
-        },
-        {
-          "id": "book-flights-backpacking",
-          "name": "Book flights to backpacking location",
-          "status": "todo"
-        },
-        {
-          "id": "book-flight-backpacking-chicago",
-          "name": "Book flight from backpacking to Chicago",
-          "status": "todo"
-        },
-        {
-          "id": "arrange-rei-gear-rentals",
-          "name": "Figure out REI gear rentals (backpack, tent, sleeping bag)",
-          "status": "todo"
-        },
-        {
-          "id": "buy-mariano-gift",
-          "name": "Buy Mariano a gift (maybe)",
-          "status": "todo"
-        }
-      ],
-      "people": [
-        "Mariano"
-      ]
-    },
     {
       "id": "japan-trip-2026",
       "name": "Japan Trip 2026",
@@ -53,8 +11,8 @@
       "category": "travel",
       "source": "craft",
       "isRecurring": false,
-      "context": "Two-week trip with Dana through Osaka, Nara, Kyoto, Takayama, Tokyo. All flights and hotels booked. Focus on activities, shopping, and buying 4 pairs of eyeglasses.",
-      "hook": "Look up eyeglasses stores in Kyoto. Validate prescription requirements. Plan activities in Kyoto, Takayama, and Tokyo.",
+      "context": "Two-week trip with Dana, March 23 - April 7. Route: Osaka, Nara, Kyoto, Takayama, Tokyo. All flights and hotels booked. Planning activities and shopping for eyeglasses.",
+      "hook": "Look up eyeglasses stores in Kyoto, validate insurance/prescription requirements for buying 4 pairs of glasses, and finalize activity plans for Kyoto and Takayama.",
       "actions": [
         {
           "id": "eyeglasses-stores-kyoto",
@@ -62,28 +20,70 @@
           "status": "todo"
         },
         {
-          "id": "validate-insurance-prescription",
+          "id": "validate-glasses-insurance",
           "name": "Validate insurance/prescription requirements for buying 4 pairs of glasses",
           "status": "todo"
         },
         {
-          "id": "plan-activities-kyoto",
+          "id": "plan-kyoto-activities",
           "name": "Plan activities in Kyoto",
           "status": "todo"
         },
         {
-          "id": "plan-activities-takayama",
+          "id": "plan-takayama-activities",
           "name": "Plan activities in Takayama",
           "status": "todo"
         },
         {
-          "id": "plan-activities-tokyo",
+          "id": "plan-tokyo-activities",
           "name": "Plan activities in Tokyo",
           "status": "todo"
         }
       ],
       "people": [
         "Dana"
+      ]
+    },
+    {
+      "id": "marianos-30th-chicago",
+      "name": "Mariano's 30th / Chicago",
+      "startDate": "2026-03-14",
+      "durationDays": 6,
+      "importance": 8,
+      "category": "travel",
+      "source": "craft",
+      "isRecurring": false,
+      "context": "Two-part trip: 1-2 night warm backpacking trip mid-March, then Chicago for Mariano's 30th birthday celebration on March 19th.",
+      "hook": "Find a warm backpacking destination for March 14-15, book flights to the destination and from there to Chicago, arrange REI gear rentals, and consider a birthday gift for Mariano.",
+      "actions": [
+        {
+          "id": "find-backpacking-destination",
+          "name": "Find warm backpacking destination (1-2 night, mid-March)",
+          "status": "todo"
+        },
+        {
+          "id": "book-backpacking-flights",
+          "name": "Book flights to backpacking location",
+          "status": "todo"
+        },
+        {
+          "id": "book-backpacking-chicago-flights",
+          "name": "Book flight from backpacking to Chicago",
+          "status": "todo"
+        },
+        {
+          "id": "arrange-rei-rentals",
+          "name": "Figure out REI gear rentals (backpack, tent, sleeping bag)",
+          "status": "todo"
+        },
+        {
+          "id": "gift-mariano",
+          "name": "Buy Mariano a gift (maybe)",
+          "status": "todo"
+        }
+      ],
+      "people": [
+        "Mariano"
       ]
     }
   ]
