@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-17T05:08:36.046Z",
+  "generatedAt": "2026-03-19T05:09:33.643Z",
   "windowDays": 60,
   "events": [
     {
@@ -11,16 +11,16 @@
       "category": "travel",
       "source": "craft",
       "isRecurring": false,
-      "context": "Two-week trip with Dana, March 23 – April 7. Route: Osaka, Nara, Kyoto, Takayama, Tokyo. All flights and hotels booked. Currently in activity planning and shopping phase.",
-      "hook": "Confirm eyeglasses stores in Kyoto and validate insurance/prescription requirements for buying 4 pairs of glasses. Lock down Kyoto, Takayama, and Tokyo activity itineraries.",
+      "context": "Two-week trip with Dana through Osaka, Nara, Kyoto, Takayama, and Tokyo. All flights and hotels booked. Now in activity planning and shopping phase.",
+      "hook": "Research eyeglasses stores in Kyoto for early trip shopping and validate insurance/prescription requirements for buying 4 pairs of glasses.",
       "actions": [
         {
-          "id": "eyeglasses-stores-kyoto",
+          "id": "eyeglasses-kyoto-stores",
           "name": "Look up eyeglasses stores in Kyoto for early trip shopping",
           "status": "todo"
         },
         {
-          "id": "validate-eyeglasses-insurance",
+          "id": "eyeglasses-insurance-validation",
           "name": "Validate insurance/prescription requirements for buying 4 pairs of glasses",
           "status": "todo"
         },
@@ -38,21 +38,6 @@
           "id": "plan-tokyo-activities",
           "name": "Plan activities in Tokyo",
           "status": "todo"
-        },
-        {
-          "id": "book-flights",
-          "name": "Book all flights",
-          "status": "done"
-        },
-        {
-          "id": "book-hotels",
-          "name": "Book all hotels",
-          "status": "done"
-        },
-        {
-          "id": "plan-route",
-          "name": "Plan route",
-          "status": "done"
         }
       ],
       "people": [
