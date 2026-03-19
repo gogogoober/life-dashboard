@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-17T05:08:36.993Z",
+  "generated_at": "2026-03-19T05:09:31.573Z",
   "energy_band": "ramp_up",
   "is_work_hours": false,
   "is_weekend": false,
@@ -18,37 +18,37 @@
           "task_name": "Look up eyeglasses stores in Kyoto for early trip shopping",
           "category": "travel",
           "tags": [
+            "eyeglasses",
             "japan",
-            "map",
             "shopping",
-            "glasses",
+            "map",
             "temple",
-            "landmark"
+            "kyoto"
           ],
           "rank": 1,
-          "first_domino": "Open Google Maps and search 'eyeglasses store Kyoto'",
-          "time_estimate": "~15 min",
+          "first_domino": "Open Google Maps and search 'eyeglasses shops Kyoto'",
+          "time_estimate": "~20 min",
           "context_cost": "low",
           "decision_load": "low",
           "momentum": "cold",
           "hook_type": "curiosity",
-          "hook_line": "Japan's eyeglass prices can save you $400+ on designer frames — but which Kyoto shops carry what you need?",
-          "reward": "Locks in early shopping plan so you can knock out all 4 pairs before temple hopping starts",
+          "hook_line": "Kyoto has clusters of eyewear shops near temples — find the ones with modern frames and English-speaking staff before you land.",
+          "reward": "First shopping day mapped out — walk off the plane and straight into buying 4 pairs",
           "unblocks": [
             "japan-trip-2026_task_2"
           ],
           "nuggets": [
-            "Kyoto Optical District near Kawaramachi",
-            "Zoff & JINS chains = budget frames",
-            "Independent shops = designer/vintage options"
+            "Kyoto station area has 3+ optical chains",
+            "Gion district shops open 10am-8pm",
+            "JINS and Zoff do same-day service"
           ],
-          "system_prompt": "Help me find eyeglasses stores in Kyoto, Japan. I'm arriving March 25 and want to buy 4 pairs of prescription glasses early in the trip. I need stores that can do same-day or next-day service, accept foreign prescriptions, and ideally have English-speaking staff. Looking for a mix of budget-friendly chains (like Zoff, JINS) and shops with designer/unique frames. Give me a list with addresses, Google Maps links, price ranges, and turnaround times. Also note which area of Kyoto they're in so I can batch the shopping efficiently.",
+          "system_prompt": "Help me find eyeglasses stores in Kyoto that can make prescription glasses quickly. I'm arriving March 23 and want to buy 4 pairs early in the trip (days 1-2). I need stores that: handle foreign prescriptions, speak some English, offer modern frame styles, and can do same-day or next-day service. Give me 5-7 specific store names with locations (Google Maps links), opening hours, and notes on selection/service speed. Prioritize areas near Kyoto Station and central Kyoto where I'll be staying.",
           "energy_type": "research",
           "batch_with": [
             "japan-trip-2026_task_3"
           ],
           "effort": "low",
-          "countdown": "6 days away"
+          "countdown": "4 days away"
         },
         {
           "task_id": "japan-trip-2026_task_2",
@@ -57,33 +57,33 @@
           "task_name": "Validate insurance/prescription requirements for buying 4 pairs of glasses",
           "category": "travel",
           "tags": [
-            "document",
             "insurance",
-            "glasses",
-            "phone",
+            "document",
+            "eyeglasses",
             "email",
-            "passport"
+            "phone",
+            "calendar"
           ],
           "rank": 2,
-          "first_domino": "Email insurance: subject 'Japan eyeglass purchase coverage question'",
-          "time_estimate": "~20 min",
+          "first_domino": "Email insurance: subject 'Japan eyewear reimbursement — 4 pairs'",
+          "time_estimate": "~15 min",
           "context_cost": "low",
           "decision_load": "none",
           "momentum": "cold",
-          "hook_type": "challenge",
-          "hook_line": "Can you hack your insurance to cover foreign eyeglass purchases and maximize the Japan price advantage?",
-          "reward": "Clears the insurance question so you can buy confidently without surprise costs later",
+          "hook_type": "urgency",
+          "hook_line": "4 days out — if insurance won't cover foreign receipts, the whole glasses plan changes.",
+          "reward": "Know exactly what receipts to collect and whether the $400+ savings is real",
           "unblocks": [],
           "nuggets": [
-            "Vision insurance often covers out-of-network",
-            "Need itemized receipt in English",
-            "Prescription valid 1-2yrs most states"
+            "Most US vision plans cover foreign purchases",
+            "Need itemized receipt with frame/lens breakdown",
+            "Prescription valid 1-2 years depending on state"
           ],
-          "system_prompt": "Help me figure out insurance and prescription requirements for buying prescription eyeglasses in Japan. I have US vision insurance and a current prescription. I want to buy 4 pairs during a trip to Japan (March 25 - April 7). What do I need to know about: (1) whether my insurance covers international purchases and how to submit claims, (2) whether Japanese opticians accept US prescriptions or need their own eye exam, (3) what documentation I need to bring or request for reimbursement. Give me specific steps to validate everything before I leave, including who to contact and what questions to ask.",
-          "energy_type": "coordination",
+          "system_prompt": "Help me draft an email to my vision insurance provider asking about international eyewear purchase reimbursement. I'm traveling to Japan March 23-April 7 and planning to buy 4 pairs of prescription glasses there. I need to know: (1) Will they reimburse foreign purchases? (2) What documentation do I need (receipts, prescription format)? (3) Are there limits on number of pairs per year? (4) Do I need pre-approval? Also help me confirm if my current US prescription is sufficient or if I need anything converted to Japanese format. Keep the email concise and professional.",
+          "energy_type": "errand",
           "batch_with": [],
           "effort": "low",
-          "countdown": "6 days away"
+          "countdown": "4 days away"
         },
         {
           "task_id": "japan-trip-2026_task_3",
@@ -92,29 +92,31 @@
           "task_name": "Plan activities in Kyoto",
           "category": "travel",
           "tags": [
-            "japan",
+            "kyoto",
             "temple",
+            "shrine",
             "map",
-            "hiking",
             "food",
-            "landmark"
+            "walking"
           ],
           "rank": 3,
-          "first_domino": "Open Google Maps, search 'top temples Kyoto', pin 5",
+          "first_domino": "Open Google Maps, create new list 'Kyoto Must-See'",
           "time_estimate": "~1 hour",
           "context_cost": "medium",
           "decision_load": "high",
           "momentum": "cold",
           "hook_type": "curiosity",
-          "hook_line": "Kyoto has 2000+ temples — which ones are actually worth the early wake-up call?",
-          "reward": "Closes out Kyoto planning — only Takayama and Tokyo activities left",
-          "unblocks": [],
-          "nuggets": [
-            "Fushimi Inari free, open 24hrs",
-            "Arashiyama bamboo best before 9am",
-            "Kinkaku-ji ¥500, opens 9am"
+          "hook_line": "Kyoto has 2000+ temples — which ones are actually worth the early wake-up?",
+          "reward": "Closes out Kyoto planning — only Takayama and Tokyo left on the route",
+          "unblocks": [
+            "japan-trip-2026_task_4"
           ],
-          "system_prompt": "Help me plan activities for 2.5 days in Kyoto, Japan (March 25-27, 2026). Traveling with my girlfriend Dana. We like temples, bamboo forests, walking, outdoor spaces, quiet neighborhoods, and excellent food. Already have hotels booked in central Kyoto. I want a day-by-day itinerary with opening hours, entry fees, Google Maps links, and suggested walking routes. Include a mix of major landmarks (Fushimi Inari, Kinkaku-ji, Arashiyama) and less touristy neighborhood spots. Also recommend 2-3 restaurants per day with specific dishes to try. Optimize for avoiding crowds — we're okay with early mornings.",
+          "nuggets": [
+            "Fushimi Inari free, open 24hrs, best dawn/dusk",
+            "Arashiyama bamboo grove peaks 7-9am",
+            "Philosopher's Path 2km walk links 5 temples"
+          ],
+          "system_prompt": "Help me plan 2.5 days of activities in Kyoto (March 25-27). Traveling with my girlfriend Dana. We like temples, walking, outdoor spaces, nature, and good food. Staying in central Kyoto near the station. I want a day-by-day itinerary with: temple names, opening hours, entry fees, Google Maps links, suggested walking routes connecting sites, and a mix of major landmarks (Fushimi Inari, Kinkaku-ji, Arashiyama) with lesser-known spots. Include breakfast/lunch/dinner recommendations near each area. Optimize for minimal backtracking and best light/crowd timing.",
           "energy_type": "research",
           "batch_with": [
             "japan-trip-2026_task_1",
@@ -122,7 +124,7 @@
             "japan-trip-2026_task_5"
           ],
           "effort": "medium",
-          "countdown": "6 days away"
+          "countdown": "4 days away"
         },
         {
           "task_id": "japan-trip-2026_task_4",
@@ -131,36 +133,38 @@
           "task_name": "Plan activities in Takayama",
           "category": "travel",
           "tags": [
-            "japan",
+            "takayama",
             "mountain",
             "hiking",
             "nature",
-            "food",
-            "map"
+            "japan",
+            "food"
           ],
           "rank": 4,
-          "first_domino": "Search 'best things to do Takayama Japan' and bookmark 3 articles",
+          "first_domino": "Google 'Takayama things to do March' and open top 3 results",
           "time_estimate": "~45 min",
           "context_cost": "medium",
           "decision_load": "medium",
           "momentum": "cold",
           "hook_type": "novelty",
-          "hook_line": "Takayama's hidden in the Japanese Alps — fewer tourists, more sake breweries and mountain air.",
-          "reward": "Fills in the Takayama gap so the entire trip route is planned",
-          "unblocks": [],
-          "nuggets": [
-            "Morning markets 6am-noon daily",
-            "Hida beef = specialty, ~¥3000",
-            "Old Town = preserved Edo-period streets"
+          "hook_line": "Takayama is the trip's mountain interlude — old town streets, sake breweries, and alpine air before Tokyo chaos.",
+          "reward": "Mountain day planned — gives the trip a breather between Kyoto temples and Tokyo energy",
+          "unblocks": [
+            "japan-trip-2026_task_5"
           ],
-          "system_prompt": "Help me plan 1.5 days in Takayama, Japan (March 27-28 evening, 2026). Coming from Kyoto, heading to Tokyo after. Takayama is a smaller mountain town in the Japanese Alps known for old streets, sake, and Hida beef. We like walking, local food, markets, and scenic areas. Give me a day-by-day breakdown with specific sites (Old Town, morning markets, any temples or shrines worth seeing), restaurant recommendations for Hida beef, and any day trips or hikes nearby if we have extra time. Include Google Maps links and realistic timing.",
+          "nuggets": [
+            "Takayama old town walkable in 2-3 hours",
+            "Morning markets 6am-noon, local crafts",
+            "Shirakawa-go day trip 50min bus, UNESCO village"
+          ],
+          "system_prompt": "Help me plan 1.5 days in Takayama (late March). Traveling with Dana. We like walking, nature, local food, and quieter experiences after busy Kyoto. Staying near Takayama station. I want: (1) walking route through old town with sake brewery recommendations, (2) best morning market to visit, (3) whether Shirakawa-go day trip is worth it (we like scenic villages and mountain views), (4) dinner spots for Hida beef. Include opening hours, travel times, and what to skip if short on time.",
           "energy_type": "research",
           "batch_with": [
             "japan-trip-2026_task_3",
             "japan-trip-2026_task_5"
           ],
           "effort": "medium",
-          "countdown": "6 days away"
+          "countdown": "4 days away"
         },
         {
           "task_id": "japan-trip-2026_task_5",
@@ -169,36 +173,36 @@
           "task_name": "Plan activities in Tokyo",
           "category": "travel",
           "tags": [
+            "tokyo",
             "japan",
-            "landmark",
             "food",
             "shopping",
-            "map",
-            "temple"
+            "fountain pen",
+            "walking"
           ],
           "rank": 5,
-          "first_domino": "Search 'Tokyo neighborhoods guide' and pick 3 to explore",
-          "time_estimate": "~1 hour",
+          "first_domino": "List Tokyo neighborhoods on paper: Shibuya, Shinjuku, Asakusa, Harajuku",
+          "time_estimate": "~1.5 hours",
           "context_cost": "medium",
           "decision_load": "high",
           "momentum": "cold",
           "hook_type": "curiosity",
-          "hook_line": "Tokyo has 23 wards and infinite rabbit holes — which neighborhoods match your vibe?",
-          "reward": "Completes the entire Japan trip activity plan — everything locked in before departure",
+          "hook_line": "Tokyo is 8 days wide — which neighborhoods get your limited edition fountain pen hunt, and which get skipped?",
+          "reward": "Trip fully planned end-to-end — nothing left but packing and boarding",
           "unblocks": [],
           "nuggets": [
-            "Shimokitazawa = vintage shops, indie cafes",
-            "Tsukiji Outer Market = breakfast sushi",
-            "TeamLab Borderless = digital art museum"
+            "Kingdom Note Shinjuku: 3-floor pen paradise",
+            "Itoya Ginza: 12 floors stationery, limited editions",
+            "Sailor Pop-Up Harajuku: exclusive Tokyo colors"
           ],
-          "system_prompt": "Help me plan 4 full days in Tokyo (March 29 - April 2, 2026). Traveling with Dana. We like neighborhood walks, quirky shops, excellent food (sushi, ramen, izakaya), art/design, and people-watching. Not super interested in big tourist crowds. I want a day-by-day itinerary organized by neighborhood with specific places to eat, walk, and explore. Include a mix: one museum or art space, one big landmark (maybe teamLab or Meiji Shrine), and lots of wandering through cool neighborhoods like Shimokitazawa, Nakameguro, or Daikanyama. Also include fountain pen shopping (Tokyo limited edition Sailor pens). Give me Google Maps links and suggested routes.",
+          "system_prompt": "Help me plan 8 days in Tokyo (late March to early April). Traveling with Dana. We like: walking, food, stationery/fountain pens (I want to hunt limited edition Sailor pens), quirky neighborhoods, parks, and some nightlife. Staying near Shinjuku. I want: (1) neighborhood-by-day breakdown (Shibuya, Harajuku, Asakusa, Ginza, etc.), (2) specific fountain pen shops with limited edition notes (Kingdom Note, Itoya, Maruzen), (3) food recommendations per area, (4) 2-3 day trip options (Nikko, Kamakura, Mt Fuji area), (5) what to skip if we're templed-out from Kyoto. Include walking routes and travel times between areas.",
           "energy_type": "research",
           "batch_with": [
             "japan-trip-2026_task_3",
             "japan-trip-2026_task_4"
           ],
-          "effort": "medium",
-          "countdown": "6 days away"
+          "effort": "high",
+          "countdown": "4 days away"
         }
       ]
     },
@@ -216,29 +220,29 @@
           "task_name": "Get it running locally",
           "category": "work",
           "tags": [
-            "laptop",
-            "code",
-            "programming",
             "computer",
-            "desk",
-            "software"
+            "code",
+            "terminal",
+            "programming",
+            "developer",
+            "setup"
           ],
           "rank": 1,
-          "first_domino": "Clone the Cerebro repo and open it in Cursor",
+          "first_domino": "Clone the Cerebro repo and open README.md",
           "time_estimate": "~2 hours",
           "context_cost": "high",
           "decision_load": "medium",
           "momentum": "cold",
           "hook_type": "challenge",
-          "hook_line": "Developer portals are supposed to make life easier — can you crack the setup puzzle on this one?",
-          "reward": "Unblocks all Cerebro work — you can finally dig into the actual project instead of being stuck at the door",
+          "hook_line": "Developer portals always have cursed local setup — can you get it running without asking for help?",
+          "reward": "Unblocks all Cerebro work — turns a parked project into an active workstream",
           "unblocks": [],
           "nuggets": [
-            "Likely needs Docker + env config",
-            "Check README for dependencies",
-            "May need VPN or internal access"
+            "Check if it needs Docker or bare Node",
+            "README probably has outdated dependencies",
+            "Slack #cerebro channel has setup gotchas"
           ],
-          "system_prompt": "Help me get the Cerebro developer portal running locally. This is a work project — an internal tool for engineers. I need to clone the repo, install dependencies, and get the dev server running. Walk me through: (1) what to check in the README or docs first, (2) common blockers for developer portals (Docker, databases, API keys, VPN requirements), (3) a step-by-step setup checklist. Assume I'm on macOS with Homebrew, Node, and Docker already installed. If there are multiple setup paths, recommend the fastest one for local development.",
+          "system_prompt": "Help me get the Cerebro developer portal running locally. It's a work project I haven't touched in a while. I need to: (1) understand the tech stack (likely Node/React), (2) identify prerequisites (Docker, databases, API keys), (3) follow setup docs and troubleshoot common issues, (4) verify it's actually working with a test page load. Walk me through the setup step-by-step, asking clarifying questions as needed. If setup docs are unclear or outdated, help me reverse-engineer from the codebase structure.",
           "energy_type": "deep_work",
           "batch_with": [],
           "effort": "high",
@@ -251,17 +255,17 @@
     {
       "slot": 1,
       "task_id": "japan-trip-2026_task_1",
-      "reason": "Outside work hours, trip is 6 days out — this low-effort research task fits the ramp_up energy and clears a quick win before the day starts"
+      "reason": "4 days out, ramp-up energy, low activation — just search and browse eyeglasses shops to start the day"
     },
     {
       "slot": 2,
       "task_id": "japan-trip-2026_task_2",
-      "reason": "Low decision load coordination task — good for early morning before the brain fully turns on, and unblocks confident glasses shopping"
+      "reason": "Quick errand that unblocks the glasses plan — email insurance now before work hours start"
     },
     {
       "slot": 3,
       "task_id": "japan-trip-2026_task_3",
-      "reason": "Most important activity planning task with highest impact — Kyoto is 2.5 days and still blank, closes a major gap"
+      "reason": "Kyoto is 6 days away and still blank — morning research energy fits this curiosity-driven planning"
     }
   ],
   "active_slot": 1
