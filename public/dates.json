@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-19T05:09:33.643Z",
+  "generatedAt": "2026-03-21T04:58:58.865Z",
   "windowDays": 60,
   "events": [
     {
@@ -7,35 +7,35 @@
       "name": "Japan Trip 2026",
       "startDate": "2026-03-23",
       "durationDays": 16,
-      "importance": 10,
+      "importance": 9,
       "category": "travel",
       "source": "craft",
       "isRecurring": false,
-      "context": "Two-week trip with Dana through Osaka, Nara, Kyoto, Takayama, and Tokyo. All flights and hotels booked. Now in activity planning and shopping phase.",
-      "hook": "Research eyeglasses stores in Kyoto for early trip shopping and validate insurance/prescription requirements for buying 4 pairs of glasses.",
+      "context": "Two-week trip with Dana to Osaka, Nara, Kyoto, Takayama, and Tokyo. All flights and hotels booked. Now in activity planning and shopping phase, including buying 4 pairs of eyeglasses.",
+      "hook": "Look up eyeglasses stores in Kyoto for early trip shopping and validate insurance/prescription requirements before departure.",
       "actions": [
         {
-          "id": "eyeglasses-kyoto-stores",
+          "id": "eyeglasses-stores-kyoto",
           "name": "Look up eyeglasses stores in Kyoto for early trip shopping",
           "status": "todo"
         },
         {
-          "id": "eyeglasses-insurance-validation",
+          "id": "validate-insurance-prescription",
           "name": "Validate insurance/prescription requirements for buying 4 pairs of glasses",
           "status": "todo"
         },
         {
-          "id": "plan-kyoto-activities",
+          "id": "plan-activities-kyoto",
           "name": "Plan activities in Kyoto",
           "status": "todo"
         },
         {
-          "id": "plan-takayama-activities",
+          "id": "plan-activities-takayama",
           "name": "Plan activities in Takayama",
           "status": "todo"
         },
         {
-          "id": "plan-tokyo-activities",
+          "id": "plan-activities-tokyo",
           "name": "Plan activities in Tokyo",
           "status": "todo"
         }
