@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-21T04:58:58.865Z",
+  "generatedAt": "2026-03-22T05:07:44.477Z",
   "windowDays": 60,
   "events": [
     {
@@ -7,35 +7,35 @@
       "name": "Japan Trip 2026",
       "startDate": "2026-03-23",
       "durationDays": 16,
-      "importance": 9,
+      "importance": 10,
       "category": "travel",
       "source": "craft",
       "isRecurring": false,
-      "context": "Two-week trip with Dana to Osaka, Nara, Kyoto, Takayama, and Tokyo. All flights and hotels booked. Now in activity planning and shopping phase, including buying 4 pairs of eyeglasses.",
-      "hook": "Look up eyeglasses stores in Kyoto for early trip shopping and validate insurance/prescription requirements before departure.",
+      "context": "Two-week trip with Dana covering Osaka, Nara, Kyoto, Takayama, and Tokyo. All flights and hotels booked. Now in activity planning and shopping phase.",
+      "hook": "Validate eyeglasses prescription requirements, look up optical shops in Kyoto, and finalize activities in Kyoto, Takayama, and Tokyo.",
       "actions": [
         {
-          "id": "eyeglasses-stores-kyoto",
+          "id": "eyeglasses-research",
           "name": "Look up eyeglasses stores in Kyoto for early trip shopping",
           "status": "todo"
         },
         {
-          "id": "validate-insurance-prescription",
+          "id": "validate-glasses-insurance",
           "name": "Validate insurance/prescription requirements for buying 4 pairs of glasses",
           "status": "todo"
         },
         {
-          "id": "plan-activities-kyoto",
+          "id": "plan-kyoto-activities",
           "name": "Plan activities in Kyoto",
           "status": "todo"
         },
         {
-          "id": "plan-activities-takayama",
+          "id": "plan-takayama-activities",
           "name": "Plan activities in Takayama",
           "status": "todo"
         },
         {
-          "id": "plan-activities-tokyo",
+          "id": "plan-tokyo-activities",
           "name": "Plan activities in Tokyo",
           "status": "todo"
         }
