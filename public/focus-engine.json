@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-21T04:58:59.450Z",
+  "generated_at": "2026-03-22T05:07:43.688Z",
   "energy_band": "ramp_up",
   "is_work_hours": false,
   "is_weekend": true,
@@ -19,9 +19,9 @@
           "category": "travel",
           "tags": [
             "japan",
-            "shopping",
             "map",
-            "landmark"
+            "landmark",
+            "eyeglasses"
           ],
           "rank": 1,
           "first_domino": "Open Google Maps and search 'eyeglasses Kyoto'",
@@ -30,17 +30,17 @@
           "decision_load": "low",
           "momentum": "cold",
           "hook_type": "curiosity",
-          "hook_line": "Kyoto's eyeglasses district could save $400+ on 4 pairs — where do locals actually shop?",
-          "reward": "Locks in shopping stops for day 1-2 so you can buy early and wear them the rest of the trip",
+          "hook_line": "Kyoto is your first stop — find the best optical shops before Tokyo's overwhelming options.",
+          "reward": "Locks in a Kyoto shopping stop so you can buy glasses early and use them the whole trip",
           "unblocks": [
             "japan-trip-2026_task_2"
           ],
           "nuggets": [
-            "Japan eyeglasses typically $100-150/pair vs $200+ US",
-            "Kyoto has optician clusters near Kawaramachi station",
-            "Most shops do same-day lens fitting"
+            "Kyoto eyewear shops cluster in Kawaramachi district",
+            "Japanese opticians offer same-day service",
+            "Owndays and Zoff are budget-friendly chains"
           ],
-          "system_prompt": "Help me find eyeglasses stores in Kyoto, Japan where I can buy 4 pairs during my trip (March 25-27 in Kyoto). I'm looking for affordable but quality frames and lenses. I want a list of 3-5 stores with their locations (Google Maps links), opening hours, price range estimates, and whether they typically serve English-speaking customers. Focus on areas near central Kyoto hotels (Kawaramachi/Gion area). Include any clusters or shopping districts known for eyeglasses.",
+          "system_prompt": "Help me find eyeglasses stores in Kyoto, Japan. I'm traveling there March 25-27 and want to buy 4 pairs of prescription glasses early in the trip. I need stores with good selection, English-speaking staff if possible, and ideally same-day or next-day service. Provide Google Maps links, opening hours, and any location notes (near which subway station, etc.). Focus on areas around central Kyoto where I'm staying.",
           "energy_type": "research",
           "batch_with": [
             "japan-trip-2026_task_3",
@@ -48,7 +48,7 @@
             "japan-trip-2026_task_5"
           ],
           "effort": "low",
-          "countdown": "2 days away"
+          "countdown": "tomorrow"
         },
         {
           "task_id": "japan-trip-2026_task_2",
@@ -58,30 +58,30 @@
           "category": "travel",
           "tags": [
             "document",
-            "money",
+            "eyeglasses",
             "insurance",
-            "medical"
+            "money"
           ],
           "rank": 2,
-          "first_domino": "Email insurance agent with subject 'Japan eyeglasses coverage'",
+          "first_domino": "Email insurance agent: subject 'Japan glasses coverage question'",
           "time_estimate": "~10 min",
           "context_cost": "low",
           "decision_load": "none",
           "momentum": "cold",
           "hook_type": "urgency",
-          "hook_line": "2 days out — need to know if you can expense these or if it's cash only",
-          "reward": "Clears the biggest unknown blocker for the 4-glasses plan",
+          "hook_line": "You leave tomorrow — if insurance needs forms filed, you need to know now.",
+          "reward": "Clears the insurance question so you can shop confidently without surprise costs",
           "unblocks": [],
           "nuggets": [
-            "US vision insurance rarely covers international",
-            "Need current prescription or can test in Japan",
-            "Some credit cards offer travel purchase protection"
+            "US vision insurance often covers out-of-country",
+            "Need itemized receipt for reimbursement",
+            "Prescription valid for 1-2 years in most states"
           ],
-          "system_prompt": "I'm traveling to Japan in 2 days and want to buy 4 pairs of eyeglasses there. Help me figure out: (1) whether my US vision insurance will reimburse international eyeglasses purchases and what documentation I need, (2) whether I need to bring my current prescription or if Japanese opticians can test and create a new one, (3) any other financial or legal considerations for buying multiple pairs abroad. I have standard US vision insurance through work.",
+          "system_prompt": "Help me figure out what I need to buy prescription eyeglasses in Japan and get insurance reimbursement. I have US vision insurance and want to buy 4 pairs of glasses during my Japan trip (March 23 - April 7). Questions: 1) Do I need any special forms or pre-approval from insurance? 2) What documentation do I need from the Japanese optician for reimbursement? 3) Is my US prescription valid in Japan or do I need an eye exam there? 4) Any other paperwork or prep I should do before leaving?",
           "energy_type": "errand",
           "batch_with": [],
           "effort": "low",
-          "countdown": "2 days away"
+          "countdown": "tomorrow"
         },
         {
           "task_id": "japan-trip-2026_task_3",
@@ -92,26 +92,27 @@
           "tags": [
             "japan",
             "temple",
+            "shrine",
             "map",
-            "hiking",
-            "food"
+            "landmark",
+            "walking"
           ],
           "rank": 3,
-          "first_domino": "Open Google Maps and create 'Kyoto Must-See' saved list",
+          "first_domino": "Open Google Doc titled 'Kyoto Day Plan March 25-27'",
           "time_estimate": "~1 hour",
           "context_cost": "medium",
           "decision_load": "high",
-          "momentum": "warm",
+          "momentum": "cold",
           "hook_type": "curiosity",
-          "hook_line": "Kyoto has 2000+ temples — which ones are actually worth the early wake-up?",
-          "reward": "Closes out Kyoto planning — only Takayama and Tokyo left",
+          "hook_line": "Kyoto has 2000+ temples and hidden gardens — which ones are worth the early morning walk?",
+          "reward": "Turns 2.5 blank days into a clear itinerary with no decision fatigue on the ground",
           "unblocks": [],
           "nuggets": [
-            "Fushimi Inari free, open 24hrs, best before 8am",
-            "Arashiyama bamboo grove magical before 9am crowds",
-            "Philosopher's Path walk connects 5 temples, 2km"
+            "Fushimi Inari free, open 24hrs, best at dawn",
+            "Arashiyama bamboo grove best before 9am",
+            "Philosopher's Path 2km scenic temple walk"
           ],
-          "system_prompt": "Help me plan activities for 2.5 days in Kyoto (March 25-27, 2026). Traveling with my girlfriend Dana. We like temples, walking, outdoor spaces, nature, and good food. Already have hotels booked in central Kyoto. I want a day-by-day itinerary with opening hours, entry fees, Google Maps links, and a suggested walking route. Include a mix of major landmarks (Fushimi Inari, Kinkaku-ji, Arashiyama) and less touristy spots. We're early risers and don't mind hiking. Also suggest 2-3 food stops per day (breakfast, lunch, dinner recommendations).",
+          "system_prompt": "Help me plan activities for 2.5 days in Kyoto (March 25-27, 2026). Traveling with my girlfriend Dana. We like temples, walking, outdoor spaces, traditional architecture, and good food. Already have hotels booked in central Kyoto. I want a day-by-day itinerary with opening hours, entry fees, Google Maps links, and a suggested walking route. Include a mix of major landmarks (Fushimi Inari, Kinkaku-ji, etc.) and less touristy spots. We're early risers and don't mind long walks. Also suggest where to stop for meals.",
           "energy_type": "research",
           "batch_with": [
             "japan-trip-2026_task_1",
@@ -119,7 +120,7 @@
             "japan-trip-2026_task_5"
           ],
           "effort": "medium",
-          "countdown": "2 days away"
+          "countdown": "tomorrow"
         },
         {
           "task_id": "japan-trip-2026_task_4",
@@ -129,27 +130,28 @@
           "category": "travel",
           "tags": [
             "japan",
-            "mountain",
             "hiking",
+            "mountain",
             "nature",
-            "food"
+            "outdoor",
+            "map"
           ],
           "rank": 4,
-          "first_domino": "Google 'Takayama day trips hiking March weather'",
+          "first_domino": "Search 'Takayama day trips hiking' in Google",
           "time_estimate": "~45 min",
           "context_cost": "medium",
           "decision_load": "medium",
           "momentum": "cold",
           "hook_type": "novelty",
-          "hook_line": "Takayama is mountain town Japan — totally different vibe from Kyoto and Tokyo",
-          "reward": "Locks in the mountain/nature break between temple cities",
+          "hook_line": "Takayama is your mountain escape from the city rush — what hikes are hidden in the Japanese Alps?",
+          "reward": "Locks in your mountain town experience so Takayama isn't just a transit stop",
           "unblocks": [],
           "nuggets": [
-            "Shirakawa-go UNESCO village 50min bus from Takayama",
-            "Old Town district walkable, traditional wooden houses",
-            "Late March still has snow on mountains"
+            "Takayama morning market operates 7am-noon daily",
+            "Kamikochi alpine valley 90min bus from Takayama",
+            "Old Town preserved Edo-period buildings walkable"
           ],
-          "system_prompt": "Help me plan 1.5 days in Takayama, Japan (March 28-29, 2026). Traveling with Dana. We want outdoor activities, hiking, mountain views, and traditional Japanese mountain town experience. Interested in day trips to nearby villages or nature spots. I want specific activity suggestions with timing, transportation details (bus/train schedules), and backup indoor options if weather is bad. Also recommend local food specialties to try (Hida beef, etc). We have moderate hiking experience.",
+          "system_prompt": "Help me plan activities for Takayama, Japan (visiting late March/early April 2026). We'll be there for 1-2 days between Kyoto and Tokyo. Interested in: hiking or nature walks in the Japanese Alps, exploring the old town, local food (Hida beef), and any unique cultural spots. I want to know: what day trips are accessible from Takayama? How's the weather and trail accessibility in late March? What are the must-see spots in town? Include transportation options, timing, and any advance booking needed.",
           "energy_type": "research",
           "batch_with": [
             "japan-trip-2026_task_1",
@@ -157,7 +159,7 @@
             "japan-trip-2026_task_5"
           ],
           "effort": "medium",
-          "countdown": "7 days away"
+          "countdown": "tomorrow"
         },
         {
           "task_id": "japan-trip-2026_task_5",
@@ -167,27 +169,28 @@
           "category": "travel",
           "tags": [
             "japan",
-            "shopping",
+            "map",
+            "landmark",
             "food",
-            "museum",
-            "landmark"
+            "shopping",
+            "museum"
           ],
           "rank": 5,
-          "first_domino": "Open Google Maps and search 'Tokyo neighborhoods map'",
+          "first_domino": "List Tokyo neighborhoods you want to explore on a note",
           "time_estimate": "~1 hour",
           "context_cost": "medium",
           "decision_load": "high",
           "momentum": "cold",
           "hook_type": "curiosity",
-          "hook_line": "Tokyo has 23 wards — which neighborhoods match your vibe vs tourist traps?",
-          "reward": "Completes all Japan trip planning — ready to just execute",
+          "hook_line": "Tokyo has 23 wards and endless rabbit holes — which neighborhoods match your vibe?",
+          "reward": "Creates a Tokyo framework so you're not overwhelmed by infinite options on arrival",
           "unblocks": [],
           "nuggets": [
-            "Shimokitazawa has vintage shops, indie cafes, young crowd",
-            "Tsukiji Outer Market still thriving for breakfast sushi",
-            "TeamLab Borderless requires advance tickets, sells out"
+            "Tsukiji Outer Market best for breakfast 6-9am",
+            "Shimokitazawa vintage shops and indie cafes",
+            "TeamLab Borderless museum requires advance tickets"
           ],
-          "system_prompt": "Help me plan activities for 5 days in Tokyo (March 30 - April 3, 2026). Traveling with Dana. We like exploring neighborhoods on foot, unique food experiences, art/design, shopping (fountain pens, watches, eyeglasses, stationery), and mixing tourist landmarks with local spots. Already planning to visit fountain pen stores (Itoya, Kingdom Note). I want a loose day-by-day framework organized by neighborhood, with 2-3 activities per day, food recommendations, and shopping stops. Include transportation tips (which subway lines). We stay up late and like nightlife.",
+          "system_prompt": "Help me plan activities for several days in Tokyo (early April 2026). Traveling with my girlfriend Dana. Interests: unique neighborhoods, stationery/fountain pen shops, good coffee and food, some traditional cultural spots, and quirky Tokyo things (arcade bars, themed cafes, etc.). Already planning to shop for fountain pens and eyeglasses. I want: neighborhood recommendations with what makes each special, a list of specific spots (shops, cafes, sights) with Google Maps links, and suggestions for how to group them by day/area. We like walking and public transit. Don't need every hour planned, just the anchors.",
           "energy_type": "research",
           "batch_with": [
             "japan-trip-2026_task_1",
@@ -195,7 +198,7 @@
             "japan-trip-2026_task_4"
           ],
           "effort": "medium",
-          "countdown": "9 days away"
+          "countdown": "tomorrow"
         }
       ]
     },
@@ -215,25 +218,27 @@
           "tags": [
             "computer",
             "code",
-            "terminal",
-            "debugging"
+            "programming",
+            "software",
+            "laptop",
+            "keyboard"
           ],
           "rank": 1,
-          "first_domino": "Open terminal and git clone the Cerebro repo",
-          "time_estimate": "~2 hours",
+          "first_domino": "Open terminal and cd into Cerebro repo directory",
+          "time_estimate": "~1 hour",
           "context_cost": "high",
           "decision_load": "medium",
           "momentum": "cold",
           "hook_type": "challenge",
-          "hook_line": "Developer portal that won't run locally — can you untangle the setup?",
-          "reward": "Unblocks all future Cerebro work and removes the 'parked' status",
+          "hook_line": "Can you untangle the local setup before the codebase gets even more unfamiliar?",
+          "reward": "Unblocks all Cerebro work — you can finally start building instead of planning",
           "unblocks": [],
           "nuggets": [
-            "Internal dev portal for engineering teams",
-            "Likely needs Docker, Node, database setup",
-            "Check README for environment variable requirements"
+            "Developer portals typically need Docker + Node",
+            "Check README for environment variable setup",
+            "Database migrations often cause local setup issues"
           ],
-          "system_prompt": "I'm trying to get Cerebro (a developer portal for engineers at my company) running locally. I've cloned the repo but haven't gotten it working yet. Help me work through the setup process step by step. I need to understand: (1) what dependencies are required (Docker, Node version, databases, etc.), (2) how to configure environment variables and secrets, (3) common setup errors and how to debug them, (4) how to verify it's running correctly. Walk me through this methodically — I'm comfortable with dev tools but new to this specific codebase.",
+          "system_prompt": "Help me get the Cerebro developer portal running locally on my machine. Cerebro is an internal tooling project for engineers. I need to: 1) Figure out what dependencies are required (Docker, Node version, databases, etc.), 2) Identify any environment setup or config files I need to create, 3) Get the local dev server running without errors, 4) Verify I can access the portal in my browser. Walk me through the setup steps systematically, troubleshooting common issues. Assume a Mac development environment. If there's a README or setup doc in the repo, help me interpret it.",
           "energy_type": "deep_work",
           "batch_with": [],
           "effort": "high",
@@ -246,17 +251,17 @@
     {
       "slot": 1,
       "task_id": "japan-trip-2026_task_1",
-      "reason": "Weekend ramp-up energy matches low-effort research, and 2-day deadline makes this urgent"
+      "reason": "Weekend + tomorrow's departure + lowest context cost research task that unlocks glasses shopping"
     },
     {
       "slot": 2,
       "task_id": "japan-trip-2026_task_3",
-      "reason": "Medium-effort Kyoto planning unblocks rest of trip and batches well with slot 1"
+      "reason": "Kyoto is your first major destination — planning it now prevents decision paralysis on the ground"
     },
     {
       "slot": 3,
       "task_id": "japan-trip-2026_task_2",
-      "reason": "Quick 10-min errand clears blocker before Monday departure"
+      "reason": "Quick errand that clears insurance uncertainty before you leave tomorrow"
     }
   ],
   "active_slot": 1
