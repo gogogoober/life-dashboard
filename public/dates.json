@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-23T05:14:58.405Z",
+  "generatedAt": "2026-03-24T05:09:19.074Z",
   "windowDays": 60,
   "events": [
     {
@@ -7,52 +7,37 @@
       "name": "Japan Trip 2026",
       "startDate": "2026-03-23",
       "durationDays": 16,
-      "importance": 10,
+      "importance": 9,
       "category": "travel",
       "source": "craft",
       "isRecurring": false,
-      "context": "Two-week trip with Dana through Osaka, Nara, Kyoto, Takayama, and Tokyo. All flights and hotels booked. Now in final planning and shopping phase.",
-      "hook": "Finalize eyeglasses shopping research in Kyoto and plan remaining activity details for each city.",
+      "context": "Two-week trip with Dana across Osaka, Nara, Kyoto, Takayama, and Tokyo. All flights and hotels booked. Currently planning activities and shopping for eyeglasses.",
+      "hook": "Complete eyeglasses store research in Kyoto, validate insurance/prescription requirements, and finalize activity plans for Kyoto, Takayama, and Tokyo.",
       "actions": [
         {
-          "id": "research-eyeglasses-stores-kyoto",
+          "id": "eyeglasses-stores-kyoto",
           "name": "Look up eyeglasses stores in Kyoto for early trip shopping",
           "status": "todo"
         },
         {
-          "id": "validate-glasses-prescription",
+          "id": "validate-glasses-insurance",
           "name": "Validate insurance/prescription requirements for buying 4 pairs of glasses",
           "status": "todo"
         },
         {
-          "id": "plan-kyoto-activities",
+          "id": "plan-activities-kyoto",
           "name": "Plan activities in Kyoto",
           "status": "todo"
         },
         {
-          "id": "plan-takayama-activities",
+          "id": "plan-activities-takayama",
           "name": "Plan activities in Takayama",
           "status": "todo"
         },
         {
-          "id": "plan-tokyo-activities",
+          "id": "plan-activities-tokyo",
           "name": "Plan activities in Tokyo",
           "status": "todo"
-        },
-        {
-          "id": "book-flights",
-          "name": "Book all flights",
-          "status": "done"
-        },
-        {
-          "id": "book-hotels",
-          "name": "Book all hotels",
-          "status": "done"
-        },
-        {
-          "id": "plan-route",
-          "name": "Plan route",
-          "status": "done"
         }
       ],
       "people": [
