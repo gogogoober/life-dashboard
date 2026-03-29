@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-27T05:17:59.209Z",
+  "generatedAt": "2026-03-29T05:19:21.123Z",
   "windowDays": 60,
   "events": [
     {
@@ -7,12 +7,12 @@
       "name": "Japan Trip 2026",
       "startDate": "2026-03-23",
       "durationDays": 16,
-      "importance": 9,
+      "importance": 10,
       "category": "travel",
       "source": "craft",
       "isRecurring": false,
-      "context": "Two-week trip with Dana covering Osaka, Nara, Kyoto, Takayama, and Tokyo. All flights and hotels booked. Currently in activity planning and shopping phase.",
-      "hook": "Plan remaining activities in Kyoto, Takayama, and Tokyo. Research eyeglasses stores in Kyoto and validate prescription requirements for purchasing 4 pairs.",
+      "context": "Two-week trip with Dana through Osaka, Nara, Kyoto, Takayama, and Tokyo (Mar 23 – Apr 7). All flights and hotels booked. Now in activity planning and shopping phase, including buying 4 pairs of eyeglasses in Japan.",
+      "hook": "Finalize eyeglasses stores in Kyoto, validate insurance/prescription requirements for buying 4 pairs, and confirm activities for remaining cities (Kyoto, Takayama, Tokyo).",
       "actions": [
         {
           "id": "eyeglasses-kyoto-research",
@@ -25,17 +25,17 @@
           "status": "todo"
         },
         {
-          "id": "kyoto-activities",
+          "id": "activities-kyoto",
           "name": "Plan activities in Kyoto",
           "status": "todo"
         },
         {
-          "id": "takayama-activities",
+          "id": "activities-takayama",
           "name": "Plan activities in Takayama",
           "status": "todo"
         },
         {
-          "id": "tokyo-activities",
+          "id": "activities-tokyo",
           "name": "Plan activities in Tokyo",
           "status": "todo"
         }
