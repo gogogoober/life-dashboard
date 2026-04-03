@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-02T05:14:37.824Z",
+  "generatedAt": "2026-04-03T05:15:46.544Z",
   "windowDays": 60,
   "events": [
     {
@@ -11,31 +11,31 @@
       "category": "travel",
       "source": "craft",
       "isRecurring": false,
-      "context": "Two-week trip with Dana across Osaka, Nara, Kyoto, Takayama, and Tokyo. Currently on day 11 of 16. Planning eyeglasses shopping and exploring onsen and Japanese food.",
-      "hook": "Validate insurance/prescription requirements for buying 4 pairs of glasses in Kyoto. Look up eyeglasses stores for early shopping.",
+      "context": "Two-week trip with Dana covering Osaka, Nara, Kyoto, Takayama, and Tokyo. Currently on day 12 of trip. Planning to buy eyeglasses and explore fountain pens during the journey.",
+      "hook": "Hugo should look up eyeglasses stores in Kyoto and validate insurance/prescription requirements for buying 4 pairs. Also needs to finalize activity plans for remaining cities.",
       "actions": [
         {
-          "id": "eyeglasses-stores-kyoto",
+          "id": "eyeglasses-kyoto-research",
           "name": "Look up eyeglasses stores in Kyoto for early trip shopping",
           "status": "todo"
         },
         {
-          "id": "insurance-prescription-validation",
+          "id": "validate-glasses-insurance",
           "name": "Validate insurance/prescription requirements for buying 4 pairs of glasses",
           "status": "todo"
         },
         {
-          "id": "activities-kyoto",
+          "id": "plan-kyoto-activities",
           "name": "Plan activities in Kyoto",
           "status": "todo"
         },
         {
-          "id": "activities-takayama",
+          "id": "plan-takayama-activities",
           "name": "Plan activities in Takayama",
           "status": "todo"
         },
         {
-          "id": "activities-tokyo",
+          "id": "plan-tokyo-activities",
           "name": "Plan activities in Tokyo",
           "status": "todo"
         }
